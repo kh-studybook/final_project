@@ -11,6 +11,29 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<logger name="Members">
+		<level value="trace"/>
+	</logger>
+	<logger name="Events">
+		<level value="trace"/>
+	</logger>
+	<logger name="Comments">
+		<level value="trace"/>
+	</logger>
+	<logger name="Notices">
+		<level value="trace"/>
+	</logger>
+	<logger name="Foods">
+		<level value="trace"/>
+	</logger>
+	<logger name="Reserves">
+		<level value="trace"/>
+	</logger>
+	<logger name="Rooms">
+		<level value="trace"/>
+	</logger>
+	
+	
 	<logger name="kh.finalproject.studybook">
 		<level value="info" />
 	</logger>
