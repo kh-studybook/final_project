@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>    
+	<typeAliases>
+		<typeAlias alias = "member" type = "kh.project.studybook.domain.Member"/>	
+		<typeAlias alias = "reserve" type = "kh.project.studybook.domain.Reserve"/>	
+		<typeAlias alias = "food_reserve" type = "kh.project.studybook.domain.Food_reserve"/>
+		<typeAlias alias = "room" type = "kh.project.studybook.domain.Room"/>
+		<typeAlias alias = "room_ex" type = "kh.project.studybook.domain.Room_ex"/>
+		<typeAlias alias = "gallery" type = "kh.project.studybook.domain.Gallery"/>
+		<typeAlias alias = "review" type = "kh.project.studybook.domain.Review"/>
+		<typeAlias alias = "food" type = "kh.project.studybook.domain.Food"/>
+		<typeAlias alias = "notice" type = "kh.project.studybook.domain.Notice"/>
+		<typeAlias alias = "event" type = "kh.project.studybook.domain.Event"/>
+		<typeAlias alias = "event_comment" type = "kh.project.studybook.domain.Event_comment"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource = "sql/member.xml"/>
+		<mapper resource = "sql/comment.xml"/>
+		<mapper resource = "sql/food.xml"/>
+		<mapper resource = "sql/notice.xml"/>
+		<mapper resource = "sql/event_comment.xml"/>
+	</mappers>	
+</configuration>
