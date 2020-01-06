@@ -4,24 +4,26 @@
 
 <configuration>    
 	<typeAliases>
-		<typeAlias alias = "member" type = "kh.project.studybook.domain.Member"/>	
-		<typeAlias alias = "reserve" type = "kh.project.studybook.domain.Reserve"/>	
-		<typeAlias alias = "food_reserve" type = "kh.project.studybook.domain.Food_reserve"/>
-		<typeAlias alias = "room" type = "kh.project.studybook.domain.Room"/>
-		<typeAlias alias = "room_ex" type = "kh.project.studybook.domain.Room_ex"/>
-		<typeAlias alias = "gallery" type = "kh.project.studybook.domain.Gallery"/>
-		<typeAlias alias = "review" type = "kh.project.studybook.domain.Review"/>
-		<typeAlias alias = "food" type = "kh.project.studybook.domain.Food"/>
-		<typeAlias alias = "notice" type = "kh.project.studybook.domain.Notice"/>
-		<typeAlias alias = "event" type = "kh.project.studybook.domain.Event"/>
-		<typeAlias alias = "event_comment" type = "kh.project.studybook.domain.Event_comment"/>
+		<typeAlias alias = "member" type = "kh.finalproject.studybook.domain.Member"/>	
+		<typeAlias alias = "reserve" type = "kh.finalproject.studybook.domain.Reserve"/>	
+		<typeAlias alias = "food_reserve" type = "kh.finalproject.studybook.domain.Food_reserve"/>
+		<typeAlias alias = "room" type = "kh.finalproject.studybook.domain.Room"/>
+		<typeAlias alias = "room_ex" type = "kh.finalproject.studybook.domain.Room_ex"/>
+		<typeAlias alias = "gallery" type = "kh.finalproject.studybook.domain.Gallery"/>
+		<typeAlias alias = "review" type = "kh.finalproject.studybook.domain.Review"/>
+		<typeAlias alias = "food" type = "kh.finalproject.studybook.domain.Food"/>
+		<typeAlias alias = "notice" type = "kh.finalproject.studybook.domain.Notice"/>
+		<typeAlias alias = "event" type = "kh.finalproject.studybook.domain.Event"/>
+		<typeAlias alias = "event_comment" type = "kh.finalproject.studybook.domain.Event_comment"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource = "sql/member.xml"/>
-		<mapper resource = "sql/comment.xml"/>
-		<mapper resource = "sql/food.xml"/>
+		<mapper resource = "sql/room.xml"/>
 		<mapper resource = "sql/notice.xml"/>
+		<mapper resource = "sql/event.xml"/>
 		<mapper resource = "sql/event_comment.xml"/>
+		<mapper resource = "sql/reserve.xml"/>
+		<mapper resource = "sql/food.xml"/>
 	</mappers>	
 </configuration>
