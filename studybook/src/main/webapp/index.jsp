@@ -5,7 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
 안녀엉
 </body>
