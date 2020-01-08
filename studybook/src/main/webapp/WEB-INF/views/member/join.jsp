@@ -15,7 +15,7 @@ $(document).ready(function(){
 			'bottom' : 0
 		})
 	}
-})	
+})	 
 </script>
 <style>
 footer{height: 150px;}

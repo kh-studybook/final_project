@@ -14,7 +14,7 @@ $(document).ready(function(){
 			'position' : fixed,
 			'bottom' : 0
 		})
-	}
+	} 
 })	
 </script>
 <style>

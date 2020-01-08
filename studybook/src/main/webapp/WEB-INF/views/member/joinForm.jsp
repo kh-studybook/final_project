@@ -15,7 +15,7 @@
 <span>이미 회원이신가요?</span> <a href=# class=login>로그인</a>
 
 	<form name="joinform" action="joinProcess.net" method="post">
-		
+		 
 		<input type="text" name="name" placeholder="이름" maxlength=15 required>	
 		<span id="namemsg"></span>
 		

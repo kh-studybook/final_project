@@ -11,7 +11,7 @@
 	$(function(){
 		$(".join").click(function(){
 			location.href="join.net";
-		});
+		}); 
 	});
 </script>
 </head>
