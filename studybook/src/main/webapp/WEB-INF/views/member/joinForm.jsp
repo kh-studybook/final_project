@@ -24,7 +24,7 @@
 		
 		<input type="password" name="pw" placeholder="비밀번호" required>
 		<span id="pwmsg"></span>
-		
+		 
 		<input type="password" name="pwcheck" placeholder="비밀번호 확인" required>
 		<span id="pwcheckmsg"></span>
 		

@@ -14,7 +14,7 @@
 		}); 
 	});
 </script>
-</head>
+</head> 
 <body>
 	<form name="loginform" action="loginProcess.net" method="post">
 		<h1>로그인</h1>

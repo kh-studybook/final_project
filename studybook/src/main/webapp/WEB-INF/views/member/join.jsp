@@ -20,7 +20,7 @@ $(document).ready(function(){
 <style>
 footer{height: 150px;}
 </style>
-</head>
+</head> 
 <body>
 
 	<!-- Body Start -->
