@@ -8,6 +8,6 @@ public class MemberController {
 
 	@RequestMapping(value="/room_detail")
 	public String room_detail() {
-		return "room/room_detail";
+		return "room/detail";
 	}
 }

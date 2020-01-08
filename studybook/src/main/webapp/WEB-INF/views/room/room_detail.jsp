@@ -5,8 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/E_room_detail.css">
 </head>
 <body>
-출력
+	<div class="">
+		<div class="">
+			<div class="wrap main">
+				<div class="wrap main detail space">
+					<div class="inner_width">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
