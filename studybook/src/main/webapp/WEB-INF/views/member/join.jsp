@@ -10,7 +10,7 @@
 
 </head>
 <body>
-
+ 
 <h2>회원가입</h2>
 <span>이미 회원이신가요?</span> <a href=# class=login>로그인</a>
  

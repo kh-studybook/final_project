@@ -8,7 +8,7 @@
 <link type="text/css" rel="stylesheet" href="resources/css/login.css" >
 
 <script>
-	$(function(){
+	$(function(){  
 		$(".join").click(function(){
 			location.href="join.net";
 		}); 
