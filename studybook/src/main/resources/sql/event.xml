@@ -4,6 +4,6 @@
 
 <mapper namespace="Events">
 	<insert id = "insertEvent">
-	
+		insert into 
 	</insert>
 </mapper>
