@@ -9,7 +9,7 @@
 <div id="j_footer">
 	<div class="j_footer__column">
 		<div id="j_footer_logo">
-			STUDYBOOK
+			STUDYBOOK 
 		</div>
 	</div>
 	<div class="j_footer__column">

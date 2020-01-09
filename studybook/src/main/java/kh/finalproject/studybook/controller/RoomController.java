@@ -8,6 +8,11 @@ public class RoomController {
 
 	@RequestMapping(value="/main.net")
 	public String room_detail() {
-		return "room/content_index";
+		return "room/main_index";
+	}
+	
+	@RequestMapping(value="/template.net")
+	public String template() {
+		return "template/index";
 	}
 }

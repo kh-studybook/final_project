@@ -7,6 +7,6 @@ $(document).ready(function(){
 	$('.navbar-toggler').click(function(){
 		$('main').css({
 		margin: '0 auto -navheight'
-		})
+		}) 
 	})
 });

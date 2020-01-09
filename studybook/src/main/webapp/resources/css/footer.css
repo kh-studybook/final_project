@@ -36,6 +36,6 @@ footer {
 
 @media screen and (max-width: 900px) {
   .j_footer__column:nth-child(2) {
-    display: none;
+    display: none; 
   }
 }
