@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<jsp:include page="header.jsp" flush="false" />
 <script>
 $(document).ready(function(){
 	var mainheight = $('main').height();
-	var navheight = $('nav').height();
+	var navheight = 150px;
 	if(($(window).height() - navheigt) < mainheight) {
 		$('footer').css({
 			'position' : fixed,
@@ -17,23 +18,16 @@ $(document).ready(function(){
 })	
 </script>
 <style>
-nav {height: 100px;}
-footer{height: 100px;}
+footer{height: 150px;}
 </style>
 </head>
 <body>
-	<!-- Header Start -->
-	<nav>
-		<jsp:include page="header.jsp" flush="false" /><br> <br>
-	</nav>
-	<!-- Header End -->
 
 	<!-- Body Start -->
 	<main>		
 		<jsp:include page="content.jsp" />
 	</main>
 	<!-- Body End -->
-
 	<!-- Footer Start -->
 	<footer>
 		<jsp:include page="footer.jsp" flush="false" />
