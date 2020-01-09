@@ -26,17 +26,19 @@ public class RoomController {
 		//¾îµå¹Î ·ëµî·Ï ÀÌµ¿
 		@GetMapping(value = "/RoomWrite.ro")
 		public String board_write() throws Exception {
-			return "room_register";
+			return "admin/room_register";
 		}
 		
-	/*
-	 * //¾îµå¹Î ·ëµî·Ï ¾×¼Ç
-	 * 
-	 * @PostMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
-	 * HttpServletRequest request) throws Exception{
-	 * 
-	 * }
-	 */
+	
+	 //¾îµå¹Î ·ëµî·Ï ¾×¼Ç
+	 
+	 @GetMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
+	HttpServletRequest request) throws Exception{
+	
+		 
+		 return "redirect:RoomList.ro";
+	 }
+	
 		
 	
 }
