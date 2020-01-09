@@ -14,6 +14,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		
 	<!-- 지은 추가: jackson json converter : 멀티이미지 업로드 용도 -->
 	<dependency>
         <groupId>org.codehaus.jackson</groupId>
