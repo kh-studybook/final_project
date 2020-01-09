@@ -37,6 +37,10 @@ public class RoomController {
 	 * 
 	 * }
 	 */
-		
+		//룸 정보 보기 -연습용(은지)
+		@RequestMapping(value="/room_detail")
+		public String room_detail() {
+			return "room/detail";
+		}
 	
 }

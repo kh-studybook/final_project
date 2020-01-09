@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="room_detail_sample.jsp" />
+		<jsp:include page="room_detail.jsp" />
 	</main>
 	<!-- Body End -->
 
