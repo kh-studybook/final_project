@@ -13,7 +13,7 @@ $(document).ready(function(){
 		$('footer').css({
 			'position' : fixed,
 			'bottom' : 0
-		})
+		}) 
 	} 
 })	 
 </script>

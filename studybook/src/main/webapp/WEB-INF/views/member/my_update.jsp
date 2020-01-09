@@ -9,7 +9,7 @@
 <jsp:include page="../room/header.jsp"/>
 	<script>
 		$(function(){
-			
+			 
 			var checkemail=true;
 			$("input:eq(6)").on("keyup",function(){
 				$("#email_message").empty();

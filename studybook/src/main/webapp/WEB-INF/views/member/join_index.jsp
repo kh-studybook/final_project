@@ -21,7 +21,7 @@ $(document).ready(function(){
 footer{height: 150px;}
 </style>
 </head> 
-<body>
+<body> 
 
 	<!-- Body Start -->
 	<main>		
