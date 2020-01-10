@@ -10,23 +10,22 @@
 <script>
 	$(function(){  
 		$(".join").click(function(){
-			location.href="join.net";
+			location.href="join.mem";
 		}); 
 	});
 </script>
 </head> 
 <body>
-	<form name="loginform" action="loginProcess.net" method="post">
+
+	<form name="loginform" action="loginProcess.mem" method="post">
 		<h1>로그인</h1>
 		<hr>
-		<b>아이디</b>
-		<input type="text" name="id" placeholder="Enter id" required>
-		<b>Password</b>
-		<input type="password" name="password" placeholder="Enter password" required>
+		<input type="text" name="email" id="email" placeholder="이메일" required>
+		<input type="password" name="pw" id="pw" placeholder="비밀번호" required>
 		<div class="clearfix">
-			<button type="submit" class="submitbtn">로그인</button>
-			<button type="button" class="join">회원 가입</button>
+			<button type="submit" class="submitbtn">로그인</button>			
 		</div>
 	</form>
+	
 </body>
 </html>

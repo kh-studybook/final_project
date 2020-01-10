@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="../room/header.jsp"/>
+<title>update</title>
+<jsp:include page="../main/header.jsp"/>
 	<script>
 		$(function(){
 			 
@@ -19,27 +19,15 @@
 				console.log(email)
 				console.log(pattern.test(email))
 				if(!pattern.test(email)){
-					$("#email_message").css("color","red")
-										.html("이메일 형식이 맞지 않습니다.");
+					$("#email_message").css("color","red").html("이메일 형식이 맞지 않습니다.");
 					checkemail=false;
 				}else{
-					$("#email_message").css("color","green")
-										.html("이메일 형식에 맞습니다.");
+					$("#email_message").css("color","green").html("이메일 형식에 맞습니다.");
 					checkemail=true;
 				}
 			});
 			
-			var pandan='${member.gender}';
-			if(pandan=='남'){
-				$("input:radio").eq(0).attr('checked','checked');
-			}else{
-				$("input:radio").eq(1).attr('checked','checked');
-			}
-			
-			$(".cancelbtn").click(function(){
-				history.back();
-			});
-			
+	
 		});
 	</script>
 </head>
@@ -47,8 +35,14 @@
 	<form name="updateform" action="updateProcess" method="post">
 		<h1>프로필 관리</h1>
 		
-		<img src="">
-		<button>프로필 사진 변경</button>
+		<div class="profileimg">
+			<label> 
+				<input type="file" name="uploadfile" accept="image/gif, image/jpeg, image/png" style="display: none">
+				<img src="resources/image/profile/default.png" alt="Avatar" class="avatar">
+			</label>
+			<button>프로필 사진 변경</button>
+		</div>
+		
 		
 		<hr>
 
@@ -56,7 +50,7 @@
 		<input type="text" name="name" maxlength=15 value="${member.name }">
 		
 		<b>이메일 주소</b>
-		<input type="text" name="email" placeholder="Enter Email"  value="${member.email }">
+		<input type="text" name="email" value="${member.email }">
 		<span id="email_message"></span>
 		
 		<b>연락처</b>
