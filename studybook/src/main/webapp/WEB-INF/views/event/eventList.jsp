@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>EventList.jsp</title>
 <style>
-	/** 글자 관련!!*/
+	/** 글자 관련!!!!*/
 	.p_title{font-family:"맑은 고딕"; text-align:center;}
 	.p_p_title{font-family:"맑은 고딕"; text-align:center;}
 </style>

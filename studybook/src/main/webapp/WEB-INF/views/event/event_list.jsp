@@ -23,7 +23,7 @@ footer{height: 150px;}
 </head>
 <body>
 
-	<!-- Body Start!! -->
+	<!-- Body Start!!!! -->
 	<main>		
 		<jsp:include page="eventList.jsp" />
 	</main>

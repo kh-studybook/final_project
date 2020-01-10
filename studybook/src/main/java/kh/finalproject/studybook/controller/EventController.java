@@ -29,7 +29,7 @@ public class EventController {
 		@Autowired
 		private EventCommentService eventcommentservice; 
 
-		//이벤트 등록 화면으로 이동!!
+		//이벤트 등록 화면으로 이동!!!!
 		@GetMapping(value = "/registerEvent.eve")
 		public String event_write_view() throws Exception{
 			return "event/event_main";

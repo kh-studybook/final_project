@@ -5,7 +5,7 @@ import kh.finalproject.studybook.domain.Event;
 
 
 public interface EventService {
-	//이벤트 등록하기!!
+	//이벤트 등록하기!!!!
 	public void insertEvent(Event event);
 	//글 내용 보기
 	public Event getEventDetail(int num);
