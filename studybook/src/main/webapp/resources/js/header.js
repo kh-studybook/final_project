@@ -17,4 +17,5 @@ $(document).ready(function(){
 	$('.close').click(function(){
 		$('.menu').removeClass('nav-expanded');
 	})
+	
 });

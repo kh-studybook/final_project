@@ -56,7 +56,7 @@
 			<a href="#" class="close j_menu__header__column"><i class="fas fa-arrow-right"></i></a>
 			<div class="j_menu__header__column">
 					<div id="j_profile_picture">
-						<img src="resources/image/profile/default.png">
+						<img src="resources/image/profile/id/default.png">
 					</div>
 				<c:if test="${email==null}">
 					<div>로그인이 필요합니다.</div>
