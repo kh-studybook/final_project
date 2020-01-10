@@ -5,7 +5,9 @@
 
 /** 글자 관련*/
 .p_title{font-family:"맑은 고딕"; text-align:center; maxLength:200}
-#p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px}
+#p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
+textarea::placeholder, input[type=text]::placeholder{color:black;}
+.col-25 > label {font-weight:bold;}
 
 /** 입력 폼 관련*/
 input[type=text], select, textarea {width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;}
@@ -15,7 +17,7 @@ input[type=date]{height:3rem;}
 /** 버튼 관련*/
 .p_submit, .p_reset{width:43%; padding: 12px; border: none; border-radius: 4px; cursor: pointer; opacity:0.7}
 .p_submit{background-color: #7F56D2; color:white;}
-.p_reset{background-color: #d2d2d2; } 
+.p_reset{background-color: #d2d2d2;} 
 .p_submit:hover, .p_reset:hover{opacity:1}
 #eventPic_uploadfile{border: none;}
 
@@ -25,7 +27,8 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:200px; height:200px;}
+.p_avatar{width:200px; height:200px; border-radius: 5px}
+#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; background-color:#56D7D6; color:white; margin-top:5px; text-align:center;}
 
 /* Clear floats after the columns */
 .row:after { content: ""; display: table; clear: both;}
@@ -49,7 +52,12 @@ input[type=date]{height:3rem;}
 			if (!file.type.match('image.*')) {//파일 타입이 image인지 확인합니다.
 				alert("확장자는 이미지 확장자만 가능합니다.");
 				return;
-			}	
+			}
+	
+			if (file[0].size > (1024*1024*5)) {
+				alert("5MB이하 파일만 등록할 수 있습니다.\n현재파일 용량 : " + (Math.round(file[0].size/1024/1024*100) / 100) + "MB");
+				return;
+			}
 	
 			//파일을 읽기 위한 객체 생성
 			var reader = new FileReader();
@@ -62,16 +70,21 @@ input[type=date]{height:3rem;}
 			reader.onload = function(e){
 				//result : 읽기 결과가 저장됩니다.
 				//reader.result 또는 e.target.result
-				$("#eventPic_image").attr("src", e.target.result);
+				$("#eventPic_image").attr("src", e.target.result).css("opacity", 1);
 			}//reader.onload end
-		}//function preview end
-		
+		}//function preview end		
 		
 		//textarea 글자 수 보여주기
 		$('textarea').keyup(function(){
 			var inputLength = $(this).val().length;
 			var remain = 4000 - inputLength;
 			$('#p_event_content').text("남은 글자 수 : " + remain + "/4000");
+		});
+		
+		//reset 버튼 눌렀을 때 1. 남은 글자수 삭제하기 2. 이미지 삭제하기
+		$(".p_reset").click(function(){
+			$("#p_event_content").text("");
+			$("#eventPic_image").prop("src", "resources/image/default_thumnail.png").css("opacity", 0.2);
 		});
 		
 		//등록시 필수 항목 입력 여부 검사
@@ -126,6 +139,8 @@ input[type=date]{height:3rem;}
 
 <div class="p container">
   <form method="post" action="EventAddAction.eve" enctype="multipart/form-data">
+  	<!--  작성자 -->
+ 	<input name = "event_writer" id = "event_writer" value = "${id}" readOnly type = "hidden">
   
 	<!--  썸네일 등록 -->
    <div class="row">
@@ -135,8 +150,11 @@ input[type=date]{height:3rem;}
       
       <div class="col-75">
       	<label for = "eventPic_uploadfile">
-        	<input type="file" name="eventPic_uploadfile" id = "eventPic_uploadfile" accept="image/gif, image/jpeg, image/png" value = "이미지 등록"> 
-        	<img src="resources/image/default_thumnail.png" id = "eventPic_image" class="p_avatar">
+        	<input type="file" name="eventPic_uploadfile" id = "eventPic_uploadfile" accept="image/gif, image/jpeg, image/png" 
+        	style = "display:none"><!-- 파일 선택하는 부분 --> 
+        	<img src="resources/image/default_thumnail.png" id = "eventPic_image" class="p_avatar" style = "opacity:0.2"><!-- 이미지 -->
+        	<br>
+        	<label for = "eventPic_uploadfile" id = "eventPic_button">이미지 등록</label>
         </label>
       </div>
     </div>
