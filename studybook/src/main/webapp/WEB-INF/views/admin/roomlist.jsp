@@ -35,7 +35,7 @@ $(function(){
 				<table class="table table-striped custab">
 					<thead>
 						<a href="#" class="btn btn-primary btn-xs pull-right w_addbtn"><b>+</b>공간
-							추가</a>
+							추가</a><br>
 						<tr>
 							<th>No</th>
 							<th>룸 이름</th>
