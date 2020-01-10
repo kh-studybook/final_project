@@ -9,4 +9,12 @@ $(document).ready(function(){
 		margin: '0 auto -navheight'
 		}) 
 	})
+	
+	$('#menu_icon').click(function(){
+		$('.menu').addClass('nav-expanded');
+	})
+	
+	$('.close').click(function(){
+		$('.menu').removeClass('nav-expanded');
+	})
 });

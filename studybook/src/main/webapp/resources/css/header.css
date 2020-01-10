@@ -4,6 +4,7 @@
 
 * {
 	box-sizing: border-box;
+	font-family: 'Malgun Gothic';
 }
 
 html {
@@ -13,7 +14,6 @@ html {
 
 body {
 	height: 100%;
-	font-family: 'Malgun Gothic';
 	font-size: 10pt;
 }
 
@@ -23,7 +23,6 @@ nav {
 
 main {
 	min-height: 100%;
-	height: 100%;
 }
 
 .navbar {
@@ -61,30 +60,54 @@ main {
 	padding-bottom: 0px;
 }
 
-.thumbnail1 {
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-}
-
-.thumbnail2 {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-}
-
-.mymenu {
-	left: -200px;
-}
-
-.mysearch {
-	margin-right: 20px;
-}
-
-* {
-	font-family: "맑은 고딕";
-}
-
-.tag_strong {
+.nav-link {
+	font-size: 15px;
 	color: white;
+}
+
+#menu_icon {
+	font-size: 30px;
+	color: white;
+	cursor: pointer;
+}
+
+.menu{
+	width: 300px;
+	display: block;
+	background: #F2F2F2;
+	height: 100%;
+	top: 0;
+	right: -300px;
+	position: fixed;
+	z-index: 100;
+	text-align: center;
+	transition: right 0.4s;
+}
+
+.menu.nav-expanded{
+	right: 0;
+}
+
+.menu .close{
+	color: #7F56D2;
+	font-weight: bold;
+	margin-right: 10px;
+	margin-top:10px;
+	width: 100%;
+	font-size: 30px;
+}
+
+.j_menu__header {
+	width: 100%;
+	height: 20%;
+	background-color: #3EF4F3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#j_profile_picture > img {
+	width: 70px;
+	height: 70px;
+	border-radius: 35px;
 }
