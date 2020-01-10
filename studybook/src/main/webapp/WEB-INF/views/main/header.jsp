@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
+
 <!-- 스크립트 import -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script
@@ -56,7 +56,7 @@
 			<a href="#" class="close j_menu__header__column"><i class="fas fa-arrow-right"></i></a>
 			<div class="j_menu__header__column">
 					<div id="j_profile_picture">
-						<img src="resources/image/profile/id/default.png">
+						<img src="resources/image/profile/default.png">
 					</div>
 				<c:if test="${email==null}">
 					<div>로그인이 필요합니다.</div>

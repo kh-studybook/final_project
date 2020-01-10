@@ -15,7 +15,8 @@
 	<div class="j_footer__column">
 		Copyright &copy; 2020 STUDYBOOK. All Rights Reserved.
 	</div>
-	<div class="j_footer__column"></div>
+	<div class="j_footer__column">
+	</div>
 </div>
 </body>
 </html>
