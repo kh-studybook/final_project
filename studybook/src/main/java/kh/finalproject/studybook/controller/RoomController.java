@@ -19,7 +19,7 @@ public class RoomController {
 
 	// 지은 시작--
 	// 어드민으로 접속 , 룸리스트 보여줌
-	@RequestMapping(value = "/admin", method = RequestMethod.GET) // 異뷀썑 紐⑤뜽�븻酉곕줈 諛붽퓭�빞�븿
+	@RequestMapping(value = "/admin", method = RequestMethod.GET) // 추후 모델엔 뷰로 바꿔야함
 	public String ADaccess() {
 		return "admin/admin_index";
 	}
