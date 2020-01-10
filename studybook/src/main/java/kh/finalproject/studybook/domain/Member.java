@@ -3,9 +3,9 @@ package kh.finalproject.studybook.domain;
 public class Member {
 	private String name;
 	private String email;
-	private String pw;
+	private String password;
 	private String pwcheck;
-	private String tel;
+	private String phone;
 	
 	
 	public String getName() {
@@ -20,11 +20,11 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getPwcheck() {
 		return pwcheck;
@@ -32,12 +32,13 @@ public class Member {
 	public void setPwcheck(String pwcheck) {
 		this.pwcheck = pwcheck;
 	}
-	public String getTel() {
-		return tel;
+	public String getPhone() {
+		return phone;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
+	
 	
 	
 	
