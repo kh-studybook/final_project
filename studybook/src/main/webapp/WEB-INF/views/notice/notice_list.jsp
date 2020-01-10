@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>change password</title>
+<title>notice  list</title>
 </head>
 <body>
-   
+
 </body>
 </html>

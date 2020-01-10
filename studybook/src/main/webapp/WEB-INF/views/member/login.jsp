@@ -3,17 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>loginForm</title>
+  <title>login</title>
   
-<link type="text/css" rel="stylesheet" href="resources/css/login.css" >
-
 <script>
+
 	$(function(){  
+		
 		$(".join").click(function(){
 			location.href="join.mem";
 		}); 
+		
+		$(".findpw").click(function(){
+			location.href="login_findpw.mem";
+		}); 
+		
 	});
-</script>
+</script> 
 </head> 
 <body>
 
@@ -22,9 +27,13 @@
 		<hr>
 		<input type="text" name="email" id="email" placeholder="이메일" required>
 		<input type="password" name="pw" id="pw" placeholder="비밀번호" required>
-		<div class="clearfix">
+		
+		<div class="clearfix">	
+		<label class=floatl><input type=checkbox>아이디 기억하기</label><span class="floatr findpw">비밀번호 찾기</span>
 			<button type="submit" class="submitbtn">로그인</button>			
 		</div>
+		
+		<span class=clear>studybook 방문이 처음이신가요?</span> <span class="clear join">회원가입</span>
 	</form>
 	
 </body>

@@ -10,7 +10,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
 	
-<script>
+<script> 
 
    $(document).ready(function() {
 	      
@@ -66,16 +66,20 @@
    		}
 	  });
       
-      $("#tel").blur(function() {
+      $("#phone").blur(function() {
     		var re_id = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; //test
-    		var userid=$("#email").val();
-     		var param ="email="+email; 
-     		if(emailcheck.test(email)!=true){
-     			$("#telmsg").html('<span style="color:red">특수기호 없이 숫자만 입력해주세요.</span>');
-     			$("#tel").focus();
+    		var userid=$("#phone").val();
+     		var param ="phone="+email; 
+     		if(phonecheck.test(phone)!=true){
+     			$("#phonemsg").html('<span style="color:red">특수기호 없이 숫자만 입력해주세요.</span>');
+     			$("#phone").focus();
      			return;
      		}
   	  });
+      
+      $(".login").click(function(){
+			location.href="login.mem";
+	  }); 
       
       
 });
@@ -87,26 +91,26 @@
 <body>
  
 <h2>회원가입</h2>
-<span>이미 회원이신가요?</span> <a href=# class=login>로그인</a>
+<span>이미 회원이신가요?</span> <span class=login>로그인</span>
  
 	<form name="joinform" action="joinProcess.mem" method="post">
 
 		
 		
 		<input type="text" name="name" id="name" placeholder="이름" maxlength=15 required>	
-		<span id="namemsg"/>
+		<span id="namemsg"></span>
 		
 		<input type="text" name="email" id="email" placeholder="이메일" required>
-		<span id="emailmsg"/>
+		<span id="emailmsg"></span> 
 		
-		<input type="password" name="pw" id="pw" placeholder="비밀번호" required>
-		<span id="pwmsg"/>
+		<input type="password" name="password" id="password" placeholder="비밀번호" required>
+		<span id="pwmsg"></span>
 		 
 		<input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인" required>
-		<span id="pwcheckmsg"/>
+		<span id="pwcheckmsg"></span>
 		
-		<input type="text" name="tel" id="tel" placeholder="전화번호" maxLength="12" required>
-		<span id="telmsg"/>		
+		<input type="text" name="phone" id="phone" placeholder="전화번호" maxLength="12" required>
+		<span id="phonemsg"></span>
 
 
 		<input type="checkbox" name="priv"> 서비스 약관과 개인정보 보호정책에 동의합니다.
