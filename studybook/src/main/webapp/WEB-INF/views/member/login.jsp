@@ -1,38 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<jsp:include page="../room/header.jsp" flush="false" />
+  <title>loginForm</title>
+  
+<link type="text/css" rel="stylesheet" href="resources/css/login.css" >
+
 <script>
-$(document).ready(function(){
-	var mainheight = $('main').height();
-	var navheight = 150px;
-	if(($(window).height() - navheigt) < mainheight) {
-		$('footer').css({
-			'position' : fixed,
-			'bottom' : 0
-		})
-	} 
-})	 
+	$(function(){  
+		$(".join").click(function(){
+			location.href="join.net";
+		}); 
+	});
 </script>
-<style>
-footer{height: 150px;}
-</style>
-</head>
+</head> 
 <body>
-
-	<!-- Body Start -->
-	<main>		
-		<jsp:include page="login.jsp" />
-	</main>
-	<!-- Body End -->
-
-	<!-- Footer Start -->
-	<footer>
-		<jsp:include page="../room/footer.jsp" flush="false" />
-	</footer>
-	<!-- Footer End -->
+	<form name="loginform" action="loginProcess.net" method="post">
+		<h1>로그인</h1>
+		<hr>
+		<b>아이디</b>
+		<input type="text" name="id" placeholder="Enter id" required>
+		<b>Password</b>
+		<input type="password" name="password" placeholder="Enter password" required>
+		<div class="clearfix">
+			<button type="submit" class="submitbtn">로그인</button>
+			<button type="button" class="join">회원 가입</button>
+		</div>
+	</form>
 </body>
 </html>

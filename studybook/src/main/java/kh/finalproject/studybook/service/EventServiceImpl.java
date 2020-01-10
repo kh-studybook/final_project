@@ -13,8 +13,7 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public void insertEvent(Event event) {//이벤트 등록하기
-		
-		
+		dao.insertEvent(event);		
 	}
 	
 }
