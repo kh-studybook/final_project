@@ -18,29 +18,43 @@ public class RoomController {
 	private RoomService roomservice;
 	
 	
-		//ÁöÀº Ãß°¡ //¾îµå¹ÎÀ¸·Î Á¢¼Ó , ·ë¸®½ºÆ® º¸¿©ÁÜ
-		@RequestMapping(value="/admin", method=RequestMethod.GET)//ÃßÈÄ ¸ğµ¨¾Øºä·Î ¹Ù²ã¾ßÇÔ
+		//ì§€ì€ ì¶”ê°€ //ì–´ë“œë¯¼ìœ¼ë¡œ ì ‘ì† , ë£¸ë¦¬ìŠ¤íŠ¸ ë³´ì—¬ì¤Œ//
+		@RequestMapping(value="/admin", method=RequestMethod.GET)//ì¶”í›„ ëª¨ë¸ì•¤ë·°ë¡œ ë°”ê¿”ì•¼í•¨
 		public String ADaccess() {
 			return "admin/admin_index";
 		}
-		//¾îµå¹Î ·ëµî·Ï ÀÌµ¿
+		//ì–´ë“œë¯¼ ë£¸ë“±ë¡ ì´ë™
 		@GetMapping(value = "/RoomWrite.ro")
 		public String board_write() throws Exception {
-			return "room_register";
+			return "admin/room_register";
 		}
 		
+
+	
+	 //ì–´ë“œë¯¼ ë£¸ë“±ë¡ ì•¡ì…˜- ë‹¤ì¤‘ì—…ë¡œë“œ ì‹œì‘
+	 
+	 @GetMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
+	HttpServletRequest request) throws Exception{
+	
+		 
+		 return "redirect:RoomList.ro";
+	 }
+	
+		
+
 	/*
-	 * //¾îµå¹Î ·ëµî·Ï ¾×¼Ç
+	 * //ì–´ë“œë¯¼ ë£¸ë“±ë¡ ì•¡ì…˜
 	 * 
 	 * @PostMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
 	 * HttpServletRequest request) throws Exception{
 	 * 
 	 * }
 	 */
-		//·ë Á¤º¸ º¸±â -¿¬½À¿ë(ÀºÁö)
+		//ë£¸ ì •ë³´ ë³´ê¸° -ì—°ìŠµìš©(ì€ì§€)
 		@RequestMapping(value="/room_detail")
 		public String room_detail() {
 			return "room/detail";
 		}
+
 	
 }

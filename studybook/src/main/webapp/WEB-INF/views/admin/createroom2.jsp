@@ -28,8 +28,8 @@
 </script>
 </head>
 <div class="container w_wrap">
-	<form action="RoomAddAction.ro" method="post"
-		enctype="multipart/form-data" name="roomform">
+	<form action="RoomAddAction.ro" id="frm" name="frm"
+		enctype="multipart/form-data">
 		<!-- 여기에 enctype=multipart써있어야 액션에서 multipart request쓸 수 있음 -->
 
 		<div class="row">
@@ -226,28 +226,16 @@
 					<div class="col-md-12">
 						<div class="body">
 							<!-- 첨부 버튼 -->
-							<div id="attach">
-								<label class="waves-effect waves-teal btn-flat"
-									for="uploadInputBox">사진첨부</label> <input id="uploadInputBox"
-									style="display: none" type="file" name="filedata" multiple />
+							<div id="fileDiv">
+							<p>
+							<input type="file" id="file" name="file_0">
+							<a href="#this" class="btn" id="delete" name="delete">삭제</a>
+							</p>
 							</div>
-
-							<!-- 미리보기 영역 -->
-							<div id="preview" class="content"></div>
-
-							<!-- multipart 업로드시 영역 -->
-							<form id="uploadForm" style="display: none;" />
-						</div>
-						<div class="footer">
-							<button class="submit">
-								<a href="#" title="등록" class="btnlink">등록</a>
-							</button>
+					<a href="#file" class="btn btn-info" id="addFile">파일 추가</a>
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 		</div>
 
@@ -267,116 +255,30 @@
 	<br>
 </div>
 <script>
-	//임의의 file object영역
-	var files = {};
-	var previewIndex = 0;
-
-	// image preview 기능 구현
-	// input = file object[]
-	function addPreview(input) {
-            if (input[0].files) {
-                //파일 선택이 여러개였을 시의 대응
-                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-                    var file = input[0].files[fileIndex];
-                    if(validation(file.name)) continue;
-                    setPreviewForm(file);
-                }
-            } else
-                alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-        }
-        
-        function setPreviewForm(file, img){
-            var reader = new FileReader();
-            
-            //div id="preview" 내에 동적코드추가.
-            //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
-            reader.onload = function(img) {
-                var imgNum = previewIndex++;
-                $("#preview").append(
-                        "<div class=\"preview-box\" value=\"" + imgNum +"\">" +
-                        "<img class=\"thumbnail\" src=\"" + img.target.result + "\"\/>" +
-                        "<p>" + file.name + "</p>" +
-                        "<a href=\"#\" value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">" +
-                        "삭제" + "</a>"
-                        + "</div>"
-                );
-                resizeHeight();
-                files[imgNum] = file;            
-            };
-            
-            reader.readAsDataURL(file);
-        }
-
-
-	//preview 영역에서 삭제 버튼 클릭시 해당 미리보기이미지 영역 삭제
-	function deletePreview(obj) {
-		var imgNum = obj.attributes['value'].value;
-		delete files[imgNum];
-		$("#preview .preview-box[value=" + imgNum + "]").remove();
-		resizeHeight();
+	$(document).ready(function(){
+		$('#addFile').on('click', function(e){//파일 추가 버튼
+			e.preventDefault();
+			fn_addFile();
+		})
+		$("a[name='delete']").on('click',function(e){
+			e.preventDefault();
+			fn_deleteFile($(this));
+		})
+	})
+	
+	var gfv_count=1;
+	
+	function fn_addFile(){
+		var str="<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+		$('#fileDiv').append(str);
+		$("a[name='delete']").on('click',function(e){//삭제버튼
+			e.preventDefault();
+			fn_deleteFile($(this));
+		})
 	}
-
-	//client-side validation
-	//always server-side validation required
-	function validation(fileName) {
-		fileName = fileName + "";
-		var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		var fileNameExtension = fileName.toLowerCase().substring(
-				fileNameExtensionIndex, fileName.length);
-		if (!((fileNameExtension === 'jpg') || (fileNameExtension === 'gif') || (fileNameExtension === 'png'))) {
-			alert('jpg, gif, png 확장자만 업로드 가능합니다.');
-			return true;
-		} else {
-			return false;
-		}
+	function fn_deleteFile(obj){
+		obj.parent().remove();
 	}
-
-	$(document).ready(function() {
-		//submit 등록. 실제로 submit type은 아니다.
-		$('.submit a').on('click', function() {
-			var form = $('#uploadForm')[0];
-			var formData = new FormData(form);
-
-			for (var index = 0; index < Object.keys(files).length; index++) {
-				//formData 공간에 files라는 이름으로 파일을 추가한다.
-				//동일명으로 계속 추가할 수 있다.
-				formData.append('files', files[index]);
-			}
-
-			//ajax 통신으로 multipart form을 전송한다.
-			$.ajax({
-				type : 'POST',
-				enctype : 'multipart/form-data',
-				processData : false,
-				contentType : false,
-				cache : false,
-				timeout : 600000,
-				url : '/imageupload',
-				dataType : 'JSON',
-				data : formData,
-				success : function(result) {
-					//이 부분을 수정해서 다양한 행동을 할 수 있으며,
-					//여기서는 데이터를 전송받았다면 순수하게 OK 만을 보내기로 하였다.
-					//-1 = 잘못된 확장자 업로드, -2 = 용량초과, 그외 = 성공(1)
-					if (result === -1) {
-						alert('jpg, gif, png, bmp 확장자만 업로드 가능합니다.');
-						// 이후 동작 ...
-					} else if (result === -2) {
-						alert('파일이 10MB를 초과하였습니다.');
-						// 이후 동작 ...
-					} else {
-						alert('이미지 업로드 성공');
-						// 이후 동작 ...
-					}
-				}
-			//전송실패에대한 핸들링은 고려하지 않음
-			});
-		});
-		// <input type=file> 태그 기능 구현
-		$('#attach input[type=file]').change(function() {
-			addPreview($(this)); //preview form 추가하기
-		});
-	});
 </script>
 
 <script
