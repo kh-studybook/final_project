@@ -18,7 +18,7 @@ public class RoomController {
 	private RoomService roomservice;
 	
 	
-		//지은 추가 //어드민으로 접속 , 룸리스트 보여줌
+		//지은 추가 //어드민으로 접속 , 룸리스트 보여줌//
 		@RequestMapping(value="/admin", method=RequestMethod.GET)//추후 모델앤뷰로 바꿔야함
 		public String ADaccess() {
 			return "admin/admin_index";
