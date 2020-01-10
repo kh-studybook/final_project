@@ -19,7 +19,7 @@
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="createroom2.jsp" />
+		<jsp:include page="createroom3.jsp" />
 	</main>
 	<!-- Body End -->
 
