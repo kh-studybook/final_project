@@ -5,7 +5,7 @@
 <head data-n-head="">
 <title data-n-head="true">StudyBook</title>
 <link rel="stylesheet" type="text/css"
-	href="resources/css/room_detail.css" />
+	href="resources/css/room_detail_sample.css" />
 </head>
 <body>
 	<div class="wrap">

@@ -19,72 +19,72 @@ import kh.finalproject.studybook.domain.Event;
 
 @Controller
 public class EventController {
-		@Autowired
-		private EventService eventservice;
+      @Autowired
+      private EventService eventservice;
 
-		//ÀÌº¥Æ® µî·Ï È­¸éÀ¸·Î ÀÌµ¿
-		@GetMapping(value = "/registerEvent.eve")
-		public String event_write_view() throws Exception{
-			return "event/event_main";
-		}
-		
-		//ÀÌº¥Æ® µî·ÏÇÏ±â
-		@PostMapping(value = "EventAddAction.eve")
-		public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
-			   //»çÁø µî·ÏÇÏ±â				
-			  MultipartFile uploadfile=event.getEventPic_uploadfile();
-		      
-		      if(!uploadfile.isEmpty()) {
-		         String fileName=uploadfile.getOriginalFilename();
-		         event.setEventPic_originalfile(fileName);  //¿ø·¡ ÆÄÀÏ¸í ÀúÀå
-		      
-		      //»õ·Î¿î Æú´õ ÀÌ¸§ : ¿À´Ã ³â+¿ù+ÀÏ
-		      Calendar c=Calendar.getInstance();
-		      int year=c.get(Calendar.YEAR);
-		      int month=c.get(Calendar.MONTH) + 1 ;
-		      int date=c.get(Calendar.DATE);
-		      String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
-		      String homedir=saveFolder+year+"-"+month+"-"+date;
-		      System.out.println(homedir);
-		      File path1=new File(homedir);
-		      if(!(path1.exists())) {
-		         path1.mkdir(); //»õ·Î¿î Æú´õ¸¦ »ı¼º
-		      }
-		     
-		      //³­¼ö »ı¼º
-		      Random r=new Random();
-		      int random=r.nextInt(100000000);
-		      
-		      /*** È®ÀåÀÚ ±¸ÇÏ±â ½ÃÀÛ ***/
-		      int index=fileName.lastIndexOf(".");
-		      //¹®ÀÚ¿­¿¡¼­ Æ¯Á¤ ¹®ÀÚ¿­ÀÇ À§Ä¡ °ª(index)¸¦ ¹İÈ¯ÇÑ´Ù.
-		      //indexOf°¡ Ã³À½ ¹ß°ßµÇ´Â ¹®ÀÚ¿­¿¡ ´ëÇÑ index¸¦ ¹İÈ¯ÇÏ´Â ¹İ¸é
-		      //lastIndexOf´Â ¸¶Áö¸·À¸·Î ¹ß°ßµÇ´Â ¹®ÀÚ¿­ÀÇ index¸¦¹İÈ¯ÇÕ´Ï´Ù.
-		      System.out.println("index = " + index);
-		      String fileExtension =fileName.substring(index+1);
-		      System.out.println("fileExtension = "+fileExtension);
-		      /*** È®ÀåÀÚ ±¸ÇÏ±â ³¡ ***/
-		      
-		      //»õ·Î¿î ÆÄÀÏ¸í
-		      String refileName="bbs"+year+month+date+random+"."+fileExtension;
-		      System.out.println("refileName = "+refileName);
-		      String fileDBName= "/"+year+"-"+month+"-"+date+"/"+refileName;
-		      System.out.println("fileDBName = "+fileDBName);
-		      
-		      //tranferTo(File path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
-		      uploadfile.transferTo(new File(saveFolder+fileDBName));
-		      
-		      //¹Ù²ïÆÄÀÏ¸íÀ¸·Î ÀúÀå
-		      event.setEventPic_originalfile(fileDBName);
-		      }	      
-		      
-			eventservice.insertEvent(event);
-			return "EventList.eve";
-		}
-		
-		//ÀÌº¥Æ® ¸®½ºÆ® º¸±â
-		//@RequestMapping(value = "EventList.eve")
-		
-		
-	
+      //ì´ë²¤íŠ¸ ë“±ë¡ í™”ë©´ìœ¼ë¡œ ì´ë™
+      @GetMapping(value = "/registerEvent.eve")
+      public String event_write_view() throws Exception{
+         return "event/event_main";
+      }
+      
+      //ì´ë²¤íŠ¸ ë“±ë¡í•˜ê¸°
+      @PostMapping(value = "EventAddAction.eve")
+      public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
+            //ì‚¬ì§„ ë“±ë¡í•˜ê¸°            
+           MultipartFile uploadfile=event.getEventPic_uploadfile();
+            
+            if(!uploadfile.isEmpty()) {
+               String fileName=uploadfile.getOriginalFilename();
+               event.setEventPic_originalfile(fileName);  //ì›ë˜ íŒŒì¼ëª… ì €ì¥
+            
+            //ìƒˆë¡œìš´ í´ë” ì´ë¦„ : ì˜¤ëŠ˜ ë…„+ì›”+ì¼
+            Calendar c=Calendar.getInstance();
+            int year=c.get(Calendar.YEAR);
+            int month=c.get(Calendar.MONTH) + 1 ;
+            int date=c.get(Calendar.DATE);
+            String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
+            String homedir=saveFolder+year+"-"+month+"-"+date;
+            System.out.println(homedir);
+            File path1=new File(homedir);
+            if(!(path1.exists())) {
+               path1.mkdir(); //ìƒˆë¡œìš´ í´ë”ë¥¼ ìƒì„±
+            }
+           
+            //ë‚œìˆ˜ ìƒì„±
+            Random r=new Random();
+            int random=r.nextInt(100000000);
+            
+            /*** í™•ì¥ì êµ¬í•˜ê¸° ì‹œì‘ ***/
+            int index=fileName.lastIndexOf(".");
+            //ë¬¸ìì—´ì—ì„œ íŠ¹ì • ë¬¸ìì—´ì˜ ìœ„ì¹˜ ê°’(index)ë¥¼ ë°˜í™˜í•œë‹¤.
+            //indexOfê°€ ì²˜ìŒ ë°œê²¬ë˜ëŠ” ë¬¸ìì—´ì— ëŒ€í•œ indexë¥¼ ë°˜í™˜í•˜ëŠ” ë°˜ë©´
+            //lastIndexOfëŠ” ë§ˆì§€ë§‰ìœ¼ë¡œ ë°œê²¬ë˜ëŠ” ë¬¸ìì—´ì˜ indexë¥¼ë°˜í™˜í•©ë‹ˆë‹¤.
+            System.out.println("index = " + index);
+            String fileExtension =fileName.substring(index+1);
+            System.out.println("fileExtension = "+fileExtension);
+            /*** í™•ì¥ì êµ¬í•˜ê¸° ë ***/
+            
+            //ìƒˆë¡œìš´ íŒŒì¼ëª…
+            String refileName="bbs"+year+month+date+random+"."+fileExtension;
+            System.out.println("refileName = "+refileName);
+            String fileDBName= "/"+year+"-"+month+"-"+date+"/"+refileName;
+            System.out.println("fileDBName = "+fileDBName);
+            
+            //tranferTo(File path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
+            uploadfile.transferTo(new File(saveFolder+fileDBName));
+            
+            //ë°”ë€íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
+            event.setEventPic_originalfile(fileDBName);
+            }         
+            
+         eventservice.insertEvent(event);
+         return "EventList.eve";
+      }
+      
+      //ì´ë²¤íŠ¸ ë¦¬ìŠ¤íŠ¸ ë³´ê¸°
+      //@RequestMapping(value = "EventList.eve")
+      
+      
+   
 }
