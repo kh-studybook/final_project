@@ -30,7 +30,7 @@ public class RoomController {
 		}
 		
 	
-	 //어드민 룸등록 액션
+	 //어드민 룸등록 액션- 다중업로드 시작
 	 
 	 @GetMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
 	HttpServletRequest request) throws Exception{
