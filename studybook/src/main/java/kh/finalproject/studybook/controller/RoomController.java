@@ -23,10 +23,10 @@ public class RoomController {
 
 	// 지은 시작--
 	// 어드민으로 접속 , 룸리스트 보여줌
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adAccess() {
-		return "admin/admin_index";
-	}
+
 
 	// 어드민 룸등록 이동
 	@GetMapping(value = "/RoomWrite.ro")
