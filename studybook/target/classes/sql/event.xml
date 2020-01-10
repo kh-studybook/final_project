@@ -4,6 +4,11 @@
 
 <mapper namespace="Events">
 	<insert id = "insertEvent">
-		insert into 
+		<!--  글번호 -->
+		<selectKey resultType = "int" order = "BEFORE" keyProperty = "event_num">
+			select nvl(max(EVENT_NUM), 0)+1 from event
+		</selectKey>
+		insert into event(event_num, mem_key, title, content, even_date, event_start, event_end, event_room, event_pic) 
+		values(#{event_num}, #{id}, #{event_title}, #{event_date}, #{event_start}, #{event_room}, #{eventPic_originalfile})
 	</insert>
 </mapper>
