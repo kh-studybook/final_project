@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>EventDetailView.jsp</title>
 <style>
-	/** a 태그 관련 */
+	/** a 태그 관련!! */
 	a{text-decoragion:none;}
 	
 	/** 글자 관련 */

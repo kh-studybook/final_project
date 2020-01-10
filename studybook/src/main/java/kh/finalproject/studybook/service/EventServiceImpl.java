@@ -14,7 +14,7 @@ public class EventServiceImpl implements EventService {
 	private EventDAO dao;
 	
 	@Override
-	public void insertEvent(Event event) {//이벤트 등록하기
+	public void insertEvent(Event event) {//이벤트 등록하기!!
 		dao.insertEvent(event);		
 	}
 

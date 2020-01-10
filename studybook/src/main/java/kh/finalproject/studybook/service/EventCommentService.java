@@ -4,7 +4,7 @@ import java.util.List;
 import kh.finalproject.studybook.domain.Event_comment;
 
 public interface EventCommentService {
-	//글의 개수 구하기
+	//글의 개수 구하기!!
 	public int getEventListCount(int event_num);	
 	//댓글 목록 가져가기
 	public List<Event_comment> getEventCommentList(int event_num);

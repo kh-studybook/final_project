@@ -3,7 +3,7 @@
 <style>
 * {box-sizing: border-box; font-family:"맑은 고딕"}
 
-/** 글자 관련*/
+/** 글자 관련!!*/
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px;}
 #event_title{maxLength:200}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}

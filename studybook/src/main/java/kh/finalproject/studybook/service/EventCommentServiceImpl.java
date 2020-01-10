@@ -10,7 +10,7 @@ public class EventCommentServiceImpl implements EventCommentService {
 
 	@Override
 	public int getEventListCount(int event_num) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub!!
 		return 0;
 	}
 

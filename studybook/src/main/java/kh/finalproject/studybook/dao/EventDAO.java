@@ -12,7 +12,7 @@ public class EventDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public void insertEvent(Event event) {//이벤트 등록하기
+	public void insertEvent(Event event) {//이벤트 등록하기!!
 		sqlSession.insert("event.insert", event);		
 	}
 
