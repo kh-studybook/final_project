@@ -2,6 +2,7 @@ package kh.finalproject.studybook.controller;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import kh.finalproject.studybook.service.EventCommentService;
 import kh.finalproject.studybook.service.EventService;
 import kh.finalproject.studybook.domain.Event;
 
@@ -21,24 +25,27 @@ import kh.finalproject.studybook.domain.Event;
 public class EventController {
 		@Autowired
 		private EventService eventservice;
+		
+		@Autowired
+		private EventCommentService eventcommentservice; 
 
-		//ÀÌº¥Æ® µî·Ï È­¸éÀ¸·Î ÀÌµ¿
+		//ì´ë²¤íŠ¸ ë“±ë¡ í™”ë©´ìœ¼ë¡œ ì´ë™
 		@GetMapping(value = "/registerEvent.eve")
 		public String event_write_view() throws Exception{
 			return "event/event_main";
-		}
+		}//event_write view end
 		
-		//ÀÌº¥Æ® µî·ÏÇÏ±â
+		//ì´ë²¤íŠ¸ ë“±ë¡í•˜ê¸°
 		@PostMapping(value = "EventAddAction.eve")
 		public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
-			   //»çÁø µî·ÏÇÏ±â				
+			   //ì‚¬ì§„ ë“±ë¡í•˜ê¸°				
 			  MultipartFile uploadfile=event.getEventPic_uploadfile();
 		      
 		      if(!uploadfile.isEmpty()) {
 		         String fileName=uploadfile.getOriginalFilename();
-		         event.setEventPic_originalfile(fileName);  //¿ø·¡ ÆÄÀÏ¸í ÀúÀå
+		         event.setEventPic_originalfile(fileName);  //ì›ë˜ íŒŒì¼ëª… ì €ì¥
 		      
-		      //»õ·Î¿î Æú´õ ÀÌ¸§ : ¿À´Ã ³â+¿ù+ÀÏ
+		      //ìƒˆë¡œìš´ í´ë” ì´ë¦„ : ì˜¤ëŠ˜ ë…„+ì›”+ì¼
 		      Calendar c=Calendar.getInstance();
 		      int year=c.get(Calendar.YEAR);
 		      int month=c.get(Calendar.MONTH) + 1 ;
@@ -48,43 +55,85 @@ public class EventController {
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
 		      if(!(path1.exists())) {
-		         path1.mkdir(); //»õ·Î¿î Æú´õ¸¦ »ı¼º
+		         path1.mkdir(); //ìƒˆë¡œìš´ í´ë”ë¥¼ ìƒì„±
 		      }
 		     
-		      //³­¼ö »ı¼º
+		      //ë‚œìˆ˜ ìƒì„±
 		      Random r=new Random();
 		      int random=r.nextInt(100000000);
 		      
-		      /*** È®ÀåÀÚ ±¸ÇÏ±â ½ÃÀÛ ***/
+		      /*** í™•ì¥ì êµ¬í•˜ê¸° ì‹œì‘ ***/
 		      int index=fileName.lastIndexOf(".");
-		      //¹®ÀÚ¿­¿¡¼­ Æ¯Á¤ ¹®ÀÚ¿­ÀÇ À§Ä¡ °ª(index)¸¦ ¹İÈ¯ÇÑ´Ù.
-		      //indexOf°¡ Ã³À½ ¹ß°ßµÇ´Â ¹®ÀÚ¿­¿¡ ´ëÇÑ index¸¦ ¹İÈ¯ÇÏ´Â ¹İ¸é
-		      //lastIndexOf´Â ¸¶Áö¸·À¸·Î ¹ß°ßµÇ´Â ¹®ÀÚ¿­ÀÇ index¸¦¹İÈ¯ÇÕ´Ï´Ù.
+		      //ë¬¸ìì—´ì—ì„œ íŠ¹ì • ë¬¸ìì—´ì˜ ìœ„ì¹˜ ê°’(index)ë¥¼ ë°˜í™˜í•œë‹¤.
+		      //indexOfê°€ ì²˜ìŒ ë°œê²¬ë˜ëŠ” ë¬¸ìì—´ì— ëŒ€í•œ indexë¥¼ ë°˜í™˜í•˜ëŠ” ë°˜ë©´
+		      //lastIndexOfëŠ” ë§ˆì§€ë§‰ìœ¼ë¡œ ë°œê²¬ë˜ëŠ” ë¬¸ìì—´ì˜ indexë¥¼ë°˜í™˜í•©ë‹ˆë‹¤.
 		      System.out.println("index = " + index);
 		      String fileExtension =fileName.substring(index+1);
 		      System.out.println("fileExtension = "+fileExtension);
-		      /*** È®ÀåÀÚ ±¸ÇÏ±â ³¡ ***/
+		      /*** í™•ì¥ì êµ¬í•˜ê¸° ë ***/
 		      
-		      //»õ·Î¿î ÆÄÀÏ¸í
+		      //ìƒˆë¡œìš´ íŒŒì¼ëª…
 		      String refileName="bbs"+year+month+date+random+"."+fileExtension;
 		      System.out.println("refileName = "+refileName);
 		      String fileDBName= "/"+year+"-"+month+"-"+date+"/"+refileName;
 		      System.out.println("fileDBName = "+fileDBName);
 		      
-		      //tranferTo(File path) : ¾÷·ÎµåÇÑ ÆÄÀÏÀ» ¸Å°³º¯¼öÀÇ °æ·Î¿¡ ÀúÀåÇÕ´Ï´Ù.
+		      //tranferTo(File path) : ì—…ë¡œë“œí•œ íŒŒì¼ì„ ë§¤ê°œë³€ìˆ˜ì˜ ê²½ë¡œì— ì €ì¥í•©ë‹ˆë‹¤.
 		      uploadfile.transferTo(new File(saveFolder+fileDBName));
 		      
-		      //¹Ù²ïÆÄÀÏ¸íÀ¸·Î ÀúÀå
+		      //ë°”ë€íŒŒì¼ëª…ìœ¼ë¡œ ì €ì¥
 		      event.setEventPic_originalfile(fileDBName);
 		      }	      
 		      
 			eventservice.insertEvent(event);
-			return "EventList.eve";
-		}
+			return "eventList.eve";
+		}//event_write_ok end
 		
-		//ÀÌº¥Æ® ¸®½ºÆ® º¸±â
-		//@RequestMapping(value = "EventList.eve")
+		//ì´ë²¤íŠ¸ ë¦¬ìŠ¤íŠ¸ ë³´ê¸°
+		@RequestMapping(value = "eventList.eve")
+		public ModelAndView eventList(
+				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
+				ModelAndView mv) throws Exception {	
+			int limit = 9;//ê¸°ë³¸ìœ¼ë¡œ 10ê°œì˜ ê¸€ì„ ë³´ì—¬ì¤Œ
+			int listcount = eventservice.getEventListCount();// ì´ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ì˜´
+			
+			int maxpage = (listcount + limit - 1)/limit;
+			int startpage = ((page - 1)/9) * 9 + 1;
+			int endpage = startpage + 9 - 1;
+			
+			if (endpage > maxpage){endpage = maxpage;}		
+			
+			List<Event> eventlist = eventservice.getEventList(page, limit);
+
+			mv.setViewName("event/eventlist");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("eventlist", eventlist);
+			mv.addObject("limit", limit);
+			
+			return mv;
+		}//EventList.eve end
 		
-		
+		//ì´ë²¤íŠ¸ ê²Œì‹œê¸€ ë³´ê¸°
+		@RequestMapping(value = "EventDetailAction.eve")
+		public ModelAndView eventGetDetail(int num, ModelAndView mv, HttpServletRequest request) {
+			Event event = eventservice.getEventDetail(num);
+			if (event == null) {
+				System.out.println("ìƒì„¸ë³´ê¸° ì‹¤íŒ¨");
+				mv.setViewName("redirect:eventList.eve");
+				mv.addObject("url", request.getRequestURL());//ìœ„ì˜ requestëŠ” ì–´ë””ì—ì„œ ì—ëŸ¬ê°€ ë‚¬ëŠ”ì§€ ì•Œë ¤ì£¼ê¸° ìœ„í•´ì„œ ë„£ëŠ”ë‹¤.
+				mv.addObject("message", "ìƒì„¸ë³´ê¸° ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
+			} else {
+				System.out.println("ìƒì„¸ë³´ê¸° ì„±ê³µ");
+				int count = eventcommentservice.getEventListCount(num);
+				mv.setViewName("event/event_view");
+				mv.addObject("count", count);
+				mv.addObject("eventdata", event);
+			}				
+			return mv;
+		}//EventDetailAction.eve end
 	
 }

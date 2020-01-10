@@ -18,26 +18,26 @@ public class RoomController {
 	private RoomService roomservice;
 	
 	
-		//ÁöÀº Ãß°¡ //¾îµå¹ÎÀ¸·Î Á¢¼Ó , ·ë¸®½ºÆ® º¸¿©ÁÜ
-		@RequestMapping(value="/admin", method=RequestMethod.GET)//ÃßÈÄ ¸ðµ¨¾Øºä·Î ¹Ù²ã¾ßÇÔ
+		
+		@RequestMapping(value="/admin", method=RequestMethod.GET)
 		public String ADaccess() {
 			return "admin/admin_index";
 		}
-		//¾îµå¹Î ·ëµî·Ï ÀÌµ¿
+		
 		@GetMapping(value = "/RoomWrite.ro")
 		public String board_write() throws Exception {
 			return "room_register";
 		}
 		
 	/*
-	 * //¾îµå¹Î ·ëµî·Ï ¾×¼Ç
+	 * //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½
 	 * 
 	 * @PostMapping("/RoomAddAction.ro") public String room_write_ok(Room room,
 	 * HttpServletRequest request) throws Exception{
 	 * 
 	 * }
 	 */
-		//·ë Á¤º¸ º¸±â -¿¬½À¿ë(ÀºÁö)
+		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 		@RequestMapping(value="/room_detail")
 		public String room_detail() {
 			return "room/detail";

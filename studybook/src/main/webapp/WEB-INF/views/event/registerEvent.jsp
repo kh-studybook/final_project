@@ -4,7 +4,8 @@
 * {box-sizing: border-box; font-family:"맑은 고딕"}
 
 /** 글자 관련*/
-.p_title{font-family:"맑은 고딕"; text-align:center; maxLength:200}
+.p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px;}
+#event_title{maxLength:200}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
 textarea::placeholder, input[type=text]::placeholder{color:black;}
 .col-25 > label {font-weight:bold;}
@@ -51,12 +52,15 @@ input[type=date]{height:3rem;}
 			//file.type : 파일의 형식(MIME타입 - 예)text/html)
 			if (!file.type.match('image.*')) {//파일 타입이 image인지 확인합니다.
 				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
+				return false;
 			}
-	
-			if (file[0].size > (1024*1024*5)) {
-				alert("5MB이하 파일만 등록할 수 있습니다.\n현재파일 용량 : " + (Math.round(file[0].size/1024/1024*100) / 100) + "MB");
-				return;
+			
+			//파일 크기 제한 하기
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize = file.getSize;
+			if (fileSize > maxSize) {
+				alert("5MB이하 파일만 등록할 수 있습니다.\n파일 용량을 확인해주세요.");
+				return false;
 			}
 	
 			//파일을 읽기 위한 객체 생성
@@ -88,7 +92,7 @@ input[type=date]{height:3rem;}
 		});
 		
 		//등록시 필수 항목 입력 여부 검사
-		$(".p_submit").click(function(){
+		$("#p_event_write_form").submit(function(){
 			if (("#eventPic_uploadfile").attr("src") == "resources/image/default_thumnail.png"){
 				alert("이벤트의 썸네일을 등록해주세요.");
 				return false;				
@@ -138,9 +142,9 @@ input[type=date]{height:3rem;}
 <h2 class = "p_title">이벤트 등록</h2>
 
 <div class="p container">
-  <form method="post" action="EventAddAction.eve" enctype="multipart/form-data">
+  <form method="post" action="EventAddAction.eve" enctype="multipart/form-data" id = "p_event_write_form">
   	<!--  작성자 -->
- 	<input name = "event_writer" id = "event_writer" value = "${id}" readOnly type = "hidden">
+ 	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
   
 	<!--  썸네일 등록 -->
    <div class="row">
