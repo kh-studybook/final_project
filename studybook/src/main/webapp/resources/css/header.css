@@ -95,19 +95,75 @@ main {
 	margin-top:10px;
 	width: 100%;
 	font-size: 30px;
+	display: inline-flex;
+	justify-content: flex-end;
 }
 
 .j_menu__header {
 	width: 100%;
 	height: 20%;
 	background-color: #3EF4F3;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
-#j_profile_picture > img {
+#j_menu_profile > img {
 	width: 70px;
 	height: 70px;
 	border-radius: 35px;
+}
+
+.j_menu_orgs {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 10px;
+	margin-top: 10px;
+	align-items: center;
+}
+
+.j_menu_org {
+	width: 135px;
+	height: 90%;
+	background: white;
+	color: #BABBBE;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.j_menu_org > div {
+	margin-bottom: 10px;
+}
+
+.j_menu_org > div > i {
+	font-size: 30px;
+}
+
+.j_menu_event {
+	width: 100%;
+	height: 60px;
+	background-color: #7F56D2;
+	color: white;
+	font-size: 16px;
+	padding: 0 20px;
+	display: flex;
+	justify-contet: flex-start;
+	align-items: center;
+	margin: 10px auto;
+	cursor: pointer;
+}
+
+.j_menu_list {
+	width: 100%;
+	height: 60px;
+	background-color: white;
+	color: black;
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	cursor: pointer;
 }

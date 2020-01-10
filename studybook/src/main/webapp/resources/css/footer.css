@@ -2,12 +2,12 @@
 
 footer {
 	height: 100px;
+	z-index: 10;
 }
 
 #j_footer {
 	width: 100%;
 	height: 100px;
-	z-index: 10;
 	background: linear-gradient(to right, #7F56D2, #56D7D6);
 	display: flex;
 	justify-content: space-between;

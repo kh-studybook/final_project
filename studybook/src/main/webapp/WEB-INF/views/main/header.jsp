@@ -51,23 +51,48 @@
 		<ul class="nav navbar-nav navbar-right j_header__column">
 			<li class="nav-item" id="menu_icon"><i class="fas fa-bars"></i></li>
 		</ul>
-	<div class="menu">
+	<div class="menu nav-expanded">
+		<a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
 		<div class="j_menu__header">
-			<a href="#" class="close j_menu__header__column"><i class="fas fa-arrow-right"></i></a>
-			<div class="j_menu__header__column">
-					<div id="j_profile_picture">
-						<img src="resources/image/profile/id/default.png">
+			<div class="j_menu_member">
+					<div id="j_menu_profile">
+						<img src="resources/image/profile/default.png">
 					</div>
 				<c:if test="${email==null}">
-					<div>로그인이 필요합니다.</div>
+					<p class="j_menu_login">로그인이 필요합니다.</p>
 				</c:if>
 				<c:if test="${email!=null}">
-					<div>
-						<div>[${name}]</div>
-						<div><a href="#">프로필 관리</a></div>
+					<div class="j_menu_login">
+						<div class="j_menu_name">[${name}]</div>
+						<div class="j_menu_reg"><a href="#">프로필 관리</a></div>
 					</div>
 				</c:if>
 			</div>
 		</div>
+		<div class="j_menu_orgs">
+			<div class="j_menu_org" onClick="#">
+				<div><i class="far fa-list-alt"></i></div>
+				<div>예약 관리</div>
+			</div>
+			<div class="j_menu_org" onClick="#">
+				<div><i class="far fa-edit"></i></div>
+				<div>후기 관리</div>
+			</div>
+		</div>
+		<div class="j_menu_event" onClick="#">이 달의 이벤트</div>
+		<div>
+			<ul>
+				<li class="j_menu_list" onClick="#">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onClick="#">공지사항<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onClick="#">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+			</ul>
+		</div>
+		<div>
+			<p><a href="#">logout</a></p>
+			<p>Powered by STUDYBOOK</p>
+		</div>
+		<%-- <c:if test="${id=='admin'}"> --%>
+			<div id="j_menu_center">관리자 센터로 이동</div>
+		<%-- </c:if> --%>
 	</div>
 </nav>
