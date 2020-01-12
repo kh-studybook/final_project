@@ -12,7 +12,7 @@
 }
 
 .s_title { 
-	margin-top: 100px; 
+	margin-top: 50px; 
 	font-size: 32px;
 	text-align: center;
 }
