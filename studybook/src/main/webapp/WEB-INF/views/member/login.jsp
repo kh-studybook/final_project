@@ -110,7 +110,7 @@ input[type=checkbox] {
 
 		$(".findpw").click(function() {
 			location.href = "login_findpw.mem";
-		});
+		}); 
 
 	});
 </script>

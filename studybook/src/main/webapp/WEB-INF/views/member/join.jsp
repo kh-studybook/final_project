@@ -214,7 +214,7 @@ input[type=checkbox] {
 					<input type="password" id="passwordcheck" class="s_input" name="passwordcheck" placeholder="비밀번호 확인">
 					<span class=passwordcheckmsg></span>	
 				</div>
-				<div class="col-100">
+				<div class="col-100"> 
 					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="12" required>
 					<span class=phonemsg></span>	
 				</div>
