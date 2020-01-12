@@ -5,20 +5,6 @@
 <head>
 <title>login</title>
 
-<script>
-	$(function() {
-
-		$(".join").click(function() {
-			location.href = "join.mem";
-		});
-
-		$(".findpw").click(function() {
-			location.href = "login_findpw.mem";
-		});
-
-	});
-</script>
-
 <style>
 * {
 	box-sizing: border-box;
@@ -115,13 +101,28 @@ input[type=checkbox] {
 </style>
 
 
+<script>
+	$(function() {
+
+		$(".join").click(function() {
+			location.href = "join.mem";
+		});
+
+		$(".findpw").click(function() {
+			location.href = "login_findpw.mem";
+		});
+
+	});
+</script>
+
+
 </head>
 <body>
 
 	<p class=s_title>로그인</p>
 
 	<div class="s_container">
-		<form name="joinform" action="joinProcess.mem" method="post">
+		<form name="loginform" action="loginProcess.mem" method="post">
 			<div class="row">
 				<div class="col-100">
 					<input type="text" id="email" class="s_input" name="email" placeholder="이메일">
