@@ -26,7 +26,10 @@ public class RoomController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adAccess() {
-
+		return "admin/admin_index";
+		
+	}
+	
 
 	// 어드민 룸등록 이동
 	@GetMapping(value = "/RoomWrite.ro")
@@ -41,7 +44,7 @@ public class RoomController {
 
 		List<MultipartFile> fileList = mtfRequest.getFiles("filename");
 
-		String path="D:\\image\\";
+		String path="C:\\Users\\user1\\git\\final_project2\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		// 포문으로 꺼냄
 		int i = 0;
@@ -54,7 +57,10 @@ public class RoomController {
 			System.out.println("i=" + i);
 
 			String safeFile = path + System.currentTimeMillis() + originFileName;
-
+			
+			//파일명 저장
+		//	roomservice.insertGallery(originFileName, i);
+			
 			try {
 				mf.transferTo(new File(safeFile));
 			} catch (IllegalStateException e) {
@@ -67,7 +73,7 @@ public class RoomController {
 		return "admin/admin_index";
 	}
 
-	// 룸리스트보기
+	// 룸리스트보기//
 	@RequestMapping(value = "/RoomList.ro", method = RequestMethod.GET)
 	public String roomList() {
 		return "admin/admin_index";
