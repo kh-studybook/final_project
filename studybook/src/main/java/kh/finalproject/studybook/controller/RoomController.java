@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Room;
+import kh.finalproject.studybook.domain.Room_ex;
 import kh.finalproject.studybook.service.RoomService;
 
 @Controller
@@ -42,7 +43,7 @@ public class RoomController {
 	// 어드민 룸등록 액션- 다중업로드 시작
 
 	@PostMapping("/RoomAddAction.ro")
-	public String room_write_ok(Room room,MultipartHttpServletRequest mtfRequest) throws Exception {
+	public String room_write_ok(Room room,Room_ex room_ex,MultipartHttpServletRequest mtfRequest) throws Exception {
 
 		//룸정보 테이블에 입력
 		roomservice.insertRoom(room);
@@ -51,6 +52,9 @@ public class RoomController {
 		Room room1 = roomservice.selectRoomNum(room.getROOM_NAME());
 		int room_code = room1.getROOM_CODE(); 
 		System.out.println("해당 룸코드는?="+room_code);
+		
+		//룸특징 테이블에 입력
+		roomservice.insertRoom_ex(room_code,room_ex);
 		
 		//해당 룸코드 기준으로 맥스 갤러리넘버 최대값 가져옴
 		Gallery gallery1 = roomservice.getGalleryMaxCount(room_code);
@@ -74,8 +78,8 @@ public class RoomController {
 			
 			try {				
 				mf.transferTo(new File(safeFile));
-				//파일명 저장
-				roomservice.insertGallery(room_code,originFileName, i);
+				//파일명 DB에 저장
+				roomservice.insertGallery(room_code,originFileName,i);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
