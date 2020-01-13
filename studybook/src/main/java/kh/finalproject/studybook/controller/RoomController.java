@@ -44,7 +44,7 @@ public class RoomController {
 
 		List<MultipartFile> fileList = mtfRequest.getFiles("filename");
 
-		String path="C:\\Users\\user1\\git\\final_project2\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\final_project3\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		// 포문으로 꺼냄
 		int i = 0;
