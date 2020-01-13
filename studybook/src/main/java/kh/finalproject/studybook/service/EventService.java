@@ -18,5 +18,5 @@ public interface EventService {
 	//글 삭제
 	public int eventDelete(int num);
 	//글쓴이인지 확인
-	public boolean isEventWriter(int num, String pass);
+	public boolean isEventWriter(int num);
 }

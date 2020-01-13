@@ -14,3 +14,4 @@ create table event(
 drop table event;
 
 select * from event;
+delete from event;

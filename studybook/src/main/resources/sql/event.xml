@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Events">
-	<insert id = "insertEvent">
+<mapper namespace="event">
+	<insert id = "insertEvent" parameterType = "Event">
 		<!--  글번호!!!! -->
 		<selectKey resultType = "int" order = "BEFORE" keyProperty = "event_num">
-			select nvl(max(EVENT_NUM), 0)+1 from event
+			select nvl(max(event_num), 0)+1 from event
 		</selectKey>
-		insert into event(event_num, mem_key, title, content, even_date, event_start, event_end, event_room, event_pic) 
-		values(#{event_num}, #{id}, #{event_title}, #{event_date}, #{event_start}, #{event_room}, #{eventPic_originalfile})
+		insert into event(event_num, mem_key, title, content, event_date, event_start, event_end, event_room, event_pic) 
+		values(#{event_num}, #{mem_key}, #{title}, #{content}, #{event_date}, #{event_start}, #{event_end}, #{event_room}, #{event_pic})
 	</insert>
 	
 	<select id = "count" resultType = "int">
@@ -19,4 +19,43 @@
 	<select id = "detail" parameterType = "int" resultType = "Event">
 		select * from event where event_num = #{event_num}
 	</select>
+	
+	<select id = "eventWriter" parameterType = "int" resultType = "Event">
+		select * from event where event_num = #{num}
+	</select>
+	
+	<delete id = "delete" parameterType = "event"><!--  추후 확인 : event_comment.xml인지 -->
+		<![CDATA[	
+		delete from event_event 
+			where com_re_ref = #{com_re_ref}  
+			and com_re_lev >= #{com_re_lev}  
+			and com_re_seq >= #{com_re_seq}   
+			and com_re_seq <(
+								nvl((SELECT min(com_re_seq) 
+								FROM event_comment
+								WHERE com_re_ref=#{com_re_ref}
+								AND   com_re_lev=#{com_re_lev}
+								AND   com_re_seq>#{com_re_seq}),
+								(SELECT max(com_re_seq)+1 
+								 FROM event_comment
+			                     WHERE com_re_ref=#{com_re_ref}))
+			                   )
+	]]>
+	</delete>
+	
+	<select id = "list" parameterType = "java.util.Map" resultType = "event">
+		select * from (select rownum rnum, event_num, mem_key, title,
+					   	content, event_pic, com_re_ref, com_re_lev, com_re_seq, com_date
+						from (select * from event, event_comment order by com_re_ref desc, com_re_seq asc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<update id = "modifyEvent" parameterType = "event">
+		update event
+		set 
+			title = #{title}, 
+	 		content =  #{content}, 
+	 		event_pic = #{event_pic}
+			where event_num = #{event_num}
+	</update>
 </mapper>
