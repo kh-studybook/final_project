@@ -53,7 +53,7 @@ public class RoomController {
 		int room_code = room1.getROOM_CODE(); 
 		System.out.println("해당 룸코드는?="+room_code);
 		
-		//룸특징 테이블에 입력
+		//룸특징 테이블에 입력//이게 빈칸이 아닌경우에만 들어가야함
 		roomservice.insertRoom_ex(room_code,room_ex);
 		
 		//해당 룸코드 기준으로 맥스 갤러리넘버 최대값 가져옴
@@ -61,12 +61,18 @@ public class RoomController {
 		
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("filename");
-
+		MultipartFile first=fileList.get(0);
+		System.out.println("fileList:"+fileList.size());
+		
+		
+		//이게 이미지가 공란이 아닐때만 실행되야함
+		if(!fileList.isEmpty()&&first.getSize()!=0) {
 		String path="C:\\Users\\user1\\git\\final_project4\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
-
+		
 		// 포문으로 꺼냄
 		int i = gallery1.getGALLERY_NUM();
 		for (MultipartFile mf : fileList) {
+			
 			String originFileName = mf.getOriginalFilename();// 원본파일명
 			long fileSize = mf.getSize();// 파일 사이즈
 			int num = i++;
@@ -82,10 +88,12 @@ public class RoomController {
 				roomservice.insertGallery(room_code,originFileName,i);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
+				System.out.println("갤러리에 이미지파일 업로드하다 에러남 Roomcontroller");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		
+		}}
 
 		return "admin/admin_index";
 	}
