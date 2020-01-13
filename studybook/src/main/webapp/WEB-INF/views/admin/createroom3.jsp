@@ -24,6 +24,45 @@
 }
 </style>
 <script>
+	$(function(){
+		$("input:text[numberOnly]").on("focus",function(){
+			var x = $(this).val();
+			x=removeCommas(x);
+			$(this).val(x);
+		}).on("focusout",function(){
+			var x=$(this).val();
+			if(x && x.length>0){
+				if(!$.isNumeric(x)){
+					x= x.replace(/[^0-9]/g,"");
+				}
+				$(this).val(x);
+			}
+		}).on("keyup", function(){
+			$(this).val($(this).val().replace(/[^0-9]/g,""));
+		})
+		
+		//모든 콤마 제거
+		function removeCommas(x) {
+		    if(!x || x.length == 0) return "";
+		    else return x.split(",").join("");
+		}
+		
+		function compare(){
+			var max=$("#max_member").val();
+			var min=$("#min_member").val();
+			if(max<min){
+				alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
+				
+			}
+		}
+		
+		$("#max_member").on('blur', function(){
+			compare();
+		})
+		
+
+	})
+	
 	
 </script>
 </head>
@@ -115,9 +154,10 @@
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">최소시간</label> <input
-								type="text" name="MIN_HOUR" id="min_hour" maxlength="60"
-								class="form-control" placeholder="최소시간 입력" class="form-control" />
+							<label class="control-label">최소시간(숫자입력)</label> <input
+								type="text" numberOnly name="MIN_HOUR" id="min_hour"
+								maxlength="2" class="form-control" placeholder="최소시간 입력"
+								class="form-control" />
 						</div>
 					</div>
 				</div>
@@ -125,24 +165,26 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label">최소인원(숫자 입력)</label> <input
-								type="text" name="MIN_MEMBER" id="min_member" maxlength="2"
-								class="form-control" placeholder="최소인원 입력" class="form-control" />
+								type="text" numberOnly name="MIN_MEMBER" id="min_member"
+								maxlength="2" class="form-control" placeholder="최소인원 입력"
+								class="form-control" />
 						</div>
 					</div>
 
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label">최대인원(숫자 입력)</label> <input
-								type="text" name="MAX_MEMBER" id="max_member" maxlength="3"
-								class="form-control" placeholder="최대인원 입력" class="form-control" />
+								type="text" numberOnly name="MAX_MEMBER" id="max_member"
+								maxlength="3" class="form-control" placeholder="최대인원 입력"
+								class="form-control" />
 						</div>
 					</div>
 
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label">시간당 가격(숫자 입력)</label> <input
-								type="text" name="HOUR_COST" id="hour_cost" maxlength="5"
-								class="form-control" placeholder="시간당 가격 입력"
+								type="text" numberOnly name="HOUR_COST" id="hour_cost"
+								maxlength="5" class="form-control" placeholder="시간당 가격 입력"
 								class="form-control" />
 						</div>
 					</div>
@@ -234,9 +276,9 @@
 						<div class="body">
 							<!-- 첨부 버튼 -->
 							<div>
-								<input multiple="multiple" type="file" name="filename" /> 
+								<input multiple="multiple" type="file" name="filename" />
 							</div>
-						
+
 						</div>
 					</div>
 				</div>
