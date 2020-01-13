@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<jsp:include page="../main/header.jsp" flush="false" />
+<jsp:include page="../room/header.jsp" flush="false" />
 <script>
 $(document).ready(function(){
 	var mainheight = $('main').height();
@@ -25,12 +25,12 @@ footer{height: 150px;}
 
 	<!-- Body Start!!!! -->
 	<main>		
-		<jsp:include page="registerEvent.jsp" />
+		<jsp:include page="eventModifyView.jsp" />
 	</main>
 	<!-- Body End -->
 	<!-- Footer Start -->
 	<footer>
-		<jsp:include page="../main/footer.jsp" flush="false" />
+		<jsp:include page="../room/footer.jsp" flush="false" />
 	</footer>
 	<!-- Footer End -->
 </body>

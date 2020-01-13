@@ -29,10 +29,10 @@ public class RoomController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adAccess() {
-		return "admin/admin_index";
-		
+
+		return null;
 	}
-	
+
 
 	// 어드민 룸등록 이동
 	@GetMapping(value = "/RoomWrite.ro")

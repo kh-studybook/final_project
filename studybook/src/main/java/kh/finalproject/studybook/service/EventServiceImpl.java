@@ -1,5 +1,6 @@
 package kh.finalproject.studybook.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,26 +31,37 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> getEventList(int page, int limit) {//글 목록 보기
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page - 1)*limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getEventList(map);
 	}
 
 	@Override
 	public int eventModify(Event modifyevent) {//이벤트 수정하기
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.eventModify(modifyevent);
 	}
 
 	@Override
 	public int eventDelete(int num) {//이벤트 삭제하기
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		Event event = dao.getEventDetail(num);
+		if (event != null) {
+			result = dao.eventDelete(event);
+		}
+		return result;
 	}
 
 	@Override
-	public boolean isEventWriter(int num, String pass) {//글쓴이인지 확인하기
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isEventWriter(int num) {//글쓴이인지 확인하기
+		Event result = dao.isEventWriter(num);
+		if (result == null) {
+			return false;
+		} else {
+			return true;			
+		}
 	}
 	
 }
