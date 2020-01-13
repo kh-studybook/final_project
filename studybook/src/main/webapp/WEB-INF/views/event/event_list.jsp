@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start!!!! -->
 	<main>		
-		<jsp:include page="registerEvent.jsp" />
+		<jsp:include page="eventList.jsp" />
 	</main>
 	<!-- Body End -->
 	<!-- Footer Start -->

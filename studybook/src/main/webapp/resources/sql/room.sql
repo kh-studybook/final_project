@@ -1,6 +1,6 @@
 create table room(
 	room_code number(10) not null constraint room_room_code_pk primary key,
-	room_name varchar2(50) not null,
+	room_name varchar2(50) not null unique,
 	room_info varchar2(100) not null,
 	room_type varchar2(100) not null,
 	min_member number(2) not null,
@@ -16,3 +16,5 @@ create table room(
 drop table room;
 
 select * from room;
+
+truncate table room;

@@ -1,15 +1,20 @@
 package kh.finalproject.studybook.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Gallery {
 	private int ROOM_CODE;
 	private String FILE_NAME;
 	private int GALLERY_NUM;
+	
 	public int getROOM_CODE() {
 		return ROOM_CODE;
 	}
 	public void setROOM_CODE(int rOOM_CODE) {
 		ROOM_CODE = rOOM_CODE;
 	}
+	
+	
 	public String getFILE_NAME() {
 		return FILE_NAME;
 	}

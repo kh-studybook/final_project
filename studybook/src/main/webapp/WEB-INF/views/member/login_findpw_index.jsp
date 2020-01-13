@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="join.jsp" />
+		<jsp:include page="login_findpw.jsp" />
 	</main>
 	<!-- Body End -->
 

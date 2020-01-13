@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="join.jsp" />
+		<jsp:include page="my_update.jsp" />
 	</main>
 	<!-- Body End -->
 
