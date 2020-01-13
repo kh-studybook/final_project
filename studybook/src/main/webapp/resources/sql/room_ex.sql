@@ -15,3 +15,5 @@ create table room_ex(
 drop table room_ex;
 
 select * from room_ex;
+
+truncate table room_ex;

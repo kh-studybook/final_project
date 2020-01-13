@@ -14,7 +14,8 @@
 }
 
 .s_title { 
-	margin-top: 50px; 
+	margin-top: 250px; 
+	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
 }
@@ -40,7 +41,8 @@
 	line-height:43px;
 	background-color: #9f9f9f;
 	color: white;
-	margin-top: 25px;
+	margin-top: 10px;
+	margin-bottom: 180px;
 	border: none;
 	cursor: pointer;
 }
@@ -55,17 +57,16 @@ input[type=checkbox] {
 
 .col-100 {
 	width: 100%;
-	margin-top: 15px;
+	margin-bottom: 30px;
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
-		margin-top: 15px;
+		margin-bottom: 30px;
 	}
 }
-
 
 .floatl {
 	float:left;
@@ -85,6 +86,7 @@ input[type=checkbox] {
 
 
 .schonangemeldet {
+	margin-bottom: 40px;
 	font-size: 12px;
 	color: #555555;
 	display: flex;
@@ -96,15 +98,19 @@ input[type=checkbox] {
 	color: #7F56D2;
 	font-weight : bolder;
 	cursor: pointer;
+	margin-left: 20px;
 }
 
 .tologin:hover {
-	background: #7F56D2;
-	color:#ffffff;
-	font-weight : bolder;
+	color:#56D7D6;
 }
 
-
+.joinus {
+	text-align:center;
+	font-size: 12px;
+	color: #555555;
+	margin-top:20px;
+}
 </style>
 
 
@@ -121,7 +127,7 @@ input[type=checkbox] {
 	        if($('#pw').val() != $('#pwcheck').val()){
 	          $('#pwcheckmsg').html('비밀번호 일치하지 않음<br><br>');
 	          $('#pwcheckmsg').attr('color', 'red');
-	        } else{
+	        } else {
 	          $('#pwcheckmsg').html('비밀번호 일치함<br><br>');
 	          $('#pwcheckmsg').attr('color', 'red');
 	        }
@@ -176,7 +182,7 @@ input[type=checkbox] {
      		}
   	  });
       
-      $(".login").click(function(){
+      $(".tologin").click(function(){
 			location.href="login.mem";
 	  }); 
       
@@ -193,27 +199,35 @@ input[type=checkbox] {
 <p class="schonangemeldet">이미 스터디북 회원이신가요?  <span class="tologin">로그인</span></p>
 	<div class="s_container">
 		<form name="joinform" action="joinProcess.mem" method="post">
-			<div class="row">
-
-					
+		
+			<div class="row">	
 				<div class="col-100">
 					<input type="text" id="name" class="s_input" name="name" placeholder="이름">
 					<span class=namemsg></span>
 				</div>
+			</div>	
+			
+			<div class="row">
 				<div class="col-100">
 					<input type="text" id="email" class="s_input" name="email" placeholder="이메일">
 					<span class=emailmsg></span>
 				</div>
-
+			</div>
+			
+			<div class="row">
 				<div class="col-100">
 					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
 					<span class=passwordmsg></span>	
 				</div>
-				
+			</div>
+			<div class="row">		
 				<div class="col-100">
 					<input type="password" id="passwordcheck" class="s_input" name="passwordcheck" placeholder="비밀번호 확인">
 					<span class=passwordcheckmsg></span>	
 				</div>
+			</div>
+				
+			<div class="row">
 				<div class="col-100"> 
 					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="12" required>
 					<span class=phonemsg></span>	
@@ -223,8 +237,8 @@ input[type=checkbox] {
 
 			
 			<div class="row">
-				<div class="col-100">
-					<span class="wannajoinus floatl"><input type="checkbox" name="priv"> 서비스 약관과 개인정보 보호정책에 동의합니다.</span>
+				<div class="col-100 joinus">
+					<span class="joinus"><input type="checkbox" name="priv"> 서비스 약관과 개인정보 보호정책에 동의합니다.</span>
 				</div>
 			</div>
 			
