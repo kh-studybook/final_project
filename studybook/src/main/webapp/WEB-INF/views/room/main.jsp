@@ -14,7 +14,7 @@
 	
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="content.jsp" />
+		<jsp:include page="main_detail.jsp" />
 	</main>
 	<!-- Body End -->
 

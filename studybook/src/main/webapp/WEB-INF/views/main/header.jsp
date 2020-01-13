@@ -51,7 +51,7 @@
 		<ul class="nav navbar-nav navbar-right j_header__column">
 			<li class="nav-item" id="menu_icon"><i class="fas fa-bars"></i></li>
 		</ul>
-	<div class="menu nav-expanded">
+	<div class="menu">
 		<a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
 		<div class="j_menu__header">
 			<div class="j_menu_member">
@@ -87,12 +87,14 @@
 				<li class="j_menu_list" onClick="#">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 			</ul>
 		</div>
-		<div>
-			<p><a href="#">logout</a></p>
-			<p>Powered by STUDYBOOK</p>
+		<div class="j_menu_bottom">
+			<div></div>
+			<div><a href="#">로그아웃</a></div>
+			<div>Powered by STUDYBOOK</div>
+		
+		<c:if test="${id=='admin'}">
+			<div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='/studybook/admin'">관리자 센터로 이동</div>
+		</c:if>
 		</div>
-		<%-- <c:if test="${id=='admin'}"> --%>
-			<div id="j_menu_center">관리자 센터로 이동</div>
-		<%-- </c:if> --%>
 	</div>
 </nav>
