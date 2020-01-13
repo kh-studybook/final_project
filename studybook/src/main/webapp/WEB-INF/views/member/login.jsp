@@ -12,7 +12,8 @@
 }
 
 .s_title { 
-	margin-top: 50px; 
+	margin-top: 250px; 
+	margin-bottom: 20px;
 	font-size: 32px;
 	text-align: center;
 }
@@ -38,12 +39,12 @@
 	line-height:43px;
 	background-color: #7F56D2;
 	color: white;
-	margin-top: 25px;
+	margin-top: 18px;
 	border: none;
 	cursor: pointer;
 }
 
-s_submit:hover {
+.s_submit:hover {
 	opacity: 70%;
 }
 
@@ -52,6 +53,10 @@ input[type=checkbox] {
 }
 
 .findpw {
+	text-decoration: none;
+}
+
+.findpw:hover {
 	text-decoration: none;
 }
 
@@ -89,17 +94,15 @@ input[type=checkbox] {
 	color: #7F56D2;
 	font-weight : bolder;
 	cursor: pointer;
+	margin-left:20px;
 }
 
 .join:hover {
-	background: #7F56D2;
-	color:#ffffff;
-	font-weight : bolder;
+	color:#56D7D6;
 }
 
 
 </style>
-
 
 <script>
 	$(function() {
@@ -151,8 +154,8 @@ input[type=checkbox] {
 			</div>
 			
 			<div class="row">
-				<div class="col-100">
-					<span class="wannajoinus floatl">스터디북 방문이 처음이신가요?</span><span class="join floatr">회원가입</span>
+				<div class="col-100" style="text-align:center; margin-top:25px;">
+					<span class="wannajoinus">스터디북 방문이 처음이신가요?</span><span class="join">회원가입</span>
 				</div>
 			</div>
 		</form>

@@ -8,12 +8,12 @@
 
 <script>
 
-	$(function(){  
+	//$(function(){  
 		
-		$(".start").click(function(){
-			location.href="main"";
-		}); 
-	});
+	//	$(".start").click(function(){
+	//		location.href="main.";
+	//	}); 
+	//});
 </script> 
 
 </head>
