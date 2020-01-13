@@ -39,6 +39,7 @@ input[type=text], select, textarea {
 	padding: 20px;
 	width: 60%;
 	min-width: 500px;
+	margin-bottom: 150px;
 }
 
 .col-20 {
@@ -51,21 +52,21 @@ input[type=text], select, textarea {
 .col-30 {
 	float: left;
 	width: 30%;
-	margin-top: 20px;
+	margin-top: 25px;
 	text-align:left;
 }
 
 .col-50 {
 	float: left;
 	width: 50%;
-	margin-top: 20px;
+	margin-top: 25px;
 	text-align:left;
 }
 
 .col-100 {
 	clear: both;
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 25px;
 	display: flex;
 	justify-content: center;
 }
@@ -115,6 +116,22 @@ instead of next to each other */
 	text-decoration:none;
 	color:#7F56D2;
 }
+
+.s_delete {
+	margin-bottom:50px;
+}
+
+.hr {
+	margin:50px;
+	width:100%
+}
+
+.hr2 {
+	margin-bottom:30px;
+	margin-top:80px;
+	width:100%
+}
+
 </style>
 </head>
 <body>
@@ -141,7 +158,10 @@ instead of next to each other */
 					</div>
 				</div>
 
-				<hr>
+				
+				<hr class=hr>
+				
+				
 				<div class="row">
 					<div class="col-30"></div>
 					<div class="col-20">
@@ -186,7 +206,11 @@ instead of next to each other */
 					</div>
 					<div class="col-20"></div>
 				</div>
-				<hr>
+				
+				
+				<hr class=hr2>
+				
+				
 				<div class="row">
 					<div class="col-100">
 						<a href=# class=s_delete>계정 삭제하기</a>
