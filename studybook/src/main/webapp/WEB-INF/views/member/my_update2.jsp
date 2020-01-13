@@ -37,35 +37,27 @@ input[type=text], select, textarea {
 .s_container {
 	background-color: #ffffff;
 	padding: 20px;
-	width: 60%;
-	min-width: 500px;
-}
-
-.col-20 {
-	float: left;
-	width: 20%;
-	margin-top: 20px;
-	text-align:left;
-}
-
-.col-30 {
-	float: left;
-	width: 30%;
-	margin-top: 20px;
-	text-align:left;
+	width: 50%;
+	min-width: 550px;
 }
 
 .col-50 {
 	float: left;
 	width: 50%;
-	margin-top: 20px;
-	text-align:left;
+	margin-top: 6px;
 }
+
+.col-60 {
+	float: left;
+	width: 60%;
+	margin-top: 6px;
+}
+
 
 .col-100 {
 	clear: both;
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 6px;
 	display: flex;
 	justify-content: center;
 }
@@ -87,34 +79,13 @@ input[type=text], select, textarea {
 make the two columns stack on top of each other 
 instead of next to each other */
 @media screen and (max-width: 600px) {
-	{
+	.col-50 {
 		width: 100%;
 		margin-top: 0;
 	}
 }
 
-.picupdate {
-	cursor: pointer;
-	background-color:#56D7D6;
-	color:white;
-	border:0px;
-}
 
-.picupdate:hover {
-	opacity:70%
-}
-
-.s_update, .s_delete {
-	text-decoration:none;
-	font-weight:bold;
-	cursor: pointer;
-	color:#56D7D6;
-}
-
-.s_update:hover, .s_delete:hover {
-	text-decoration:none;
-	color:#7F56D2;
-}
 </style>
 </head>
 <body>
@@ -135,26 +106,24 @@ instead of next to each other */
 						</label>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-100">
-						<p>프로필 사진 변경</p>
+						<button>프로필 사진 변경</button>
 					</div>
 				</div>
 
 				<hr>
 				<div class="row">
-					<div class="col-30"></div>
-					<div class="col-20">
+					<div class="col-50">
 						<label for="name">이름</label>
 					</div>
-					<div class="col-30">
+					<div class="col-50">
 						<input type="text" id="name" name="name" placeholder="손연수">
 					</div>
-					<div class="col-20"></div>
 				</div>
 				<div class="row">
-					<div class="col-30"></div>
-					<div class="col-20">
+					<div class="col-50">
 						<label for="email">이메일</label>
 					</div>
 					<div class="col-50">
@@ -163,33 +132,27 @@ instead of next to each other */
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-30"></div>
-					<div class="col-20">
+					<div class="col-50">
 						<label for="phone">연락처</label>
 					</div>
-					<div class="col-20">
+					<div class="col-50">
 						<input type="text" id="phone" name="phone"
 							placeholder="010-2222-3333">
 						<!--   <input type="text" name="phone" id=phone class=phone maxLength="12" value="${member.phone }">-->
 					</div>
-					<div class="col-30">
-						<a href=# class=s_update>변경하기</a>
-					</div>
 				</div>
 				<div class="row">
-					<div class="col-30"></div>
-					<div class="col-20">
+					<div class="col-50">
 						<label for="password">비밀번호</label>
 					</div>
-					<div class="col-30">	
-						<a href=# class=s_update>변경하기</a>
+					<div class="col-50">
+						<a href=# class>변경하기</a>
 					</div>
-					<div class="col-20"></div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-100">
-						<a href=# class=s_delete>계정 삭제하기</a>
+						<a href=#>계정 삭제하기</a>
 					</div>
 				</div>
 			</form>
