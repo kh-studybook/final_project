@@ -6,7 +6,7 @@ public class Room {
 	private String ROOM_INFO;
 	private String ROOM_TYPE;
 	private int MIN_MEMBER;
-	private int MAX_NUMBER;
+	private int MAX_MEMBER;
 	private int MIN_HOUR;
 	private int HOUR_COST;
 	private String ROOM_INTRO;
@@ -43,11 +43,13 @@ public class Room {
 	public void setMIN_MEMBER(int mIN_MEMBER) {
 		MIN_MEMBER = mIN_MEMBER;
 	}
-	public int getMAX_NUMBER() {
-		return MAX_NUMBER;
+
+	
+	public int getMAX_MEMBER() {
+		return MAX_MEMBER;
 	}
-	public void setMAX_NUMBER(int mAX_NUMBER) {
-		MAX_NUMBER = mAX_NUMBER;
+	public void setMAX_MEMBER(int mAX_MEMBER) {
+		MAX_MEMBER = mAX_MEMBER;
 	}
 	public int getMIN_HOUR() {
 		return MIN_HOUR;

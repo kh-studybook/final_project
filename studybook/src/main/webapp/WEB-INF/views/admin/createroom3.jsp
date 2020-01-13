@@ -113,6 +113,13 @@
 								class="form-control" placeholder="공간유형 입력" class="form-control" />
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label">최소시간</label> <input
+								type="text" name="MIN_HOUR" id="min_hour" maxlength="60"
+								class="form-control" placeholder="최소시간 입력" class="form-control" />
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">
