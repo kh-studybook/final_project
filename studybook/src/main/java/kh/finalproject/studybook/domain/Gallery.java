@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Gallery {
 	private int ROOM_CODE;
-	private MultipartFile FILE_NAME;
+	private String FILE_NAME;
 	private int GALLERY_NUM;
 	
 	public int getROOM_CODE() {
@@ -14,10 +14,11 @@ public class Gallery {
 		ROOM_CODE = rOOM_CODE;
 	}
 	
-	public MultipartFile getFILE_NAME() {
+	
+	public String getFILE_NAME() {
 		return FILE_NAME;
 	}
-	public void setFILE_NAME(MultipartFile fILE_NAME) {
+	public void setFILE_NAME(String fILE_NAME) {
 		FILE_NAME = fILE_NAME;
 	}
 	public int getGALLERY_NUM() {

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kh.finalproject.studybook.domain.Gallery;
+import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.service.RoomService;
 
 @Controller
@@ -40,14 +42,26 @@ public class RoomController {
 	// 어드민 룸등록 액션- 다중업로드 시작
 
 	@PostMapping("/RoomAddAction.ro")
-	public String room_write_ok(MultipartHttpServletRequest mtfRequest) throws Exception {
+	public String room_write_ok(Room room,MultipartHttpServletRequest mtfRequest) throws Exception {
 
+		//룸정보 테이블에 입력
+		roomservice.insertRoom(room);
+		
+		//룸 넘버를 알아내기 (갤러리 등록할 수 있게)
+		Room room1 = roomservice.selectRoomNum(room.getROOM_NAME());
+		int room_code = room1.getROOM_CODE(); 
+		System.out.println("해당 룸코드는?="+room_code);
+		
+		//해당 룸코드 기준으로 맥스 갤러리넘버 최대값 가져옴
+		Gallery gallery1 = roomservice.getGalleryMaxCount(room_code);
+		
+		
 		List<MultipartFile> fileList = mtfRequest.getFiles("filename");
 
-		String path="C:\\Users\\user1\\git\\final_project2\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\final_project4\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		// 포문으로 꺼냄
-		int i = 0;
+		int i = gallery1.getGALLERY_NUM();
 		for (MultipartFile mf : fileList) {
 			String originFileName = mf.getOriginalFilename();// 원본파일명
 			long fileSize = mf.getSize();// 파일 사이즈
@@ -58,11 +72,10 @@ public class RoomController {
 
 			String safeFile = path + System.currentTimeMillis() + originFileName;
 			
-			//파일명 저장
-		//	roomservice.insertGallery(originFileName, i);
-			
-			try {
+			try {				
 				mf.transferTo(new File(safeFile));
+				//파일명 저장
+				roomservice.insertGallery(room_code,originFileName, i);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
