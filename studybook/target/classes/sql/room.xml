@@ -3,5 +3,63 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Rooms">
+<!-- 지은 시작 -->
+<insert id="insertGallery" parameterType="Map">
+insert into gallery 
+values
+(#{ROOM_CODE},#{FILE_NAME},#{GALLERY_NUM})
+</insert>
 
+
+<insert id="insertroom" parameterType="room">
+	<selectKey resultType="int" order="BEFORE" keyProperty="ROOM_CODE">
+	select nvl(max(ROOM_CODE),0)+1 from room
+	</selectKey>
+insert into room
+(ROOM_CODE,
+ROOM_NAME, ROOM_INFO, ROOM_TYPE, 
+MIN_MEMBER, MAX_MEMBER,
+MIN_HOUR, HOUR_COST,
+ROOM_INTRO,FAC_INTRO,HASHTAG)
+values
+(#{ROOM_CODE},
+#{ROOM_NAME},#{ROOM_INFO},#{ROOM_TYPE},
+#{MIN_MEMBER}, #{MAX_MEMBER},
+#{MIN_HOUR},#{HOUR_COST},
+#{ROOM_INTRO},#{FAC_INTRO},#{HASHTAG})
+
+</insert>
+
+
+<select id="selectRoomName" parameterType="String" resultType="room">
+select * from room where room_name=#{ROOM_NAME}
+</select>
+
+<select id="selectMaxNum" parameterType="int" resultType="gallery">
+select * from room where room_code=#{ROOM_CODE}
+</select>
+
+<insert id="insertRoom_ex" parameterType="room_ex">
+insert into room_ex 
+(ROOM_CODE,
+ALCOHOL, MIC, CHAIR, FOOD,
+TOILET, SMOKING, PARKING,
+TV, BOARD, WIFI)
+values
+(
+#{ROOM_CODE},
+#{ALCOHOL}, #{MIC}, #{CHAIR}, #{FOOD},
+#{TOILET}, #{SMOKING}, #{PARKING},
+#{TV}, #{BOARD}, #{WIFI}
+)
+
+</insert>
+
+
+<!-- 룸네임 찾기 roomnameCheck -->
+<select id="roomnameCheck" resultType="room" parameterType="String">
+select * from room where room_name=#{ROOM_NAME}
+</select>
+
+<!-- 지은 끝 -->
 </mapper>
