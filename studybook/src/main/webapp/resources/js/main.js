@@ -53,4 +53,5 @@ $(document).ready(function(){
 		$('#m_write_count').append('<i class="fas fa-chevron-down"></i>');
 		$(this).parent().parent().prev().css('padding','10px');
 	})
+	
 })
