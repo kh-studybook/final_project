@@ -15,3 +15,8 @@ drop table event;
 
 select * from event;
 delete from event;
+
+		select * from (select rownum rnum, event.event_num, event.mem_key, event.title,
+					   	event.content, event.event_pic, event_comment.com_re_ref, 
+					   	event_comment.com_re_lev, event_comment.com_re_seq, event_comment.com_date
+						from (select * from event, event_comment order by com_re_ref desc, com_re_seq asc))

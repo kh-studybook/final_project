@@ -40,13 +40,13 @@ public class EventController {
 		private String saveFolder;
 
 		//이벤트 등록 화면으로 이동!!!!
-		@GetMapping(value = "/registerEvent.eve")
+		@RequestMapping(value = "/registerEvent.eve")
 		public String event_write_view() throws Exception{
 			return "event/event_main";
 		}//event_write view end
 		
 		//이벤트 등록하기
-		@PostMapping(value = "EventAddAction.eve")
+		@RequestMapping(value = "EventAddAction.eve")
 		public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
 			   //사진 등록하기				
 			  MultipartFile uploadfile=event.getEventPic_uploadfile();
@@ -96,11 +96,11 @@ public class EventController {
 		      }	      
 		    
 			eventservice.insertEvent(event);
-			return "event/event_list";
+			return "redirect:event_list.eve";
 		}//event_write_ok end
 		
 		//이벤트 리스트 보기
-		@RequestMapping(value = "event_list.eve", method = RequestMethod.GET)
+		@RequestMapping(value = "event_list.eve")
 		public ModelAndView eventList(
 				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
 				ModelAndView mv) throws Exception {	
@@ -114,8 +114,8 @@ public class EventController {
 			if (endpage > maxpage){endpage = maxpage;}		
 			
 			List<Event> eventlist = eventservice.getEventList(page, limit);
-
-			mv.setViewName("event_list.jsp");
+			System.out.println(eventlist.size());
+			mv.setViewName("event/event_list");
 			mv.addObject("page", page);
 			mv.addObject("maxpage", maxpage);
 			mv.addObject("startpage", startpage);
@@ -169,7 +169,7 @@ public class EventController {
 		public ModelAndView EventModifyAction(Event event, 
 				ModelAndView mv, HttpServletRequest request, HttpServletResponse response) 
 						throws Exception{
-			boolean usercheck = eventservice.isEventWriter(event.getMem_key());
+			boolean usercheck = eventservice.isEventWriter(event.getMem_key());//추후 확인 : 유저 확인이 필요한가?
 			//비밀번호가 다른 경우
 			if (usercheck == false) {
 				response.setContentType("text/html;charset=utf-8");
