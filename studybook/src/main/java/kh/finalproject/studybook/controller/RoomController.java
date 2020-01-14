@@ -111,6 +111,18 @@ public class RoomController {
 	public String room_detail() {
 		return "room/detail";
 	}
+	
+	//예약 페이지로
+	@RequestMapping(value="room_reserve.ro")
+	public String room_reserve_page() {
+		return "room/room_reserve_page";
+	}
+	
+	//음료추가 페이지로
+	@RequestMapping(value="food_add_page.ro")
+	public String food_add_page() {
+		return "room/food_add_page";
+	}
 
 	// 메인 화면 보기(테스트) - 민지
 	@RequestMapping(value = "/main.net")

@@ -1,0 +1,118 @@
+@charset "UTF-8";
+.container{
+background: #eeeeee;
+}
+.e_food_page_title{
+	height: 150px;
+    text-align: center;
+    font-size: 2rem;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 150px;
+}
+
+.e_food_add_div{
+	background: white;
+	display: inline-table;
+    padding: 7px 15px 15px 15px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.e_food_add_div .e_head{
+	font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 2px solid #7E57D2;
+    padding: 10px;
+    font-family: inherit;
+}
+
+.e_food_info{
+	padding: 10px;
+    border-bottom: 1px solid lightgray;
+    height: 200px;
+}
+
+.e_product-img {
+  float: left;
+}
+
+.e_product-img img {
+  border-radius: 7px;
+  width:150px;
+  height:180px;
+}
+
+.e_product-info{
+  display:grid;
+}
+
+.e_product-text h1 {
+    margin: 0 0 0 38px;
+    padding-top: 15px;
+    font-size: 25px;
+    color: #474747;
+}
+
+.e_product-price-btn {
+    padding: 25px 0 0 25px;
+    color: #474747
+}
+
+.e_product-price-btn p {
+	font-size: 24px;
+	padding-left: 20px;
+}
+
+.input-group.number-spinner{
+	width: 150px;
+    float: right;
+    margin-top: 30px;
+}
+
+.input-group-btn .btn.btn-default{
+    background: lightgray;
+}
+
+.e_food_add_div .e_list_detail li {
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.e_food_add_div .e_list_detail li .e_drink_num{
+	padding-left:90px;
+}
+
+.e_food_add_div .e_list_detail li .e_data{
+	padding-left:80px;
+}
+
+.e_food_add_div .e_list_detail li:last-child{
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 2px solid #7e56d2;
+}
+
+.e_food_add_div .e_total_price_div{
+    padding: 20px 10px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.e_food_add_div .e_total_price_div .e_total_price{
+	float: right;
+    color: #7E56D2;
+    font-size: 1.3rem;
+}
+
+.e_food_add_div .e_to_payment_page{
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    border: none;
+    background: #7e56d2;
+    font-weight: bolder;
+    color: white;
+}

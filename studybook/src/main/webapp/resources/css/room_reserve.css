@@ -1,0 +1,119 @@
+@charset "UTF-8";
+.container{
+background: #eeeeee;
+}
+.e_reserve_page_title{
+	height: 150px;
+    text-align: center;
+    font-size: 2rem;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 150px;
+}
+
+.e_reserve_room_info{
+	background: white;
+	display: inline-table;
+    padding: 7px 15px 15px 15px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.e_reserve_room_info .e_head{
+	font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 2px solid #7E57D2;
+    padding: 10px;
+    font-family: inherit;
+}
+
+.e_reserve_room_info .e_room_info{
+    padding: 25px;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+}
+
+.e_reserve_room_info .e_room_info .e_room_pic img{
+	width:150px;
+	height:150px;
+}
+.e_reserve_room_info .e_room_info .e_room_detail{
+	padding: 25px 0 25px 25px;
+    font-size: 1rem;
+    display: grid;
+}
+.e_reserve_room_info .e_room_info .e_room_detail span:first-child{
+	font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.e_reserve_room_info .e_list_detail li {
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+
+.e_list_detail .e_tit {
+    left: 14px;
+    margin-right: 18px;
+}
+
+.e_reserve_room_info .e_head span{
+	float: right;
+    font-size: 10px;
+    color: red;
+    font-weight: 400;
+}
+
+.e_info_div .e_user_info{
+	display:flex;
+	padding:15px 5px;
+}
+
+.e_info_div .e_user_info .e_info_name{
+    width: 20%;
+}
+
+.e_info_div .e_user_info .e_info_name span{
+	padding-left:5px;
+    color:red;
+}
+
+.e_info_div .e_user_info .e_info_input{
+	display:flex;
+    width: 80%;
+}
+
+.e_info_div .e_user_info:nth-child(2) input{
+	margin: 0 5px;
+    width: 40%;
+}
+
+.e_reserve_room_info .e_total_price_div{
+    padding: 20px 10px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+.col-md-5 .e_reserve_room_info .e_list_detail li:last-child{
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 2px solid #7e56d2;
+}
+
+.e_reserve_room_info .e_total_price_div .e_total_price{
+	float: right;
+    color: #7E56D2;
+    font-size: 1.3rem;
+}
+
+.e_reserve_room_info .e_to_drink_page{
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    border: none;
+    background: #7e56d2;
+    font-weight: bolder;
+    color: white;
+}

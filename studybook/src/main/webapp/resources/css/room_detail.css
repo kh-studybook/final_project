@@ -32,7 +32,7 @@ html {
 }
 
 .e_aside_outer{
-	padding: 30% 10% 0 8%;;
+	padding: 30% 3% 0 5%;
 }
 
 /* For mobile phones: */
@@ -72,7 +72,7 @@ html {
 }
 
 .e_inner_detail{
-	padding:5% 0 0 20%;
+	padding: 5% 0 0 8%;
 }
 .e_inner_detail .e_room_name{
 	font-size:46px;
@@ -188,7 +188,8 @@ html {
 
 
 .pagination{
-  padding: 30px 33%;
+  place-content: center;
+    padding-top: 25px;
 }
 
 .pagination ul{
@@ -226,8 +227,9 @@ html {
 	color:#555555;
 	margin-bottom:15px;
 }
-.e_head span{
-	float:right;
+.e_head .e_head_right{
+	display: inline-block;
+    float: right;	
 }
 
 .e_container{
@@ -405,62 +407,62 @@ html {
     color: #ccc;
     margin-right: 8px;
 }
+/* 시간 선택 부분 */
 
-.swiper-container {
-    padding-bottom: 20px;
-	    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    z-index: 1;
-}
-.swiper-container-free-mode>.swiper-wrapper {
-    -webkit-transition-timing-function: ease-out;
-    -o-transition-timing-function: ease-out;
-    transition-timing-function: ease-out;
-    margin: 0 auto;
+
+/* 시간 선택 끝*/
+.e_head .e_plus_num{
+	font-size: small;
+    padding-top: 10px;
+    color: gray;
+    font-weight: 500;
 }
 
-.swiper-wrapper {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-transition-property: -webkit-transform;
-	transition-property: -webkit-transform;
-	-o-transition-property: transform;
-	transition-property: transform;
-	transition-property: transform, -webkit-transform;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box
+.e_num_count .input-group .input-group-btn{
+	background:lightgray;
+}
+.e_num_count .input-group .btn .btn-default{
+	height:100%
 }
 
-.swiper-slide {
-	-webkit-flex-shrink: 0;
-	-ms-flex-negative: 0;
-	flex-shrink: 0;
-	width: 100%;
-	height: 100%;
-	position: relative;
-	-webkit-transition-property: -webkit-transform;
-	transition-property: -webkit-transform;
-	-o-transition-property: transform;
-	transition-property: transform;
-	transition-property: transform, -webkit-transform
+.e_num_count .input-group .btn .btn-default span{
+	font-size: medium;
+    font-weight: 600;
 }
 
-.time_list li {
-    position: relative;
-    float: left;
-    height: 103px;
-    width: 45px;
-    padding: 47px 0 14px;
+.e_total_price_div{
+	padding: 15px;
+}
+.e_total_price_div span{
+	font-size: large;
+    font-weight: 800;
 }
 
+.e_total_price_div .e_price_div{
+	padding: 15px 0;
+}
 
+.e_total_price_div .e_price{
+	float:right;
+}
+.e_total_price_div .e_total_price{
+	font-weight: 900;
+	float:right;
+	color:#855FD4;
+	font-size: 1.65em;
+}
 
+.e_to_reserve_button{
+	text-align: -webkit-center;
+    padding-top: 10px;
+}
+
+.e_to_reserve_button .e_to_reserve_page{
+	width: 93%;
+    border: none;
+    height: 48px;
+    background: #855FD4;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
