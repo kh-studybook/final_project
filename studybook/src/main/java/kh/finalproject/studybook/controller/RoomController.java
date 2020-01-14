@@ -33,13 +33,13 @@ public class RoomController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adAccess() {
+
 		return "redirect:RoomList.ro";
 		
 	}
 	
 	//룸리스트
-	
-	
+
 
 	// 어드민 룸등록 이동
 	@GetMapping(value = "/RoomWrite.ro")

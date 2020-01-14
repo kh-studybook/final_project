@@ -1,18 +1,17 @@
 package kh.finalproject.studybook.domain;
 
-import java.sql.Date;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Event {
 	private int event_num;
 	private int mem_key;
 	private String title;
-	private String date;
-	private Date event_date;
+	private String content;
+	private String event_date;
 	private String event_start;
 	private String event_end;
 	private String event_room;
+	private String event_pic;
 	private MultipartFile eventPic_uploadfile;
 	private String eventPic_savefile="/image/default.png";
 	private String eventPic_originalfile="/image/default.png";
@@ -35,16 +34,16 @@ public class Event {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDate() {
-		return date;
+	public String getContent() {
+		return content;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public Date getEvent_date() {
+	public String getEvent_date() {
 		return event_date;
 	}
-	public void setEvent_date(Date event_date) {
+	public void setEvent_date(String event_date) {
 		this.event_date = event_date;
 	}
 	public String getEvent_start() {
@@ -64,6 +63,12 @@ public class Event {
 	}
 	public void setEvent_room(String event_room) {
 		this.event_room = event_room;
+	}
+	public String getEvent_pic() {
+		return event_pic;
+	}
+	public void setEvent_pic(String event_pic) {
+		this.event_pic = event_pic;
 	}
 	public MultipartFile getEventPic_uploadfile() {
 		return eventPic_uploadfile;
