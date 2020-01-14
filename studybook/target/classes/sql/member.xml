@@ -4,4 +4,25 @@
 
 <mapper namespace="Members">
 
+	<select id="idcheck" resultType="member" parameterType="String">
+		select *
+		from member where email = #{email}
+	</select>
+
+	<insert id="insert" parameterType="member">
+		insert into member
+		values(#{name},#{email},#{password},#{phone})
+	</insert>
+
+	<update id="update" parameterType="member">
+		update member set
+		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}
+		where email=#{email}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from member where email=#{email}
+	</delete>
+	
+	
 </mapper>
