@@ -24,6 +24,7 @@
 }
 </style>
 <script>
+$(document).ready(function(){
 	var uf = "";
 	function file_add(size, ext) {
 		var filecountTemp = parseInt(document.getElementById("file_cnt").value);
@@ -57,6 +58,42 @@
 
 		document.getElementById("file_cnt").value = filecountTemp - 1;
 	}
+	
+	//룸이름 중복검사
+	var checkid=false;
+	$("#room_name").on('keyup',function(){
+		$("#message").empty();
+		var pattern = /^\w{2,16}$/;
+		var pattern_kor=/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]$/;
+		var id=$("#room_name").val();
+		if((!pattern.test(id))&&(!pattern_kor.test(id))){
+			$("message").css('color','red')
+						.html("한글,영어,숫자로 2~16자 가능")
+			checkid=false;
+			return;
+		}
+		$.ajax({
+			url:"roomNameCheck.ro",
+			data:{"ROOM_NAME":id},
+			success:function(resp){
+				if(resp==-1){
+					$("#message").css('color','green')
+								.html("사용 가능한 룸네임입니다.")
+					checkid=true;
+				}else{
+					$("#message").css('color','blue')
+								.html("사용 중인 룸네임입니다.")
+					checkid=false;
+					
+				}
+				
+			}
+			
+		})
+	})
+	
+})
+	
 </script>
 </head>
 <div class="container w_wrap">
@@ -81,13 +118,15 @@
 
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<div class="form-group">
 							<label class="control-label">룸 이름</label> <input type="text"
 								name="ROOM_NAME" id="room_name" maxlength="16"
-								class="form-control" placeholder="룸이름 입력" />
+								class="form-control" placeholder="룸이름 입력" /><span id="w_message"></span>
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label">룸 소개</label> <input type="text"
@@ -95,8 +134,8 @@
 								class="form-control" placeholder="룸소개 입력" />
 						</div>
 					</div>
-
 				</div>
+
 				<div class="row">
 					<div class="col-md-10">
 						<div class="form-group">

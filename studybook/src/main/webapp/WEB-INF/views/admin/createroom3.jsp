@@ -24,46 +24,94 @@
 }
 </style>
 <script>
-	$(function(){
-		$("input:text[numberOnly]").on("focus",function(){
-			var x = $(this).val();
-			x=removeCommas(x);
-			$(this).val(x);
-		}).on("focusout",function(){
-			var x=$(this).val();
-			if(x && x.length>0){
-				if(!$.isNumeric(x)){
-					x= x.replace(/[^0-9]/g,"");
-				}
-				$(this).val(x);
-			}
-		}).on("keyup", function(){
-			$(this).val($(this).val().replace(/[^0-9]/g,""));
-		})
-		
-		//모든 콤마 제거
-		function removeCommas(x) {
-		    if(!x || x.length == 0) return "";
-		    else return x.split(",").join("");
-		}
-		
-		function compare(){
-			var max=$("#max_member").val();
-			var min=$("#min_member").val();
-			if(max<min){
-				alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
-				
-			}
-		}
-		
-		$("#max_member").on('blur', function(){
-			compare();
-		})
-		
+	$(
+			function() {
+				$("input:text[numberOnly]").on("focus", function() {
+					var x = $(this).val();
+					x = removeCommas(x);
+					$(this).val(x);
+				}).on("focusout", function() {
+					var x = $(this).val();
+					if (x && x.length > 0) {
+						if (!$.isNumeric(x)) {
+							x = x.replace(/[^0-9]/g, "");
+						}
+						$(this).val(x);
+					}
+				}).on("keyup", function() {
+					$(this).val($(this).val().replace(/[^0-9]/g, ""));
+				})
 
-	})
-	
-	
+				//모든 콤마 제거
+				function removeCommas(x) {
+					if (!x || x.length == 0)
+						return "";
+					else
+						return x.split(",").join("");
+				}
+
+				function compare() {
+					var max = $("#max_member").val();
+					var min = $("#min_member").val();
+					if (max < min) {
+						alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
+
+					}
+				}
+
+				$("#max_member").on('blur', function() {
+					compare();
+				})
+
+				//룸이름 중복검사
+				var checkid = false;
+				$("#room_name")
+						.on(
+								'keyup',
+								function() {
+									$("#message").empty();
+									var pattern = /^[a-zA-Z0-9가-힣]{4,16}$/;
+									var id = $("#room_name").val();
+									if (!pattern.test(id)) {
+										$("#message").css('color', 'red').html(
+												"한글,영어,숫자로 4~16자 가능")
+										checkid = false;
+										return;
+									}
+									$.ajax({
+										url : "roomNameCheck.ro",
+										data : {
+											"ROOM_NAME" : id
+										},
+										success : function(resp) {
+											if (resp == -1) {
+												$("#message").css('color',
+														'green').html(
+														"사용 가능한 룸네임입니다.")
+												checkid = true;
+											} else {
+												$("#message").css('color',
+														'blue').html(
+														"사용 중인 룸네임입니다.")
+												checkid = false;
+
+											}
+
+										}
+
+									})
+								})
+			//폼전송 전 폼이름이 유효한지 확인
+			$('form').submit(function(){
+				if(!checkid){
+					alert("사용가능한 룸이름을 입력하세요");
+					$("#room_name").focus();
+					$("#message").text('');
+					return false;
+				}
+			})
+
+			})
 </script>
 </head>
 <div class="container w_wrap">
@@ -74,7 +122,7 @@
 		<div class="row">
 			<div class="col">
 				<p class="w_title">공간 등록</p>
-				<br>
+				<br>(* 필수입력)
 			</div>
 		</div>
 
@@ -90,24 +138,24 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">룸 이름</label> <input type="text"
+							<label class="control-label">룸 이름 *</label> <input type="text"
 								name="ROOM_NAME" id="room_name" maxlength="16"
 								class="form-control" placeholder="룸이름 입력" />
+								<span id="message"></span>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">룸 소개</label> <input type="text"
+							<label class="control-label">룸 소개 *</label> <input type="text"
 								name="ROOM_INFO" id="room_info" maxlength="60"
 								class="form-control" placeholder="룸소개 입력" />
 						</div>
 					</div>
-
 				</div>
 				<div class="row">
 					<div class="col-md-10">
 						<div class="form-group">
-							<label class="control-label">해시태그(#으로 구분)</label> <input
+							<label class="control-label">해시태그 * (#으로 구분)</label> <input
 								type="text" name="HASHTAG" id="hashtag" maxlength="20"
 								class="form-control" placeholder="해시태그 입력" />
 						</div>
@@ -117,7 +165,7 @@
 				<div class="row">
 					<div class="col-md-10">
 						<div class="form-group">
-							<label class="control-label">공간소개</label>
+							<label class="control-label">공간소개 *</label>
 							<textarea rows="6" name="ROOM_INTRO" id="room_intro"
 								maxlength="1300" class="form-control" placeholder="공간소개 입력"></textarea>
 						</div>
@@ -127,7 +175,7 @@
 				<div class="row">
 					<div class="col-md-10">
 						<div class="form-group">
-							<label class="control-label">시설소개</label>
+							<label class="control-label">시설소개 *</label>
 							<textarea rows="6" name="FAC_INTRO" id="FAC_intro"
 								maxlength="1300" class="form-control" placeholder="시설소개 입력"></textarea>
 						</div>
@@ -147,14 +195,14 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">공간유형 (60자 이하)</label> <input
+							<label class="control-label">공간유형 *</label> <input
 								type="text" name="ROOM_TYPE" id="room_type" maxlength="60"
 								class="form-control" placeholder="공간유형 입력" class="form-control" />
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">최소시간(숫자입력)</label> <input
+							<label class="control-label">최소시간(숫자만) *</label> <input
 								type="text" numberOnly name="MIN_HOUR" id="min_hour"
 								maxlength="2" class="form-control" placeholder="최소시간 입력"
 								class="form-control" />
@@ -164,7 +212,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">최소인원(숫자 입력)</label> <input
+							<label class="control-label">최소인원(숫자만) *</label> <input
 								type="text" numberOnly name="MIN_MEMBER" id="min_member"
 								maxlength="2" class="form-control" placeholder="최소인원 입력"
 								class="form-control" />
@@ -173,7 +221,7 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">최대인원(숫자 입력)</label> <input
+							<label class="control-label">최대인원(숫자만) *</label> <input
 								type="text" numberOnly name="MAX_MEMBER" id="max_member"
 								maxlength="3" class="form-control" placeholder="최대인원 입력"
 								class="form-control" />
@@ -182,7 +230,7 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-							<label class="control-label">시간당 가격(숫자 입력)</label> <input
+							<label class="control-label">시간당 가격(숫자만) *</label> <input
 								type="text" numberOnly name="HOUR_COST" id="hour_cost"
 								maxlength="5" class="form-control" placeholder="시간당 가격 입력"
 								class="form-control" />

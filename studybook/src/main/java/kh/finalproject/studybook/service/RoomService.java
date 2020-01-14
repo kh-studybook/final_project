@@ -17,6 +17,8 @@ public interface RoomService {
 
 	//룸특징 테이블에 등록하기
 	void insertRoom_ex(int room_code,Room_ex room_ex);
+	//룸이름 중복 알아내기
+	int isRoomName(String rOOM_NAME);
 	
 	
 	

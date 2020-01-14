@@ -26,6 +26,8 @@ public class RoomServiceImpl implements RoomService {
 	
 	@Autowired
 	private Room_exDAO rdao;
+	
+	//지은 시작
 
 	@Override
 	public void insertGallery(int room_code, String originFileName, int i) {
@@ -79,8 +81,14 @@ public class RoomServiceImpl implements RoomService {
 		rdao.insertRoomex(map); //여기서 만약에 안되면 map형으로 만들어 보내야함
 		
 	}
+	//룸이름 중복 검사
+	@Override
+	public int isRoomName(String ROOM_NAME) {
+		Room room = dao.isRoomName(ROOM_NAME);
+		return (room==null)?-1:1;
+	}
 	
-	
+	//지은 끝
 	
 	
 

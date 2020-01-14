@@ -2,8 +2,10 @@ package kh.finalproject.studybook.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -98,12 +100,21 @@ public class RoomController {
 		return "admin/admin_index";
 	}
 
-	// 룸리스트보기//
+	// 룸리스트보기
 	@RequestMapping(value = "/RoomList.ro", method = RequestMethod.GET)
 	public String roomList() {
 		return "admin/admin_index";
 	}
 
+	//룸이름 중복 확인
+	@GetMapping(value="/roomNameCheck.ro")
+	public void roomNameCheck(String ROOM_NAME, HttpServletResponse response) throws Exception{
+		int result=roomservice.isRoomName(ROOM_NAME);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
 	// 지은 끝--
 
 	// 룸 정보 보기 -연습용(은지)
