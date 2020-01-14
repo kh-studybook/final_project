@@ -43,10 +43,8 @@
 	]]>
 	</delete>
 	
-	<select id = "list" parameterType = "java.util.Map" resultType = "event">
-		select * from (select rownum rnum, event_num, mem_key, title,
-					   	content, event_pic, com_re_ref, com_re_lev, com_re_seq, com_date
-						from (select * from event, event_comment order by com_re_ref desc, com_re_seq asc))
+	<select id = "list" parameterType = "java.util.Map" resultType = "Event">
+		select * from (select rownum rnum, event_num, mem_key, title, content, event_pic from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	

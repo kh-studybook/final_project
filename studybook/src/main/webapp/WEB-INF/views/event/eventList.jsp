@@ -8,7 +8,7 @@
 	.p_p_title{font-family:"맑은 고딕"; text-align:center; font-size:16px;}
 	
 	/** 버튼 관련 : 추후 글쓰기 버튼 위치 다시 확인하기*/
-	#p_register_event{border-radius:5px; border:none; background-color: #7F56D2; color:white; width:20%; padding: 12px; position:relative; top:10%; left:90%;}
+	#p_register_event{border-radius:5px; border:none; background-color: #7F56D2; color:white; width:20%; padding: 12px; position:relative; top:10%; left:70%;}
 	.insert_delete_btn{position:relative; top:90%; left:80%}
 	
 	/** 카드 관련 */
@@ -18,6 +18,9 @@
 	/**  모달 관련 */
 	.p_modal-title{font_size:36px; font-weight:bold;}
 	.p_container{padding:20px}
+	
+	/** 페이지 네이션*/
+	.center-block{display:flex; justify-content:center}
 </style>
 <script>
 	$(function(){
