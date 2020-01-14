@@ -5,10 +5,7 @@
 <head>
 <title>login</title>
 
-<script src="resources/js/bootstrap.js"></script>
-
 <style>
-
 * {
 	box-sizing: border-box;
 	font-family: "맑은 고딕";
@@ -68,10 +65,7 @@ input[type=checkbox] {
 	margin-top: 15px;
 }
 
-/* Responsive layout 
-- when the screen is less than 600px wide, 
-make the two columns stack on top of each other 
-instead of next to each other */
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
@@ -107,7 +101,6 @@ instead of next to each other */
 	color:#56D7D6;
 }
 
-#success_message{ display: none;}
 
 </style>
 
@@ -122,50 +115,6 @@ instead of next to each other */
 			location.href = "login_findpw.mem";
 		}); 
 
-		
-		
-		$('#contact_form').bootstrapValidator({
-	        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-	        feedbackIcons: {
-	            valid: 'glyphicon glyphicon-ok',
-	            invalid: 'glyphicon glyphicon-remove',
-	            validating: 'glyphicon glyphicon-refresh'
-	        },
-	        fields: {
-	            
-	            email: {
-	                validators: {
-	                    notEmpty: {
-	                        message: 'Please supply your email address'
-	                    },
-	                    emailAddress: {
-	                        message: 'Please supply a valid email address'
-	                    }
-	                }
-	            }
-	        }
-	        })
-	        .on('success.form.bv', function(e) {
-	            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-	                $('#contact_form').data('bootstrapValidator').resetForm();
-
-	            // Prevent form submission
-	            e.preventDefault();
-
-	            // Get the form instance
-	            var $form = $(e.target);
-
-	            // Get the BootstrapValidator instance
-	            var bv = $form.data('bootstrapValidator');
-
-	            // Use Ajax to submit form data
-	            $.post($form.attr('action'), $form.serialize(), function(result) {
-	                console.log(result);
-	            }, 'json');
-	        });
-		
-		
-		
 	});
 </script>
 
@@ -175,30 +124,14 @@ instead of next to each other */
 
 	<p class=s_title>로그인</p>
 
-<div class="form-group">
-  <label class="col-md-4 control-label">E-Mail</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
-
-
 	<div class="s_container">
 		<form name="loginform" action="loginProcess.mem" method="post">
-		
-		
 			<div class="row">
 				<div class="col-100">
 					<input type="text" id="email" class="s_input" name="email" placeholder="이메일">
 					<span class=emailmsg></span>
 				</div>
 			</div>
-			
-			
-			
 			<div class="row">
 				<div class="col-100">
 					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">

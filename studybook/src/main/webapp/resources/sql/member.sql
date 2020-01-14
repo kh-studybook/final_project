@@ -10,4 +10,6 @@ drop table member;
 
 select * from member;
 
+delete from member where name = 'admin'
+
 insert into member values('admin', 1234, 'admin@naver.com', '0101111111', 0);

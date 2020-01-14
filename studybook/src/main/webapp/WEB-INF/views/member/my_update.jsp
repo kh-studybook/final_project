@@ -106,6 +106,8 @@ instead of next to each other */
 }
 
 .s_update, .s_delete {
+	background-color:#ffffff;
+	border:0px;
 	text-decoration:none;
 	font-weight:bold;
 	cursor: pointer;
@@ -114,6 +116,7 @@ instead of next to each other */
 
 .s_update:hover, .s_delete:hover {
 	text-decoration:none;
+	border:0px;
 	color:#7F56D2;
 }
 
@@ -130,6 +133,58 @@ instead of next to each other */
 	margin-bottom:30px;
 	margin-top:80px;
 	width:100%
+}
+
+
+/*modal*/
+
+#modalforupdate {
+	display: none;
+} 
+
+.modal {
+	text-align: center;
+}
+
+@
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal_dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+	
+}
+
+.modal_wrap {
+	padding: 40px;
+	margin-top: 160px;
+	margin-left: auto;
+	width:300px;
+	background-color:white;
+}
+
+.modal_body {
+	
+}
+
+.modal_title {
+	font-size:20pt;
+}
+
+.modal_text {
+	font-size:12pt;
+}
+
+#modal_phone {
+
 }
 
 </style>
@@ -188,12 +243,14 @@ instead of next to each other */
 						<label for="phone">연락처</label>
 					</div>
 					<div class="col-20">
-						<input type="text" id="phone" name="phone"
+						<input type="text" id="modal_phone" name="phone"
 							placeholder="010-2222-3333">
 						<!--   <input type="text" name="phone" id=phone class=phone maxLength="12" value="${member.phone }">-->
 					</div>
 					<div class="col-30">
-						<a href=# class=s_update>변경하기</a>
+
+						<button data-toggle="modal" data-target="#modalforupdate"
+												class=s_update id="v1">변경하기</button>
 					</div>
 				</div>
 				<div class="row">
@@ -219,5 +276,43 @@ instead of next to each other */
 			</form>
 		</div>
 	</div>
+	
+	
+	
+	
+	<!-- modal 시작! -->
+	<div class="modal" id="modalforupdate">
+		<div class="modal_dialog">
+			<div class="modal_wrap">
+			
+				<!-- modal body -->
+				<div class="modal_body">
+					<form >
+						<div class="phoneupdate">
+						
+							<div class=modal_intro>
+								<p class=modal_title>연락처 변경</p>
+								<p class=modal_text>변경할 전화번호를 입력하세요.</p>
+							</div>
+							
+							<div class="modal_content">
+								<input type="text" id="phone" name="phone" placeholder="010-2222-3333">
+								<span style="color: #141414; font-size: 10pt;" id="counter"></span>
+							</div>
+								
+							<div class=modal_submit>
+								<button type="button" class="modalclose"
+								data-dismiss="modal" aria-label="Close">취소</button>
+								<button type=submit class="submtbutton">저장</button>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 연수모달여기까지 -->
 </body>
 </html>
