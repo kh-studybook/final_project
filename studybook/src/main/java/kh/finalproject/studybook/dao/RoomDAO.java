@@ -23,6 +23,10 @@ public class RoomDAO {
 		System.out.println("RoomDAO의 selectRoom까지 옴");
 		return sqlSession.selectOne("Rooms.selectRoomName",roomname);
 	}
+	//룸이름 중복 검사
+	public Room isRoomName(String ROOM_NAME) {
+		return sqlSession.selectOne("Rooms.roomnameCheck",ROOM_NAME);
+	}
 	
 	//--지은 끝
 	

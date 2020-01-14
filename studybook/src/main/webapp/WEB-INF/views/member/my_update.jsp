@@ -37,7 +37,7 @@ input[type=text], select, textarea {
 .s_container {
 	background-color: #ffffff;
 	padding: 20px;
-	width: 60%;
+	width: 40%;
 	min-width: 500px;
 	margin-bottom: 150px;
 }

@@ -53,9 +53,7 @@ values
 #{TV}, #{BOARD}, #{WIFI}
 )
 
-
 </insert>
-
 
 <!-- 지은 끝 -->
 </mapper>
