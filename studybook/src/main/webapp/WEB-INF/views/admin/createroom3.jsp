@@ -109,6 +109,12 @@
 					$("#message").text('');
 					return false;
 				}
+				var max = $("#max_member").val();
+				var min = $("#min_member").val();
+				if (max < min) {
+					alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
+				return false;
+				}
 			})
 
 			})
@@ -122,7 +128,7 @@
 		<div class="row">
 			<div class="col">
 				<p class="w_title">공간 등록</p>
-				<br>(* 필수입력)
+				<br>(*) 필수입력<br>
 			</div>
 		</div>
 
@@ -140,7 +146,7 @@
 						<div class="form-group">
 							<label class="control-label">룸 이름 *</label> <input type="text"
 								name="ROOM_NAME" id="room_name" maxlength="16"
-								class="form-control" placeholder="룸이름 입력" />
+								class="form-control" placeholder="룸이름 입력" required/>
 								<span id="message"></span>
 						</div>
 					</div>
@@ -148,7 +154,7 @@
 						<div class="form-group">
 							<label class="control-label">룸 소개 *</label> <input type="text"
 								name="ROOM_INFO" id="room_info" maxlength="60"
-								class="form-control" placeholder="룸소개 입력" />
+								class="form-control" placeholder="룸소개 입력" required/>
 						</div>
 					</div>
 				</div>
@@ -157,7 +163,7 @@
 						<div class="form-group">
 							<label class="control-label">해시태그 * (#으로 구분)</label> <input
 								type="text" name="HASHTAG" id="hashtag" maxlength="20"
-								class="form-control" placeholder="해시태그 입력" />
+								class="form-control" placeholder="해시태그 입력" required/>
 						</div>
 					</div>
 				</div>
@@ -167,7 +173,7 @@
 						<div class="form-group">
 							<label class="control-label">공간소개 *</label>
 							<textarea rows="6" name="ROOM_INTRO" id="room_intro"
-								maxlength="1300" class="form-control" placeholder="공간소개 입력"></textarea>
+								maxlength="1300" class="form-control" placeholder="공간소개 입력" required></textarea>
 						</div>
 					</div>
 				</div>
@@ -177,7 +183,7 @@
 						<div class="form-group">
 							<label class="control-label">시설소개 *</label>
 							<textarea rows="6" name="FAC_INTRO" id="FAC_intro"
-								maxlength="1300" class="form-control" placeholder="시설소개 입력"></textarea>
+								maxlength="1300" class="form-control" placeholder="시설소개 입력" required></textarea>
 						</div>
 					</div>
 				</div>
@@ -197,7 +203,7 @@
 						<div class="form-group">
 							<label class="control-label">공간유형 *</label> <input
 								type="text" name="ROOM_TYPE" id="room_type" maxlength="60"
-								class="form-control" placeholder="공간유형 입력" class="form-control" />
+								class="form-control" placeholder="공간유형 입력" class="form-control" required/>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -205,7 +211,7 @@
 							<label class="control-label">최소시간(숫자만) *</label> <input
 								type="text" numberOnly name="MIN_HOUR" id="min_hour"
 								maxlength="2" class="form-control" placeholder="최소시간 입력"
-								class="form-control" />
+								class="form-control" required/>
 						</div>
 					</div>
 				</div>
@@ -215,7 +221,7 @@
 							<label class="control-label">최소인원(숫자만) *</label> <input
 								type="text" numberOnly name="MIN_MEMBER" id="min_member"
 								maxlength="2" class="form-control" placeholder="최소인원 입력"
-								class="form-control" />
+								class="form-control" required/>
 						</div>
 					</div>
 
@@ -224,7 +230,7 @@
 							<label class="control-label">최대인원(숫자만) *</label> <input
 								type="text" numberOnly name="MAX_MEMBER" id="max_member"
 								maxlength="3" class="form-control" placeholder="최대인원 입력"
-								class="form-control" />
+								class="form-control" required/>
 						</div>
 					</div>
 
@@ -233,7 +239,7 @@
 							<label class="control-label">시간당 가격(숫자만) *</label> <input
 								type="text" numberOnly name="HOUR_COST" id="hour_cost"
 								maxlength="5" class="form-control" placeholder="시간당 가격 입력"
-								class="form-control" />
+								class="form-control" required/>
 						</div>
 					</div>
 				</div>

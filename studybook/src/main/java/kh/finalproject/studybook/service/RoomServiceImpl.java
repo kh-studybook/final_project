@@ -1,6 +1,7 @@
 package kh.finalproject.studybook.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -86,6 +87,18 @@ public class RoomServiceImpl implements RoomService {
 	public int isRoomName(String ROOM_NAME) {
 		Room room = dao.isRoomName(ROOM_NAME);
 		return (room==null)?-1:1;
+	}
+
+	@Override
+	public List<Room> getSearchList(int index, String search_word, int page, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSearchListCount(int index, String search_word) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	//지은 끝
