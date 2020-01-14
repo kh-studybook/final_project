@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix ="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<script src="resources/js/main.js"></script>
 </head>
 <body>
 	<div id="m_main_header">
@@ -12,24 +14,12 @@
 		</div>
 		<div class="m_main_header_column">
 			<div class="m_main_select" onClick="">
-				<i class="far fa-calendar-alt"></i>
-				모임 날짜
-				<i class="fas fa-chevron-down"></i>
-			</div>
-			<div class="m_main_select" onClick="">
-				<i class="far fa-clock"></i>
-				시간
-				<i class="fas fa-chevron-down"></i>
-			</div>
-			<div class="m_main_select" onClick="">
-				<i class="fas fa-user"></i>
-				인원
-				<i class="fas fa-chevron-down"></i>
-			</div>
-			<button id="m_main_search" class="m_main_select">검색</button>
-		</div>
-		<div class="m_main_header_column">
-			<div class="e_calendar">
+				<div class="m_write" id="m_write_date">
+					<i class="far fa-calendar-alt"></i>
+					모임 날짜
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<div class="e_calendar">
             	<div class="month">
                 	<a href="#" class="e_nav"> <i class="fas fa-angle-left"></i></a>
 						<div>January <span class="year">2019</span></div>
@@ -135,40 +125,57 @@
                            </button>
             	</div>
         	</div>
-        	<div id="m_main_time">
-	        	<input type="checkbox" id="m_main_time_all" name="m_main_time" />
-			    <label for="m_main_time_all"><span></span>전체</label>
-				<p></p>
-		
-			    <input type="checkbox" id="m_main_time_morning" name="m_main_time" />
-			    <label for="m_main_time_morning"><span></span>오전(09~12시)</label>
-			    <p></p>
-			    
-			    <input type="checkbox" id="m_main_time_afternoon" name="m_main_time" />
-			    <label for="m_main_time_afternoon"><span></span>오후(12~18시)</label>
-			    <p></p>
-			    
-			    <input type="checkbox" id="m_main_time_evening" name="m_main_time" />
-			    <label for="m_main_time_evening"><span></span>저녁(18~22시)</label>
-        	</div>
-        	<div id="m_main_time">
-        		<input type="checkbox" id="m_main_count_1" name="m_main_count" />
-			    <label for="m_main_count_1"><span></span>4명 이하</label>
-				<p></p>
-				
-			    <input type="checkbox" id="m_main_count_4" name="m_main_count" />
-			    <label for="m_main_count_4"><span></span>4 ~ 8명</label>
-			    <p></p>
-			    
-			    <input type="checkbox" id="m_main_count_8" name="m_main_count" />
-			    <label for="m_main_count_8"><span></span>8 ~ 12명</label>
-			    <p></p>
-			    
-			    <input type="checkbox" id="m_main_count_12" name="m_main_count" />
-			    <label for="m_main_count_12"><span></span>12명 이상</label>
-        	</div>
-        	<div class="m_main_result"></div>
+			</div>
+			<div class="m_main_select" onClick="">
+				<div class="m_write" id="m_write_time">
+					<i class="far fa-clock"></i>
+					시간
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<div id="m_main_time">
+					<ul>
+						<li>전체</li>
+						<li>오전(09~12시)</li>
+						<li>오후(12~18시)</li>
+						<li>저녁(18~22시)</li>
+					</ul>
+	        	</div>
+			</div>
+			<div class="m_main_select" onClick="">
+				<div class="m_write" id="m_write_count">
+					<i class="fas fa-user"></i>
+					인원
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<div id="m_main_count">
+					<ul>
+						<li>4명 이하</li>
+						<li>4 ~ 8명</li>
+						<li>8 ~ 12명</li>
+						<li>12명 이상</li>
+					</ul>
+	        	</div>
+			</div>
+			<button id="m_main_search" class="m_main_select">검색</button>
 		</div>
+	</div>
+	<div id="j_main_room">
+		<p>스터디북의 추천공간</p>
+		<c:forEach var="list" items="${list}" varStatus="status">
+			<div class="card">
+				<a href="Room_detail.ro?room_code=${list.room_code}">
+				<img class="card-img-top" src="C:\Users\minji\git\final_project\studybook\src\main\webapp\resources\image\room\${list.file_name}" alt="Room Image">
+				</a>
+				<div class="card-body">
+				<p class="card-text">
+					<span class="j_room_name">${list.room_name}</span>
+				  	<span class="j_room_count">최대 ${list.max_member}인</span>
+				  	<span class="j_room_pay"><span class="j_room_pay_hour">${list.hour_cost}</span> 원/시간</span>
+				  	<span class="j_room_tag">${list.hashtag}</span>
+				</p>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 </body>
 </html>
