@@ -27,28 +27,35 @@
 }
 
 .m_main_select {
+	width: 125px;
 	height: 50px;
 	background: white;
 	border: 1px solid #3EF4F3;
 	margin: 10px;
+}
+
+.m_write {
+	width: 100%;
+	height: 100%;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	justify-content: center;
 	cursor: pointer;
 }
 
 .m_main_select:first-child {
 	width: 380px;
+	position: relative;
 }
 
-.m_main_select>i {
+.m_write>i {
 	color: #3EF4F3;
 	font-size: 18px;
 	margin: 10px;
 }
 
-.m_main_select:first-child >i:last-child {
-	margin-left: 250px;
+.m_main_select:first-child > div > i:last-child {
+	margin-left: 200px;
 }
 
 #m_main_search {
@@ -58,15 +65,21 @@
 	padding: 10px;
 	width: 100px;
 	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .e_calendar {
-	display: inline-grid;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	background: #fff;
 	padding: 15px 0;
-	border-radius: 5px;
+	position: absolute;
+	bottom: -400px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px, rgba(0, 0, 0, 0.024)
+		0px -6px 16px -6px;
 }
 
 .month {
@@ -156,19 +169,45 @@
 	font-weight: 600;
 }
 
-#m_main_time {
+#m_main_time, #m_main_count {
+	width: 125px;
 	background: white;
-	margin: 10px;
-	padding: 30px 10px;
-	border-radius: 5px;
+	position: absolute;
+	left: 0px;
+	bottom: -130px;
+	opacity: 0;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px, rgba(0, 0, 0, 0.024)
+		0px -6px 16px -6px;
 }
 
-#m_main_time > p {
-	height: 20px;
+#m_main_time > ul, #m_main_count > ul {
+	width: 100%;
+	height: 100%;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-.m_main_result {
-	width: 100px;
-	visibility: hidden;
+#m_main_time > ul > li, #m_main_count > ul > li {
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	margin: 0;
+	padding: 5px;
 }
 
+#m_main_time > ul > li:hover, #m_main_count > ul > li:hover {
+	background-color: #F2F2F2;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#j_main_room > p {
+	font-size: 24px;
+	margin: 30px auto;
+	align: center;
+}
