@@ -1,5 +1,7 @@
 package kh.finalproject.studybook.service;
 
+import java.util.List;
+
 import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.domain.Room_ex;
@@ -19,6 +21,10 @@ public interface RoomService {
 	void insertRoom_ex(int room_code,Room_ex room_ex);
 	//룸이름 중복 알아내기
 	int isRoomName(String rOOM_NAME);
+	//검색리스트 가져오기
+	List<Room> getSearchList(int index, String search_word, int page, int limit);
+	//리스트 카운트가져오기
+	int getSearchListCount(int index, String search_word);
 	
 	
 	

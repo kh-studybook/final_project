@@ -109,6 +109,12 @@
 					$("#message").text('');
 					return false;
 				}
+				var max = $("#max_member").val();
+				var min = $("#min_member").val();
+				if (max < min) {
+					alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
+				return false;
+				}
 			})
 
 			})
@@ -122,7 +128,7 @@
 		<div class="row">
 			<div class="col">
 				<p class="w_title">공간 등록</p>
-				<br>(* 필수입력)
+				<br>(*) 필수입력<br>
 			</div>
 		</div>
 
