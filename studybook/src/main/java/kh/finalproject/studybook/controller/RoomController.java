@@ -74,7 +74,7 @@ public class RoomController {
 		
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
-		String path="C:\\Users\\user1\\git\\final_project4\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\final_project5\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 		
 		// 포문으로 꺼냄
 		int i = gallery1.getGALLERY_NUM();
@@ -88,11 +88,12 @@ public class RoomController {
 			System.out.println("i=" + i);
 
 			String safeFile = path + System.currentTimeMillis() + originFileName;
+			String DBname=System.currentTimeMillis() + originFileName;
 			
 			try {				
 				mf.transferTo(new File(safeFile));
 				//파일명 DB에 저장
-				roomservice.insertGallery(room_code,originFileName,i);
+				roomservice.insertGallery(room_code,DBname,i);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 				System.out.println("갤러리에 이미지파일 업로드하다 에러남 Roomcontroller");
@@ -116,8 +117,9 @@ public class RoomController {
 		List<Room> list = null;
 		int listcount =0;
 		list = roomservice.getSearchList(index, search_word,page,limit);
+		System.out.println("RoomController의 roomservice.getSearchList 끝");
 		listcount = roomservice.getSearchListCount(index, search_word);
-		
+		System.out.println("RoomController의 roomservice.getSearchListCount 끝");
 		//총페이지수
 		int maxpage=(listcount+limit -1)/limit;
 		
