@@ -100,9 +100,26 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	
 	//지은 끝
 	
+	//룸 총 리스트 갯수 가져오기
+	@Override
+	public int getListCount() {
+		return dao.getListCount();
+	}
+
+	//룸 총 리스트 가져오기
+	@Override
+	public List<Room> getRoomList(int page, int limit) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getRoomList(map);
+	}
 	
 
 }

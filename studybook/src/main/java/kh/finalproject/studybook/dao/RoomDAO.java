@@ -1,11 +1,14 @@
 package kh.finalproject.studybook.dao;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Room;
 
 @Repository
@@ -27,7 +30,13 @@ public class RoomDAO {
 	public Room isRoomName(String ROOM_NAME) {
 		return sqlSession.selectOne("Rooms.roomnameCheck",ROOM_NAME);
 	}
-	
+	public int getListCount() {
+		return sqlSession.selectOne("Rooms.count");
+	}
 	//--지은 끝
+	
+	public List<Room> getRoomList(HashMap<String, Integer> map) {
+		return sqlSession.selectList("Rooms.allList", map);
+	}
 	
 }

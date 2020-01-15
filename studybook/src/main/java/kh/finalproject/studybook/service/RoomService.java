@@ -25,8 +25,9 @@ public interface RoomService {
 	List<Room> getSearchList(int index, String search_word, int page, int limit);
 	//리스트 카운트가져오기
 	int getSearchListCount(int index, String search_word);
-	
-	
-	
+	//룸 총 리스트 갯수 가져오기
+	int getListCount();
+	//룸 리스트 가져오기
+	List<Room> getRoomList(int page, int limit);
 }
 
