@@ -92,7 +92,7 @@ input[type=date]{height:3rem;}
 		});
 		
 		//등록시 필수 항목 입력 여부 검사
-		$("#p_event_write_form").submit(function(){
+		$("#p_event_modify_form").submit(function(){
 			if (("#eventPic_uploadfile").attr("src") == "resources/image/default_thumnail.png"){
 				alert("이벤트의 썸네일을 등록해주세요.");
 				return false;				
@@ -143,9 +143,9 @@ input[type=date]{height:3rem;}
 <h2 class = "p_title">이벤트 수정</h2>
 
 <div class="p container">
-  <form method="post" action="EventAddAction.eve" enctype="multipart/form-data" id = "p_event_write_form">
+  <form method="post" action="EventModifyAction.eve" enctype="multipart/form-data" id = "p_event_modify_form">
   	<!--  작성자 -->
- 	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
+ 	<input name = "mem_key" id = "mem_key" value = 0 type = "hidden">
   
 	<!--  썸네일 등록 -->
    <div class="row">

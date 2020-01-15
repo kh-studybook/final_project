@@ -60,7 +60,9 @@ public class EventController {
 		      int year=c.get(Calendar.YEAR);
 		      int month=c.get(Calendar.MONTH) + 1 ;
 		      int date=c.get(Calendar.DATE);
-		      String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
+		      
+		      //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/" 바꾸기;
+		      String saveFolder="C:\\Users\\user1\\git\\final_project[0115]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -114,7 +116,6 @@ public class EventController {
 			if (endpage > maxpage){endpage = maxpage;}		
 			
 			List<Event> eventlist = eventservice.getEventList(page, limit);
-			System.out.println(eventlist.size());
 			mv.setViewName("event/event_list");
 			mv.addObject("page", page);
 			mv.addObject("maxpage", maxpage);

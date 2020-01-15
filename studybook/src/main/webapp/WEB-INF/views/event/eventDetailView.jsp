@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class = "p container">
-	<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
+	<input type = "hidden" id = "mem_key" name = "mem_key" value = 0><!--  추후 확인 : mem_key -->
 	<!-- 상단 메뉴 -->
    	<div class="row">
       <div class="col-md-4"><a href = "event_list.jsp">메인페이지</a>></div><!-- 추구 확인 : 주소 확인 -->
