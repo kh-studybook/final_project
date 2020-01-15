@@ -28,8 +28,9 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:200px; height:200px; border-radius: 5px}
-#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; background-color:#56D7D6; color:white; margin-top:5px; text-align:center;}
+.p_avatar{width:200px; height:200px;}
+#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; 
+				background-color:#56D7D6; color:white; margin-top:5px; padding-right:0px; text-align:center;}
 
 /* Clear floats after the columns */
 .row:after { content: ""; display: table; clear: both;}
@@ -42,6 +43,7 @@ input[type=date]{height:3rem;}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script>
 	$(function(){
+		var eventcheckid = false;
 		
 		//썸네일 이미지 변경하기
 		$('#eventPic_uploadfile').on('change', preview);
@@ -55,7 +57,7 @@ input[type=date]{height:3rem;}
 				return false;
 			}
 			
-			//파일 크기 제한 하기
+			//파일 크기 제한 하기 추후 확인
 			var maxSize = 5 * 1024 * 1024;
 			var fileSize = file.getSize;
 			if (fileSize > maxSize) {
@@ -76,6 +78,8 @@ input[type=date]{height:3rem;}
 				//reader.result 또는 e.target.result
 				$("#eventPic_image").attr("src", e.target.result).css("opacity", 1);
 			}//reader.onload end
+			
+			eventcheckid = true;
 		}//function preview end		
 		
 		//textarea 글자 수 보여주기
@@ -94,22 +98,23 @@ input[type=date]{height:3rem;}
 		
 		//등록시 필수 항목 입력 여부 검사
 		$("#p_event_write_form").submit(function(){
-			if ($("#eventPic_uploadfile").attr("src") == "resources/image/default_thumnail.png"){
+			if (eventcheckid == false){
 				alert("이벤트의 썸네일을 등록해주세요.");
 				return false;				
 			}
 			
-			if ($("#event_title").val() = "") {
-				alert("이벤트의 이름을 200자 이하로 입력해주세요.");
-				$("#event_content").focus();
+			if ($("#event_title").val() == "") {
+				alert("이벤트명을 200자 이하로 입력해주세요.");
+				$("#event_title").focus();
 				return false;
 			}
 			
 			if ($("#event_date").val() == "") {
 				alert("이벤트의 날짜를 입력해주세요.");
+				$("#event_date").focus();
 				return false;
 			}
-			
+						
 			if ($("#event_start option:selected").val() == "none") {
 				alert("이벤트의 시작 시간을 선택해주세요.");
 				$("#event_start").focus();
@@ -123,11 +128,25 @@ input[type=date]{height:3rem;}
 			}
 			
 			if ($("#event_start option:selected").val() == $("#event_end option:selected").val()) {
-				alert("이벤트의 시간 시간과 종료 시간은 같을 수 없습니다.\n 종료 시간을 다시 선택해주세요.");
-				$("#event_end option:eq(0)").attr("selected", true);
+				alert("이벤트의 시간 시간과 종료 시간은 같을 수 없습니다.\n종료 시간을 다시 선택해주세요.");
+				$("#event_end option:eq(0)").prop("selected", true);
+				$("#event_end").focus();
 				return false;
 			}
 			
+			if ($("#event_start option:selected").val() > $("#event_end option:selected").val()) {
+				alert("이벤트의 시간 시간은 종료 시간보다 늦을 수 없습니다.\n시간을 다시 선택해주세요.");
+				$("#event_start option:eq(0)").prop("selected", true);
+				$("#event_end option:eq(0)").prop("selected", true);
+				$("#event_start").focus();
+				return false;
+			}
+					
+			if ($("#event_room option:selected").val() == "none") {
+				alert("이벤트의 장소를 입력해주세요.");
+				$("#event_room").focus();
+				return false;
+			}
 			
 			if ($("#event_content").val() == "") {
 				alert("이벤트의 세부 내용을 4000자 이하로 입력해주세요.");
@@ -136,7 +155,7 @@ input[type=date]{height:3rem;}
 			}		
 			
 		});
-
+		
 	});
 	
 
@@ -231,7 +250,8 @@ input[type=date]{height:3rem;}
 			<option value = "18:00">18:00</option>
 			<option value = "19:00">19:00</option>	
 			<option value = "20:00">20:00</option>			
-			<option value = "21:00">21:00</option>					
+			<option value = "21:00">21:00</option>
+			<option value = "22:00">22:00</option>					
 		</select>
       </div>
     </div>

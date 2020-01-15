@@ -21,31 +21,18 @@
 	</select>
 	
 	<select id = "eventWriter" parameterType = "int" resultType = "Event">
-		select * from event where event_num = #{num}
+		select * from event where event_num = #{event_num}
 	</select>
 	
-	<delete id = "delete" parameterType = "event"><!--  추후 확인 : event_comment.xml인지 -->
-		<![CDATA[	
-		delete from event_event 
-			where com_re_ref = #{com_re_ref}  
-			and com_re_lev >= #{com_re_lev}  
-			and com_re_seq >= #{com_re_seq}   
-			and com_re_seq <(
-								nvl((SELECT min(com_re_seq) 
-								FROM event_comment
-								WHERE com_re_ref=#{com_re_ref}
-								AND   com_re_lev=#{com_re_lev}
-								AND   com_re_seq>#{com_re_seq}),
-								(SELECT max(com_re_seq)+1 
-								 FROM event_comment
-			                     WHERE com_re_ref=#{com_re_ref}))
-			                   )
-	]]>
+	<delete id = "delete" parameterType = "event">
+		delete from event where event_num = #{event_num}
 	</delete>
 	
 	<select id = "list" parameterType = "java.util.Map" resultType = "Event">
-		select * from (select rownum rnum, event_num, mem_key, title, content, event_pic from event) 
+		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		order by event_num desc
 	</select>
 	
 	<update id = "modifyEvent" parameterType = "event">
