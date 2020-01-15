@@ -165,9 +165,9 @@ public class RoomController {
 	// 지은 끝--
 
 	// 룸 정보 보기 -연습용(은지)
-	@RequestMapping(value = "/room_detail")
+	@RequestMapping(value = "/room_detail.ro")
 	public String room_detail() {
-		return "room/detail";
+		return "room/room_detail_page";
 	}
 	
 	//예약 페이지로
@@ -177,10 +177,16 @@ public class RoomController {
 	}
 	
 	//음료추가 페이지로
-	@RequestMapping(value="food_add_page.ro")
+	@RequestMapping(value="food_add.ro")
 	public String food_add_page() {
 		return "room/food_add_page";
 	}
+	
+	//예약 완료 페이지로
+		@RequestMapping(value="reserve_ok.ro")
+		public String reserve_ok_page() {
+			return "room/reserve_ok_page";
+		}
 
 	// 메인 화면 보기(테스트) - 민지
 	@RequestMapping(value = "/main.net")

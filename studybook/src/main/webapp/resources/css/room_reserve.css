@@ -47,10 +47,20 @@ background: #eeeeee;
     font-weight: bold;
 }
 
+.e_reserve_room_info .e_list_detail_notice li {
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 1px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 10% 80%;
+}
+
 .e_reserve_room_info .e_list_detail li {
     padding: 12px 0 12px 8px;
     font-size: 15px;
     border-bottom: 1px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 40% 60%;
 }
 
 
