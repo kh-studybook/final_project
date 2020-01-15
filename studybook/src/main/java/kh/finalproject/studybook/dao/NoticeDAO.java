@@ -16,12 +16,16 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<Notice> getNoticeList(HashMap<String, Integer> map) {
-		return sqlSession.selectList("Notice.list", map);
-	}
-
 	public void insertNotice(Notice notice) {
 		sqlSession.insert("Notice.insert", notice);
+	}
+	
+	public int getListCount() {
+		return 0;
+	}
+	
+	public List<Notice> getNoticeList(HashMap<String, Integer> map) {
+		return sqlSession.selectList("Notice.list", map);
 	}
 
 	public Notice getDetail(int num) {
@@ -39,5 +43,8 @@ public class NoticeDAO {
 	public Notice isNoticeWriter(Map<String, Object> map) {
 		return sqlSession.selectOne("Notice.NoticeWriter", map);
 	}
+
+
+
 
 }

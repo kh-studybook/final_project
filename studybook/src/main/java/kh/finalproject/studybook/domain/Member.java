@@ -4,8 +4,9 @@ public class Member {
 	private String name;
 	private String email;
 	private String password;
-	private String pwcheck;
 	private String phone;
+	private int key;
+	private String profile;
 	
 	
 	public String getName() {
@@ -26,17 +27,23 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPwcheck() {
-		return pwcheck;
-	}
-	public void setPwcheck(String pwcheck) {
-		this.pwcheck = pwcheck;
-	}
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 	

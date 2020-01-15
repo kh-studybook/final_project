@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>notice  update</title>
+<title>notice  delete</title>
 </head>
 <body>
 

@@ -5,6 +5,7 @@ create table notice(
 	notice_date date
 );
 
+
 drop table notice;
 
 select * from notice;
