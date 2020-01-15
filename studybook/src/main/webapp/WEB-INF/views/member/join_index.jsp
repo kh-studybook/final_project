@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../main/header.jsp" flush="false" />
 <script>
@@ -14,7 +14,7 @@ $(document).ready(function(){
 			'position' : fixed,
 			'bottom' : 0
 		}) 
-	} 
+	}
 })	  
 </script>
 <style>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import kh.finalproject.studybook.domain.Notice;
 
-public interface NoticeService {
+public interface NoticeService { 
 	
 	public int getListCount();
 	

@@ -15,14 +15,14 @@ import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.service.MemberService;
 
 @Controller
-public class MemberController {
+public class MemberController { 
 
 	@Autowired
 	private MemberService memberservice;
 
 	@RequestMapping(value = "/login.mem", method = RequestMethod.GET)
 	public String login() {
-		return "member/login_index";
+		return "member/login_index"; 
 	}
 
 	@RequestMapping(value = "/join.mem", method = RequestMethod.GET)

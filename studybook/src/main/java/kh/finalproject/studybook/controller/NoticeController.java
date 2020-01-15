@@ -22,7 +22,7 @@ import kh.finalproject.studybook.domain.Notice;
 import kh.finalproject.studybook.service.NoticeService;
 
 @Controller
-public class NoticeController {
+public class NoticeController { 
 
 	@Autowired
 	private NoticeService noticeService;
@@ -32,7 +32,7 @@ public class NoticeController {
 	@RequestMapping(value = "/NoticeList.bo")
 	ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
-			throws Exception {
+			throws Exception { 
 
 		//총 리스트 
 		int listcount = noticeService.getListCount();

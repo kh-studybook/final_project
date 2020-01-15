@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import kh.finalproject.studybook.dao.NoticeDAO;
 import kh.finalproject.studybook.domain.Notice;
 
-@Service
+@Service 
 public class NoticeServiceImpl implements NoticeService{
 
 	@Autowired

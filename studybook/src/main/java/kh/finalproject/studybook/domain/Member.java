@@ -4,10 +4,10 @@ public class Member {
 	private String name;
 	private String email;
 	private String password;
-	private String phone;
+	private String phone; 
 	private int key;
 	private String profile;
-	
+	 
 	
 	public String getName() {
 		return name;

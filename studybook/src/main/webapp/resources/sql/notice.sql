@@ -6,6 +6,7 @@ create table notice(
 );
 
 
+ 
 drop table notice;
-
+ 
 select * from notice;

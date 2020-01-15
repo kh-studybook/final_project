@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 import kh.finalproject.studybook.domain.Notice;
 
 @Repository
-public class NoticeDAO {
+public class NoticeDAO { 
 
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession; 
 
 	public void insertNotice(Notice notice) {
 		sqlSession.insert("Notice.insert", notice);

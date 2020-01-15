@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import kh.finalproject.studybook.domain.Member;
 
 
-@Repository
-public class MemberDAO {
+@Repository 
+public class MemberDAO { 
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
