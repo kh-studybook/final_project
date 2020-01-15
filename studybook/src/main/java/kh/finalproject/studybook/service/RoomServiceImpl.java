@@ -31,12 +31,12 @@ public class RoomServiceImpl implements RoomService {
 	//지은 시작
 
 	@Override
-	public void insertGallery(int room_code, String originFileName, int i) {
+	public void insertGallery(int room_code, String DBname, int i) {
 
 			
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ROOM_CODE", room_code);
-		map.put("FILE_NAME", originFileName);
+		map.put("FILE_NAME", DBname);
 		map.put("GALLERY_NUM", i);
 
 		gdao.insertGallery(map);
@@ -91,14 +91,33 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<Room> getSearchList(int index, String search_word, int page, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		//검색한다면
+		if(index!=-1) {
+			String[] search_field = new String[] {"ROOM_NAME","ROOM_CODE","MAX_MEMBER","HOUR_COST"};
+			map.put("search_field",search_field[index]);
+			map.put("search_word", "%"+search_word+"%");
+		}
+		//검색 안한다면
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getSearchList(map);
 	}
 
 	@Override
 	public int getSearchListCount(int index, String search_word) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		//검색한 경우
+		if(index!=-1) {
+			String[] search_field = new String[]{"ROOM_NAME","ROOM_CODE","MAX_MEMBER","HOUR_COST"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word", "%"+search_word+"%");
+		}
+		System.out.println("RoomServiceImpl의 getSearchListCount");
+		return dao.getSearchListCount(map);
 	}
 
 	

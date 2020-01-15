@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
+*{font-family:"맑은 고딕";
+font-size:14px;}
 .w_wrap {
 	font-size: 14px;
 }
@@ -16,7 +18,6 @@
 .w_title {
 	font-size: 32px;
 	font-weight: bold;
-	margin-top: 50px;
 }
 
 .w_p {
@@ -53,9 +54,8 @@
 				function compare() {
 					var max = $("#max_member").val();
 					var min = $("#min_member").val();
-					if (max < min) {
+					if (parseInt(max) < parseInt(min)) {
 						alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
-
 					}
 				}
 
@@ -111,7 +111,7 @@
 				}
 				var max = $("#max_member").val();
 				var min = $("#min_member").val();
-				if (max < min) {
+				if (parseInt(max) < parseInt(min)) {
 					alert("최대인원수는 최소인원수보다 큰 수를 입력해주세요.");
 				return false;
 				}
@@ -128,7 +128,7 @@
 		<div class="row">
 			<div class="col">
 				<p class="w_title">공간 등록</p>
-				<br>(*) 필수입력<br>
+				<br>(*) 필수입력<br><br>
 			</div>
 		</div>
 

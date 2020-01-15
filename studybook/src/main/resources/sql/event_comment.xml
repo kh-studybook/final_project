@@ -3,5 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Event_comments">
-
+	<delete id = "delete_event_comment" parameterType = "event">
+			<![CDATA[	
+		delete from event_event 
+			where com_re_ref = #{com_re_ref}  
+			and com_re_lev >= #{com_re_lev}  
+			and com_re_seq >= #{com_re_seq}   
+			and com_re_seq <(
+								nvl((SELECT min(com_re_seq) 
+								FROM event_comment
+								WHERE com_re_ref=#{com_re_ref}
+								AND   com_re_lev=#{com_re_lev}
+								AND   com_re_seq>#{com_re_seq}),
+								(SELECT max(com_re_seq)+1 
+								 FROM event_comment
+			                     WHERE com_re_ref=#{com_re_ref}))
+			                   )
+	]]>
+	</delete>
 </mapper>

@@ -78,7 +78,9 @@ public class RoomController {
 		
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
+<
 		String path="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+
 		
 		// 포문으로 꺼냄
 		int i = gallery1.getGALLERY_NUM();
@@ -93,6 +95,7 @@ public class RoomController {
 
 			String safeFile = path + System.currentTimeMillis() + originFileName;
 			String DBname = System.currentTimeMillis() + originFileName;
+
 			
 			try {				
 				mf.transferTo(new File(safeFile));
@@ -121,8 +124,9 @@ public class RoomController {
 		List<Room> list = null;
 		int listcount =0;
 		list = roomservice.getSearchList(index, search_word,page,limit);
+		System.out.println("RoomController의 roomservice.getSearchList 끝");
 		listcount = roomservice.getSearchListCount(index, search_word);
-		
+		System.out.println("RoomController의 roomservice.getSearchListCount 끝");
 		//총페이지수
 		int maxpage=(listcount+limit -1)/limit;
 		
