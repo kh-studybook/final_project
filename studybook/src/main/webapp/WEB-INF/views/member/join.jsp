@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html> 
+<html>  
 <head>
 <meta charset="UTF-8">
 <title>join</title>
@@ -119,53 +119,28 @@ input[type=checkbox] {
 
    $(document).ready(function() {
 	      
-	   $('#pw').on('keyup',function(){
-		      $('#pwcheckmsg').html('');
+	   $('#password').on('keyup',function(){
+		      $('.pwcheckmsg').html('');
 		    });
 	   
 	   $('#pwcheck').on('keyup',function(){
-	        if($('#pw').val() != $('#pwcheck').val()){
-	          $('#pwcheckmsg').html('비밀번호 일치하지 않음<br><br>');
-	          $('#pwcheckmsg').attr('color', 'red');
+	        if($('#password').val() != $('.pwcheck').val()){
+	          $('.pwcheckmsg').html('비밀번호 일치하지 않음<br><br>');
+	          $('.pwcheckmsg').attr('color', 'red');
 	        } else {
-	          $('#pwcheckmsg').html('비밀번호 일치함<br><br>');
-	          $('#pwcheckmsg').attr('color', 'red');
+	          $('.pwcheckmsg').html('비밀번호 일치함<br><br>');
+	          $('.pwcheckmsg').attr('color', 'red');
 	        }
 
 	    });
 		    	   
-      $('#id').on('keyup',function(){
-         $("#message").empty();
-         var pattern = /^\w{4,12}$/;
-         var id = $("#id").val();
-         if(!pattern.test(id)){
-            $("#message").css('color', 'red').html("영문자, 숫자, _ 4~12자 가능");
-            checkid=false;
-            return;
-         }
-         
-          $.ajax({
-            type:"post",
-            url : "idcheck",
-            data : {"id":id},   
-            success : function(resp){
-               if(resp == -1){
-                  $("#message").css('color','green').html("사용 가능한 아이디");
-                  checkid=true;
-               }else{
-                  $("#message").css('color','red').html("사용중인 아이디");
-                  checkid=false;
-               }
-            } 
-         }) 
-      })
 
       $("#email").blur(function() {
   		var re_id = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; //test
   		var userid=$("#email").val();
    		var param ="email="+email; 
    		if(emailcheck.test(email)!=true){
-   			$("#emailcheck").html('<span style="color:red">유효한 이메일 주소를 입력해주세요.</span>');
+   			$(".emailcheck").html('<span style="color:red">유효한 이메일 주소를 입력해주세요.</span>');
    			$("#email").focus();
    			return;
    		}
@@ -176,7 +151,7 @@ input[type=checkbox] {
     		var userid=$("#phone").val();
      		var param ="phone="+email; 
      		if(phonecheck.test(phone)!=true){
-     			$("#phonemsg").html('<span style="color:red">특수기호 없이 숫자만 입력해주세요.</span>');
+     			$(".phonemsg").html('<span style="color:red">특수기호 없이 숫자만 입력해주세요.</span>');
      			$("#phone").focus();
      			return;
      		}
@@ -198,7 +173,7 @@ input[type=checkbox] {
 <p class=s_title>회원가입</p>
 <p class="schonangemeldet">이미 스터디북 회원이신가요?  <span class="tologin">로그인</span></p>
 	<div class="s_container">
-		<form name="joinform" action="joinProcess.mem" method="post">
+		<form name="joinform" action="joinProcess.mem" method="get">
 		
 			<div class="row">	
 				<div class="col-100">
@@ -217,13 +192,13 @@ input[type=checkbox] {
 			<div class="row">
 				<div class="col-100">
 					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
-					<span class=passwordmsg></span>	
+					<span class=pwmsg></span>	
 				</div>
 			</div>
 			<div class="row">		
 				<div class="col-100">
-					<input type="password" id="passwordcheck" class="s_input" name="passwordcheck" placeholder="비밀번호 확인">
-					<span class=passwordcheckmsg></span>	
+					<input type="password" id="pwcheck" class="s_input" name="pwcheck" placeholder="비밀번호 확인">
+					<span class=pwcheckmsg></span>	
 				</div>
 			</div>
 				
@@ -233,7 +208,6 @@ input[type=checkbox] {
 					<span class=phonemsg></span>	
 				</div>
 			</div>
-
 
 			
 			<div class="row">

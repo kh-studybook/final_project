@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class Notice {
 
-	private int notice_num; 
+	private int notice_num;  
 	private String notice_title;
 	private String notice_content;
 	private Date notice_date;
 	
 	
-	public int getNotice_num() {
+	public int getNotice_num() { 
 		return notice_num;
 	}
 	public void setNotice_num(int notice_num) {

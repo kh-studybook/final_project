@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="UTF-8">
 <title>join success</title>
@@ -15,7 +15,7 @@
 	//	}); 
 	//});
 </script> 
-
+ 
 </head>
 <body>
 <h1>환영합니다!</h1>

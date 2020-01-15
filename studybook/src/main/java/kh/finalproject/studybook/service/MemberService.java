@@ -4,7 +4,7 @@ import kh.finalproject.studybook.domain.Member;
 
 public interface MemberService {
 
-	public int insert(Member m);
+	public int insert(Member m); 
 
 	public Member myinfo(String id);
 

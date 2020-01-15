@@ -2,19 +2,19 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../main/header.jsp" flush="false" />
-<script>
+<script> 
 $(document).ready(function(){
 	var mainheight = $('main').height();
 	var navheight = 150px;
 	if(($(window).height() - navheigt) < mainheight) {
 		$('footer').css({
-			'position' : fixed,
+			'position' : fixed, 
 			'bottom' : 0
 		}) 
-	}
+	} 
 })	  
 </script>
 <style>
@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="join.jsp" />
+		<jsp:include page="notice_list.jsp" />
 	</main>
 	<!-- Body End -->
 

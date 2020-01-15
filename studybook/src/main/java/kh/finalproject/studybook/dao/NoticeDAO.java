@@ -11,17 +11,21 @@ import org.springframework.stereotype.Repository;
 import kh.finalproject.studybook.domain.Notice;
 
 @Repository
-public class NoticeDAO {
+public class NoticeDAO { 
 
 	@Autowired
-	private SqlSessionTemplate sqlSession;
-
-	public List<Notice> getNoticeList(HashMap<String, Integer> map) {
-		return sqlSession.selectList("Notice.list", map);
-	}
+	private SqlSessionTemplate sqlSession; 
 
 	public void insertNotice(Notice notice) {
 		sqlSession.insert("Notice.insert", notice);
+	}
+	
+	public int getListCount() {
+		return 0;
+	}
+	
+	public List<Notice> getNoticeList(HashMap<String, Integer> map) {
+		return sqlSession.selectList("Notice.list", map);
 	}
 
 	public Notice getDetail(int num) {
@@ -39,5 +43,8 @@ public class NoticeDAO {
 	public Notice isNoticeWriter(Map<String, Object> map) {
 		return sqlSession.selectOne("Notice.NoticeWriter", map);
 	}
+
+
+
 
 }
