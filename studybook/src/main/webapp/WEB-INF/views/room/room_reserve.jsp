@@ -9,7 +9,7 @@
 	href="resources/css/room_reserve.css" />
 </head>
 <body>
-	<form action="food_add_page.ro">
+	<form action="food_add.ro">
 	<div class="container">
 		<div class="col-md-12 e_reserve_page_title">
 		<span>예약 페이지</span>
@@ -85,7 +85,7 @@
 			
 			<div class="e_reserve_room_info">
 				<h2 class="e_head">예약시 주의사항</h2>
-				<ul class="e_list_detail">
+				<ul class="e_list_detail_notice">
 					<li><span class="e_tit">1</span> <span class="e_data">8인까지 추가비용 없이 사용하실 수 있습니다. </span></li>
 
 					<li><span class="e_tit">2</span> <span class="e_data">선결제하신 인원외에 추가인원이 더 있으실 경우 사전에 문의주시기 바랍니다. </span></li>

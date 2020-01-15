@@ -29,6 +29,7 @@ $(document).on('click', '.number-spinner button', function () {
 </script>
 </head>
 <body>
+<form action="reserve_ok.ro">
 	<div class="container">
 		<div class="col-md-12 e_food_page_title">
 			<span>음료 추가 페이지</span>
@@ -158,12 +159,17 @@ $(document).on('click', '.number-spinner button', function () {
 			<div class="e_food_add_div">				
 				<h2 class="e_head">음료 결제 예정금액</h2>
 				<ul class="e_list_detail">
-					<li><span class="e_tit">아이스 아메리카노</span><span class="e_drink_num">1</span> <span class="e_data">4000</span></li>
-					<li><span class="e_tit">아이스 카라멜 마끼야또</span><span class="e_drink_num">1</span> <span class="e_data">3500</span></li>
+					<li><div class="e_food_price_div">
+						<span class="e_tit">아이스 아메리카노</span><span class="e_drink_num">1</span> <span class="e_data">4000</span>
+					</div></li>
+					
+					<li><div class="e_food_price_div">
+						<span class="e_tit">아이스 카라멜 마끼야또</span><span class="e_drink_num">1</span> <span class="e_data">3500</span>
+					</div></li>
 				</ul>
 				
 				<div class="e_total_price_div">
-					<span class="e_total_name">공간 예약 금액</span>
+					<span class="e_total_name">음료 결제 금액</span>
 					<span class="e_total_price">22,000</span>
 				</div>			
 			</div>
@@ -184,7 +190,7 @@ $(document).on('click', '.number-spinner button', function () {
 		<!-- row 끝 -->
 	</div>
 	<!-- container 끝 -->
-
+</form>
 
 </body>
 </html>

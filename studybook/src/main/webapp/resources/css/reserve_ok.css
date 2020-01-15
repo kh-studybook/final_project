@@ -1,0 +1,93 @@
+@charset "UTF-8";
+.container{
+background: #eeeeee;
+}
+.e_reserve_ok_title{
+	height: 150px;
+    text-align: center;
+    font-size: 2rem;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 150px;
+}
+
+.e_reserve_check_div{
+	background: white;
+	display: inline-table;
+    padding: 7px 15px 15px 15px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.e_reserve_check_div .e_head{
+	font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 2px solid #7E57D2;
+    padding: 10px;
+    font-family: inherit;
+}
+
+.e_reserve_check_div .e_head .e_reserve_code_div{
+    float: right;
+    background: #eeeeee;
+    border-radius: 50px;
+    font-size: small;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: 140px;
+    text-align: center;
+    position: relative;
+    bottom: 6px;
+}
+
+.e_reserve_check_div .e_head .e_reserve_code{
+	color:#7e57d2;
+}
+.e_reserve_check_div .e_list_detail li {
+    padding: 12px 0 12px 8px;
+    font-size: 15px;
+    border-bottom: 1px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+
+.e_reserve_check_div .e_list_detail li .e_food_price_div{
+	 display: grid;
+    grid-template-columns: 200px 70px 90px;
+}
+
+.e_reserve_check_div .e_list_detail .e_food_price_div .e_data{
+	 text-align: center;
+}
+
+.e_reserve_check_div .e_total_price_div{
+    padding: 20px 10px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.e_reserve_check_div .e_total_price_div .e_total_price{
+	float: right;
+    color: #7E56D2;
+    font-size: 1.3rem;
+}
+
+.reserve_cancel_div{
+	display: inline-table;
+    padding: 7px 0px 15px 15px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.reserve_cancel_div input{
+	height: 45px;
+    border: none;
+    width: 180px;
+    background: #7e56d2;
+    font-size: 1rem;
+    color: white;
+    font-weight: 900;
+    float:right;
+}
+

@@ -78,14 +78,17 @@ background: #eeeeee;
     padding: 12px 0 12px 8px;
     font-size: 15px;
     border-bottom: 1px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 40% 60%;
 }
 
-.e_food_add_div .e_list_detail li .e_drink_num{
-	padding-left:90px;
+.e_food_add_div .e_list_detail li .e_food_price_div{
+	 display: grid;
+    grid-template-columns: 200px 70px 90px;
 }
 
-.e_food_add_div .e_list_detail li .e_data{
-	padding-left:80px;
+.e_food_add_div .e_list_detail .e_food_price_div .e_data{
+	 text-align: center;
 }
 
 .e_food_add_div .e_list_detail li:last-child{
