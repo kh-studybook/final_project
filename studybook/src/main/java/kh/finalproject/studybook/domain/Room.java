@@ -12,6 +12,8 @@ public class Room {
 	private String ROOM_INTRO;
 	private String FAC_INTRO;
 	private String HASHTAG;
+	//db에 없는 값(gallery filename)
+	private String FILE_NAME;
 	
 	public int getROOM_CODE() {
 		return ROOM_CODE;
@@ -80,6 +82,12 @@ public class Room {
 	}
 	public void setHASHTAG(String hASHTAG) {
 		HASHTAG = hASHTAG;
+	}
+	public String getFILE_NAME() {
+		return FILE_NAME;
+	}
+	public void setFILE_NAME(String fILE_NAME) {
+		FILE_NAME = fILE_NAME;
 	}
 	
 	

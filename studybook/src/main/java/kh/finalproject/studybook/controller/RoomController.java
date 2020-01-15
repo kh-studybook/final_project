@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,9 @@ public class RoomController {
 	@Autowired
 	private RoomService roomservice;
 
+	@Value("${savefoldername}")
+	private String saveFolder;
+	
 	// 지은 시작--
 	// 어드민으로 접속 , 룸리스트 보여줌
 
@@ -74,7 +78,9 @@ public class RoomController {
 		
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
-		String path="C:\\Users\\user1\\git\\final_project5\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+<
+		String path="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+
 		
 		// 포문으로 꺼냄
 		int i = gallery1.getGALLERY_NUM();
@@ -88,7 +94,8 @@ public class RoomController {
 			System.out.println("i=" + i);
 
 			String safeFile = path + System.currentTimeMillis() + originFileName;
-			String DBname=System.currentTimeMillis() + originFileName;
+			String DBname = System.currentTimeMillis() + originFileName;
+
 			
 			try {				
 				mf.transferTo(new File(safeFile));
@@ -177,8 +184,38 @@ public class RoomController {
 
 	// 메인 화면 보기(테스트) - 민지
 	@RequestMapping(value = "/main.net")
-	public String main() {
-		return "room/main";
+	public ModelAndView main(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			ModelAndView mv) {
+		// 한 화면에 출력할 갯수
+		int limit = 9;
+		
+		// 총 리스트 갯수
+		int listcount = roomservice.getListCount();
+		
+		// 총 페이지 수
+		int maxpage = (listcount+limit-1)/limit;
+		
+		// 시작 페이지(1, 6, 11, ...)
+		int startpage = ((page-1) / 5) * 5 + 1;
+		
+		// 마지막 페이지(5, 10, 15, ...)
+		int endpage = startpage + 5 - 1;
+		
+		if(endpage > maxpage) endpage = maxpage;
+		
+		List<Room> roomlist = roomservice.getRoomList(page, limit);
+		
+		mv.setViewName("main/main");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("list", roomlist);
+		mv.addObject("limit", limit);
+		
+		return mv;
 	}
 
 }

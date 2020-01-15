@@ -163,15 +163,15 @@
 		<p>스터디북의 추천공간</p>
 		<c:forEach var="list" items="${list}" varStatus="status">
 			<div class="card">
-				<a href="Room_detail.ro?room_code=${list.room_code}">
-				<img class="card-img-top" src="C:\Users\minji\git\final_project\studybook\src\main\webapp\resources\image\room\${list.file_name}" alt="Room Image">
+				<a href="Room_detail.ro?room_code=${list.ROOM_CODE}">
+				<img class="card-img-top" src="resources/image/room/${list.FILE_NAME }">
 				</a>
 				<div class="card-body">
 				<p class="card-text">
-					<span class="j_room_name">${list.room_name}</span>
-				  	<span class="j_room_count">최대 ${list.max_member}인</span>
-				  	<span class="j_room_pay"><span class="j_room_pay_hour">${list.hour_cost}</span> 원/시간</span>
-				  	<span class="j_room_tag">${list.hashtag}</span>
+					<span class="j_room_name">${list.ROOM_NAME}</span>
+				  	<span class="j_room_count">최대 ${list.MAX_MEMBER}인</span>
+				  	<span class="j_room_pay"><span class="j_room_pay_hour">${list.HOUR_COST}</span> 원/시간</span>
+				  	<span class="j_room_tag">${list.HASHTAG}</span>
 				</p>
 				</div>
 			</div>

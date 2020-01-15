@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -62,4 +63,22 @@ select * from room where room_name=#{ROOM_NAME}
 </select>
 
 <!-- 지은 끝 -->
+
+<!-- room 총 list count -->
+<select id="count" resultType="int">
+	select count(*) from room
+</select>
+
+<!-- room 총 list -->
+<select id="allList" parameterType="java.util.Map" resultType="room">
+	select * 
+		from (select rownum rnum, b.* 
+			  from (select room.ROOM_CODE, room.ROOM_NAME, room.MAX_MEMBER, room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
+			  		from room, gallery
+			  		where room.ROOM_CODE=gallery.ROOM_CODE
+			  		and gallery.gallery_num=1) b
+			  		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+</select>
+
 </mapper>
