@@ -62,7 +62,7 @@ public class EventController {
 		      int date=c.get(Calendar.DATE);
 		      
 		      //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/" 바꾸기;
-		      String saveFolder="C:\\Users\\user1\\git\\final_project[0115]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+		      String saveFolder="C:\\Users\\user1\\git\\final_project[0116]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);

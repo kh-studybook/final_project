@@ -32,7 +32,7 @@
 		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
 		event_start, event_end, event_room, event_pic from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
-		order by event_num desc
+		order by event_date
 	</select>
 	
 	<update id = "modifyEvent" parameterType = "event">
