@@ -33,7 +33,6 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public void insertGallery(int room_code, String DBname, int i) {
 
-			
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ROOM_CODE", room_code);
 		map.put("FILE_NAME", DBname);
@@ -119,7 +118,22 @@ public class RoomServiceImpl implements RoomService {
 		System.out.println("RoomServiceImpl의 getSearchListCount");
 		return dao.getSearchListCount(map);
 	}
-
+	//룸 상세정보 조회
+	@Override
+	public Room getRoomDetail(int room_code) {
+		return dao.getRoomDetail(room_code);
+	}
+	//갤러리 리스트 가져오기
+	@Override
+	public List<String> getGallerylist(int room_code) {
+		return gdao.getGalleryList(room_code);
+	}
+	//room_ex정보 가져오기
+	@Override
+	public Room_ex getRoomExDetail(int ROOM_CODE) {
+		return rdao.getRoomExDetail(ROOM_CODE);
+	}
+	
 	
 	//지은 끝
 	
@@ -139,6 +153,12 @@ public class RoomServiceImpl implements RoomService {
 		map.put("end", endrow);
 		return dao.getRoomList(map);
 	}
+
+	
+
+	
+
+	
 	
 
 }
