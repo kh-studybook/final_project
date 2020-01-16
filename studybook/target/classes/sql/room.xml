@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -57,9 +56,44 @@ values
 </insert>
 
 
-<!-- 룸네임 찾기 roomnameCheck -->
+<!-- 룸이름 중복검사  -->
 <select id="roomnameCheck" resultType="room" parameterType="String">
 select * from room where room_name=#{ROOM_NAME}
+</select>
+
+<!-- 검색관련 -->
+<select id="getSearchList" parameterType="map" resultType="room">
+select * 
+from (select rownum rnum, b.*
+							from(select * from room 
+<if test="search_field!=null">
+where
+	<choose>
+		<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
+		<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
+		<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
+		<when test="search_field=='HOUR_COST'">HOUR_COST</when>
+	</choose>
+	like #{search_word}
+</if>							
+order by room_code desc)b							
+)
+where rnum &gt;=#{start} and rnum &lt;=#{end}
+</select>
+
+<select id="searchcount" parameterType="map" resultType="int">
+select count(*)
+from room 
+<if test="search_field!=null">
+where
+<choose>
+		<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
+		<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
+		<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
+		<when test="search_field=='HOUR_COST'">HOUR_COST</when>
+	</choose>
+	like #{search_word}
+</if>
 </select>
 
 <!-- 지은 끝 -->
@@ -80,5 +114,4 @@ select * from room where room_name=#{ROOM_NAME}
 			  		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 </select>
-
 </mapper>

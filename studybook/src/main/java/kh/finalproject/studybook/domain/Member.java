@@ -6,7 +6,7 @@ public class Member {
 	private String password;
 	private String phone; 
 	private int key;
-	private String profile;
+	private String profile = "/image/profile/default.png";
 	 
 	
 	public String getName() {
