@@ -4,7 +4,7 @@
 * {box-sizing: border-box; font-family:"맑은 고딕"}
 
 /** 글자 관련!!!!*/
-.p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px;}
+.p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
 #event_title{maxLength:200}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
 textarea::placeholder, input[type=text]::placeholder{color:black;}
@@ -47,6 +47,16 @@ input[type=date]{height:3rem;}
 		
 		//썸네일 이미지 변경하기
 		$('#eventPic_uploadfile').on('change', preview);
+		
+		//이벤트명 20자까지 막기
+		$("#event_title").keyup(function(){
+			if ($("#event_title").val().length > 20) {
+				alert("이벤트명을 20자 이하로 입력해주세요.");
+				$("#event_title").val('');
+				$("#event_title").focus();				
+				return false;
+			}
+		});
 		
 		function preview(e){
 			var file = e.target.files[0];//File 객체 리스트에서 첫번째 File 객체를 가져옵니다.
@@ -104,7 +114,7 @@ input[type=date]{height:3rem;}
 			}
 			
 			if ($("#event_title").val() == "") {
-				alert("이벤트명을 200자 이하로 입력해주세요.");
+				alert("이벤트명을 20자 이하로 입력해주세요.");
 				$("#event_title").focus();
 				return false;
 			}
@@ -193,7 +203,7 @@ input[type=date]{height:3rem;}
         <label for="event_title">이벤트명</label>
       </div>
       <div class="col-75">
-        <input type="text" id="event_title" name="title" placeholder="이벤트명">
+        <input type="text" id="event_title" name="title" placeholder="이벤트명을 20자까지 입력해주세요.">
       </div>
     </div>
     
