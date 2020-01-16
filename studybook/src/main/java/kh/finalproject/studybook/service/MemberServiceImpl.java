@@ -11,28 +11,34 @@ public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberDAO dao;
-	
+
 	@Override
-	public int insert(Member m) {
-		return dao.insert(m);
+	public int insert(Member member) {
+		return dao.insert(member);
 	}
 
 	@Override
-	public Member myinfo(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member myinfo(String key) {
+		return dao.myinfo(key);
 	}
 
 	@Override
 	public int myupdate(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.myupdate(member);
 	}
 
 	@Override
-	public int delete(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int isUser(String email, String password) {
+		Member member = dao.isUser(email);
+		int result = -1; //아이디 존재하지 않으면 -> member가 null
+		if (member != null) {
+			if (member.getPassword().equals(password)) {
+				result = 1;
+			} else 
+				result = 0;
+		}
+		return result;
 	}
+	
 
 }

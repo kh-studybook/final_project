@@ -14,10 +14,23 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int insert(Member m) {
-		return sqlSession.insert("Members.insert",m);
+	public int insert(Member member) {
+		return sqlSession.insert("Members.insert", member); 
 	}
 
-	 
+	public int myupdate(Member member) {
+		return sqlSession.update("Members.update", member); 
+	}
+
+	public Member myinfo(String key) {
+		return null;
+	}
+
+	public Member isUser(String email) {
+		return sqlSession.selectOne("Members.usercheck", email);
+	}
+
+
+
 
 }

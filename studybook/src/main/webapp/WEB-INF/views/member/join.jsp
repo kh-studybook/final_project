@@ -124,15 +124,15 @@ input[type=checkbox] {
 		    });
 	   
 	   $('#pwcheck').on('keyup',function(){
-	        if($('#password').val() != $('.pwcheck').val()){
-	          $('.pwcheckmsg').html('비밀번호 일치하지 않음<br><br>');
+	        if($('#password').val() != $('#pwcheck').val()){
+	          $('.pwcheckmsg').html('비밀번호 일치하지 않음');
 	          $('.pwcheckmsg').attr('color', 'red');
 	        } else {
-	          $('.pwcheckmsg').html('비밀번호 일치함<br><br>');
-	          $('.pwcheckmsg').attr('color', 'red');
+	          $('.pwcheckmsg').html('비밀번호 일치함');
+	          $('.pwcheckmsg').attr('color', 'blue');
 	        }
 
-	    });
+	   });
 		    	   
 
       $("#email").blur(function() {
@@ -204,7 +204,7 @@ input[type=checkbox] {
 				
 			<div class="row">
 				<div class="col-100"> 
-					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="12" required>
+					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="11" required>
 					<span class=phonemsg></span>	
 				</div>
 			</div>
