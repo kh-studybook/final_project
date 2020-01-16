@@ -33,4 +33,5 @@
         <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
     </beans:bean>
 
+	<context:property-placeholder location="classpath:pro/savefolder.properties"/>
 </beans:beans>
