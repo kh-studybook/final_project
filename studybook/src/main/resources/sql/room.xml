@@ -76,7 +76,7 @@ where
 	</choose>
 	like #{search_word}
 </if>							
-order by room_name)b							
+order by room_code desc)b							
 )
 where rnum &gt;=#{start} and rnum &lt;=#{end}
 </select>

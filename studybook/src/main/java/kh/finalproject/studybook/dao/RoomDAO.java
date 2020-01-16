@@ -1,6 +1,5 @@
 package kh.finalproject.studybook.dao;
 
-
 import java.util.HashMap;
 
 import java.util.List;
@@ -40,14 +39,19 @@ public class RoomDAO {
 		return sqlSession.selectList("Rooms.getSearchList", map);
 	}
 
+	// 목록 리스트 카운트
+	public int getSearchListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("Rooms.searchcount", map);
+	}
+
+	// --지은 끝
+
 	public int getListCount() {
 		return sqlSession.selectOne("Rooms.count");
 	}
-	//--지은 끝
-	
+
 	public List<Room> getRoomList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
-	
 
 }

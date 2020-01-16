@@ -78,7 +78,7 @@ public class RoomController {
 		
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
-<
+
 		String path="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		
