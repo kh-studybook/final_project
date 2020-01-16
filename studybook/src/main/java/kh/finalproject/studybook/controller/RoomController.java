@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +80,7 @@ public class RoomController {
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
 
-		String path="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path=saveFolder;
 
 		
 		// 포문으로 꺼냄
@@ -160,6 +161,28 @@ public class RoomController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
+	}
+	//룸수정RoomModify.ro
+	@GetMapping("RoomModify.ro") //파라미터로 넘어올때는 대소문자를 맞춰줘야함, 반드시 들어오는 파라미터라서 int ROOM_CODE로 작성
+	public ModelAndView roomModifyView(int ROOM_CODE, ModelAndView mv, HttpServletRequest request) throws Exception{
+		Room roomdata = roomservice.getRoomDetail(ROOM_CODE);
+		List<String> gallerydata = roomservice.getGallerylist(ROOM_CODE);
+		Room_ex roomexdata = roomservice.getRoomExDetail(ROOM_CODE);
+		
+		//내용 불러오기 실패한 경우
+		if(roomdata==null) {
+			System.out.println("(수정)상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","(수정) 상세보기 실패입니다.");
+			return mv;
+		}
+		System.out.println("(수정) 상세보기 성공");
+		mv.addObject("roomdata",roomdata);
+		mv.addObject("gallerydata",gallerydata);
+		mv.addObject("roomexdata",roomexdata);
+		mv.setViewName("admin/room_modify");
+		return mv;
 	}
 	
 	// 지은 끝--
