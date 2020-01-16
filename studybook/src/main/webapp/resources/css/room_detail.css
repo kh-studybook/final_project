@@ -488,3 +488,31 @@ html {
     align-items: center;
 	cursor:pointer;
 }
+.jsCalendar table {
+    width: 99%!important;
+}
+
+.jsCalendar thead .jsCalendar-week-days th, .jsCalendar tbody td {
+    width: 48px!important;
+}
+
+.jsCalendar thead .jsCalendar-title {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
+
+.jsCalendar tbody td.jsCalendar-current {
+    border: 1px solid darkslateblue;
+    border-radius: 90%;
+    background-color:#52c9ff00!important;
+    color:black!important;
+}
+
+.e_head .e_head_right_div{
+	display: inline-block;
+    float: right;
+    position: relative;
+    bottom: 25px;
+}
+
