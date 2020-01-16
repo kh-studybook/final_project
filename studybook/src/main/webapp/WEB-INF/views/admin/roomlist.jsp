@@ -55,7 +55,7 @@ li .current {
 .w_center-block {
 	display: flex;
 	justify-content: center; /* 가운데 정렬 */
-	margin-bottom:50px;
+	margin-bottom:20px;
 }
 </style>
 <script>
@@ -107,11 +107,11 @@ li .current {
 							</tr>
 						</thead>
 						<tbody>
-						<c:set var="num" value="${listcount-(page-1)*10}"/>
+						<c:set var="num" value="${(page-1)*10+1}"/>
 							<c:forEach var="m" items="${roomlist}">
 								<tr>
 									<td><c:out value="${num}"/>
-									<c:set var="num" value="${num-1}"/>
+									<c:set var="num" value="${num+1}"/>
 									</td>
 									<td>${m.ROOM_CODE}</td>
 									<td>${m.ROOM_NAME}</td>

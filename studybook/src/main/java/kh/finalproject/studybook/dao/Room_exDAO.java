@@ -21,6 +21,11 @@ public class Room_exDAO {
 		sqlSession.insert("Rooms.insertRoom_ex",map);//
 		
 	}
+	//Room_Ex정보 가져오기
+	public Room_ex getRoomExDetail(int ROOM_CODE) {
+		System.out.println("Room_exDAO의 getRoomExDetail까지 옴");
+		return sqlSession.selectOne("Rooms.roomexDetail",ROOM_CODE);
+	}
 	
 	
 

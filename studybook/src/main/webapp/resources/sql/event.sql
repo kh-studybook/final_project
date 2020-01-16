@@ -16,6 +16,6 @@ drop table event;
 select * from event;
 delete from event;
 
-delete from event where event_num = 3;
+delete from event where event_num between 11 and 14;
 select * from (select rownum rnum, event_num, mem_key, title, content, event_pic from event) 
 	order by event_num desc

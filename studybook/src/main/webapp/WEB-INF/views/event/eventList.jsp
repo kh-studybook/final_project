@@ -1,25 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
 <meta charset="UTF-8">
 <style>
 /** 글자 관련!!!!*/
-.p_title {font-family: "맑은 고딕";text-align: center;font-size: 32px;}
+.p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px;}
 alt{color:White; font-weight:bold; z-index:10}
 .p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
+#nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
 
 /** 버튼 관련 : 추후 글쓰기 버튼 위치 다시 확인하기*/
 #p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
-	color: white;width: 20%;padding: 12px;position: relative;top: 10%;left: 70%;}
-.insert_delete_btn {position: relative;top: 90%;left: 70%}
+	color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
 #event_modify_btn:hover, #event_delete_btn:hover {cursor: pointer;color: #3EF4F3}
+#delete_modify_btn{padding:10px; z-index:10; float:right;}
+#delete_modify_btn:after{clear:both}
 
 /** 카드 관련 */
-.card-img-top{max-height:200px; max-height:200px; z-index:2; border-radius:0px;}
-.wrapper{border:1px solid black; width:300px; height:350px; margin:2em;}
-.card>h3{font-size: 2em; color: white; text-shadow: 0 0 5px #000; 
-		margin-top: -1.5em; margin-bottom: 1.5em; z-index:10}
+.card-img-top{height:200px; border-radius:0px;}
+.wrapper{width:350px; height:300px; margin:20px; background-color:#F2F2F2;}
+.title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-8rem; position:relative; z-index:10}
+.title_z_index_big{font-size:24px; font-weight:bold; }
+.card_contents{padding:20px;}
+		
 /**  모달 관련 */
 .p_modal-title {font_size: 36px;font-weight: bold;}
 
@@ -48,7 +53,7 @@ alt{color:White; font-weight:bold; z-index:10}
 		});
 
 		//게시글 상세보기로 이동하기
-		$(".card").click(function() {
+		$(".wrapper").click(function() {
 			location.href = "EventDetailAction.eve";//추후 확인 : 가지고 가야 할 정보 	 
 		});
 
@@ -83,19 +88,27 @@ alt{color:White; font-weight:bold; z-index:10}
 								<div class="tile job-bucket">
 							    <div class="front">
       								<div class = "card-img">
-        								<img class="card-img-top" src="resources/upload${b.event_pic}">
-        								<div><h3>${b.title}</h3></div></img>
+      									<div style = "filter: brightness(80%)">
+        									<img class="card-img-top" src="resources/upload${b.event_pic}">
+        								</div>
+        								<div class = "title_z_index"><p class = "title_z_index_big">${b.title}</p><br>
+        									<p>${fn:substring(b.event_date,0,11)}<br>${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;<br>
+        									<span>${b.event_room}</span></p>
+        								</div>
         							</div>
-        							<div class="contents">        								
-        								
-        								<p>${b.event_date}&nbsp;${b.event_start}&nbsp;${b.event_room}</p><br>
-      								</div>
-      								 <div class="insert_delete_btn">
-											<a id="event_modify_btn">수정</a> | <a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
+        							<div class="card_contents">
+        								<br>        								
+        								<p>${b.title}</p>
+        								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;
+        								<span style = "color : #7F56D2">${b.event_room}</span></p>
+        								<p style = "padding-top:5px">작성자</p>
+									<div id = "delete_modify_btn">
+										<a id="event_modify_btn">수정</a> | <a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
+									</div>									
 									</div>
     							</div>
-							</div>
-							</div>
+								</div>
+						</div>  
 						</div>
 					</c:forEach>
 				</div>
@@ -141,14 +154,11 @@ alt{color:White; font-weight:bold; z-index:10}
 						</div>
 					</div>
 				</div>
-
-
-
-
 		</c:if>
 		<%-- 게시글이 없는 경우 --%>
 		<c:if test="${listcount == 0}">
-			<font size=5 margin="10">등록된 글이 없습니다.</font>
+			<p id = "nocontent">등록된 글이 없습니다. 글을 등록해주세요.</p><br>
+			<br><br><br><br><br><br>
 		</c:if>
 
 		<button id="p_register_event">글등록</button>
@@ -175,14 +185,12 @@ alt{color:White; font-weight:bold; z-index:10}
 				<div class="modal-footer">
 					<form id=deletemodalForm action="EventDeleteAction.eve"
 						method="post">
-						<input type="hidden" name="event_num" value="${b.event_num}"
-							id="event_num"> <input type="submit" class="btn btn-dark"
-							id="deletemodalSubmit" value=삭제> <input type="button"
-							class="btn btn-light" data-dismiss="modal" value=취소>
+						<input type="hidden" name="event_num" value="${b.event_num}" id="event_num"> 
+						<input type="submit" class="btn btn-dark" id="deletemodalSubmit" value=삭제> 
+						<input type="button" class="btn btn-light" data-dismiss="modal" value=취소>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
