@@ -54,6 +54,7 @@ public class RoomController {
 	// 어드민 룸등록 액션- 다중업로드 시작
 
 	@PostMapping("/RoomAddAction.ro")
+
 	public String room_write_ok(Room room, Room_ex room_ex, MultipartHttpServletRequest mtfRequest,
 			HttpServletResponse response) throws Exception {
 
@@ -164,6 +165,7 @@ public class RoomController {
 		out.print(result);
 	}
 
+
 	// 룸수정RoomModify.ro
 	@GetMapping("RoomModify.ro") // 파라미터로 넘어올때는 대소문자를 맞춰줘야함, 반드시 들어오는 파라미터라서 int room_code)로 작성
 	public ModelAndView roomModifyView(int room_code, ModelAndView mv, HttpServletRequest request) throws Exception {
@@ -173,6 +175,7 @@ public class RoomController {
 
 		// 내용 불러오기 실패한 경우
 		if (roomdata == null) {
+
 			System.out.println("(수정)상세보기 실패");
 			mv.setViewName("error/error");
 			mv.addObject("url", request.getRequestURL());
@@ -266,10 +269,29 @@ public class RoomController {
 
 	// 지은 끝--
 
-	// 룸 정보 보기 -연습용(은지)
+	// 룸 정보 보기 - 은지
 	@RequestMapping(value = "/room_detail.ro")
-	public String room_detail() {
-		return "room/room_detail_page";
+	public ModelAndView room_detail(int room_code,ModelAndView mv, 
+			HttpServletRequest request) {
+		
+		Room room=roomservice.getRoomDetail(room_code);
+		//Room_ex room_ex=roomservice.getRoomExDetail(room_code);
+		//List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		if(room==null) {
+			System.out.println("룸 상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","룸 상세보기 실패입니다.");
+		}else {
+			System.out.println("룸 상세보기 성공");
+			mv.setViewName("room/room_detail_page");
+			mv.addObject("room",room);
+			//mv.addObject("room_ex",room_ex);
+			//mv.addObject("gallerylist",gallerylist);
+		}
+			
+		return mv;
+		
 	}
 
 	// 예약 페이지로

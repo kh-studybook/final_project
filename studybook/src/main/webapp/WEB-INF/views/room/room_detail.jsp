@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,97 +11,22 @@
 <link rel="stylesheet" type="text/css" href="resources/css/swiper.min.css" />
 <link rel="stylesheet" href="resources/css/jsCalendar.css">
 <script src="resources/js/jsCalendar.js"></script>
-
-<script>
-	$(document).on(
-			'click',
-			'.number-spinner button',
-			function() {
-				var btn = $(this), oldValue = btn.closest('.number-spinner')
-						.find('input').val().trim(), newVal = 0;
-
-				if (btn.attr('data-dir') == 'up') {
-					newVal = parseInt(oldValue) + 1;
-
-				} else {
-					if (oldValue > 1) {
-						newVal = parseInt(oldValue) - 1;
-
-					} else {
-						newVal = 1;
-					}
-				}
-				btn.closest('.number-spinner').find('input').val(newVal);
-				$("#extra_num").text(newVal);
-				$("#extra_num_price").text(1000*newVal);
-				var extra_price=$("#extra_num_price").text();
-				var room_price=$("#total_time_price").text();
-				$("#total_price").text(parseInt(extra_price)+parseInt(room_price));
-				return false;
-			});
-	
-	
-	
-	$(document).ready(function(){
-		var time_check=0;
-		$(".swiper-slide").click(function(){
-			
-			if(time_check==0){
-				
-				$(".swiper-slide").css("background","#57D7D5");
-				$(".swiper-wrapper").find('input').removeAttr('name');
-				
-				var time=$(this).find($("input")).val();
-				console.log("시작시간"+time)
-				$(this).css("background","#855FD4");
-				$(this).find($("input")).attr("name","start_time");
-				time_check=1;
-				
-			}else if(time_check==1){
-				var time2=$(this).find($("input")).val();
-				console.log("종료시간"+time2)
-				$(this).find($("input")).attr("name","end_time");
-				
-				var start_time=$(".swiper-slide").find($("input[name=start_time]")).val();
-				$("#start_time_span").text(start_time);	
-				var end_time=$(".swiper-slide").find($("input[name=end_time]")).val();
-				$("#end_time_span").text(end_time);
-				
-				var total_time=end_time-start_time;
-				$("#select_time_span").text(total_time);
-				var time_price=$("#time_price").text();
-				$("#total_time_price").text((time_price*total_time));
-				
-				
-					for(var i=parseInt(start_time);i<=parseInt(end_time);i++){
-						console.log("for문의 i값="+i)
-						console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
-						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
-					}
-				var extra_price=$("#extra_num_price").text();
-				var room_price=$("#total_time_price").text();
-				$("#total_price").text(parseInt(extra_price)+parseInt(room_price));
-				time_check=0;
-			}
-		});
-		
-	});
-</script>
-
-
+<script src="resources/js/swiper.min.js"></script>
+<script src="resources/js/room_detail.js"></script>
 </head>
 <body>
 	<form action="room_reserve.ro">
-		<input type="hidden" name="room_code" value="${room_code }">
+		<input type="hidden" name="room_code" value="${room.ROOM_CODE }">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
 					<div class="e_inner_detail">
-						<h2 class="e_room_name">ROOM 512</h2>
-						<p class="e_sub-desc">ROOM 512 간단 소개 부분 입니당</p>
+						<h2 class="e_room_name">${room.ROOM_NAME }</h2>
+						<p class="e_sub-desc">${room.ROOM_INFO}</p>
 						<div class="e_tags">
-							<span class="e_tag">#스터디</span> <span class="e_tag">#회의</span> <span
-								class="e_tag">#세미나</span>
+							<span class="e_tag">${room.HASHTAG }</span>
+							
+							
 						</div>
 
 						<div class="e_container">
@@ -141,20 +67,20 @@
 
 						<!-- 사진 밑 설명 부분 -->
 						<div class="e_text_box">
-							<h3 class="e_h_copy">ROOM 512 간단 소개 부분 입니당</h3>
+							<h3 class="e_h_copy">${room.ROOM_INFO }</h3>
 							<h4 class="e_h_intro">공간 소개</h4>
 							<p class="e_p_intro">
-								-공간 소개1<br> -공간 소개2<br> -공간 소개3<br>
+								${room.ROOM_INTRO }
 							</p>
 						</div>
 						<div class="e_text_box">
 							<h4 class="e_h_intro">시설 안내</h4>
-
+								${room.FAC_INTRO }
 						</div>
 
 						<div class="e_text_box">
 							<h4 class="e_h_intro">예약시 주의 사항</h4>
-
+								
 						</div>
 
 						<div class="e_text_box">
@@ -389,69 +315,74 @@
 			</div>
 	</form>
 	
- <script src="resources/js/swiper.min.js"></script>
- <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 5,
-      spaceBetween: 5,    
-    });
-    
- // Get the element
-    var element = document.getElementById("my-calendar");
-    // Create the calendar
-    var myCalendar=jsCalendar.new(element, "now",{
+	<script>
+
+var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 5,
+    spaceBetween: 5,    
+  });
+  
+// Get the element
+  var element = document.getElementById("my-calendar");
+  // Create the calendar
+  var myCalendar=jsCalendar.new(element, "now",{
 		 	  // language
-    	  language : "en",
-    	  // Enable/Disable date's number zero fill
-    	  zeroFill : false,
-    	  // Custom month string format
-    	  // month: Month's full name "February"
-    	  // ##: Month's number  "02"
-    	  // #: Month's number  "2"
-    	  // YYYY: Year  "2017"
-    	  monthFormat : "month YYYY",
-    	  // Custom day of the week string forma
-    	  // day: Day's full name "Monday"
-    	  // DDD: Day's first 3 letters "Mon"
-    	  // DD: Day's first 2 letters "Mo"
-    	  // D: Day's first letter  "M"
-    	  dayFormat : "DDD",
-    	  
-    	  // 1 = monday
-    	  firstDayOfTheWeek: 1,
-    	  // Enable/Disable month's navigation buttons.
-    	  navigator : true,
-    	  // both | left | right
-    	  navigatorPosition : "both",
-    	  // min date
+  	  language : "en",
+  	  // Enable/Disable date's number zero fill
+  	  zeroFill : false,
+  	  // Custom month string format
+  	  // month: Month's full name "February"
+  	  // ##: Month's number  "02"
+  	  // #: Month's number  "2"
+  	  // YYYY: Year  "2017"
+  	  monthFormat : "month YYYY",
+  	  // Custom day of the week string forma
+  	  // day: Day's full name "Monday"
+  	  // DDD: Day's first 3 letters "Mon"
+  	  // DD: Day's first 2 letters "Mo"
+  	  // D: Day's first letter  "M"
+  	  dayFormat : "DDD",  	  
+  	  // 1 = monday
+  	  firstDayOfTheWeek: 1,
+  	  // Enable/Disable month's navigation buttons.
+  	  navigator : true,
+  	  // both | left | right
+  	  navigatorPosition : "both",
+  	  // min date
 	   	  // max date
 	   	  min : "now",
-    	  max : false  
-    	});
-   
-    function formatDate(date) {
+  	  max : false  
+  	});
+ 
+  function formatDate(date) {
+  	var weekName = ["일", "월", "화", "수", "목", "금", "토"];
 		    var d = new Date(date),
 		        month = '' + (d.getMonth() + 1),
 		        day = '' + d.getDate(),
-		        year = d.getFullYear();
+		        year = d.getFullYear(),
+		        E =d.getDay();
 
 		    if (month.length < 2) 
 		        month = '0' + month;
 		    if (day.length < 2) 
 		        day = '0' + day;
 
-		    return [year, month, day].join('-');
+		    return [year, month, day].join('-')+"("+ weekName[E]+")";
 		}
-   
-   	myCalendar.onDateClick(function(event, date){
-    	 $("#reserve_date_span").text(formatDate(date));
-    	 console.log(this)
-    	 
-    	});
+  
+ 		myCalendar.onDateClick(function(event, date){
+ 		
+ 	 	
+ 		if(date<"now"){
+ 			alert("다음날짜를 골라주세요");
+ 		}
+  	 $("#reserve_date_span").text(formatDate(date));
+  	 myCalendar.clearselect();
+  	 myCalendar.select([date]);
+  	 
+  	});
+</script>
 
-   
-
-  </script>
 
 </body>
 </html>
