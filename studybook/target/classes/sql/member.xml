@@ -4,23 +4,29 @@
 
 <mapper namespace="Members"> 
 
-<!-- key, profile ㅠㅠ -->
-
-	<select id="idcheck" resultType="member" parameterType="String">
-		select *
-		from member where key = #{key}
-	</select>
+<!-- profile ㅠㅠ -->
 
 	<insert id="insert" parameterType="member">
-		insert into member
-		values(#{name},#{email},#{password},#{phone},#{key})
-	</insert>
+		<selectKey resultType="int" order="BEFORE" keyProperty="key">
+			select nvl(max(key),0)+1 from member
+		</selectKey>
+        insert into member (name, email, password, phone, key, profile)
+        values (#{name}, #{email}, #{password}, #{phone}, #{key}, default)
+    </insert>
+    
+    
+	<select id="usercheck" resultType="member" parameterType="String">
+		select *
+		from member where email = #{email}
+	</select>
+
 
 	<update id="update" parameterType="member">
 		update member set
-		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}, profile=#{profile}
-		where key=#{key}
+		name = #{name}, email = #{email}, password = #{password}, phone = #{phone}, profile = #{profile}
+		where key = #{key}
 	</update>
+	
 	
 	<delete id="delete" parameterType="String">
 		delete from member where email=#{email}

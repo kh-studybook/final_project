@@ -95,6 +95,20 @@ where
 	like #{search_word}
 </if>
 </select>
+<!-- 룸상세정보 조회 -->
+<select id="roomDetail" parameterType="int" resultType="room">
+select * from room where ROOM_CODE=#{ROOM_CODE}
+</select>
+
+<!-- 갤러리 리스트 조회 -->
+<select id="galleryList" parameterType="int" resultType="gallery">
+select * from gallery where ROOM_CODE=#{ROOM_CODE}
+</select>
+
+<!-- Roomex 조회 -->
+<select id="roomexDetail" parameterType="int" resultType="room_ex">
+select * from room_ex where ROOM_CODE=#{ROOM_CODE}
+</select>
 
 <!-- 지은 끝 -->
 
@@ -114,5 +128,4 @@ where
 			  		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 </select>
-
 </mapper>
