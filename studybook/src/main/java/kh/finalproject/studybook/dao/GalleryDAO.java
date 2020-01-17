@@ -30,6 +30,10 @@ public class GalleryDAO {
 		System.out.println("galleryDAO의 getGalleryList까지 옴");
 		return sqlSession.selectList("Rooms.galleryList",room_code);
 	}
+	//해당 룸넘버의 이미지 삭제하기
+	public void deleteGallery(int room_code) {
+		sqlSession.delete("Rooms.deleteGallery",room_code);
+	}
 	
 	//--지은끝
 	

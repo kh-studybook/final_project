@@ -133,6 +133,37 @@ public class RoomServiceImpl implements RoomService {
 	public Room_ex getRoomExDetail(int ROOM_CODE) {
 		return rdao.getRoomExDetail(ROOM_CODE);
 	}
+	//룸정보 업데이트하기
+	@Override
+	public int updateRoom(Room room) {
+		return dao.updateRoom(room);
+	}
+	//room_ex테이블 업데이트
+	@Override
+	public int updateRoom_ex(int room_code, Room_ex room_ex) {
+		System.out.println("RoomServiceImpl의 updateRoom_ex");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_CODE", room_code);
+		map.put("ALCOHOL", room_ex.getALCOHOL());
+		map.put("MIC", room_ex.getMIC());
+		map.put("CHAIR", room_ex.getCHAIR());
+		map.put("FOOD", room_ex.getFOOD());
+		map.put("TOILET", room_ex.getTOILET());
+		map.put("SMOKING", room_ex.getSMOKING());
+		map.put("PARKING", room_ex.getPARKING());
+		map.put("TV", room_ex.getTV());
+		map.put("BOARD", room_ex.getBOARD());
+		map.put("WIFI", room_ex.getWIFI());
+		
+		return rdao.updateRoom_ex(map);
+	}
+	//갤러리에 해당 룸넘버 이미지 삭제
+	@Override
+	public void deleteGallary(int room_code) {
+		gdao.deleteGallery(room_code);
+		
+	}
 	
 	
 	//지은 끝
@@ -153,6 +184,8 @@ public class RoomServiceImpl implements RoomService {
 		map.put("end", endrow);
 		return dao.getRoomList(map);
 	}
+
+	
 
 	
 

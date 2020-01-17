@@ -26,6 +26,11 @@ public class Room_exDAO {
 		System.out.println("Room_exDAO의 getRoomExDetail까지 옴");
 		return sqlSession.selectOne("Rooms.roomexDetail",ROOM_CODE);
 	}
+	//Room_Ex 업데이트하기
+	public int updateRoom_ex(Map<String, Object> map) {
+		System.out.println("Room_exDAO의 updateRoom_ex까지 옴");
+		return sqlSession.update("Rooms.updateRoomEx",map);
+	}
 	
 	
 

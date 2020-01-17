@@ -49,6 +49,11 @@ public class RoomDAO {
 	public Room getRoomDetail(int room_code) {
 		return sqlSession.selectOne("Rooms.roomDetail",room_code);
 	}
+	//룸정보 업데이트
+	public int updateRoom(Room room) {
+		return sqlSession.update("Rooms.updateRoom",room);
+	}
+
 
 	// --지은 끝
 
@@ -59,6 +64,7 @@ public class RoomDAO {
 	public List<Room> getRoomList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
+
 
 	
 
