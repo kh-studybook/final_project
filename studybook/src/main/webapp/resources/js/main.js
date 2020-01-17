@@ -30,14 +30,14 @@ $(document).ready(function(){
 		}
 	})
 	
-	$('.e_dates').children().click(function(){
+	$('.jsCalendar-current').click(function(){
 		$('#m_write_date').empty();
 		$('#m_write_date').append($(this).text());
 		$('#m_write_date').append(" ");
-		$('#m_write_date').append($('.month').children().next().text())
+		$('#m_write_date').append($('.jsCalendar-title-name').text())
 		$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
-		$(this).parent().parent().prev().css('padding','10px');
-		$('.e_calendar').css("display", "none");
+		$('#m_write_date').css('padding','10px');
+		$('.jsCalendar').css("display", "none");
 	})
 	
 	$('#m_main_time').children().children().click(function(){
@@ -89,4 +89,9 @@ $(document).ready(function(){
          max : false  
        });
 
+    // carousel - optional
+    $('#blogCarousel').carousel({
+          interval: 5000
+    });
+    
 })

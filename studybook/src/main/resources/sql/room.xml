@@ -98,6 +98,7 @@ where
 
 <!-- 지은 끝 -->
 
+<!-- 민지 시작 -->
 <!-- room 총 list count -->
 <select id="count" resultType="int">
 	select count(*) from room
@@ -114,4 +115,5 @@ where
 			  		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 </select>
+<!-- 민지 끝 -->
 </mapper>

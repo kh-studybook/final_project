@@ -125,21 +125,32 @@
 
 /* 공간 list */
 #j_main_room > p {
-	font-size: 24px;
-	margin: 30px auto;
+	font-size: 32px;
+	margin: 40px auto;
+	text-align: center;
+}
+
+.card-text {
+	font-size: 14px;
+	margin: 10px auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card {
+	cursor: pointer;
+	border: none;
+	margin-bottom: 30px;
+}
+
+.card-img-top {
 	align: center;
 }
 
 .card-body {
 	color: #7F7F7F;
 	padding:0;
-}
-
-.card-body > div {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 10px 0;
 }
 
 .j_room_pay_hour {
@@ -154,3 +165,29 @@
 	font-weight: bold;
 	color: black;
 }
+
+#center-block {
+	display: flex;
+	justify-content: center;
+}
+
+/*carousel*/
+.blog .carousel-indicators {
+   left: 0;
+   top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}
+

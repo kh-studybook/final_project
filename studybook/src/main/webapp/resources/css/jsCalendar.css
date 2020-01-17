@@ -28,11 +28,12 @@
 
 
 /* Default Theme */
-	/* General style */
+	/* General style */		
 		.jsCalendar * {
 			margin: 0;
 			padding: 0;
 			z-index: 10;
+			
 		}
 		.jsCalendar table,
 		.jsCalendar table th,
@@ -397,4 +398,13 @@
 		.jsCalendar.classic-theme.green thead .jsCalendar-nav-left:hover,
 		.jsCalendar.classic-theme.green thead .jsCalendar-nav-right:hover {
 			background-color: #639000;
+		}
+		
+		/* 내가 추가한 코드*/
+		.jsCalendar {
+			display: none;
+		}
+
+		.jsCalendar tbody td:hover {
+			cursor: pointer;
 		}

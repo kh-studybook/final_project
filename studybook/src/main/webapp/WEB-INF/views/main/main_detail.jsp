@@ -75,10 +75,9 @@
 					<div class="wrapper">
 						<div class="tile job-bucket">
 						<div class="front">
-							<div class="card">
-	      						<img class="card-img-top" src="resources/image/room/${list.FILE_NAME }">
+							<div class="card" onClick="javascript:location.href='room_detail.ro?room_code=${list.ROOM_CODE}'">
+	      						<img class="card-img-top img-fluid rounded mx-auto d-block" src="resources/image/room/${list.FILE_NAME }">
 	        					<div class="card-body">
-	        						<h5 class="card-title">${list.ROOM_NAME}</h5>
 	        						<p class="card-text">
 		        						<span class="j_room_name">${list.ROOM_NAME}</span>
 									  	<span class="j_room_count">최대 ${list.MAX_MEMBER}인</span>
@@ -104,12 +103,12 @@
 				<div class="col">
 					<ul class="pagination">
 						<c:if test="${page <= 1}">
-							<li class="page-item"><a class="page-link" href="#">이전&nbsp;</a>
+							<li class="page-item"><a class="page-link" href="#">&lt;</a>
 							</li>
 						</c:if>
 						<c:if test="${page >1}">
 							<li class="page -item"><a
-								href="main.net?page = ${page-6}" class="page-link">이전</a>&nbsp;
+								href="main.net?page = ${page-1}" class="page-link">&lt;</a>
 							</li>
 						</c:if>
 
@@ -120,18 +119,18 @@
 									href="#">${a}</a></li>
 							</c:if>
 							<c:if test="${a != page}">
-								<li class="page-item"><a href="event_list.eve?page=${a}"
+								<li class="page-item"><a href="main.net?page=${a}"
 									class="page-link">${a}</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page >= maxpage}">
-							<li class="page-item"><a class="page-link" href="#">&nbsp;다음</a>
+							<li class="page-item"><a class="page-link" href="#">&gt;</a>
 							</li>
 						</c:if>
 						<c:if test="${page < maxpage}">
 							<li class="page-item"><a
-								href="main.net?page=${page+6}" class="page-link">&nbsp;다음</a>
+								href="main.net?page=${page+1}" class="page-link">&gt;</a>
 							</li>
 						</c:if>
 					</ul>
@@ -139,11 +138,97 @@
 			</div>
 		</div>
 				
-				
+		
 		<%-- 게시글이 없는 경우 --%>
 		<c:if test="${listcount == 0}">
 			<font size=5 margin="10">등록된 공간이 없습니다.</font>
 		</c:if>
+		
+		<div class="row">
+			<div class="j_event_title">UPCOMING EVENT</div>
+		</div>
+		<div class="row">
+			<div class="j_event_more">더보기</div>
+		</div>
+		
+		<!-- Carousel -->
+		<div class="row">
+			<div class="container">
+            <div class="row blog">
+                <div class="col-md-12">
+                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                        <ol class="carousel-indicators">
+                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#blogCarousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--.row-->
+                            </div>
+                            <!--.item-->
+
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--.row-->
+                            </div>
+                            <!--.item-->
+
+                        </div>
+                        <!--.carousel-inner-->
+                    </div>
+                    <!--.Carousel-->
+                </div>
+            </div>
+			</div>
+		</div>
 	</div>
+	
 </body>
 </html>

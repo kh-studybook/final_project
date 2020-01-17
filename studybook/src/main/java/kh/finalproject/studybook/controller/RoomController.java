@@ -79,9 +79,9 @@ public class RoomController {
 		//이게 이미지가 공란이 아닐때만 실행되야함
 		if(!fileList.isEmpty()&&first.getSize()!=0) {
 
-		String path="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path=saveFolder;
+		System.out.println("path = " + path);
 
-		
 		// 포문으로 꺼냄
 		int i = gallery1.getGALLERY_NUM();
 		for (MultipartFile mf : fileList) {
@@ -200,7 +200,7 @@ public class RoomController {
 		int listcount = roomservice.getListCount();
 		
 		// 총 페이지 수
-		int maxpage = (listcount+limit-1)/limit;
+		int maxpage = (listcount + limit - 1)/limit;
 		
 		// 시작 페이지(1, 6, 11, ...)
 		int startpage = ((page-1) / 5) * 5 + 1;

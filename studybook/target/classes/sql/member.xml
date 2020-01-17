@@ -2,22 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Members">
+<mapper namespace="Members"> 
+
+<!-- key, profile ㅠㅠ -->
 
 	<select id="idcheck" resultType="member" parameterType="String">
 		select *
-		from member where email = #{email}
+		from member where key = #{key}
 	</select>
 
 	<insert id="insert" parameterType="member">
 		insert into member
-		values(#{name},#{email},#{password},#{phone})
+		values(#{name},#{email},#{password},#{phone},#{key})
 	</insert>
 
 	<update id="update" parameterType="member">
 		update member set
-		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}
-		where email=#{email}
+		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}, profile=#{profile}
+		where key=#{key}
 	</update>
 	
 	<delete id="delete" parameterType="String">
