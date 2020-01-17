@@ -118,8 +118,8 @@ li .current {
 									<td>${m.MAX_MEMBER}</td>
 									<td>${m.HOUR_COST}</td>
 									<td class="text-center"><a class='btn btn-info btn-xs'
-										href="RoomModify.ro?ROOM_CODE=${m.ROOM_CODE}">수정 </a> <a
-										href="RoomDelete.ro?ROOM_CODE=${m.ROOM_CODE}"
+										href="RoomModify.ro?room_code=${m.ROOM_CODE}">수정 </a> <a
+										href="RoomDelete.ro?room_code=${m.ROOM_CODE}"
 										class="btn btn-danger btn-xs">삭제</a></td>
 								</tr>
 							</c:forEach>
