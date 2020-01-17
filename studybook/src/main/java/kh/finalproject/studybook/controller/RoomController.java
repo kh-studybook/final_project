@@ -56,7 +56,10 @@ public class RoomController {
 
 	@PostMapping("/RoomAddAction.ro")
 	public String room_write_ok(Room room,Room_ex room_ex,MultipartHttpServletRequest mtfRequest) throws Exception {
-
+		
+		String content=room.getROOM_INTRO();
+		 content = content.replace("\r\n","<br>");
+		room.setROOM_INTRO(content);
 		//룸정보 테이블에 입력
 		roomservice.insertRoom(room);
 		
@@ -166,7 +169,7 @@ public class RoomController {
 	@GetMapping("RoomModify.ro") //파라미터로 넘어올때는 대소문자를 맞춰줘야함, 반드시 들어오는 파라미터라서 int ROOM_CODE로 작성
 	public ModelAndView roomModifyView(int ROOM_CODE, ModelAndView mv, HttpServletRequest request) throws Exception{
 		Room roomdata = roomservice.getRoomDetail(ROOM_CODE);
-		List<String> gallerydata = roomservice.getGallerylist(ROOM_CODE);
+		List<Gallery> gallerydata = roomservice.getGallerylist(ROOM_CODE);
 		Room_ex roomexdata = roomservice.getRoomExDetail(ROOM_CODE);
 		
 		//내용 불러오기 실패한 경우
@@ -187,10 +190,29 @@ public class RoomController {
 	
 	// 지은 끝--
 
-	// 룸 정보 보기 -연습용(은지)
+	// 룸 정보 보기 - 은지
 	@RequestMapping(value = "/room_detail.ro")
-	public String room_detail() {
-		return "room/room_detail_page";
+	public ModelAndView room_detail(int room_code,ModelAndView mv, 
+			HttpServletRequest request) {
+		
+		Room room=roomservice.getRoomDetail(room_code);
+		//Room_ex room_ex=roomservice.getRoomExDetail(room_code);
+		//List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		if(room==null) {
+			System.out.println("룸 상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","룸 상세보기 실패입니다.");
+		}else {
+			System.out.println("룸 상세보기 성공");
+			mv.setViewName("room/room_detail_page");
+			mv.addObject("room",room);
+			//mv.addObject("room_ex",room_ex);
+			//mv.addObject("gallerylist",gallerylist);
+		}
+			
+		return mv;
+		
 	}
 	
 	//예약 페이지로

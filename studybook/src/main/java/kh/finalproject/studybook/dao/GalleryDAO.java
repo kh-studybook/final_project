@@ -26,7 +26,7 @@ public class GalleryDAO {
 	}
 	
 	//갤러리 리스트 가져오기
-	public List<String> getGalleryList(int room_code) {
+	public List<Gallery> getGalleryList(int room_code) {
 		System.out.println("galleryDAO의 getGalleryList까지 옴");
 		return sqlSession.selectList("Rooms.galleryList",room_code);
 	}

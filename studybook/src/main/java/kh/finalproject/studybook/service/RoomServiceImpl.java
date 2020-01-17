@@ -125,7 +125,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 	//갤러리 리스트 가져오기
 	@Override
-	public List<String> getGallerylist(int room_code) {
+	public List<Gallery> getGallerylist(int room_code) {
 		return gdao.getGalleryList(room_code);
 	}
 	//room_ex정보 가져오기
