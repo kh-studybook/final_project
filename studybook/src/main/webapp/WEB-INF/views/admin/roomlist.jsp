@@ -2,12 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-*{font-family:"맑은 고딕";
-font-size:14px;}
+* {
+	font-family: "맑은 고딕";
+	font-size: 14px;
+}
+
 .custab {
 	border: 1px solid #ccc;
 	padding: 5px;
-	margin-bottom: 30px; box-shadow : 3px 3px 2px #ccc;
+	margin-bottom: 30px;
+	box-shadow: 3px 3px 2px #ccc;
 	transition: 0.5s;
 	box-shadow: 3px 3px 2px #ccc;
 }
@@ -41,7 +45,10 @@ li .current {
 	background: #faf7f7;
 	color: gray;
 }
-.table td{vertical-align:middle;}
+
+.table td {
+	vertical-align: middle;
+}
 
 .w_p {
 	font-size: 24px;
@@ -55,7 +62,10 @@ li .current {
 .w_center-block {
 	display: flex;
 	justify-content: center; /* 가운데 정렬 */
-	margin-bottom:20px;
+	margin-bottom: 20px;
+}
+.w_margin-top{
+margin-top:50px;
 }
 </style>
 <script>
@@ -73,7 +83,7 @@ li .current {
 				<p class="w_title">공간관리</p>
 				<br>
 
-				<form action="room_list.ro">
+				<form action="RoomList.ro">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>룸 네임</option>
@@ -92,7 +102,7 @@ li .current {
 		</div>
 		<div class="row">
 			<div class="col">
-				<%--회원이 있는 경우 --%>
+				<%--룸 데이터가 있는 경우 --%>
 				<c:if test="${listcount>0}">
 					<p class="w_span">총 공간 수 ${listcount}</p>
 					<table class="table table-striped custab">
@@ -107,19 +117,18 @@ li .current {
 							</tr>
 						</thead>
 						<tbody>
-						<c:set var="num" value="${(page-1)*10+1}"/>
+							<c:set var="num" value="${(page-1)*10+1}" />
 							<c:forEach var="m" items="${roomlist}">
 								<tr>
-									<td><c:out value="${num}"/>
-									<c:set var="num" value="${num+1}"/>
-									</td>
+									<td><c:out value="${num}" /> <c:set var="num"
+											value="${num+1}" /></td>
 									<td>${m.ROOM_CODE}</td>
 									<td>${m.ROOM_NAME}</td>
 									<td>${m.MAX_MEMBER}</td>
 									<td>${m.HOUR_COST}</td>
 									<td class="text-center"><a class='btn btn-info btn-xs'
-										href="RoomModify.ro?ROOM_CODE=${m.ROOM_CODE}">수정 </a> <a
-										href="RoomDelete.ro?ROOM_CODE=${m.ROOM_CODE}"
+										href="RoomModify.ro?room_code=${m.ROOM_CODE}">수정 </a> <a
+										href="RoomDelete.ro?room_code=${m.ROOM_CODE}"
 										class="btn btn-danger btn-xs">삭제</a></td>
 								</tr>
 							</c:forEach>
@@ -165,17 +174,16 @@ li .current {
 						</div>
 					</div>
 				</c:if>
+				<%--룸 리스트가 없는 경우 --%>
+				<c:if test="${listcount==0}">
+					<p class="w_p w_margin-top">검색 결과가 없습니다.</p>
+				</c:if>
+
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col">
-			<%--룸 리스트가 없는 경우 --%>
-			<c:if test="${listcount==0}">
-				<p class="w_p">검색 결과가 없습니다.</p>
-			</c:if>
-		</div>
-	</div>
+
+	
 
 
 

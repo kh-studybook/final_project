@@ -2,6 +2,7 @@ package kh.finalproject.studybook.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,22 +47,16 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public int eventDelete(int num) {//이벤트 삭제하기
-		int result = 0;
-		Event event = dao.getEventDetail(num);
-		if (event != null) {
-			result = dao.eventDelete(event);
-		}
-		return result;
+	
+		return dao.eventDelete(num);
+		
 	}
 
 	@Override
-	public boolean isEventWriter(int num) {//글쓴이인지 확인하기
-		Event result = dao.isEventWriter(num);
-		if (result == null) {
-			return false;
-		} else {
-			return true;			
-		}
+	public boolean isEventWriter(int num) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
 	
 }

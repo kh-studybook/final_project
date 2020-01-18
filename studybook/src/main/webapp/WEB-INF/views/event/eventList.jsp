@@ -21,9 +21,9 @@ alt{color:White; font-weight:bold; z-index:10}
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
 .wrapper{width:350px; height:300px; margin:20px; background-color:#F2F2F2;}
-.title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-8rem; position:relative; z-index:10}
+.title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-9rem; position:relative; z-index:10}
 .title_z_index_big{font-size:24px; font-weight:bold; }
-.card_contents{padding:20px;}
+.card_contents{padding:20px; font-family:"맑은 고딕"}
 		
 /**  모달 관련 */
 .p_modal-title {font_size: 36px;font-weight: bold;}
@@ -42,21 +42,31 @@ alt{color:White; font-weight:bold; z-index:10}
 			}
 		});//p_register_event end
 
-		//게시글 삭제 버튼 클릭 했을 때
-		$("#event_delete_btn").click(function() {
-			$("#deletetype").val("board");
-		});
-
 		//게시글 수정 버튼 클릭 했을 때
 		$("#event_modify_btn").click(function() {
 			location.href = "EventModifyView.eve";//추후 확인 : 가지고 가야 할 정보
 		});
 
 		//게시글 상세보기로 이동하기
-		$(".wrapper").click(function() {
-			location.href = "EventDetailAction.eve";//추후 확인 : 가지고 가야 할 정보 	 
+		$(".click_detail").click(function(){
+			var event_num = $(this).find($("input[name=event_num2]")).val();
+			location.href = "EventDetailAction.eve?num="+parseInt(event_num);
 		});
-
+		
+		///이벤트 삭제하기
+		$("#deletemodal").on("show.bs.modal", function(){
+			var event_num = $("input[name=event_num2]").val();
+			$("input[name=event_num]").val(event_num);
+			console.log(event_num);
+			
+			$(".deletemodalSubmit").click(function(){
+				console.log("delete");
+				location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
+			});
+		});
+		
+		
+		
 	});//function end
 </script>
 </head>
@@ -85,7 +95,9 @@ alt{color:White; font-weight:bold; z-index:10}
 
 						<div class="col-md-4">
 							<div class="wrapper">
-								<div class="tile job-bucket">
+								<div class = "click_detail">
+								<input type = "hidden" value = "${b.event_num}" name  = "event_num2">
+								
 							    <div class="front">
       								<div class = "card-img">
       									<div style = "filter: brightness(80%)">
@@ -97,18 +109,20 @@ alt{color:White; font-weight:bold; z-index:10}
         								</div>
         							</div>
         							<div class="card_contents">
-        								<br>        								
+    								
         								<p>${b.title}</p>
         								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;
         								<span style = "color : #7F56D2">${b.event_room}</span></p>
         								<p style = "padding-top:5px">작성자</p>
-									<div id = "delete_modify_btn">
-										<a id="event_modify_btn">수정</a> | <a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
-									</div>									
 									</div>
     							</div>
+								
 								</div>
-						</div>  
+							  	<div id = "delete_modify_btn">
+									<a id="event_modify_btn">수정</a> | 
+									<a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
+								</div>
+							</div>  
 						</div>
 					</c:forEach>
 				</div>
@@ -171,7 +185,6 @@ alt{color:White; font-weight:bold; z-index:10}
 		<div class="modal-dialog">
 			<div class="modal-content">
 
-
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<p class="p_modal-title">게시글 삭제</p>
@@ -183,10 +196,9 @@ alt{color:White; font-weight:bold; z-index:10}
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<form id=deletemodalForm action="EventDeleteAction.eve"
-						method="post">
-						<input type="hidden" name="event_num" value="${b.event_num}" id="event_num"> 
-						<input type="submit" class="btn btn-dark" id="deletemodalSubmit" value=삭제> 
+					<form id=deletemodalForm>
+						<input type="hidden" name="event_num">  
+						<input type="button" class="btn btn-dark deletemodalSubmit" value=삭제> 
 						<input type="button" class="btn btn-light" data-dismiss="modal" value=취소>
 					</form>
 				</div>

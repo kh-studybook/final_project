@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Room;
+import kh.finalproject.studybook.domain.Room_ex;
 
 @Repository
 public class RoomDAO {
@@ -46,12 +47,17 @@ public class RoomDAO {
 	
 	//룸 상세 보기
 	public Room getRoomDetail(int room_code) {
-		
 		return sqlSession.selectOne("Rooms.roomDetail",room_code);
 	}
+	//룸정보 업데이트
+	public int updateRoom(Room room) {
+		return sqlSession.update("Rooms.updateRoom",room);
+	}
+
 
 	// --지은 끝
 
+	// --민지 시작
 	public int getListCount() {
 		return sqlSession.selectOne("Rooms.count");
 	}
@@ -59,6 +65,8 @@ public class RoomDAO {
 	public List<Room> getRoomList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
+	// --민지 끝
+
 
 	
 
