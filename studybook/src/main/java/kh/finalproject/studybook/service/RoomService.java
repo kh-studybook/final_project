@@ -33,9 +33,16 @@ public interface RoomService {
 	//룸 상세 조회
 	public Room getRoomDetail(int room_code);
 	//갤러리 리스트 가져오기
-	public List<String> getGallerylist(int room_code);
+	public List<Gallery> getGallerylist(int room_code);
 	//룸ex 정보 가져오기
 	public Room_ex getRoomExDetail(int rOOM_CODE);
+	//룸테이블 수정하기
+	public int updateRoom(Room room);
+	//룸ex테이블 수정하기
+	public int updateRoom_ex(int room_code, Room_ex room_ex);
+	//갤러리에서 해당 룸넘버의 기존 사진 지우기
+	public void deleteGallary(int room_code);
+	
 
 }
 

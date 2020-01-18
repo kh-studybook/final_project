@@ -394,13 +394,13 @@ html {
 
 .e_color_desc .e_color_today::before {
     content: "○";
-    color: #0A3D61;
+    color: #7F56D2;
     margin-right: 8px;
 }
 
 .e_color_desc .e_color_select::before {
 	content: "●";
-    color: #0A3D61;
+    color: #7F56D2;
     margin-right: 8px;
 }
 
@@ -503,10 +503,12 @@ html {
 
 
 .jsCalendar tbody td.jsCalendar-current {
-    border: 1px solid darkslateblue;
-    border-radius: 90%;
+    border: 1px solid #7F56D2!important;
     background-color:#52c9ff00!important;
+    height: 32px;
+    line-height: 32px;
     color:black!important;
+    width:47px!important;
 }
 
 .e_head .e_head_right_div{
@@ -516,3 +518,15 @@ html {
     bottom: 25px;
 }
 
+.jsCalendar tbody td.jsCalendar-selected {
+    background-color: #7F56D2!important;
+    border: 1px solid #7F56D2!important;
+    height: 32px;
+    line-height: 32px;
+    color:white!important;
+    width:47px!important;
+}
+
+.jsCalendar thead .jsCalendar-title-name {
+    text-align: center;
+}
