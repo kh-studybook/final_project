@@ -52,5 +52,11 @@ public class EventServiceImpl implements EventService {
 		
 	}
 
+	@Override
+	public boolean isEventWriter(int num) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

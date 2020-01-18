@@ -191,3 +191,33 @@
 background: #707070;
 }
 
+.jsCalendar{
+	z-index:0!important;
+	display:none;
+}
+
+.jsCalendar table td{
+	padding: 0 auto!important;
+}
+
+.jsCalendar thead .jsCalender-title{
+	display:grid;
+	grid-template-columns:100px 160px 100px;
+}
+
+.jsCalendar table{
+	box-shadow:0 0 2px rgba(0,0,0,0.4)!important;
+	font-family:Tahoma,Geneva,sans-serif;
+	margin:5px!important;
+}
+
+.jsCalendar tbody td{
+	width:36px!important;
+}
+
+.jsCalendar tbody td:hover{
+	cursor:pointer;
+}
+
+
+

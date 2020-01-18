@@ -85,18 +85,16 @@ public class RoomController {
 		String path=saveFolder;
 		System.out.println("path = " + path);
 
-		// 포문으로 꺼냄
-		int i = gallery1.getGALLERY_NUM();
-		for (MultipartFile mf : fileList) {
-			
-			String originFileName = mf.getOriginalFilename();// 원본파일명
-			long fileSize = mf.getSize();// 파일 사이즈
-			int num = i++;
-			System.out.println("originFilename : " + originFileName);
-			System.out.println("fileSize : " + fileSize);
-			System.out.println("i=" + i);
-
-
+		/*
+		 * // 포문으로 꺼냄 int i = gallery1.getGALLERY_NUM(); for (MultipartFile mf :
+		 * fileList) {
+		 * 
+		 * String originFileName = mf.getOriginalFilename();// 원본파일명 long fileSize =
+		 * mf.getSize();// 파일 사이즈 int num = i++; System.out.println("originFilename : "
+		 * + originFileName); System.out.println("fileSize : " + fileSize);
+		 * System.out.println("i=" + i);
+		 * 
+		 */
 			// 포문으로 꺼냄
 			int i = gallery1.getGALLERY_NUM();
 			for (MultipartFile mf : fileList) {
@@ -108,6 +106,7 @@ public class RoomController {
 				System.out.println("fileSize : " + fileSize);
 				System.out.println("i=" + i);
 
+				
 				String safeFile = path + System.currentTimeMillis() + originFileName;
 				String DBname = System.currentTimeMillis() + originFileName;
 
@@ -123,7 +122,7 @@ public class RoomController {
 				}
 
 			}
-		}
+		/* } */
 
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
