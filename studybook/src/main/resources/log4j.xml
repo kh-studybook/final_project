@@ -14,7 +14,7 @@
 	<logger name="Members">
 		<level value="trace"/>
 	</logger>
-	<logger name="Events">
+	<logger name="event">
 		<level value="trace"/>
 	</logger>
 	<logger name="Comments">
