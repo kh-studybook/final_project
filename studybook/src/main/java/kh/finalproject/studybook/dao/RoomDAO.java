@@ -57,6 +57,7 @@ public class RoomDAO {
 
 	// --지은 끝
 
+	// --민지 시작
 	public int getListCount() {
 		return sqlSession.selectOne("Rooms.count");
 	}
@@ -64,6 +65,7 @@ public class RoomDAO {
 	public List<Room> getRoomList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
+	// --민지 끝
 
 
 	

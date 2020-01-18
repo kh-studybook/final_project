@@ -4,6 +4,10 @@
 
 <mapper namespace="Members"> 
 
+
+<!-- key, profile ㅠㅠ -->
+
+
 <!-- profile ㅠㅠ -->
 
 	<insert id="insert" parameterType="member">
@@ -17,14 +21,19 @@
     
 	<select id="usercheck" resultType="member" parameterType="String">
 		select *
-		from member where email = #{email}
+		from member where key = #{key}
 	</select>
 
+	<insert id="insert" parameterType="member">
+		insert into member
+		values(#{name},#{email},#{password},#{phone},#{key})
+	</insert>
 
 	<update id="update" parameterType="member">
 		update member set
-		name = #{name}, email = #{email}, password = #{password}, phone = #{phone}, profile = #{profile}
-		where key = #{key}
+		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}, profile=#{profile}
+		where key=#{key}
+
 	</update>
 	
 	

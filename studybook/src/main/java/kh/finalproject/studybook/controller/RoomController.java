@@ -82,10 +82,20 @@ public class RoomController {
 		MultipartFile first = fileList.get(0);
 		System.out.println("fileList:" + fileList.size());
 
-		// 이게 이미지가 공란이 아닐때만 실행되야함
-		if (!fileList.isEmpty() && first.getSize() != 0) {
+		String path=saveFolder;
+		System.out.println("path = " + path);
 
-			String path = saveFolder;
+		// 포문으로 꺼냄
+		int i = gallery1.getGALLERY_NUM();
+		for (MultipartFile mf : fileList) {
+			
+			String originFileName = mf.getOriginalFilename();// 원본파일명
+			long fileSize = mf.getSize();// 파일 사이즈
+			int num = i++;
+			System.out.println("originFilename : " + originFileName);
+			System.out.println("fileSize : " + fileSize);
+			System.out.println("i=" + i);
+
 
 			// 포문으로 꺼냄
 			int i = gallery1.getGALLERY_NUM();
@@ -336,7 +346,8 @@ public class RoomController {
 		int listcount = roomservice.getListCount();
 
 		// 총 페이지 수
-		int maxpage = (listcount + limit - 1) / limit;
+		int maxpage = (listcount + limit - 1)/limit;
+		
 
 		// 시작 페이지(1, 6, 11, ...)
 		int startpage = ((page - 1) / 5) * 5 + 1;
