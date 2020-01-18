@@ -57,6 +57,12 @@ public class RoomController {
 
 	public String room_write_ok(Room room, Room_ex room_ex, MultipartHttpServletRequest mtfRequest,
 			HttpServletResponse response) throws Exception {
+		String content = room.getROOM_INTRO();
+		content = content.replace("\r\n", "<br>");
+		room.setROOM_INTRO(content);
+		String content2 = room.getFAC_INTRO();
+		content2 = content2.replace("\r\n", "<br>");
+		room.setFAC_INTRO(content2);
 
 		// 룸정보 테이블에 입력
 		roomservice.insertRoom(room);
@@ -111,7 +117,7 @@ public class RoomController {
 
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('등록 완료되었습니다.')");
+		out.println("alert('OK')");
 		out.println("location.href='RoomList.ro';");
 		out.println("</script>");
 		out.close();
@@ -195,26 +201,33 @@ public class RoomController {
 	public ModelAndView RoomModifyAction(Room room, Room_ex room_ex, ModelAndView mv,
 			MultipartHttpServletRequest mtfRequest) throws Exception {
 
-		// 룸정보 테이블에 입력
-		int result=roomservice.updateRoom(room);
+		String content = room.getROOM_INTRO();
+		content = content.replace("\r\n", "<br>");
+		room.setROOM_INTRO(content);
+		String content2 = room.getFAC_INTRO();
+		content2 = content2.replace("\r\n", "<br>");
+		room.setFAC_INTRO(content2);
 		
-		//룸테이블 수정 실패한 경우
-		if(result==0) {
+		// 룸정보 테이블에 입력
+		int result = roomservice.updateRoom(room);
+
+		// 룸테이블 수정 실패한 경우
+		if (result == 0) {
 			System.out.println("ROOM 테이블 수정 실패");
 			mv.setViewName("error/error");
 			mv.addObject("url", mtfRequest.getRequestURL());
-			mv.addObject("message","ROOM테이블 수정 실패");
-		}else {
+			mv.addObject("message", "ROOM테이블 수정 실패");
+		} else {
 			System.out.println("ROOM 테이블 수정 완료");
-			
+
 			// 룸 넘버를 알아내기 (갤러리 등록할 수 있게)
 			Room room1 = roomservice.selectRoomNum(room.getROOM_NAME());
 			int room_code = room1.getROOM_CODE();
 			System.out.println("해당 룸코드는?=" + room_code);
 
 			// 룸특징 테이블에 입력//이게 빈칸이 아닌경우에만 들어가야함
-			int result2=roomservice.updateRoom_ex(room_code, room_ex);
-			if(result2==0) {
+			int result2 = roomservice.updateRoom_ex(room_code, room_ex);
+			if (result2 == 0) {
 				System.out.println("ROOM_EX테이블 수정 실패");
 			}
 
@@ -225,13 +238,13 @@ public class RoomController {
 			// 이게 이미지가 공란이 아닐때만 실행되야함
 			if (!fileList.isEmpty() && first.getSize() != 0) {
 				String path = saveFolder;
-				
+
 				// 해당 룸넘버의 기존 사진을 지움
 				roomservice.deleteGallary(room_code);
-				
-				//해당 룸넘버의 max 이미지 번호를 알아옴
+
+				// 해당 룸넘버의 max 이미지 번호를 알아옴
 				Gallery gallery1 = roomservice.getGalleryMaxCount(room_code);
-				
+
 				// 포문으로 꺼냄
 				int i = gallery1.getGALLERY_NUM();
 				for (MultipartFile mf : fileList) {
@@ -250,7 +263,7 @@ public class RoomController {
 						mf.transferTo(new File(safeFile));
 						// 파일명 DB에 저장
 						roomservice.insertGallery(room_code, DBname, i);
-						
+
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 						System.out.println("갤러리에 이미지파일(수정) 업로드하다 에러남 Roomcontroller");
@@ -259,10 +272,10 @@ public class RoomController {
 					}
 				}
 			}
-			String url="redirect:RoomList.ro";
+			String url = "redirect:RoomList.ro";
 			mv.setViewName(url);
 		}
-		
+
 		return mv;
 
 	}

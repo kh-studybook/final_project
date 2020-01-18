@@ -26,13 +26,19 @@
 .w_p {
 	font-size: 18px;
 }
-.w_img{
-	width:150px;display:inline-block;
+
+.w_img {
+	width: 150px;
+	display: inline-block;
 }
-.w_stext{
-	font-size:12px;
+
+.w_stext {
+	font-size: 12px;
 }
-.w_margin{margin-top:20px;}
+
+.w_margin {
+	margin-top: 20px;
+}
 </style>
 <script>
 	$(
@@ -130,8 +136,7 @@
 		<div class="row">
 			<div class="col">
 				<p class="w_title">공간 정보 수정</p>
-				<br>(*) 필수입력<br>
-				<br>
+				<br>(*) 필수입력<br> <br>
 			</div>
 		</div>
 
@@ -367,16 +372,21 @@
 						<div class="body">
 							<!-- 첨부 버튼 -->
 							<div>
-								<p class="w_stext">새로운 파일을 업로드하면 기존 파일은 삭제됩니다.</p>
+								<c:if test="${gallerydata.size()>0}">
+									<p class="w_stext">새로운 파일을 업로드하면 기존 파일은 삭제됩니다.</p>
+								</c:if>
 								<input multiple="multiple" type="file" name="filename" />
 							</div>
 							<!-- 이미 DB에 올라간 이미지 -->
-							<p class="w_stext w_margin">기존 파일</p>
-							<c:forEach var="m" items="${gallerydata}">
-								<div class="w_img">
-								<img class="card-img-top" src="resources/image/room/${m.FILE_NAME}">
-								</div>
-							</c:forEach>
+							<c:if test="${gallerydata.size()>0}">
+								<p class="w_stext w_margin">기존 파일</p>
+								<c:forEach var="m" items="${gallerydata}">
+									<div class="w_img">
+										<img class="card-img-top"
+											src="resources/image/room/${m.FILE_NAME}">
+									</div>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
