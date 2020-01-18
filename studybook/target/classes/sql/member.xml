@@ -1,12 +1,9 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Members"> 
-
-
-<!-- key, profile ㅠㅠ -->
-
 
 <!-- profile ㅠㅠ -->
 
@@ -21,19 +18,14 @@
     
 	<select id="usercheck" resultType="member" parameterType="String">
 		select *
-		from member where key = #{key}
+		from member where email = #{email}
 	</select>
 
-	<insert id="insert" parameterType="member">
-		insert into member
-		values(#{name},#{email},#{password},#{phone},#{key})
-	</insert>
 
 	<update id="update" parameterType="member">
 		update member set
-		name=#{name}, email=#{email}, password=#{password}, phone=#{phone}, profile=#{profile}
-		where key=#{key}
-
+		name = #{name}, email = #{email}, password = #{password}, phone = #{phone}, profile = #{profile}
+		where key = #{key}
 	</update>
 	
 	
@@ -42,4 +34,5 @@
 	</delete>
 	
 	
+
 </mapper>

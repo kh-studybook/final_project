@@ -12,6 +12,4 @@ public interface MemberService {
 
 	int isUser(String email, String password);
 
-
-
 }
