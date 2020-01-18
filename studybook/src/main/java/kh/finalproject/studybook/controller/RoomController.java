@@ -95,6 +95,7 @@ public class RoomController {
 		 * System.out.println("i=" + i);
 		 * 
 		 */
+		
 			// 포문으로 꺼냄
 			int i = gallery1.getGALLERY_NUM();
 			for (MultipartFile mf : fileList) {
