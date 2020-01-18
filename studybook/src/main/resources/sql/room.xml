@@ -95,6 +95,55 @@ where
 	like #{search_word}
 </if>
 </select>
+<!-- 룸상세정보 조회 -->
+<select id="roomDetail" parameterType="int" resultType="room">
+select * from room where ROOM_CODE=#{ROOM_CODE}
+</select>
+
+<!-- 갤러리 리스트 조회 -->
+<select id="galleryList" parameterType="int" resultType="gallery">
+select * from gallery where ROOM_CODE=#{ROOM_CODE}
+</select>
+
+<!-- Roomex 조회 -->
+<select id="roomexDetail" parameterType="int" resultType="room_ex">
+select * from room_ex where ROOM_CODE=#{ROOM_CODE}
+</select>
+
+<!-- 룸정보 업데이트-->
+<update id="updateRoom" parameterType="room">
+update room
+set ROOM_INFO = #{ROOM_INFO},
+ROOM_TYPE=#{ROOM_TYPE},
+MIN_MEMBER=#{MIN_MEMBER},
+MAX_MEMBER=#{MAX_MEMBER},
+MIN_HOUR=#{MIN_HOUR},
+HOUR_COST=#{HOUR_COST},
+ROOM_INTRO=#{ROOM_INTRO},
+FAC_INTRO=#{FAC_INTRO},
+HASHTAG=#{HASHTAG}
+where ROOM_CODE=#{ROOM_CODE}
+</update>
+
+<!-- 룸ex 정보 업데이트 -->
+<update id="updateRoomEx" parameterType="Map">
+update room_ex
+set ALCOHOL=#{ALCOHOL},
+MIC=#{MIC},
+CHAIR=#{CHAIR},
+FOOD=#{FOOD},
+TOILET=#{TOILET},
+SMOKING=#{SMOKING},
+PARKING=#{PARKING},
+TV=#{TV},
+BOARD=#{BOARD},
+WIFI=#{WIFI}
+where ROOM_CODE=#{ROOM_CODE}
+</update>
+<!-- 해당 룸넘버의 이미지 삭제하기 -->
+<delete id="deleteGallery" parameterType="int">
+delete from gallery where ROOM_CODE=#{ROOM_CODE}
+</delete>
 
 <!-- 지은 끝 -->
 

@@ -62,7 +62,7 @@ public class EventController {
 		      int date=c.get(Calendar.DATE);
 		      
 		      //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/" 바꾸기;
-		      String saveFolder="C:\\Users\\user1\\git\\final_project[0115]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+		      String saveFolder="C:\\Users\\user1\\git\\final_project[0117]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -170,18 +170,6 @@ public class EventController {
 		public ModelAndView EventModifyAction(Event event, 
 				ModelAndView mv, HttpServletRequest request, HttpServletResponse response) 
 						throws Exception{
-			boolean usercheck = eventservice.isEventWriter(event.getMem_key());//추후 확인 : 유저 확인이 필요한가?
-			//비밀번호가 다른 경우
-			if (usercheck == false) {
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('비밀번호가 다릅니다.');");
-				out.println("histroy.back()");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
 			MultipartFile uploadfile = event.getEventPic_uploadfile();
 	
 			if (uploadfile != null && !uploadfile.isEmpty()) {//파일을 변경한 경우
@@ -259,24 +247,10 @@ public class EventController {
 		}
 		
 		//이벤트 삭제하기
-		@PostMapping("EventDeleteAction.eve")
+		@RequestMapping("EventDeleteAction.eve")
 		   public String EventDeleteAction(int num, HttpServletResponse response) throws Exception{
-		      boolean usercheck = eventservice.isEventWriter(num);
-		      
-		      //비밀번호 일치하지 않는 경우
-		      if(usercheck == false) {
-		         response.setContentType("text/html;charset=utf-8");
-		         PrintWriter out = response.getWriter();
-		         out.println("<script>");
-		         out.println("alert('비밀번호가 다릅니다.');");
-		         out.println("history.back();");
-		         out.println("</script>");
-		         out.close();
-		         return null;
-		      }
-		      //비밀번호 일치하는 겨우 삭제처리 합니다.
 		      int result=eventservice.eventDelete(num);
-		      
+		      System.out.println("DeleteAction");
 		      //삭제 처리 실패한 경우
 		      if(result ==0) {
 		         System.out.println("게시판 삭제 실패");
@@ -287,7 +261,7 @@ public class EventController {
 		      PrintWriter out = response.getWriter();
 		      out.println("<script>");
 		      out.println("alert('삭제 되었습니다.');");
-		      out.println("location.href='EventList.eve';");
+		      out.println("location.href='event_list.eve';");
 		      out.println("</script>");
 		      out.close();
 		      return null;

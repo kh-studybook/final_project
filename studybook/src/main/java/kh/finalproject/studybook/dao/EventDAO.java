@@ -27,12 +27,8 @@ public class EventDAO {
 		return sqlSession.selectOne("event.count");
 	}
 
-	public Event isEventWriter(int num) {//글쓴이인지 확인하기
-		return sqlSession.selectOne("event.eventWriter", num);
-	}
-
-	public int eventDelete(Event event) {//이벤트 삭제하기
-		return sqlSession.delete("event.delete", event);
+	public int eventDelete(int num) {//이벤트 삭제하기
+		return sqlSession.delete("event.delete", num);
 	}
 
 	public List<Event> getEventList(HashMap<String, Integer> map) {//글 목록 보기

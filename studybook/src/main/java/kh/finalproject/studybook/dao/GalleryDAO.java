@@ -1,5 +1,6 @@
 package kh.finalproject.studybook.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,6 +23,16 @@ public class GalleryDAO {
 	public Gallery selectMaxNum(int room_code) {
 		System.out.println("galleryDAO의 selectMaxNum까지 옴");
 		return sqlSession.selectOne("Rooms.selectMaxNum",room_code);
+	}
+	
+	//갤러리 리스트 가져오기
+	public List<Gallery> getGalleryList(int room_code) {
+		System.out.println("galleryDAO의 getGalleryList까지 옴");
+		return sqlSession.selectList("Rooms.galleryList",room_code);
+	}
+	//해당 룸넘버의 이미지 삭제하기
+	public void deleteGallery(int room_code) {
+		sqlSession.delete("Rooms.deleteGallery",room_code);
 	}
 	
 	//--지은끝

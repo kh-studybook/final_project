@@ -28,33 +28,29 @@
 
 
 /* Default Theme */
-	/* General style */		
+
+	/* General style */
 		.jsCalendar * {
 			margin: 0;
 			padding: 0;
-			z-index: 10;
-			
 		}
 		.jsCalendar table,
 		.jsCalendar table th,
 		.jsCalendar table td {
 			border: 0;
 			box-sizing: content-box;
-			padding: 0 auto;
-		}
-		.jsCalendar thead .jsCalendar-title {
-		    display: grid;
-		    grid-template-columns: 100px 160px 100px;
 		}
 	/* Blue default */
 		.jsCalendar table {
 			background-color: #FFFFFF;
 			border-collapse: collapse;
 			border-radius: 4px;
-			box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+
 			color: #000000;
 			font-family: Tahoma, Geneva, sans-serif;
 			margin: 5px;
+			width:99%;
+
 		}
 		.jsCalendar tr {
 			line-height: 0;
@@ -123,7 +119,8 @@
 			margin: 1px 2px;
 			text-align: center;
 			transition: color 0.1s, background-color 0.2s;
-			width: 36px;
+			width: 48px;
+
 		}
 		.jsCalendar tbody td:hover {
 			background-color: #E6E6E6;
@@ -399,12 +396,5 @@
 		.jsCalendar.classic-theme.green thead .jsCalendar-nav-right:hover {
 			background-color: #639000;
 		}
-		
-		/* 내가 추가한 코드*/
-		.jsCalendar {
-			display: none;
-		}
 
-		.jsCalendar tbody td:hover {
-			cursor: pointer;
-		}
+

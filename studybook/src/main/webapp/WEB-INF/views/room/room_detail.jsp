@@ -1,86 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css"
-	href="resources/css/room_detail.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/css/swiper.min.css" />
-<script>
-	$(document).on(
-			'click',
-			'.number-spinner button',
-			function() {
-				var btn = $(this), oldValue = btn.closest('.number-spinner')
-						.find('input').val().trim(), newVal = 0;
-
-				if (btn.attr('data-dir') == 'up') {
-					newVal = parseInt(oldValue) + 1;
-
-				} else {
-					if (oldValue > 1) {
-						newVal = parseInt(oldValue) - 1;
-
-					} else {
-						newVal = 1;
-					}
-				}
-				btn.closest('.number-spinner').find('input').val(newVal);
-				return false;
-			});
-	
-	
-	
-	$(document).ready(function(){
-		var time_check=0;
-		$(".swiper-slide").click(function(){
-			
-			if(time_check==0){
-				$(".swiper-slide").css("background","#57D7D5");
-				$(".swiper-wrapper").find('input').removeAttr('name');
-				var time=$(this).find($("input")).val();
-				console.log("시작시간"+time)
-				$(this).css("background","#855FD4");
-				$(this).find($("input")).attr("name","start_time");
-				time_check=1;
-				
-			}else if(time_check==1){
-				var time2=$(this).find($("input")).val();
-				console.log("종료시간"+time2)
-				var start_time=$(".swiper-slide").find($("input[name=start_time]")).val();
-				console.log("두번쨰 눌럿을때 시작시간"+start_time)
-				$(this).find($("input")).attr("name","end_time");
-				var end_time=$(".swiper-slide").find($("input[name=end_time]")).val();
-				console.log("두번쨰 눌럿을때 종료 시간"+end_time)
-					for(var i=start_time;i<=end_time;i++){
-						console.log("for문의 i값="+i)
-						console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
-						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
-					}
-				time_check=0;
-			}
-		});
-		
-	});
-</script>
-
+<link rel="stylesheet" type="text/css" href="resources/css/room_detail.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/swiper.min.css" />
+<link rel="stylesheet" href="resources/css/jsCalendar.css">
+<script src="resources/js/jsCalendar.js"></script>
+<script src="resources/js/swiper.min.js"></script>
+<script src="resources/js/room_detail.js"></script>
 </head>
 <body>
 	<form action="room_reserve.ro">
-		<input type="hidden" name="room_code" value="${room_code }">
+		<input type="hidden" name="room_code" value="${room.ROOM_CODE }">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
 					<div class="e_inner_detail">
-						<h2 class="e_room_name">ROOM 512</h2>
-						<p class="e_sub-desc">ROOM 512 간단 소개 부분 입니당</p>
+						<h2 class="e_room_name">${room.ROOM_NAME }</h2>
+						<p class="e_sub-desc">${room.ROOM_INFO}</p>
 						<div class="e_tags">
-							<span class="e_tag">#스터디</span> <span class="e_tag">#회의</span> <span
-								class="e_tag">#세미나</span>
+							<span class="e_tag">${room.HASHTAG }</span>
+							
+							
 						</div>
 
 						<div class="e_container">
@@ -121,20 +67,20 @@
 
 						<!-- 사진 밑 설명 부분 -->
 						<div class="e_text_box">
-							<h3 class="e_h_copy">ROOM 512 간단 소개 부분 입니당</h3>
+							<h3 class="e_h_copy">${room.ROOM_INFO }</h3>
 							<h4 class="e_h_intro">공간 소개</h4>
 							<p class="e_p_intro">
-								-공간 소개1<br> -공간 소개2<br> -공간 소개3<br>
+								${room.ROOM_INTRO }
 							</p>
 						</div>
 						<div class="e_text_box">
 							<h4 class="e_h_intro">시설 안내</h4>
-
+								${room.FAC_INTRO }
 						</div>
 
 						<div class="e_text_box">
 							<h4 class="e_h_intro">예약시 주의 사항</h4>
-
+								
 						</div>
 
 						<div class="e_text_box">
@@ -277,119 +223,13 @@
 											type="hidden" name="reserve_date" id="reserve_date">
 									</div>
 								</h2>
-								<div class="e_calendar_out">
-									<div class="e_calendar">
-										<div class="month">
-											<a href="#" class="e_nav"> <i class="fas fa-angle-left"></i></a>
 
-											<div>
-												January <span class="year">2019</span>
-											</div>
-											<a href="#" class="e_nav"><i class="fas fa-angle-right"></i></a>
-										</div>
-										<div class="e_days">
-											<span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span>
-											<span>Fri</span> <span>Sat</span> <span>Sun</span>
-										</div>
-										<div class="e_dates">
-											<button>
-												<time>1</time>
-											</button>
-											<button>
-												<time>2</time>
-											</button>
-											<button>
-												<time>3</time>
-											</button>
-											<button>
-												<time>4</time>
-											</button>
-											<button>
-												<time>5</time>
-											</button>
-											<button>
-												<time>6</time>
-											</button>
-											<button>
-												<time>7</time>
-											</button>
-											<button>
-												<time>8</time>
-											</button>
-											<button>
-												<time>9</time>
-											</button>
-											<button>
-												<time>10</time>
-											</button>
-											<button>
-												<time>11</time>
-											</button>
-											<button>
-												<time>12</time>
-											</button>
-											<button>
-												<time>13</time>
-											</button>
-											<button>
-												<time>14</time>
-											</button>
-											<button>
-												<time>15</time>
-											</button>
-											<button>
-												<time>16</time>
-											</button>
-											<button>
-												<time>17</time>
-											</button>
-											<button class="e_today">
-												<time>18</time>
-											</button>
-											<button>
-												<time>19</time>
-											</button>
-											<button>
-												<time>20</time>
-											</button>
-											<button>
-												<time>21</time>
-											</button>
-											<button>
-												<time>22</time>
-											</button>
-											<button>
-												<time>23</time>
-											</button>
-											<button>
-												<time>24</time>
-											</button>
-											<button>
-												<time>25</time>
-											</button>
-											<button>
-												<time>26</time>
-											</button>
-											<button>
-												<time>27</time>
-											</button>
-											<button>
-												<time>28</time>
-											</button>
-											<button>
-												<time>29</time>
-											</button>
-											<button>
-												<time>30</time>
-											</button>
-											<button>
-												<time>31</time>
-											</button>
-										</div>
-									</div>
-									<!-- e_calendar end -->
-								</div>
-
+									
+								<div id="my-calendar" date-format="yyyy-##-dd"></div>									
+								
+								
+							</div>
+							
 								<div class="e_color_desc">
 									<span class="e_color_disable">예약불가</span> <span
 										class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
@@ -397,12 +237,11 @@
 
 								<h2 class="e_head">
 									시간 선택
-									<div class="e_head_right">
-										<span class="select_date" id="start_time_span">11</span>시 ~ <span
-											class="select_date" id="end_time_span">2</span>시 , <span
-											class="select_time">2시간</span> <input type="hidden"
-											name="start_time"> <input type="hidden"
-											name="end_time">
+									<p class="e_plus_num">1시간당 <span id="time_price">10000</span>원</p>
+									<div class="e_head_right_div">
+										<span class="select_date" id="start_time_span">0</span>시 ~ 
+										<span class="select_date" id="end_time_span">0</span>시 , 
+											<span class="select_time" id="select_time_span">0</span>시간
 									</div>
 								</h2>
 								<!-- 시간 선택 -->
@@ -439,7 +278,7 @@
 													<span class="glyphicon glyphicon-minus">-</span>
 												</button>
 											</span> <input type="text" class="form-control text-center"
-												value="1"> <span class="input-group-btn">
+												value="0"> <span class="input-group-btn">
 												<button class="btn btn-default" data-dir="up">
 													<span class="glyphicon glyphicon-plus">+</span>
 												</button>
@@ -450,15 +289,15 @@
 									<div class="e_total_price_div">
 										<div class="e_price_div">
 											<span class="e_price_name">공간 이용료</span> <span
-												class="e_price">20,000원</span>
+												class="e_price"><span id="total_time_price">0</span>원</span>
 										</div>
 										<div class="e_price_div">
-											<span class="e_price_name">추가 인원(1명)</span> <span
-												class="e_price">1,000원</span>
+											<span class="e_price_name">추가 인원(<span id="extra_num">0</span>명)</span> 
+											<span class="e_price"><span id="extra_num_price">0</span>원</span>
 										</div>
 										<hr>
 										<div class="e_price_div">
-											<span class="e_total_price" id="total_cost_span">21,000원</span>
+											<span class="e_total_price"><span id="total_price">0</span>원</span>
 											<input type="hidden" name="total_cost">
 										</div>
 									</div>
@@ -476,13 +315,74 @@
 			</div>
 	</form>
 	
- <script src="resources/js/swiper.min.js"></script>
- <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 5,
-      spaceBetween: 5,    
-    });
-  </script>
+	<script>
+
+var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 5,
+    spaceBetween: 5,    
+  });
+  
+// Get the element
+  var element = document.getElementById("my-calendar");
+  // Create the calendar
+  var myCalendar=jsCalendar.new(element, "now",{
+		 	  // language
+  	  language : "en",
+  	  // Enable/Disable date's number zero fill
+  	  zeroFill : false,
+  	  // Custom month string format
+  	  // month: Month's full name "February"
+  	  // ##: Month's number  "02"
+  	  // #: Month's number  "2"
+  	  // YYYY: Year  "2017"
+  	  monthFormat : "month YYYY",
+  	  // Custom day of the week string forma
+  	  // day: Day's full name "Monday"
+  	  // DDD: Day's first 3 letters "Mon"
+  	  // DD: Day's first 2 letters "Mo"
+  	  // D: Day's first letter  "M"
+  	  dayFormat : "DDD",  	  
+  	  // 1 = monday
+  	  firstDayOfTheWeek: 1,
+  	  // Enable/Disable month's navigation buttons.
+  	  navigator : true,
+  	  // both | left | right
+  	  navigatorPosition : "both",
+  	  // min date
+	   	  // max date
+	   	  min : "now",
+  	  max : false  
+  	});
+ 
+  function formatDate(date) {
+  	var weekName = ["일", "월", "화", "수", "목", "금", "토"];
+		    var d = new Date(date),
+		        month = '' + (d.getMonth() + 1),
+		        day = '' + d.getDate(),
+		        year = d.getFullYear(),
+		        E =d.getDay();
+
+		    if (month.length < 2) 
+		        month = '0' + month;
+		    if (day.length < 2) 
+		        day = '0' + day;
+
+		    return [year, month, day].join('-')+"("+ weekName[E]+")";
+		}
+  
+ 		myCalendar.onDateClick(function(event, date){
+ 		
+ 	 	
+ 		if(date<"now"){
+ 			alert("다음날짜를 골라주세요");
+ 		}
+  	 $("#reserve_date_span").text(formatDate(date));
+  	 myCalendar.clearselect();
+  	 myCalendar.select([date]);
+  	 
+  	});
+</script>
+
 
 </body>
 </html>
