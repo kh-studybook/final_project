@@ -15,6 +15,7 @@
 		<typeAlias alias = "notice" type = "kh.finalproject.studybook.domain.Notice"/>
 		<typeAlias alias = "event" type = "kh.finalproject.studybook.domain.Event"/>
 		<typeAlias alias = "event_comment" type = "kh.finalproject.studybook.domain.Event_comment"/>
+		<typeAlias alias = "reviewinfo" type = "kh.finalproject.studybook.domain.ReviewInfo"/>
 	</typeAliases>
 	
 	<mappers>

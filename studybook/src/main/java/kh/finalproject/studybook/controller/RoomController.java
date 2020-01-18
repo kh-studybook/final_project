@@ -3,7 +3,9 @@ package kh.finalproject.studybook.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,19 +18,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Gallery;
+import kh.finalproject.studybook.domain.ReviewInfo;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.domain.Room_ex;
+import kh.finalproject.studybook.service.ReserveServiceImpl;
 import kh.finalproject.studybook.service.RoomService;
 
 @Controller
 public class RoomController {
 	@Autowired
 	private RoomService roomservice;
+	
+	@Autowired
+	private ReserveServiceImpl reserveservice;
 
 	@Value("${savefoldername}")
 	private String saveFolder;
@@ -312,9 +320,32 @@ public class RoomController {
 			//mv.addObject("room_ex",room_ex);
 			//mv.addObject("gallerylist",gallerylist);
 		}
-			
 		return mv;
+	}
+	
+	//리뷰 가져오기
+	@ResponseBody
+	@RequestMapping(value="getReviewList.ro")
+	public Object getReview(@RequestParam(value="page",defaultValue="1",required=false) int page,
+			int room_code) throws Exception{
+		int limit=3;
+		int listcount=reserveservice.getreviewcount(room_code);
+		int maxpage=(listcount+limit-1)/limit;
+		int startpage=((page-1)/limit)*limit+1;
+		int endpage=startpage+limit-1;
+		if(endpage>maxpage) endpage=maxpage;
+		List<ReviewInfo> reviewlist= reserveservice.getReviewList(room_code,page,limit);
 		
+		Map<String,Object> obj=new HashMap<String,Object>();
+		
+		obj.put("page",page);
+		obj.put("maxpage",maxpage);
+		obj.put("startpage",startpage);
+		obj.put("endpage",endpage);
+		obj.put("listcount",listcount);
+		obj.put("reviewlist",reviewlist);
+		
+		return obj;
 	}
 
 	// 예약 페이지로
