@@ -132,18 +132,7 @@ function go(page) {
 	   })// ajax end
 	 } // fucntion ajax end
 
-	$(function() {
-	   $("#viewcount").change(function() {
-	      go(1);
-	   });// change end
-
-	        $("button").click(function(){
-	           location.href="NoticeWrite.bo";
-	     })
-	})
-
 </script>
-
 
 </head>
 
@@ -158,7 +147,6 @@ function go(page) {
 				<div>
 					<a href="NoticeDetailAction.n?num=${n.NOTICE_NUM }">${n.NOTIVE_SUBJECT }</a>
 				</div>
-
 				<div>${n.NOTICE_NAME }${n.NOTICE_DATE }</div>
 
 			</c:forEach>
@@ -207,8 +195,7 @@ function go(page) {
 		<c:if test="${listcount == 0 }">
 			<font size=5>등록된 글이 없습니다.</font>
 		</c:if>
-		<br>
-		<button type="button">글 쓰 기</button>
+
 	</div>
 
 </body>

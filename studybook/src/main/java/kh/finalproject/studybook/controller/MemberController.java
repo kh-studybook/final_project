@@ -68,10 +68,10 @@ public class MemberController {
 		int result = memberservice.insert(member);
 		out.println("<script>");
 		if (result == 1) {
-			out.println("alert('회원가입을 축하합니다.');");
+			out.println("alert('test 회원가입 축하한다');");
 			out.println("location.href='joinSuccess.mem';");
 		} else if (result == -1) {
-			out.println("alert('이미 가입된 이메일입니다. 확인 후 다시 입력해주세요');");
+			out.println("alert('이미 가입되어 있는 이메일입니다. 확인 후 다시 입력해주세요.');");
 			out.println("history.back();");
 		}
 		out.println("</script>");
@@ -95,10 +95,11 @@ public class MemberController {
 		return mv;
 	}
 
+	
 	// 수정 처리
 	@RequestMapping(value = "/updateProcess.mem", method = RequestMethod.POST)
 	public void updateProcess(Member member, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		int result = memberservice.myupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -112,4 +113,6 @@ public class MemberController {
 		out.println("</script>");
 		out.close();
 	}
+	
+	
 }
