@@ -1,25 +1,27 @@
 package kh.finalproject.studybook.domain;
 
-public class Review {
+public class ReviewInfo {
 	private int review_code;
 	private int room_code;
 	private String content;
 	private String review_date;
 	private int mem_key;
+	private String profile;
+	private String name;
 	
-	public int getMem_key() {
-		return mem_key;
-	}
-	public void setMem_key(int mem_key) {
-		this.mem_key = mem_key;
-	}
-	private Member member;
 	
-	public Member getMember() {
-		return member;
+	
+	public String getProfile() {
+		return profile;
 	}
-	public void setMember(Member member) {
-		this.member = member;
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getReview_code() {
 		return review_code;
@@ -45,6 +47,14 @@ public class Review {
 	public void setReview_date(String review_date) {
 		this.review_date = review_date;
 	}
-
+	public int getMem_key() {
+		return mem_key;
+	}
+	public void setMem_key(int mem_key) {
+		this.mem_key = mem_key;
+	}
+	
+	
+	
 	
 }

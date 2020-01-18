@@ -162,6 +162,11 @@ html {
 	text-align:center;	
 }
 
+.e_review_box .e_rbox_mine .e_pf_info .e_pf_pic img{
+	width:80px!important;
+	border-radius:50%;
+}
+
 .e_review_box .e_rbox_mine .e_pf_info .e_guest_name{
 	margin-top:5px;
 }
@@ -177,9 +182,14 @@ html {
 }
 
 .e_review_box .e_rlist .e_rbox_info_base {
-	margin-top: 13px;
 	margin-bottom: 10px;
-    float: right;
+    text-align: right;
+}
+
+.e_review_info{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 80% 20%;
 }
 
 .e_review_box .e_rlist .e_rbox_info_base .e_time_info {

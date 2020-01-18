@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Reserves">
-
+<mapper namespace="Reserves">	
+	
+	<select id="getReivewList" parameterType="map" resultType="reviewinfo">
+		select *
+		from (select rownum rnum, reviewInfo.* 
+		from (select r.review_code, r.room_code, r.content, r.review_date, r.mem_key, m.name, m.profile
+		from review r, member m
+		where r.mem_key=m.key
+		and r.room_code=#{room_code}
+		order by r.review_date) reviewInfo )
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getReviewCount" parameterType="int" resultType="int">
+		select count(*) from review
+		where room_code=#{room_code}
+	</select>
 </mapper>

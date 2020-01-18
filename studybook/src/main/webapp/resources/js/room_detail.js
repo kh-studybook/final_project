@@ -25,9 +25,97 @@ $(document).on(
 				return false;
 			});
 	
+	function go(page) {
+	   var room_code=$("#room_code").val();
+	   var data = "room_code=" + room_code + "&state=ajax&page=" + page;
+	   ajax(data);
+	}
 	
+	function ajax(data) {
+		   console.log(data)
+		   output = "";
+		   $.ajax({
+		      type : "POST",
+		      data : data,
+		      url : "getReviewList.ro",
+		      dataType : "json",
+		      cache : false,
+		      success : function(data) {
+		    	  console.log(data)
+		         $(".e_text_box").find(".e_review_count").text(data.listcount+"개");
+
+		         if (data.listcount > 0) { // 총갯수가 0개이상인 경우
+		            /*$(".e_review_list").remove();*/
+	
+		            output = "";
+		            
+		            $(data.reviewlist).each(
+		               function(index, item) {
+		            	  output += "<li class='e_rlist'><div class='e_rbox_mine'><div class='e_pf_info'><div class='e_pf_pic'>";
+		                  output += "<img src='"+item.profile+"'></div>";
+		                  output += "<h2 class='e_guest_name'>"+item.name+"</h2></div>";
+		                  output += "<div class='e_review_info'>"
+		                	 if(mem_key==item.mem_key){
+		                		 output+="<span class='e_review_manage'><a href='#'>수정</a>/";
+		                		 output+="<a href='#'>삭제</a></span>";
+		                	 }
+		                  output += "<p class='e_p_reivew'>"+item.content+"</p>";
+		                  output += "<div class='e_rbox_info_base'><span class='e_time_info'>";
+		                  output += item.review_date+"</span></div></div></div></li>";
+		               
+		               })
+		               console.log(output)
+		          
+		            $('.e_review_list').append(output);//table 완성
+		            
+		        /*    $(".pagination").empty(); //페이징 처리
+		            output = "";
+		            
+		            digit = '<'
+		            href="";   
+		            if (data.page > 1) {
+		               href = 'href=javascript:go(' + (data.page - 1) + ')';
+		            }
+		            setPaging(href, digit);
+		            
+		            for (var i = data.startpage; i <= data.endpage; i++) {
+		               digit = i;
+		               href="";
+		               if (i != data.page) {
+		                  href = 'href=javascript:go(' + i + ')';
+		               } 
+		               setPaging( href, digit);
+		            }
+		            
+		            digit = '>';
+		            href="";
+		            if (data.page < data.maxpage) {
+		               href = 'href=javascript:go(' + (data.page + 1) + ')';
+		            } 
+		            setPaging( href, digit);
+
+		            $('.pagination').append(output)*/
+		         }//if(data.listcount) end
+		         
+		         else {
+		            $(".e_review_list").remove();
+		            $(".e_review_box").remove();
+		            $('.e_review_box').append("<font size=5>등록된 글이 없습니다.</font>");
+		         }
+		      }, //success end
+		      error : function() {
+		         console.log('에러')
+		      }
+		   })// ajax end
+		 } //function end
 	
 	$(document).ready(function(){
+		 go(1);
+		
+		var mem_key=$("#mem_key").val();
+		
+		
+		
 		var time_check=0;
 		$(".swiper-slide").click(function(){
 			
@@ -70,8 +158,8 @@ $(document).on(
 				$("#total_price").text(parseInt(extra_price)+parseInt(room_price));
 				time_check=0;
 			}
-		});
-		
+		});	
+	
 	});
  
 	
