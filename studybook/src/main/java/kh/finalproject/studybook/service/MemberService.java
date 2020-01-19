@@ -4,12 +4,12 @@ import kh.finalproject.studybook.domain.Member;
 
 public interface MemberService {
 
-	int insert(Member m);
+	public int insert(Member m);
 
-	Member myinfo(String key);
+	public Member myinfo(int key);
 
-	int myupdate(Member member);
+	public int myupdate(Member member);
 
-	int isUser(String email, String password);
+	public int isUser(String email, String password);
 
 }

@@ -9,7 +9,7 @@
 	href="resources/css/room_reserve.css" />
 </head>
 <body>
-	<form action="food_add.ro">
+	<form action="food_add.re">
 	<div class="container">
 		<div class="col-md-12 e_reserve_page_title">
 		<span>예약 페이지</span>

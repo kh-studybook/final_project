@@ -16,7 +16,6 @@
 <script src="resources/js/room_detail.js"></script>
 </head>
 <body>
-	<form action="room_reserve.ro">
 		<input type="hidden" name="room_code" id="room_code" value="${room.ROOM_CODE }">
 		<input type="hidden" name="mem_key" id="mem_key" value="${key}">
 		<div class="container">
@@ -208,6 +207,7 @@
 										class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
 								</div>
 
+							
 								<h2 class="e_head">
 									시간 선택
 									<p class="e_plus_num">1시간당 <span id="time_price">${room.HOUR_COST }</span>원</p>
@@ -265,28 +265,27 @@
 												class="e_price"><span id="total_time_price">0</span>원</span>
 										</div>
 										<div class="e_price_div">
-											<span class="e_price_name">추가 인원(<span id="extra_num">0</span>명)</span> 
-											<span class="e_price"><span id="extra_num_price">0</span>원</span>
+											<span class="e_price_name">추가 인원(<span name="extra_num" id="extra_num">0</span>명)</span> 
+											<span class="e_price"><span name="extra_num_price" id="extra_num_price">0</span>원</span>
 										</div>
 										<hr>
 										<div class="e_price_div">
-											<span class="e_total_price"><span id="total_price">0</span>원</span>
+											<span class="e_total_price"><span name="total_cost" id="total_price">0</span>원</span>
 											<input type="hidden" name="total_cost">
 										</div>
 									</div>
 
 									<div class="e_to_reserve_button">
-										<button type="submit" onclick="room_reserve.ro"
+										<button type="submit"
 											class="e_to_reserve_page">예약하기</button>
 									</div>
 								</div>
 								<!-- aside end -->
 							</div>
-						</div>
+						</div><!-- col-md-5 end -->
 					</div>
 				</div>
-			</div>
-	</form>
+			
 	
 	<script>
 
@@ -350,6 +349,7 @@
  			alert("다음날짜를 골라주세요");
  		}
   	 $("#reserve_date_span").text(formatDate(date));
+  	 $("#reserve_date").val(formatDate(date));
   	 myCalendar.clearselect();
   	 myCalendar.select([date]);
   	 

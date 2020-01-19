@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member myinfo(String key) {
+	public Member myinfo(int key) {
 		return dao.myinfo(key);
 	}
 

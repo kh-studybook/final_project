@@ -31,13 +31,24 @@ $(document).on(
 	   ajax(data);
 	}
 	
+	function setPaging(href, digit){
+		output+="";
+		gray = "";
+		if (href  == "#") {
+			gray="is-active";//현재 페이지에 회색이 나오도록 하기 위함
+		}
+		anchor = "<a class = '"+gray+"'" + href + "><li>" + digit + "</li></a>";
+		output += anchor;
+		console.log(output)
+	}
+	
 	function ajax(data) {
 		   console.log(data)
 		   output = "";
 		   $.ajax({
 		      type : "POST",
 		      data : data,
-		      url : "getReviewList.ro",
+		      url : "getReviewList.re",
 		      dataType : "json",
 		      cache : false,
 		      success : function(data) {
@@ -64,11 +75,11 @@ $(document).on(
 		                  output += item.review_date+"</span></div></div></div></li>";
 		               
 		               })
-		               console.log(output)
+		        
 		          
 		            $('.e_review_list').append(output);//table 완성
 		            
-		        /*    $(".pagination").empty(); //페이징 처리
+		          $(".pagination").empty(); //페이징 처리
 		            output = "";
 		            
 		            digit = '<'
@@ -80,11 +91,11 @@ $(document).on(
 		            
 		            for (var i = data.startpage; i <= data.endpage; i++) {
 		               digit = i;
-		               href="";
+		               href="#";
 		               if (i != data.page) {
 		                  href = 'href=javascript:go(' + i + ')';
 		               } 
-		               setPaging( href, digit);
+		               setPaging(href, digit);
 		            }
 		            
 		            digit = '>';
@@ -93,8 +104,8 @@ $(document).on(
 		               href = 'href=javascript:go(' + (data.page + 1) + ')';
 		            } 
 		            setPaging( href, digit);
-
-		            $('.pagination').append(output)*/
+		            
+		            $('.pagination').append(output)
 		         }//if(data.listcount) end
 		         
 		         else {
@@ -113,8 +124,6 @@ $(document).on(
 		 go(1);
 		
 		var mem_key=$("#mem_key").val();
-		
-		
 		
 		var time_check=0;
 		$(".swiper-slide").click(function(){
@@ -159,6 +168,10 @@ $(document).on(
 				time_check=0;
 			}
 		});	
+		
+		$(".e_to_reserve_page").click(function(){
+			location.href="room_reserve.re";
+		})
 	
 	});
  

@@ -22,7 +22,7 @@ public class MemberDAO {
 		return sqlSession.update("Members.update", member); 
 	}
 
-	public Member myinfo(String key) {
+	public Member myinfo(int key) {
 		return null;
 	}
 
