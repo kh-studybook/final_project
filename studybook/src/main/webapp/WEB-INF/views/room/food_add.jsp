@@ -29,7 +29,7 @@ $(document).on('click', '.number-spinner button', function () {
 </script>
 </head>
 <body>
-<form action="reserve_ok.ro">
+<form action="reserve_ok.re">
 	<div class="container">
 		<div class="col-md-12 e_food_page_title">
 			<span>음료 추가 페이지</span>

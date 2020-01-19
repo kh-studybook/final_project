@@ -88,7 +88,7 @@ public class MemberController {
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
 	public ModelAndView member_update(HttpSession session, ModelAndView mv) {
-		String key = (String) session.getAttribute("key");
+		int key = (int) session.getAttribute("key");
 		Member member = memberservice.myinfo(key);
 		mv.setViewName("member/my_update_index");
 		mv.addObject("member", member);

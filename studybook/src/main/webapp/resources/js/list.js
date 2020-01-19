@@ -12,6 +12,7 @@ function setPaging(href, digit){
 	}
 	anchor = "<a class = 'page-link " +  gray + "'" + href + ">" + digit + "</a></li>";
 	output += anchor;
+	
 }
 
 function ajax(data){

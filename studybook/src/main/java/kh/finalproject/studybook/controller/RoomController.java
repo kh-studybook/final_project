@@ -24,9 +24,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Gallery;
+import kh.finalproject.studybook.domain.Member;
+import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.domain.Room_ex;
+import kh.finalproject.studybook.service.ReserveService;
 import kh.finalproject.studybook.service.ReserveServiceImpl;
 import kh.finalproject.studybook.service.RoomService;
 
@@ -36,7 +39,7 @@ public class RoomController {
 	private RoomService roomservice;
 	
 	@Autowired
-	private ReserveServiceImpl reserveservice;
+	private ReserveService reserveservice;
 
 	@Value("${savefoldername}")
 	private String saveFolder;
@@ -323,49 +326,7 @@ public class RoomController {
 		return mv;
 	}
 	
-	//리뷰 가져오기
-	@ResponseBody
-	@RequestMapping(value="getReviewList.ro")
-	public Object getReview(@RequestParam(value="page",defaultValue="1",required=false) int page,
-			int room_code) throws Exception{
-		int limit=3;
-		int listcount=reserveservice.getreviewcount(room_code);
-		int maxpage=(listcount+limit-1)/limit;
-		int startpage=((page-1)/limit)*limit+1;
-		int endpage=startpage+limit-1;
-		if(endpage>maxpage) endpage=maxpage;
-		List<ReviewInfo> reviewlist= reserveservice.getReviewList(room_code,page,limit);
-		
-		Map<String,Object> obj=new HashMap<String,Object>();
-		
-		obj.put("page",page);
-		obj.put("maxpage",maxpage);
-		obj.put("startpage",startpage);
-		obj.put("endpage",endpage);
-		obj.put("listcount",listcount);
-		obj.put("reviewlist",reviewlist);
-		
-		return obj;
-	}
-
-	// 예약 페이지로
-	@RequestMapping(value = "room_reserve.ro")
-	public String room_reserve_page() {
-		return "room/room_reserve_page";
-	}
-
-	// 음료추가 페이지로
-	@RequestMapping(value = "food_add.ro")
-	public String food_add_page() {
-		return "room/food_add_page";
-	}
-
-	// 예약 완료 페이지로
-	@RequestMapping(value = "reserve_ok.ro")
-	public String reserve_ok_page() {
-		return "room/reserve_ok_page";
-	}
-
+	
 	// 메인 화면 보기(테스트) - 민지
 	@RequestMapping(value = "/main.net")
 	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
