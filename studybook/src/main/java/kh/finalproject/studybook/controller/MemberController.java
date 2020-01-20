@@ -19,7 +19,7 @@ import kh.finalproject.studybook.service.MemberService;
 @Controller
 public class MemberController { 
 
-	@Autowired
+	@Autowired 
 	private MemberService memberservice;
 
 	@RequestMapping(value = "/login.mem", method = RequestMethod.GET)
@@ -97,7 +97,12 @@ public class MemberController {
 	public String findpw() {
 		return "member/login_findpw_index";
 	}
-
+	
+	
+	@RequestMapping(value = "/updatepw.mem", method = RequestMethod.GET)
+	public String updatepw() {
+		return "member/my_password_index";
+	}
 	
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
@@ -126,6 +131,23 @@ public class MemberController {
 		}
 		out.println("</script>");
 		out.close();
+	}
+	
+	//delete? 
+	@RequestMapping(value="delete.mem", method = RequestMethod.GET)
+	public int delete(int key, HttpServletResponse response) throws Exception {
+		int result = memberservice.delete(key);
+	
+		if (result != 1) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('뭐지?');");
+			out.println("location.href='main.net';");
+			out.println("</script>");
+			out.close();
+		}
+		return result;
 	}
 	
 	

@@ -85,7 +85,7 @@ public class NoticeController {
 			mv.setViewName("notice/notice_detail");
 			mv.addObject("noticedata", notice);
 		}
-		return mv;
+		return mv;  
 	}
 
 	

@@ -17,7 +17,7 @@ public class MemberDAO {
 	public int insert(Member member) {
 		return sqlSession.insert("Members.insert", member); 
 	}
-
+ 
 	public int myupdate(Member member) {
 		return sqlSession.update("Members.update", member); 
 	}
@@ -28,6 +28,10 @@ public class MemberDAO {
 
 	public Member isUser(String email) {
 		return sqlSession.selectOne("Members.usercheck", email);
+	}
+
+	public int delete(int key) {
+		return sqlSession.delete("Members.delete", key);
 	}
 
 

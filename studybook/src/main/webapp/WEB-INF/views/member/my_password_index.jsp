@@ -15,7 +15,7 @@ $(document).ready(function(){
 			'bottom' : 0
 		}) 
 	} 
-})	   
+})	    
 </script>
 <style>
 footer{height: 150px;}
@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="my_update.jsp" />
+		<jsp:include page="my_password.jsp" />
 	</main>
 	<!-- Body End -->
 

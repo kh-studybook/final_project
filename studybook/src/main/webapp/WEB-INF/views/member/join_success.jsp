@@ -12,8 +12,8 @@
 	font-family: "맑은 고딕";
 }
 
-.s_title {
-	margin-top: 250px;
+.s_title {  
+	margin-top: 250px; 
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -63,7 +63,7 @@
 			<span>${member.name}님, 회원가입을 축하합니다.</span><br>
 		</div>
 		<div class=s_content>
-			<span>지금부터 ${member.email}으로</span><br>
+			<span>지금부터 ${member.email}으로</span><br> 
 		</div>
 		<div class=s_content>
 			<span>로그인 하실 수 있습니다.</span><br>

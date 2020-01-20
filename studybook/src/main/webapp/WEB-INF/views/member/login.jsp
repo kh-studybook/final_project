@@ -11,7 +11,7 @@
 
 * {
 	box-sizing: border-box;
-	font-family: "맑은 고딕";
+	font-family: "맑은 고딕";   
 }
 
 .s_title { 
