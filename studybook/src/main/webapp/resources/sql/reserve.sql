@@ -7,8 +7,13 @@ create table reserve(
 	end_time  varchar2(10) not null,
 	total_cost number(10) not null,
 	require varchar2(1000) ,
-	status number(1)  default 1
+	status number(1)  default 1,
+	extra_num number(2),
+	reserver_name varchar2(30) not null,
+	reserver_phone varchar2(11) not null,
+	reserver_email varchar2(40) not null
 );
+
 
 
 drop table reserve;

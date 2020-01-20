@@ -16,8 +16,9 @@
 <script src="resources/js/room_detail.js"></script>
 </head>
 <body>
-		<input type="hidden" name="room_code" id="room_code" value="${room.ROOM_CODE }">
-		<input type="hidden" name="mem_key" id="mem_key" value="${key}">
+<form action="room_reserve_page.re">
+		<input type="hidden" name="room_code" id="room_code" value="2">
+		<input type="hidden" name="mem_key" id="mem_key" value="2">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -135,6 +136,7 @@
 								</ul>
 								<div class="pagination p1">
 									<ul>
+		<!-- 							
 										<a href="#"><li><</li></a>
 										<a class="is-active" href="#"><li>1</li></a>
 										<a href="#"><li>2</li></a>
@@ -143,6 +145,8 @@
 										<a href="#"><li>5</li></a>
 										<a href="#"><li>6</li></a>
 										<a href="#"><li>></li></a>
+										 -->
+										 
 									</ul>
 								</div>
 							</div>
@@ -162,8 +166,8 @@
 											<span>${room.ROOM_TYPE}</span>
 									</span></li>
 
-									<li><span class="e_tit">예약시간</span> <span class="e_data">최소
-											1시간 부터 </span></li>
+									<li><span class="e_tit">예약시간</span> <span class="e_data">
+											최소 1시간 부터 </span></li>
 
 									<li><span class="e_tit">예약인원</span> <span class="e_data">최소
 											${room.MIN_MEMBER }명~최대 ${room.MAX_MEMBER }명 </span></li>
@@ -191,8 +195,8 @@
 								<h2 class="e_head">
 									날짜 선택
 									<div class="e_head_right">
-										<span id="reserve_date_span"></span> <input
-											type="hidden" name="reserve_date" id="reserve_date">
+										<span id="reserve_date_span"></span> 
+										<input type="hidden" name="reserve_date" id="reserve_date">
 									</div>
 								</h2>
 
@@ -265,13 +269,14 @@
 												class="e_price"><span id="total_time_price">0</span>원</span>
 										</div>
 										<div class="e_price_div">
-											<span class="e_price_name">추가 인원(<span name="extra_num" id="extra_num">0</span>명)</span> 
+											<span class="e_price_name">추가 인원(<span name="extra_num_span" id="extra_num_span">0</span>명)</span> 
 											<span class="e_price"><span name="extra_num_price" id="extra_num_price">0</span>원</span>
+											<input type="hidden" name="extra_num" id="extra_num">
 										</div>
 										<hr>
 										<div class="e_price_div">
-											<span class="e_total_price"><span name="total_cost" id="total_price">0</span>원</span>
-											<input type="hidden" name="total_cost">
+											<span class="e_total_price"><span name="total_cost_span" id="total_cost_span">0</span>원</span>
+											<input type="hidden" name="total_cost" id="total_cost" >
 										</div>
 									</div>
 
@@ -285,7 +290,7 @@
 						</div><!-- col-md-5 end -->
 					</div>
 				</div>
-			
+			</form>
 	
 	<script>
 

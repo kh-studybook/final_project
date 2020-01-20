@@ -56,11 +56,14 @@ public class ReserveController {
 		}
 		
 		// 예약 페이지로
-		@RequestMapping(value = "room_reserve.re")
+		@RequestMapping(value = "room_reserve_page.re")
 		public ModelAndView room_reserve_page(Reserve reserve,ModelAndView mv) {
-			Room room=roomservice.getRoomDetail(reserve.getRoom_code());
+			System.out.println("룸 코드 번호= " +reserve.getRoom_code());
 			Member member=memberservice.myinfo(reserve.getMem_key());
+			Room room=roomservice.getRoomInfo(reserve.getRoom_code());
 			
+			mv.addObject("room",room);
+			mv.addObject("member",member);
 			mv.addObject("reserve",reserve);
 			mv.setViewName("room/room_reserve_page");
 			return mv;
@@ -68,13 +71,14 @@ public class ReserveController {
 		}
 		
 		// 음료추가 페이지로
-		@RequestMapping(value = "food_add.re")
-		public String food_add_page() {
+		@RequestMapping(value = "food_add_page.re")
+		public String food_add_page(Reserve reserve) {
+			System.out.println(reserve.getRoom_code());
 			return "room/food_add_page";
 		}
 
 		// 예약 완료 페이지로
-		@RequestMapping(value = "reserve_ok.re")
+		@RequestMapping(value = "reserve_ok_page.re")
 		public String reserve_ok_page() {
 			return "room/reserve_ok_page";
 		}

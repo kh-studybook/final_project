@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService{
 		int result = -1; //아이디 존재하지 않으면 -> member가 null
 		if (member != null) {
 			if (member.getPassword().equals(password)) {
-				result = 1;
+				result = member.getKey();
 			} else 
 				result = 0;
 		}

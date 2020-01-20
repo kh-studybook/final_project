@@ -45,6 +45,8 @@ public interface RoomService {
 	//룸삭제
 	public int roomDelete(int room_code);
 	
+	public Room getRoomInfo(int room_code);
+	
 
 }
 

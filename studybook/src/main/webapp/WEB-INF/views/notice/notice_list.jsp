@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <!DOCTYPE html>
 <html>
@@ -59,34 +59,40 @@ function go(page) {
 	}
 
 	function ajax(data) {
-
+	   // 1줄보기 선택시 리턴된 데이터
+	   /*
+	    {"page":1,"maxpage":6,"startpage":1,"endpage":6,"listcount":6,"limit":1,
+	     "boardlist":[{"BOARD_NUM":6,"BOARD_NAME":"admin","BOARD_SUBJECT":"1","BOARD_CONTENT":"1","BOARD_RE_REF":6,"BOARD_RE_LEV":0,"BOARD_RE_SEQ":0,"BOARD_READCOUNT":0,"BOARD_DATE":"2019-05-26"}]}
+	    */
 	   console.log(data)
 	   output = "";
 	   $.ajax({
 	      type : "POST",
 	      data : data,
-	      url:'NoticeListAjax.bo',  //ajax로 바꾸기
+	      url:'NoticeListAjax.bo',
 	      dataType : "json",
 	      cache : false,
 	      success : function(data) {
 	         $("#viewcount").val(data.limit);
-	         $("table").find("font").text("글 개수 : " + data.listcount);
 
-	         if (data.listcount > 0) { 
+	         if (data.listcount > 0) { // 총갯수가 0개이상인 경우
 	            $("tbody").remove();
 	            var num = data.listcount - (data.page - 1) * data.limit;
 	            console.log(num)
 	            output = "<tbody>";
 	            
-	            $(data.boardlist).each(
+	            $(data.noticelist).each(
 	               function(index, item) {
+	                  output += '<tr><td>' + (num--) + '</td>'
 	                     
-	                  output +=  "<tr><td><div>" + blank + img
+	                  output +=  "<td><div>" + blank + img
 	                  output += ' <a href="./NoticeDetailAction.bo?num='
 	                          + item.NOTICE_NUM + '&page='
 	                         + data.page + '">'
-	                  output += item.NOTICE_SUBJECT + '</a></div></td>'
-	                  output += '<td><div>' + item.board_NAME + item.board_DATE+'</div></td></tr>'
+	                  output += item.NOTICE_TITLE + '</a></div></td>'
+
+	                  output += '<td><div>' + item.board_DATE+'</div></td>'
+	                        + '</div></td></tr>'
 	               })
 	            output += "</tbody>"
 	            $('table').append(output)//table 완성
@@ -94,7 +100,7 @@ function go(page) {
 	            $(".pagination").empty(); //페이징 처리
 	            output = "";
 	            
-	            digit = '◀&nbsp;'
+	            digit = '이전&nbsp;'
 	            href="";   
 	            if (data.page > 1) {
 	               href = 'href=javascript:go(' + (data.page - 1) + ')';
@@ -110,7 +116,7 @@ function go(page) {
 	               setPaging( href, digit);
 	            }
 	            
-	            digit = '▶&nbsp;';
+	            digit = '다음&nbsp;';
 	            href="";
 	            if (data.page < data.maxpage) {
 	               href = 'href=javascript:go(' + (data.page + 1) + ')';
@@ -132,6 +138,15 @@ function go(page) {
 	   })// ajax end
 	 } // fucntion ajax end
 
+	$(function() {
+	   $("#viewcount").change(function() {
+	      go(1);//보여줄 페이지를 1페이지로 설정합니다.
+	   });// change end
+
+	        $("button").click(function(){
+	           location.href="NoticeWrite.bo";
+	     })
+	})
 </script>
 
 </head>

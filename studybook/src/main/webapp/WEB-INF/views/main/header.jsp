@@ -35,6 +35,17 @@
 <title>StudyBook | ${id} </title>
 </c:if>
 <c:if test="${empty id }">
+
+<script>
+$(document).ready(function(){
+	
+	$("#menu_login").click(function(){
+		location.href="login.mem";
+	})
+})
+
+</script>
+
 <title>StudyBook</title>
 </c:if>
 
@@ -59,7 +70,7 @@
 						<img src="resources/image/profile/default.png">
 					</div>
 				<c:if test="${email==null}">
-					<p class="j_menu_login">로그인이 필요합니다.</p>
+					<button id="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
 				</c:if>
 				<c:if test="${email!=null}">
 					<div class="j_menu_login">
