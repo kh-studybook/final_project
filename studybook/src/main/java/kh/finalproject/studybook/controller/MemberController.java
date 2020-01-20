@@ -133,7 +133,7 @@ public class MemberController {
 		out.close();
 	}
 	
-	//delete?
+	//delete? 
 	@RequestMapping(value="delete.mem", method = RequestMethod.GET)
 	public int delete(int key, HttpServletResponse response) throws Exception {
 		int result = memberservice.delete(key);

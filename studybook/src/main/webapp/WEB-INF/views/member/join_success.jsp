@@ -12,7 +12,7 @@
 	font-family: "맑은 고딕";
 }
 
-.s_title {
+.s_title {  
 	margin-top: 250px; 
 	margin-bottom: 35px;
 	font-size: 32px;

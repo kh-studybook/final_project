@@ -173,9 +173,9 @@ input[type=checkbox] {
 				</div>
 			</div>
 				
-			
+			 
 			<div class="row">
-				<div class="col-100">
+				<div class="col-100"> 
 					<input type="submit" class="s_submit clear" value="확인">
 				</div>
 			</div>

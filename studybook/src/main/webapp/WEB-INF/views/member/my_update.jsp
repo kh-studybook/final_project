@@ -238,7 +238,7 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="email">이메일</label>
 					</div>
-					<div class="col-50">
+					<div class="col-50"> 
 						<span id="email">${member.email}</span>
 					</div>
 				</div>
@@ -246,7 +246,7 @@ instead of next to each other */
 					<div class="col-30"></div>
 					<div class="col-20">
 						<label for="phone">연락처</label>
-					</div>
+					</div> 
 					<div class="col-20">
 						<span id="modal_phone">${member.phone}</span>
 					</div>

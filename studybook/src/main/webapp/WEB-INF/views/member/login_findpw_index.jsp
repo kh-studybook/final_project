@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var mainheight = $('main').height();
 	var navheight = 150px;
 	if(($(window).height() - navheigt) < mainheight) {
-		$('footer').css({
+		$('footer').css({    
 			'position' : fixed,
 			'bottom' : 0
 		}) 

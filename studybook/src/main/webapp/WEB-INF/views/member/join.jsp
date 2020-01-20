@@ -206,7 +206,7 @@ input[type=checkbox] {
 				<div class="col-100"> 
 					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="11" required>
 					<span class=phonemsg></span>	
-				</div>
+				</div> 
 			</div>
 
 			
@@ -214,7 +214,7 @@ input[type=checkbox] {
 				<div class="col-100 joinus">
 					<span class="joinus"><input type="checkbox" name="priv"> 서비스 약관과 개인정보 보호정책에 동의합니다.</span>
 				</div>
-			</div> 
+			</div>  
 			
 			<div class="row">
 				<div class="col-100">
