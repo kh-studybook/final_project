@@ -11,6 +11,28 @@ public class Reserve {
 	private String require;
 	private int status=1;
 	private int extra_num;
+	private String reserver_name;
+	private String reserver_phone;
+	private String reserver_email;
+	
+	public String getReserver_name() {
+		return reserver_name;
+	}
+	public void setReserver_name(String reserver_name) {
+		this.reserver_name = reserver_name;
+	}
+	public String getReserver_phone() {
+		return reserver_phone;
+	}
+	public void setReserver_phone(String reserver_phone) {
+		this.reserver_phone = reserver_phone;
+	}
+	public String getReserver_email() {
+		return reserver_email;
+	}
+	public void setReserver_email(String reserver_email) {
+		this.reserver_email = reserver_email;
+	}
 	public int getR_code() {
 		return r_code;
 	}

@@ -39,7 +39,7 @@
 <script>
 $(document).ready(function(){
 	
-	$("button[name=menu_login]").click(function(){
+	$("#menu_login").click(function(){
 		location.href="login.mem";
 	})
 })
@@ -70,7 +70,7 @@ $(document).ready(function(){
 						<img src="resources/image/profile/default.png">
 					</div>
 				<c:if test="${email==null}">
-					<button name="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
+					<button id="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
 				</c:if>
 				<c:if test="${email!=null}">
 					<div class="j_menu_login">
