@@ -13,9 +13,13 @@ drop table member;
 
 select * from member;
 
+
+delete from member where name = '관리자';
+
 delete from member where name = '연수'
 
-insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999, 'default.png');
+
+insert into member values('관리자', '1234', 'admin@studybook.com', '0101111111', 999, 'default.png');
 
 
 insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999,'');

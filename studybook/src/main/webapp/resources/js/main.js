@@ -30,7 +30,7 @@ $(document).ready(function(){
 		}
 	})
 	
-	$('.jsCalendar-current').click(function(){
+	$('#my-calendar>table>tbody>tr>td').click(function(){
 		$('#m_write_date').empty();
 		$('#m_write_date').append($(this).text());
 		$('#m_write_date').append(" ");
@@ -68,15 +68,15 @@ $(document).ready(function(){
          zeroFill : false,
          // Custom month string format
          // month: Month's full name "February"
-         // ##: Month's number  "02"
-         // #: Month's number  "2"
-         // YYYY: Year  "2017"
+         // ##: Month's number "02"
+         // #: Month's number "2"
+         // YYYY: Year "2017"
          monthFormat : "month YYYY",
          // Custom day of the week string forma
          // day: Day's full name "Monday"
          // DDD: Day's first 3 letters "Mon"
          // DD: Day's first 2 letters "Mo"
-         // D: Day's first letter  "M"
+         // D: Day's first letter "M"
          dayFormat : "DDD",
          // 1 = monday
          firstDayOfTheWeek: 1,
@@ -96,7 +96,44 @@ $(document).ready(function(){
     
     // 숫자 3자리마다 , 붙이는 함수
     function numberFormat(inputNumber) {
-	    //return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    // return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     	return Number(inputNumber).toLocalString('en').split(".")[0];
     }
+    
+    function getList(){
+		$.ajax({
+			type:"post",
+			url:"getRoomList.net",
+			data : {"page" : page},
+			dataType:"json",
+			contentType:"application/json;charset=UTF-8",
+			success:function(rdata){
+				if(rdata.length>0){
+					$(".front").empty();
+					output = '';
+					$(rdata).each(function(){
+						output += '<div class="card" onClick="javascript:location.href=';
+						output += 'room_detail.ro?room_code=' + this.ROOM_CODE + '">';
+						output += '<img class="card-img-top img-fluid rounded mx-auto d-block" src="resources/image/room/' + this.FILE_NAME + '">';
+  						output += '<div class="card-body">';
+  						output += '<p class="card-text">';
+  						output += '<span class="j_room_name">' + this.ROOM_NAME + '</span>';
+  						output += '<span class="j_room_count">최대 ' + this.MAX_MEMBER + "인</span>";
+  						output += '</P>';
+  						output += '<p class="card-text">';
+  						output += '<span class="j_room_pay"><span class="j_room_pay_hour">' + this.HOUR_COST + '</span> 원/시간</span>';
+  						output += '<span class="j_room_tag">' + this.HASHTAG + '</span>';
+  						output += '</p></div></div>';
+						  						});
+					$(".front").append(output);
+				} else {
+					$(".front").text("등록된 스터디룸이 없습니다.");
+				}
+			}
+		});// ajax end
+	}// function end
+
+	$('.page-link').click(function(){
+		getList();
+	})
 })

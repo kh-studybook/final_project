@@ -32,6 +32,8 @@
 <script src="resources/js/header.js"></script>
 
 <!-- title -->
+
+<!--
 <c:if test="${!empty id }">
 <title>StudyBook | ${id} </title>
 </c:if>
@@ -52,6 +54,7 @@ $(document).ready(function(){
 
 </script>
 
+-->
 <title>StudyBook</title>
 </c:if>
 
@@ -86,7 +89,11 @@ $(document).ready(function(){
 				<c:if test="${member.email!=null}">
 					<div class="j_menu_login">
 						<div class="j_menu_name">[${member.name}]</div>
+
+					<!--	<div class="j_menu_reg"><a href="#">프로필 관리</a></div> -->
+
 						<button id="menu_update" class="j_menu_reg">프로필 관리</button>
+
 					</div>
 				</c:if>
 			</div>
@@ -104,9 +111,11 @@ $(document).ready(function(){
 		<div class="j_menu_event" onClick="#">이 달의 이벤트</div>
 		<div>
 			<ul>
-				<li class="j_menu_list" onClick="#">스터디북 홈<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onClick="#">공지사항<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onClick="#">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+
+				<li class="j_menu_list" onclick="location.href='/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+
 			</ul>
 		</div>
 		<div class="j_menu_bottom">
