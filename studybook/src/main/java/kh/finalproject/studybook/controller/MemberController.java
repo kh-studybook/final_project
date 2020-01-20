@@ -97,7 +97,12 @@ public class MemberController {
 	public String findpw() {
 		return "member/login_findpw_index";
 	}
-
+	
+	
+	@RequestMapping(value = "/updatepw.mem", method = RequestMethod.GET)
+	public String updatepw() {
+		return "member/my_password_index";
+	}
 	
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
