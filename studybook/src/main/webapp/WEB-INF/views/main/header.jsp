@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -71,7 +72,7 @@ $(document).ready(function(){
 		<a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
 		<div class="j_menu__header">
 			<div class="j_menu_member">
-					<div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 보기 -->
+					<div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 확인하기 -->
 						<c:if test="${member.profile == null}">
 						<img src="resources/image/profile/default.png">
 						</c:if>
@@ -125,4 +126,5 @@ $(document).ready(function(){
 		</c:if>
 		</div>
 	</div>
+
 </nav>
