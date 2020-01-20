@@ -273,7 +273,7 @@ instead of next to each other */
 				
 				<div class="row">
 					<div class="col-100">
-						<a href=# class=s_delete>계정 삭제하기</a>
+						<a href="delete.mem" class=s_delete>계정 삭제하기</a>
 					</div>
 				</div>
 			</form>

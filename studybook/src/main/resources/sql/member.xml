@@ -4,7 +4,7 @@
 
 <mapper namespace="Members"> 
 
-<!-- profile ㅠㅠ -->
+<!-- profile check! -->
 
 	<insert id="insert" parameterType="member">
 		<selectKey resultType="int" order="BEFORE" keyProperty="key">
@@ -28,8 +28,8 @@
 	</update>
 	
 	
-	<delete id="delete" parameterType="String">
-		delete from member where email=#{email}
+	<delete id="delete" parameterType="int">
+		delete from member where key=#{key}
 	</delete>
 	
 	<select id="myInfo" parameterType="int" resultType="member">

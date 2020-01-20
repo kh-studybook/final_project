@@ -133,6 +133,23 @@ public class MemberController {
 		out.close();
 	}
 	
+	//delete?
+	@RequestMapping(value="delete.mem", method = RequestMethod.GET)
+	public int delete(int key, HttpServletResponse response) throws Exception {
+		int result = memberservice.delete(key);
+	
+		if (result != 1) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('뭐지?');");
+			out.println("location.href='main.net';");
+			out.println("</script>");
+			out.close();
+		}
+		return result;
+	}
+	
 	
 	@RequestMapping (value = "/logout.mem", method = RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletResponse response) throws Exception {

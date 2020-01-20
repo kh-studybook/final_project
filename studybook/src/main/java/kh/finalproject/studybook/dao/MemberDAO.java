@@ -30,6 +30,10 @@ public class MemberDAO {
 		return sqlSession.selectOne("Members.usercheck", email);
 	}
 
+	public int delete(int key) {
+		return sqlSession.delete("Members.delete", key);
+	}
+
 
 
 

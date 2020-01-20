@@ -40,4 +40,9 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
+	@Override
+	public int delete(int key) {
+		return dao.delete(key);
+	}
+	
 }
