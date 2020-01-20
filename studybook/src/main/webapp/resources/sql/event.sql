@@ -5,10 +5,12 @@ create table event(
 	content varchar2(4000) not null,
 	event_date date not null,
 	event_start varchar2(10) not null,
-	event_end varchar2(10) not null,
+event_end varchar2(10) not null,
 	event_room varchar2(50) not null,
 	event_pic varchar2(200) not null
 );
+alter table event add event_status number(10) default 0;
+
 
 alter table event add event_status number(10) default 0;
 

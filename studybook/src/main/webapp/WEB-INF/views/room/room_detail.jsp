@@ -16,9 +16,9 @@
 <script src="resources/js/room_detail.js"></script>
 </head>
 <body>
-<form action="room_reserve.re">
+<form action="room_reserve_page.re">
 		<input type="hidden" name="room_code" id="room_code" value="2">
-		<input type="hidden" name="mem_key" id="mem_key" value="${key}">
+		<input type="hidden" name="mem_key" id="mem_key" value="2">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -269,13 +269,14 @@
 												class="e_price"><span id="total_time_price">0</span>원</span>
 										</div>
 										<div class="e_price_div">
-											<span class="e_price_name">추가 인원(<span name="extra_num" id="extra_num">0</span>명)</span> 
+											<span class="e_price_name">추가 인원(<span name="extra_num_span" id="extra_num_span">0</span>명)</span> 
 											<span class="e_price"><span name="extra_num_price" id="extra_num_price">0</span>원</span>
+											<input type="hidden" name="extra_num" id="extra_num">
 										</div>
 										<hr>
 										<div class="e_price_div">
-											<span class="e_total_price"><span name="total_cost" id="total_price">0</span>원</span>
-											<input type="hidden" name="total_cost">
+											<span class="e_total_price"><span name="total_cost_span" id="total_cost_span">0</span>원</span>
+											<input type="hidden" name="total_cost" id="total_cost" >
 										</div>
 									</div>
 

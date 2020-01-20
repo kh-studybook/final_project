@@ -23,7 +23,7 @@ public class MemberDAO {
 	}
 
 	public Member myinfo(int key) {
-		return null;
+		return sqlSession.selectOne("Members.myInfo",key);
 	}
 
 	public Member isUser(String email) {

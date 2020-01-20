@@ -19,11 +19,13 @@ $(document).on(
 					}
 				}
 				btn.closest('.number-spinner').find('input').val(newVal);
-				$("#extra_num").text(newVal);
+				$("#extra_num_span").text(newVal);
+				$("#extra_num").val(newVal);
 				$("#extra_num_price").text(1000*newVal);
 				var extra_price=$("#extra_num_price").text();
 				var room_price=$("#total_time_price").text();
-				$("#total_price").text(parseInt(extra_price)+parseInt(room_price));
+				$("#total_cost_span").text(parseInt(extra_price)+parseInt(room_price));
+				$("#total_cost").val(parseInt(extra_price)+parseInt(room_price));
 				return false;
 			});
 	
@@ -166,7 +168,8 @@ $(document).on(
 					}
 				var extra_price=$("#extra_num_price").text();
 				var room_price=$("#total_time_price").text();
-				$("#total_price").text(parseInt(extra_price)+parseInt(room_price));
+				$("#total_cost_span").text(parseInt(extra_price)+parseInt(room_price));
+				$("#total_cost").val(parseInt(extra_price)+parseInt(room_price));
 				time_check=0;
 			}
 		});	

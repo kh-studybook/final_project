@@ -31,6 +31,8 @@
 <script src="resources/js/header.js"></script>
 
 <!-- title -->
+
+
 <title>StudyBook</title>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -53,6 +55,7 @@
 					<div id="j_menu_profile">
 						<img src="resources/image/profile/default.png">
 					</div>
+
 				<c:if test="${member.key==null}">
 					<p name="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
 				</c:if>

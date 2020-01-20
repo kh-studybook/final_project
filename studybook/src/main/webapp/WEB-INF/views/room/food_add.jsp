@@ -18,7 +18,7 @@ $(document).on('click', '.number-spinner button', function () {
 		if (oldValue > 1) {
 			newVal = parseInt(oldValue) - 1;
 		} else {
-			newVal = 1;
+			newVal = 0;
 		}
 	}
 	btn.closest('.number-spinner').find('input').val(newVal);
@@ -29,7 +29,7 @@ $(document).on('click', '.number-spinner button', function () {
 </script>
 </head>
 <body>
-<form action="reserve_ok.re">
+<form action="reserve_ok_page.re">
 	<div class="container">
 		<div class="col-md-12 e_food_page_title">
 			<span>음료 추가 페이지</span>
@@ -59,7 +59,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="1">
+									</span> <input type="text" class="form-control text-center" value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
@@ -91,7 +91,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="1">
+									</span> <input type="text" class="form-control text-center" value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
@@ -123,7 +123,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="1">
+									</span> <input type="text" class="form-control text-center" value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
