@@ -37,7 +37,7 @@ import kh.finalproject.studybook.service.RoomService;
 public class RoomController {
 	@Autowired
 	private RoomService roomservice;
-	
+
 	@Autowired
 	private ReserveService reserveservice;
 
@@ -93,52 +93,40 @@ public class RoomController {
 		MultipartFile first = fileList.get(0);
 		System.out.println("fileList:" + fileList.size());
 
-		String path=saveFolder;
+		String path = saveFolder;
 		System.out.println("path = " + path);
 
-		/*
-		 * // 포문으로 꺼냄 int i = gallery1.getGALLERY_NUM(); for (MultipartFile mf :
-		 * fileList) {
-		 * 
-		 * String originFileName = mf.getOriginalFilename();// 원본파일명 long fileSize =
-		 * mf.getSize();// 파일 사이즈 int num = i++; System.out.println("originFilename : "
-		 * + originFileName); System.out.println("fileSize : " + fileSize);
-		 * System.out.println("i=" + i);
-		 * 
-		 */
-		
-			// 포문으로 꺼냄
-			int i = gallery1.getGALLERY_NUM();
-			for (MultipartFile mf : fileList) {
+		// 포문으로 꺼냄
+		int i = gallery1.getGALLERY_NUM();
+		for (MultipartFile mf : fileList) {
 
-				String originFileName = mf.getOriginalFilename();// 원본파일명
-				long fileSize = mf.getSize();// 파일 사이즈
-				int num = i++;
-				System.out.println("originFilename : " + originFileName);
-				System.out.println("fileSize : " + fileSize);
-				System.out.println("i=" + i);
+			String originFileName = mf.getOriginalFilename();// 원본파일명
+			long fileSize = mf.getSize();// 파일 사이즈
+			int num = i++;
+			System.out.println("originFilename : " + originFileName);
+			System.out.println("fileSize : " + fileSize);
+			System.out.println("i=" + i);
 
-				
-				String safeFile = path + System.currentTimeMillis() + originFileName;
-				String DBname = System.currentTimeMillis() + originFileName;
+			String safeFile = path + System.currentTimeMillis() + originFileName;
+			String DBname = System.currentTimeMillis() + originFileName;
 
-				try {
-					mf.transferTo(new File(safeFile));
-					// 파일명 DB에 저장
-					roomservice.insertGallery(room_code, DBname, i);
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-					System.out.println("갤러리에 이미지파일 업로드하다 에러남 Roomcontroller");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
+			try {
+				mf.transferTo(new File(safeFile));
+				// 파일명 DB에 저장
+				roomservice.insertGallery(room_code, DBname, i);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+				System.out.println("갤러리에 이미지파일 업로드하다 에러남 Roomcontroller");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		/* } */
 
+		}
+		
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('OK')");
+		out.println("alert('룸이 생성되었습니다.')");
 		out.println("location.href='RoomList.ro';");
 		out.println("</script>");
 		out.close();
@@ -192,7 +180,6 @@ public class RoomController {
 		out.print(result);
 	}
 
-
 	// 룸수정RoomModify.ro
 	@GetMapping("RoomModify.ro") // 파라미터로 넘어올때는 대소문자를 맞춰줘야함, 반드시 들어오는 파라미터라서 int room_code)로 작성
 	public ModelAndView roomModifyView(int room_code, ModelAndView mv, HttpServletRequest request) throws Exception {
@@ -220,7 +207,7 @@ public class RoomController {
 	// 룸 상세 수정
 	@PostMapping("RoomModifyAction.ro")
 	public ModelAndView RoomModifyAction(Room room, Room_ex room_ex, ModelAndView mv,
-			MultipartHttpServletRequest mtfRequest) throws Exception {
+			MultipartHttpServletRequest mtfRequest,HttpServletResponse response) throws Exception {
 
 		String content = room.getROOM_INTRO();
 		content = content.replace("\r\n", "<br>");
@@ -228,7 +215,7 @@ public class RoomController {
 		String content2 = room.getFAC_INTRO();
 		content2 = content2.replace("\r\n", "<br>");
 		room.setFAC_INTRO(content2);
-		
+
 		// 룸정보 테이블에 입력
 		int result = roomservice.updateRoom(room);
 
@@ -295,38 +282,65 @@ public class RoomController {
 			}
 			String url = "redirect:RoomList.ro";
 			mv.setViewName(url);
+			
+			
 		}
-
-		return mv;
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정되었습니다.')");
+		out.println("location.href='RoomList.ro';");
+		out.println("</script>");
+		out.close();
+		return null;
 
 	}
+	@GetMapping("RoomDelete.ro")
+	public String RoomDeleteAction(int room_code,HttpServletResponse response) throws Exception{
+		
+		int result = roomservice.roomDelete(room_code);
+		
+		if(result==0) {
+			System.out.println("룸 삭제 실패");
+		}
+		System.out.println("룸 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('삭제 되었습니다.');");
+		out.println("location.href='RoomList.ro';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+	
+	
 
 	// 지은 끝--
 
 	// 룸 정보 보기 - 은지
 	@RequestMapping(value = "/room_detail.ro")
-	public ModelAndView room_detail(int room_code,ModelAndView mv, 
-			HttpServletRequest request) {
-		
-		Room room=roomservice.getRoomDetail(room_code);
-		//Room_ex room_ex=roomservice.getRoomExDetail(room_code);
-		//List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
-		if(room==null) {
+	public ModelAndView room_detail(int room_code, ModelAndView mv, HttpServletRequest request) {
+
+		Room room = roomservice.getRoomDetail(room_code);
+		// Room_ex room_ex=roomservice.getRoomExDetail(room_code);
+		// List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		if (room == null) {
 			System.out.println("룸 상세보기 실패");
 			mv.setViewName("error/error");
-			mv.addObject("url",request.getRequestURL());
-			mv.addObject("message","룸 상세보기 실패입니다.");
-		}else {
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "룸 상세보기 실패입니다.");
+		} else {
 			System.out.println("룸 상세보기 성공");
 			mv.setViewName("room/room_detail_page");
-			mv.addObject("room",room);
-			//mv.addObject("room_ex",room_ex);
-			//mv.addObject("gallerylist",gallerylist);
+			mv.addObject("room", room);
+			// mv.addObject("room_ex",room_ex);
+			// mv.addObject("gallerylist",gallerylist);
 		}
 		return mv;
 	}
-	
-	
+
 	// 메인 화면 보기(테스트) - 민지
 	@RequestMapping(value = "/main.net")
 	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -338,8 +352,7 @@ public class RoomController {
 		int listcount = roomservice.getListCount();
 
 		// 총 페이지 수
-		int maxpage = (listcount + limit - 1)/limit;
-		
+		int maxpage = (listcount + limit - 1) / limit;
 
 		// 시작 페이지(1, 6, 11, ...)
 		int startpage = ((page - 1) / 5) * 5 + 1;

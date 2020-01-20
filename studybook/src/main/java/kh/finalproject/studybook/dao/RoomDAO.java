@@ -53,7 +53,11 @@ public class RoomDAO {
 	public int updateRoom(Room room) {
 		return sqlSession.update("Rooms.updateRoom",room);
 	}
-
+	
+	//룸정보 삭제
+	public int deleteRoom(int room_code) {
+		return sqlSession.delete("Rooms.delete",room_code);
+	}
 
 	// --지은 끝
 
@@ -66,6 +70,8 @@ public class RoomDAO {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
 	// --민지 끝
+
+	
 
 
 	

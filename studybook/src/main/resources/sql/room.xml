@@ -145,6 +145,11 @@ where ROOM_CODE=#{ROOM_CODE}
 delete from gallery where ROOM_CODE=#{ROOM_CODE}
 </delete>
 
+<!-- 룸정보 삭제 -->
+<delete id="delete" parameterType="int">
+delete from room where ROOM_CODE=#{ROOM_CODE}
+</delete>
+
 <!-- 지은 끝 -->
 
 <!-- 민지 시작 -->
