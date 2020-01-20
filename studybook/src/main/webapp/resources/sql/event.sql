@@ -11,9 +11,6 @@ event_end varchar2(10) not null,
 );
 alter table event add event_status number(10) default 0;
 
-
-alter table event add event_status number(10) default 0;
-
 drop table event;
 
 select * from event;

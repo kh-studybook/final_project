@@ -191,9 +191,13 @@
 	background: #707070;
 }
 
+/* Calendar */
 .jsCalendar{
-	z-index:100;
 	display:none;
+}
+
+#my-calendar table {
+	z-index: 10;
 }
 
 .jsCalendar table td{
@@ -212,7 +216,10 @@
 }
 
 .jsCalendar tbody td{
-	width:36px!important;
+	border-radius:24px;
+	width: 48px;
+	height: 48px;
+	line-height: 48px;
 }
 
 .jsCalendar tbody td:hover{

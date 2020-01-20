@@ -31,8 +31,6 @@
 <script src="resources/js/header.js"></script>
 
 <!-- title -->
-
-
 <title>StudyBook</title>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -61,7 +59,7 @@
 				</c:if>
 				<c:if test="${member.key!=null}">
 					<div class="j_menu_login">
-						<div class="j_menu_name">[${name}]</div>
+						<div class="j_menu_name">[${member.name}]</div>
 						<div class="j_menu_reg"><a href="#">프로필 관리</a></div>
 					</div>
 				</c:if>
@@ -82,7 +80,7 @@
 			<ul>
 				<li class="j_menu_list" onclick="location.href='/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
 				<li class="j_menu_list" onclick="location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onclick="location.href='#';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 			</ul>
 		</div>
 		<div class="j_menu_bottom">
