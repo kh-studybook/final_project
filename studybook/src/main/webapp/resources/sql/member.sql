@@ -15,4 +15,5 @@ select * from member;
 
 delete from member where name = 'admin'
 
-insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 0);
+insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999, 'default.png');
+
