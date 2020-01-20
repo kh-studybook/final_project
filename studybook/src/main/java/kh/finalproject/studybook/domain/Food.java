@@ -5,6 +5,7 @@ public class Food {
 	private String food_name;
 	private int food_cost;
 	private String food_pic;
+	
 	public int getFood_code() {
 		return food_code;
 	}
