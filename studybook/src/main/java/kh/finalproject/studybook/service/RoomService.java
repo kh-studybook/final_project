@@ -42,6 +42,8 @@ public interface RoomService {
 	public int updateRoom_ex(int room_code, Room_ex room_ex);
 	//갤러리에서 해당 룸넘버의 기존 사진 지우기
 	public void deleteGallary(int room_code);
+	//룸삭제
+	public int roomDelete(int room_code);
 	
 	public Room getRoomInfo(int room_code);
 	

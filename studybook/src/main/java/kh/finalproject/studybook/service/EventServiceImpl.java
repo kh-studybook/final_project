@@ -47,15 +47,12 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public int eventDelete(int num) {//이벤트 삭제하기
-	
 		return dao.eventDelete(num);
-		
 	}
 
 	@Override
-	public boolean isEventWriter(int num) {
-		// TODO Auto-generated method stub
-		return false;
+	public String getEventWriter(int mem_key) {
+		return dao.getEventWriter(mem_key);
 	}
 
 	

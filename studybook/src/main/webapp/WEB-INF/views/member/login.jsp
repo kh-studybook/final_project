@@ -11,11 +11,11 @@
 
 * {
 	box-sizing: border-box;
-	font-family: "맑은 고딕";
+	font-family: "맑은 고딕";   
 }
 
 .s_title { 
-	margin-top: 250px; 
+	margin-top: 300px; 
 	margin-bottom: 20px;
 	font-size: 32px;
 	text-align: center;
@@ -119,7 +119,7 @@ instead of next to each other */
 		});
 
 		$(".findpw").click(function() {
-			location.href = "login_findpw.mem";
+			location.href = "findpw.mem";
 		}); 
 
 		

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,9 +28,14 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@RequestMapping(value = "/notice.bo", method = RequestMethod.GET)
+	public String notice() {
+		return "notice/notice_list_index"; 
+	}
+	
 	
 	//공지사항 리스트
-	@RequestMapping(value = "/NoticeList.bo")
+	@RequestMapping(value = "/NoticeList.bo", method = RequestMethod.GET)
 	ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
 			throws Exception { 
@@ -59,7 +65,6 @@ public class NoticeController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("noticelist", noticelist);
 		mv.addObject("limit", limit);
-
 		return mv;
 	}
 
@@ -80,10 +85,8 @@ public class NoticeController {
 			mv.setViewName("notice/notice_detail");
 			mv.addObject("noticedata", notice);
 		}
-		return mv;
+		return mv;  
 	}
-
-	
 
 	
 	
@@ -95,6 +98,7 @@ public class NoticeController {
 	}
 	
 	
+	
 	//공지 수정 상세페이지 보기 (관리자)
 	@GetMapping("/NoticeModifyView.bo")
 	public ModelAndView NoticeModifyView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
@@ -102,7 +106,7 @@ public class NoticeController {
 		Notice noticedata = noticeService.getDetail(num);
 		if (noticedata == null) {
 			System.out.println("공지 수정 상세보기 실패");
-			mv.setViewName("error/error");
+	//		mv.setViewName("error/error");
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "공지 수정 상세보기 실패");
 			return mv;
@@ -134,13 +138,14 @@ public class NoticeController {
 	}
 	
 
+	
 	//공지 삭제 (관리자)
 	@PostMapping("NoticeDeleteAction.bo")
 	public String NoticeDeleteAction(int num, HttpServletResponse response) throws Exception {
 
 		boolean usercheck = noticeService.isNoticeWriter(num);
 
-		if (usercheck == false) {
+		if (usercheck == false) {  //필요 없으려나...
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -151,18 +156,11 @@ public class NoticeController {
 			return null;
 		}
 
-		int result = noticeService.noticeDelete(num);
-
-		if (result == 0) {
-			System.out.println("�Խ��� ���� ����");
-		}
-
-		// ���� ����
-		System.out.println("�Խ��� ���� ����");
+		System.out.println("삭제 성공");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('�����Ǿ����ϴ�');");
+		out.println("alert('삭제 완료');");
 		out.println("location.href='NoticeList.bo';");
 		out.println("</script>");
 		out.close();
@@ -171,6 +169,8 @@ public class NoticeController {
 	}
 
 	
+	
+	//paging
 	@ResponseBody
 	@PostMapping("NoticeListAjax.bo")
 	public Object NoticeListAjax(int limit, int page) {
@@ -201,8 +201,5 @@ public class NoticeController {
 		return result;
 
 	}
-	
-	
-	
 	
 }

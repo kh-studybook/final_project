@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -42,6 +43,11 @@ $(document).ready(function(){
 	$("#menu_login").click(function(){
 		location.href="login.mem";
 	})
+	
+	$("#menu_update").click(function(){
+		location.href="update.mem";
+	})
+	
 })
 
 </script>
@@ -66,16 +72,21 @@ $(document).ready(function(){
 		<a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
 		<div class="j_menu__header">
 			<div class="j_menu_member">
-					<div id="j_menu_profile">
+					<div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 확인하기 -->
+						<c:if test="${member.profile == null}">
 						<img src="resources/image/profile/default.png">
+						</c:if>
+						<c:if test="${member.profile!= null}">
+						<img src="resources/${member.profile}">
+						</c:if>
 					</div>
-				<c:if test="${email==null}">
+				<c:if test="${member.email==null}">
 					<button id="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
 				</c:if>
-				<c:if test="${email!=null}">
+				<c:if test="${member.email!=null}">
 					<div class="j_menu_login">
-						<div class="j_menu_name">[${name}]</div>
-						<div class="j_menu_reg"><a href="#">프로필 관리</a></div>
+						<div class="j_menu_name">[${member.name}]</div>
+						<button id="menu_update" class="j_menu_reg">프로필 관리</button>
 					</div>
 				</c:if>
 			</div>
@@ -100,7 +111,14 @@ $(document).ready(function(){
 		</div>
 		<div class="j_menu_bottom">
 			<div></div>
-			<div><a href="#">로그아웃</a></div>
+			<div>
+			<c:if test="${member.email==null}">
+			<span></span>
+			</c:if>
+			<c:if test="${member.email!=null}">
+			<a href="logout.mem">로그아웃</a>
+			</c:if>
+			</div>
 			<div>Powered by STUDYBOOK</div>
 		
 		<c:if test="${id=='admin'}">
@@ -108,4 +126,5 @@ $(document).ready(function(){
 		</c:if>
 		</div>
 	</div>
+
 </nav>

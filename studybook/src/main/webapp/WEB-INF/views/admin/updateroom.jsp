@@ -149,6 +149,13 @@
 
 			<div class="card-body">
 				<div class="row">
+				<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label">룸번호</label> <input type="text"
+								name="ROOM_CODE" id="room_code" maxlength="5"
+								class="form-control" value="${roomdata.ROOM_CODE}" readOnly />
+						</div>
+					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label">룸 이름 *</label> <input type="text"

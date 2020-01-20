@@ -17,8 +17,14 @@
 
 <title>스터디북-관리자사이트</title>
 <style>
-*{font-family:"맑은 고딕";}
-.w_wrap{min-height:900px;}
+* {
+	font-family: "맑은 고딕";
+}
+
+.w_wrap {
+	min-height: 900px;
+}
+
 .navbar-login {
 	width: 305px;
 	padding: 10px;
@@ -52,7 +58,12 @@
 .tag_strong {
 	color: white;
 }
-.w_bgcolor{background:#7F56D2}
+
+.w_bgcolor {
+	background: #7F56D2
+}
+
+
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark w_bgcolor">
 	<a class="navbar-brand" href="main.index">STUDYBOOK</a>
@@ -66,61 +77,29 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="main.index">Home </a></li>
+				href="RoomList.ro">Home </a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="javascript:void(0);" onclick="registerWord();">공간관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="BoardList.bo">회원관리</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#">공지사항</a>
+				href="javascript:void(0);"
+				onclick="javascript:location.href='RoomList.ro'">공간관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="FoodList.re">음식관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="MemberList.bo">회원관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a>
 			</li>
 		</ul>
-		
-		<c:if test="${userKey !=null}">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <img src="img/profile.png"
-						class="thumbnail1 setProfilePhoto"> <strong
-						class=class=tag_strong>${userName}</strong> <span
-						class="glyphicon glyphicon-chevron-down"></span>
-				</a>
-					<ul class="dropdown-menu mymenu">
-						<li>
-							<div class="navbar-login">
-								<div class="row">
-									<div class="col-lg">
-										<p class="text-center">
-											<img src="img/profile.png" class="thumbnail2 setProfilePhoto">
-										</p>
-										<p class="text-center">
-											<strong>${userName}</strong>
-										</p>
-										<p class="text-center small">${userEmail}</p>
-										<p class="text-center small">
-											<a href="mypage.net">계정 정보</a>
-										</p>
-										<p class="text-center">
-											<a href="mypage.net" class="btn btn-primary btn-block btn-sm">나의
-												단어 </a> <a href="mypage.net?type=bookmark"
-												class="btn btn-warning btn-block btn-sm">북마크 </a> <a
-												href="logout.net" class="btn btn-light btn-block btn-sm">로그아웃</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul></li>
-			</ul>
-		</c:if>
-		<c:if test="${userKey == null }">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item"><a class="nav-link loginbtn"
-					href="login.net">로그인</a></li>
-			</ul>
-		</c:if>
+		<%-- <c:if test="${member.key==0}">
+			<script>
+				location.href = "main.net";
+			</script>
+		</c:if> --%>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="nav-item"><a class="nav-link loginbtn"
+				href="logout.net">(${member.name}) 로그아웃</a></li>
+		</ul>
 
 
 	</div>
 </nav>
 <script>
-	
 	
 </script>
