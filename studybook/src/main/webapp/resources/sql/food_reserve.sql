@@ -7,6 +7,7 @@ create table food_reserve(
 );
 
 
+
 drop table food_reserve;
 
 select * from food_reserve;

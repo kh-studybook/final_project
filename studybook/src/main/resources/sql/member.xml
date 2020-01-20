@@ -8,7 +8,7 @@
 
 	<insert id="insert" parameterType="member">
 		<selectKey resultType="int" order="BEFORE" keyProperty="key">
-			select nvl(max(key),0)+1 from member
+			select nvl(max(key),1)+1 from member
 		</selectKey>
         insert into member (name, email, password, phone, key, profile)
         values (#{name}, #{email}, #{password}, #{phone}, #{key}, default)
@@ -31,6 +31,10 @@
 	<delete id="delete" parameterType="String">
 		delete from member where email=#{email}
 	</delete>
+	
+	<select id="myInfo" parameterType="int" resultType="member">
+		select * from member where key=#{mem_key}
+	</select>
 	
 	
 </mapper>

@@ -40,11 +40,9 @@ public class MemberController {
 	public String loginProcess(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpServletResponse response, HttpSession session) throws Exception {
 		int result = memberservice.isUser(email, password);
-		System.out.println("결과는" + result);
-		if (result == 1) {
-			session.setAttribute("email", email);
-			return "redirect:main.net";
-		} else {
+		System.out.println("결과는(key값)=" + result);
+		if (result == 0) {
+			
 			String message = "비밀번호 일치 X";
 			if (result == -1)
 				message = "이메일 존재 X";
@@ -57,6 +55,13 @@ public class MemberController {
 			out.println("</script>");
 			out.close();
 			return null;
+			
+		} else {
+			
+			Member member=memberservice.myinfo(result);
+			session.setAttribute("member", member);
+			System.out.println("member.name"+member.getName());
+			return "redirect:main.net";
 		}
 	}
 

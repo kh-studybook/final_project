@@ -1,9 +1,11 @@
 create table review(
 	review_code number(10) not null constraint review_review_code_pk primary key,
-	r_code number(10) not null constraint review_r_code_fk references reserve(r_code),
+	room_code number(10) not null constraint review_room_code_fk references room(room_code),
 	content varchar2(4000) not null,
-	review_date date not null
+	review_date date not null,
+	mem_key number(10) not null constraint review_mem_key_fk references member(key)
 );
+
 
 drop table review;
 
