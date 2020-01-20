@@ -27,7 +27,7 @@ select.form-control {
 }
 
 .rows {
-	text-align: right;
+	text-align: right; 
 }
 
 .row {

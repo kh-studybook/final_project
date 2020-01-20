@@ -154,11 +154,11 @@ input[type=checkbox] {
 	<div class="s_container">
 		<form name="updatepwform" action="updatepw.mem" method="post">
 			
-			<div class="row">
+			<div class="row"> 
 				<div class="col-100">
 					<input type="password" id="password" class="s_input" name="password" placeholder="${member.password}" readOnly>
 				</div>
-			</div>
+			</div> 
 			
 			<div class="row">
 				<div class="col-100">

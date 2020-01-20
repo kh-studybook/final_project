@@ -16,7 +16,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
 
-	public void insertNotice(Notice notice) {
+	public void insertNotice(Notice notice) { 
 		sqlSession.insert("Notice.insert", notice);
 	}
 	

@@ -19,7 +19,7 @@ import kh.finalproject.studybook.service.MemberService;
 @Controller
 public class MemberController { 
 
-	@Autowired
+	@Autowired 
 	private MemberService memberservice;
 
 	@RequestMapping(value = "/login.mem", method = RequestMethod.GET)

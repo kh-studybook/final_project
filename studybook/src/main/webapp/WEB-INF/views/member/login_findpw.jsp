@@ -16,7 +16,7 @@
 	margin-bottom: 25px;
 	font-size: 32px;
 	text-align: center;
-}
+} 
 
 .text {
 	margin-top: 7px;

@@ -242,7 +242,7 @@ instead of next to each other */
 						<span id="email">${member.email}</span>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row">  
 					<div class="col-30"></div>
 					<div class="col-20">
 						<label for="phone">연락처</label>
