@@ -29,6 +29,7 @@ import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.domain.Room_ex;
+import kh.finalproject.studybook.service.EventService;
 import kh.finalproject.studybook.service.ReserveService;
 import kh.finalproject.studybook.service.ReserveServiceImpl;
 import kh.finalproject.studybook.service.RoomService;
@@ -40,6 +41,9 @@ public class RoomController {
 	
 	@Autowired
 	private ReserveService reserveservice;
+	
+	@Autowired
+	private EventService eventservice;
 
 	@Value("${savefoldername}")
 	private String saveFolder;
@@ -331,13 +335,13 @@ public class RoomController {
 	@RequestMapping(value = "/main.net")
 	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
-		// 한 화면에 출력할 갯수
+		// 한 화면에 출력할 room 갯수
 		int limit = 9;
 
-		// 총 리스트 갯수
+		// 총 room 리스트 갯수
 		int listcount = roomservice.getListCount();
 
-		// 총 페이지 수
+		// 총 room 페이지 수
 		int maxpage = (listcount + limit - 1)/limit;
 		
 
@@ -351,6 +355,12 @@ public class RoomController {
 			endpage = maxpage;
 
 		List<Room> roomlist = roomservice.getRoomList(page, limit);
+		
+		// 한 화면에 출력할 event 갯수
+		int event_limit = 4;
+		
+		// 총 event 리스트 갯수
+		int event_listcount = eventservice.getEventListCount();
 
 		mv.setViewName("main/main");
 		mv.addObject("page", page);
@@ -360,6 +370,8 @@ public class RoomController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("list", roomlist);
 		mv.addObject("limit", limit);
+		mv.addObject("event_limit", event_limit);
+		mv.addObject("event_listcount", event_listcount);
 
 		return mv;
 	}

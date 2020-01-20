@@ -94,4 +94,9 @@ $(document).ready(function(){
           interval: 5000
     });
     
+    // 숫자 3자리마다 , 붙이는 함수
+    function numberFormat(inputNumber) {
+	    //return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	return Number(inputNumber).toLocalString('en').split(".")[0];
+    }
 })

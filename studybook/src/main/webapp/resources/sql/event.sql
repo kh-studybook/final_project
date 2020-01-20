@@ -10,6 +10,7 @@ create table event(
 	event_pic varchar2(200) not null
 );
 
+alter table event add event_status number(10) default 0;
 
 drop table event;
 

@@ -31,23 +31,7 @@
 <script src="resources/js/header.js"></script>
 
 <!-- title -->
-<c:if test="${!empty id }">
-<title>StudyBook | ${id} </title>
-</c:if>
-<c:if test="${empty id }">
-
-<script>
-$(document).ready(function(){
-	
-	$("button[name=menu_login]").click(function(){
-		location.href="login.mem";
-	})
-})
-
-</script>
-
 <title>StudyBook</title>
-</c:if>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="main.net">StudyBook</a>
@@ -69,10 +53,10 @@ $(document).ready(function(){
 					<div id="j_menu_profile">
 						<img src="resources/image/profile/default.png">
 					</div>
-				<c:if test="${email==null}">
-					<button name="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
+				<c:if test="${member.key==null}">
+					<p name="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
 				</c:if>
-				<c:if test="${email!=null}">
+				<c:if test="${member.key!=null}">
 					<div class="j_menu_login">
 						<div class="j_menu_name">[${name}]</div>
 						<div class="j_menu_reg"><a href="#">프로필 관리</a></div>
@@ -81,21 +65,21 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="j_menu_orgs">
-			<div class="j_menu_org" onClick="#">
+			<div class="j_menu_org" onclick="location.href='#';">
 				<div><i class="far fa-list-alt"></i></div>
 				<div>예약 관리</div>
 			</div>
-			<div class="j_menu_org" onClick="#">
+			<div class="j_menu_org" onclick="location.href='#';">
 				<div><i class="far fa-edit"></i></div>
 				<div>후기 관리</div>
 			</div>
 		</div>
-		<div class="j_menu_event" onClick="#">이 달의 이벤트</div>
+		<div class="j_menu_event" onclick="location.href='#';">이 달의 이벤트</div>
 		<div>
 			<ul>
-				<li class="j_menu_list" onClick="#">스터디북 홈<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onClick="#">공지사항<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onClick="#">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='#';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 			</ul>
 		</div>
 		<div class="j_menu_bottom">
@@ -103,7 +87,7 @@ $(document).ready(function(){
 			<div><a href="#">로그아웃</a></div>
 			<div>Powered by STUDYBOOK</div>
 		
-		<c:if test="${id=='admin'}">
+		<c:if test="${member.key == '999'}">
 			<div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='/studybook/admin'">관리자 센터로 이동</div>
 		</c:if>
 		</div>
