@@ -16,7 +16,7 @@
 	margin-bottom: 25px;
 	font-size: 32px;
 	text-align: center;
-}
+} 
 
 .text {
 	margin-top: 7px;
@@ -29,7 +29,7 @@
 .s_container {
 	margin-top: 22px;
 	display: flex;
-	justify-content: center;
+	justify-content: center;   
 }
 
 .s_input {

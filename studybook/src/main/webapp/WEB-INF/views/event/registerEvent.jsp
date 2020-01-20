@@ -9,6 +9,7 @@
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
 textarea::placeholder, input[type=text]::placeholder{color:black;}
 .col-25 > label {font-weight:bold;}
+.pp_locate{text-decoration:none; font-size:12px;}
 
 /** 입력 폼 관련*/
 input[type=text], select, textarea {width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;}
@@ -172,10 +173,18 @@ input[type=date]{height:3rem;}
 </script>
 </head>
 <body>
-<br><br><br><br><br><br>
+<div class="container">
+<br><br><br><br>
+	<!-- 상단 메뉴 -->
+   	<div class="row pp_locate"">
+      <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 등록 페이지</span></div>
+      <div class="col-md-4"></div>
+   	</div>
+   	<br>
+   	
 <h2 class = "p_title">이벤트 등록</h2>
 
-<div class="p container">
+
   <form method="post" action="EventAddAction.eve" enctype="multipart/form-data" id = "p_event_write_form">
   	<!--  작성자 : 추후 멤버키 다시 변경하기 admin 0-->
  	<input name = "mem_key" id = "mem_key" value = 0 type = "hidden">

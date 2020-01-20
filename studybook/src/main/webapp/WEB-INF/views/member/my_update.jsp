@@ -202,8 +202,14 @@ instead of next to each other */
 					<div class="col-100">
 						<label> <input type="file" name="uploadfile"
 							accept="image/gif, image/jpeg, image/png" style="display: none">
-							<img src="resources/image/profile/default.png" alt="Avatar"
+								<c:if test="${member.profile == null}">
+								<img src="resources/image/profile/default.png" alt="Avatar"
 							class="avatar">
+								</c:if>
+								<c:if test="${member.profile!= null}">
+								<img src="resources/${member.profile}" alt="Avatar"
+							class="avatar">
+								</c:if>
 						</label>
 					</div>
 				</div>
@@ -223,7 +229,7 @@ instead of next to each other */
 						<label for="name">이름</label>
 					</div>
 					<div class="col-30">
-						<input type="text" id="name" name="name" placeholder="손연수">
+						<span id="name">${member.name}</span>
 					</div>
 					<div class="col-20"></div>
 				</div>
@@ -232,23 +238,19 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="email">이메일</label>
 					</div>
-					<div class="col-50">
-						<input type="text" id="email" name="email"
-							placeholder="sonyeonsoo@son.com">
+					<div class="col-50"> 
+						<span id="email">${member.email}</span>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row">  
 					<div class="col-30"></div>
 					<div class="col-20">
 						<label for="phone">연락처</label>
-					</div>
+					</div> 
 					<div class="col-20">
-						<input type="text" id="modal_phone" name="phone"
-							placeholder="010-2222-3333">
-						<!--   <input type="text" name="phone" id=phone class=phone maxLength="12" value="${member.phone }">-->
+						<span id="modal_phone">${member.phone}</span>
 					</div>
 					<div class="col-30">
-
 						<button data-toggle="modal" data-target="#modalforupdate"
 												class=s_update id="v1">변경하기</button>
 					</div>
@@ -259,7 +261,8 @@ instead of next to each other */
 						<label for="password">비밀번호</label>
 					</div>
 					<div class="col-30">	
-						<a href=# class=s_update>변경하기</a>
+						<a href="updatepw.mem" class=s_update>변경하기</a>
+						
 					</div>
 					<div class="col-20"></div>
 				</div>
@@ -270,7 +273,7 @@ instead of next to each other */
 				
 				<div class="row">
 					<div class="col-100">
-						<a href=# class=s_delete>계정 삭제하기</a>
+						<a href="delete.mem" class=s_delete>계정 삭제하기</a>
 					</div>
 				</div>
 			</form>
@@ -296,7 +299,7 @@ instead of next to each other */
 							</div>
 							
 							<div class="modal_content">
-								<input type="text" id="phone" name="phone" placeholder="010-2222-3333">
+								<input type="text" id="phone" name="phone" placeholder="${member.phone}">
 								<span style="color: #141414; font-size: 10pt;" id="counter"></span>
 							</div>
 								

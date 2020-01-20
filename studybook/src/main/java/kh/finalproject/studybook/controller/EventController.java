@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,7 +63,7 @@ public class EventController {
 		      int date=c.get(Calendar.DATE);
 		      
 		      //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/" 바꾸기;
-		      String saveFolder="C:\\Users\\user1\\git\\final_project[0117]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+		      String saveFolder="C:\\Users\\user1\\git\\final_project[0120]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -105,7 +106,13 @@ public class EventController {
 		@RequestMapping(value = "event_list.eve")
 		public ModelAndView eventList(
 				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
-				ModelAndView mv) throws Exception {	
+				ModelAndView mv, HttpServletRequest request) throws Exception {
+			HttpSession session=request.getSession();
+			//추후 확인 : 나중에 지우기
+			session.setAttribute("mem_key", 0);
+			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
+			String event_writer = eventservice.getEventWriter(mem_key);
+			
 			int limit = 9;//기본으로 9개의 글을 보여줌
 			int listcount = eventservice.getEventListCount();// 총 리스트를 받아옴
 			
@@ -124,7 +131,7 @@ public class EventController {
 			mv.addObject("listcount", listcount);
 			mv.addObject("eventlist", eventlist);
 			mv.addObject("limit", limit);
-			
+			mv.addObject("event_writer", event_writer);
 			return mv;
 		}//EventList.eve end
 		
@@ -132,6 +139,10 @@ public class EventController {
 		@RequestMapping(value = "EventDetailAction.eve")
 		public ModelAndView eventGetDetail(int num, ModelAndView mv, HttpServletRequest request) {
 			Event event = eventservice.getEventDetail(num);
+			HttpSession session=request.getSession();
+			//추후 확인 : 나중에 지우기
+			session.setAttribute("mem_key", 0);
+			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
 			if (event == null) {
 				System.out.println("상세보기 실패");
 				mv.setViewName("redirect:eventList.eve");
@@ -140,30 +151,40 @@ public class EventController {
 			} else {
 				System.out.println("상세보기 성공");
 				int count = eventcommentservice.getEventListCount(num);
+				String event_writer = eventservice.getEventWriter(mem_key);
 				mv.setViewName("event/event_view");
 				mv.addObject("count", count);
 				mv.addObject("eventdata", event);
+				mv.addObject("event_writer", event_writer);
 			}				
 			return mv;
 		}//EventDetailAction.eve end
 		
 		//이벤트 수정 페이지 보기
-		@GetMapping("EventModifyView.eve")
+		@RequestMapping(value = "EventModifyView.eve", method = RequestMethod.GET)
 		public ModelAndView EventModify(int num, ModelAndView mv, HttpServletRequest request) 
 				throws Exception {
 			Event eventdata = eventservice.getEventDetail(num);
+			HttpSession session=request.getSession();
+			//추후 확인 : 나중에 지우기
+			session.setAttribute("mem_key", 0);
+			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
 			if(eventdata == null) {
 				System.out.println("(수정)상세보기 실패");
 				mv.setViewName("redirect:eventList.eve");
 				mv.addObject("url", request.getRequestURL());
 				mv.addObject("message", "(수정)상세보기 실패입니다.");
-				return mv;
+			} else {
+				String event_writer = eventservice.getEventWriter(mem_key);
+				System.out.println("(수정)상세보기 성공");
+				int count = eventcommentservice.getEventListCount(num);
+				mv.addObject("eventdata", eventdata);
+				mv.addObject("count", count);
+				mv.addObject("event_writer", event_writer);
+				mv.setViewName("event/event_modify");
 			}
-			System.out.println("(수정)상세보기 성공");		
-			mv.addObject("eventdata", eventdata);			
-			mv.setViewName("view/event_modify");
 			return mv;
-		}
+		}//EventModifyView.eve end
 		
 		//이벤트 수정하기
 		@PostMapping("EventModifyAction.eve")
@@ -266,58 +287,4 @@ public class EventController {
 		      out.close();
 		      return null;
 		   }
-		
-		//파일 다운 받기
-		@GetMapping("EventFileDown.eve")
-		   public void EventFileDown(String filename, HttpServletRequest request, String original, //이건 파라미터
-		         HttpServletResponse response) throws Exception {
- 
-
-		      // 서블릿의 실행환경 정보를 담고 있는 객체를 리턴합니다.
-		      ServletContext context= request.getSession().getServletContext();
-     
-		      String sFilePath = saveFolder + "/" + filename;
-		      System.out.println(sFilePath);
-
-		      byte b[] = new byte[4096];
-
-		      // sFilePath에 있는 파일의 MimeType을 구해옵니다.
-		      String sMimeType = context.getMimeType(sFilePath);
-		      System.out.println("sMimeType>>>" + sMimeType);
-
-		      if (sMimeType == null)
-		         sMimeType = "application/octet-stream";
-
-		      response.setContentType(sMimeType);
-
-		      // - 이부분이 한글 파일명이 깨지는 것을 방지해줍니다.
-		      String sEncoding = new String(original.getBytes("utf-8"), "ISO-8859-1");
-		      System.out.println(sEncoding);
-
-		      /*
-		       * Content-Disposition: attachment: 브라우저는 해당 Content를 처리하지 않고,
-		       */
-		      response.setHeader("Content-Disposition", "attachment; filename= " + sEncoding);
-
-		      // 프로젝트 속성 - Project-facets 에서 자바버전 1.8로 수정
-		      try ( // 소괄호 쓰면 알아서 close해줌
-		            // 웹브라우저로의 출력 스트림 생성합니다.
-		            BufferedOutputStream out2 = new BufferedOutputStream(response.getOutputStream());
-
-		            // sFilePath로 지정한 파일에 대한 입력 스트림을 생성합니다.
-		            BufferedInputStream in = new BufferedInputStream(new FileInputStream(sFilePath));) // 여기 소괄호 쓰면 자동으로 닫아줌
-		      {
-		         int numRead;
-		         // read(b,0,b.length) : 바이트 배열 b의 0번부터 b.length
-		         // 크기만큼 읽어옵니다.
-		         while ((numRead = in.read(b, 0, b.length)) != -1) {// 읽을 데이터가 존재하지 않을때 까지
-		            // 바이트 배열 b의 0번 부터 numRead크기 만큼 브라우저로 출력
-		            out2.write(b, 0, numRead);
-		         }
-		      }catch(Exception e) {
-		         e.printStackTrace();
-		      }
-		      
-		   }
-	
 }

@@ -8,8 +8,8 @@
 		<selectKey resultType = "int" order = "BEFORE" keyProperty = "event_num">
 			select nvl(max(event_num), 0)+1 from event
 		</selectKey>
-		insert into event(event_num, mem_key, title, content, event_date, event_start, event_end, event_room, event_pic) 
-		values(#{event_num}, #{mem_key}, #{title}, #{content}, #{event_date}, #{event_start}, #{event_end}, #{event_room}, #{event_pic})
+		insert into event(event_num, mem_key, title, content, event_date, event_start, event_end, event_room, event_pic, event_status) 
+		values(#{event_num}, #{mem_key}, #{title}, #{content}, #{event_date}, #{event_start}, #{event_end}, #{event_room}, #{event_pic}, #{event_status})
 	</insert>
 	
 	<select id = "count" resultType = "int">
@@ -26,7 +26,7 @@
 	
 	<select id = "list" parameterType = "java.util.Map" resultType = "Event">
 		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
-		event_start, event_end, event_room, event_pic from event) 
+		event_start, event_end, event_room, event_pic, event_status from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 		order by event_date
 	</select>
@@ -39,4 +39,8 @@
 	 		event_pic = #{event_pic}
 			where event_num = #{event_num}
 	</update>
+	
+	<select id = "event_writer" resultType = "String">
+		select name from member where key = #{mem_key}
+	</select>
 </mapper>
