@@ -185,6 +185,15 @@ public class RoomServiceImpl implements RoomService {
 		return dao.getRoomList(map);
 	}
 
+	//메인사진 포함한 room detail 
+	@Override
+	public Room getRoomInfo(int room_code) {
+		// TODO Auto-generated method stub
+		return dao.getRoomInfo(room_code);
+	}
+
+
+
 	
 
 	

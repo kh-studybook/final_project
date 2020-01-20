@@ -1,3 +1,5 @@
+
+
 $(document).on(
 			'click',
 			'.number-spinner button',

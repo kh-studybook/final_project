@@ -68,6 +68,13 @@ public class RoomDAO {
 	// --민지 끝
 
 
+	//메인사진 포함한 room detail
+	public Room getRoomInfo(int room_code) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Rooms.getRoomInfo",room_code);
+	}
+
+
 	
 
 }

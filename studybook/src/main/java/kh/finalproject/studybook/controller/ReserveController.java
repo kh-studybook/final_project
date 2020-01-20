@@ -57,10 +57,14 @@ public class ReserveController {
 		
 		// 예약 페이지로
 		@RequestMapping(value = "room_reserve.re")
-		public ModelAndView room_reserve_page(Reserve reserve,ModelAndView mv) {
-			Room room=roomservice.getRoomDetail(reserve.getRoom_code());
+		public ModelAndView room_reserve_page(int room_code,Reserve reserve,ModelAndView mv) {
+			System.out.println("룸코드 번호="+room_code);
+			System.out.println("룸 코드 번호= " +reserve.getRoom_code());
 			Member member=memberservice.myinfo(reserve.getMem_key());
+			Room room=roomservice.getRoomInfo(reserve.getRoom_code());
 			
+			mv.addObject("room",room);
+			mv.addObject("member",member);
 			mv.addObject("reserve",reserve);
 			mv.setViewName("room/room_reserve_page");
 			return mv;
