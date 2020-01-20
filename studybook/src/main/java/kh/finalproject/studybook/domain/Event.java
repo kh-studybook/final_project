@@ -15,6 +15,8 @@ public class Event {
 	private MultipartFile eventPic_uploadfile;
 	private String eventPic_savefile="/image/default.png";
 	private String eventPic_originalfile="/image/default.png";
+	private int event_status;
+	private String event_writer;
 
 	public int getEvent_num() {
 		return event_num;
@@ -88,5 +90,16 @@ public class Event {
 	public void setEventPic_originalfile(String eventPic_originalfile) {
 		this.eventPic_originalfile = eventPic_originalfile;
 	}
-
+	public int getEvent_status() {
+		return event_status;
+	}
+	public void setEvent_status(int event_status) {
+		this.event_status = event_status;
+	}
+	public String getEvent_writer() {
+		return event_writer;
+	}
+	public void setEvent_writer(String event_writer) {
+		this.event_writer = event_writer;
+	}
 }
