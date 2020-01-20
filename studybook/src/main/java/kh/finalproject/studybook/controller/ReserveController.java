@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
@@ -57,10 +60,10 @@ public class ReserveController {
 		
 		// 예약 페이지로
 		@RequestMapping(value = "room_reserve_page.re")
-		public ModelAndView room_reserve_page(Reserve reserve,ModelAndView mv) {
+		public ModelAndView room_reserve_page(Reserve reserve,ModelAndView mv,HttpSession session) {
 			System.out.println("룸 코드 번호= " +reserve.getRoom_code());
-			Member member=memberservice.myinfo(reserve.getMem_key());
 			Room room=roomservice.getRoomInfo(reserve.getRoom_code());
+			Member member=(Member) session.getAttribute("member");
 			
 			mv.addObject("room",room);
 			mv.addObject("member",member);
@@ -72,9 +75,13 @@ public class ReserveController {
 		
 		// 음료추가 페이지로
 		@RequestMapping(value = "food_add_page.re")
-		public String food_add_page(Reserve reserve) {
-			System.out.println(reserve.getRoom_code());
-			return "room/food_add_page";
+		public ModelAndView food_add_page(Reserve reserve,ModelAndView mv) {
+			System.out.println("룸코드="+reserve.getRoom_code());
+			//List<Food> foodlist=reserveservice.getFoodListAll();
+			//mv.addObject("foodlist",foodlist);
+			mv.addObject("reserve",reserve);
+			mv.setViewName("room/food_add_page");
+			return mv;
 		}
 
 		// 예약 완료 페이지로

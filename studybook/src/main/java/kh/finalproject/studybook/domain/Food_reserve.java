@@ -6,6 +6,7 @@ public class Food_reserve {
 	private int mem_key;
 	private int count;
 	private int total_cost;
+	
 	public int getR_code() {
 		return r_code;
 	}
