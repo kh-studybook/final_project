@@ -3,6 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Foods">
+
+	<select id="getFoodListAll" resultType="food">
+		select * from food
+	</select>
+
 <!-- 검색관련 -->
 <select id="getSearchList" parameterType="map" resultType="room">
 select * 
@@ -35,6 +40,5 @@ where
 	like #{search_word}
 </if>
 </select>
-
 
 </mapper>

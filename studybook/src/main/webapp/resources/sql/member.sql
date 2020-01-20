@@ -17,3 +17,10 @@ delete from member where name = '연수'
 
 insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999, 'default.png');
 
+
+insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999,'');
+
+insert into member values('admin@studybook.com', 1234,'관리자' , '0101111111', 998,'');
+
+commit
+

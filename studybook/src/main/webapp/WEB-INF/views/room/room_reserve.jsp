@@ -121,12 +121,6 @@
 		
 		<div class="col-md-5">
 			<div class="e_reserve_room_info">
-				<input type="hidden" name="reserve_date" value="${reserve.reserve_date }">
-				<input type="hidden" name="start_time" value="${reserve.start_time }">
-				<input type="hidden" name="end_time" value="${reserve.end_time }">
-				<input type="hidden" name="extra_num" value="${reserve.extra_num }">
-				<input type="hidden" name="total_cost" value="${reserve.total_cost }">
-				
 				
 				<h2 class="e_head">공간 결제 예정금액</h2>
 				<ul class="e_list_detail">
@@ -139,7 +133,7 @@
 					<span class="e_total_name">공간 예약 금액</span>
 					<span class="e_total_price">${reserve.total_cost }</span>
 				</div>
-				
+				<input type="hidden" name="total_cost" value="${reserve.total_cost }">
 				<button class="e_to_drink_page">다음</button>
 			</div>
 		</div>
