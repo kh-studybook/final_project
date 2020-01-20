@@ -21,18 +21,18 @@
 				<div class="e_room_info">
 					
 					<div class="e_room_pic">
-					<img src="resources/image/profile/default.png">
+					<img src='${room.FILE_NAME }'>
 					</div>
 					
 					<div class="e_room_detail">
-						<span>512호</span>
-						<span>512호 상세설명 입니다닫다다다ㅏ다</span>
+						<span>${room.ROOM_NAME }</span>
+						<span>${room.ROOM_INFO }</span>
 					</div>
 					
 				</div>
 				<ul class="e_list_detail">
 					<li><span class="e_tit">공간 유형</span> <span class="e_data">
-							<span>회의실</span> <span>세미나실</span> <span>스터디룸</span>
+							${room.ROOM_TYPE }
 					</span></li>
 
 					<li><span class="e_tit">예약시간</span> <span class="e_data">최소 1시간 부터 </span></li>
