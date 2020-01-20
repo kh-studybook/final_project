@@ -71,12 +71,12 @@ $(document).ready(function(){
 		<a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
 		<div class="j_menu__header">
 			<div class="j_menu_member">
-					<div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 수정하기 -->
-						<c:if test="${member.profile==null}">
+					<div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 보기 -->
+						<c:if test="${member.profile == null}">
 						<img src="resources/image/profile/default.png">
 						</c:if>
-						<c:if test="${member.profile!=null}">
-						<img src="resources/image/profile/default.png">
+						<c:if test="${member.profile!= null}">
+						<img src="resources/${member.profile}">
 						</c:if>
 					</div>
 				<c:if test="${member.email==null}">
@@ -110,7 +110,14 @@ $(document).ready(function(){
 		</div>
 		<div class="j_menu_bottom">
 			<div></div>
-			<div><a href="logout.mem">로그아웃</a></div>
+			<div>
+			<c:if test="${member.email==null}">
+			<span></span>
+			</c:if>
+			<c:if test="${member.email!=null}">
+			<a href="logout.mem">로그아웃</a>
+			</c:if>
+			</div>
 			<div>Powered by STUDYBOOK</div>
 		
 		<c:if test="${id=='admin'}">
