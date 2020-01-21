@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.finalproject.studybook.service.EventCommentService;
 import kh.finalproject.studybook.service.EventService;
 import kh.finalproject.studybook.domain.Event;
+import kh.finalproject.studybook.domain.Member;
 
 @Controller
 public class EventController {
@@ -37,7 +38,7 @@ public class EventController {
 		@Autowired
 		private EventCommentService eventcommentservice; 
 		
-		@Value("${savefoldername}")
+		@Value("${savefolder2name}")
 		private String saveFolder;
 
 		//이벤트 등록 화면으로 이동!!!!
@@ -47,10 +48,10 @@ public class EventController {
 		}//event_write view end
 		
 		//이벤트 등록하기
-		@RequestMapping(value = "EventAddAction.eve")
+		@PostMapping(value = "EventAddAction.eve")
 		public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
 			   //사진 등록하기				
-			  MultipartFile uploadfile=event.getEventPic_uploadfile();
+			MultipartFile uploadfile=event.getEventPic_uploadfile();
 		      
 		      if(!uploadfile.isEmpty()) {
 		         String fileName=uploadfile.getOriginalFilename();
@@ -62,8 +63,11 @@ public class EventController {
 		      int month=c.get(Calendar.MONTH) + 1 ;
 		      int date=c.get(Calendar.DATE);
 		      
-		      //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/" 바꾸기;
-		      String saveFolder="C:\\Users\\user1\\git\\final_project[0120]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+		    String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
+			/*
+			 * String saveFolder=
+			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+			 */
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -97,7 +101,6 @@ public class EventController {
 		      //바뀐파일명으로 저장
 		      event.setEvent_pic(fileDBName);
 		      }	      
-		    
 			eventservice.insertEvent(event);
 			return "redirect:event_list.eve";
 		}//event_write_ok end
@@ -106,43 +109,51 @@ public class EventController {
 		@RequestMapping(value = "event_list.eve")
 		public ModelAndView eventList(
 				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
-				ModelAndView mv, HttpServletRequest request) throws Exception {
-			HttpSession session=request.getSession();
-			//추후 확인 : 나중에 지우기
-			session.setAttribute("mem_key", 0);
-			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
-			String event_writer = eventservice.getEventWriter(mem_key);
+				ModelAndView mv, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 			
-			int limit = 9;//기본으로 9개의 글을 보여줌
-			int listcount = eventservice.getEventListCount();// 총 리스트를 받아옴
+			try {						
+				Member member = (Member)session.getAttribute("member");
+				String event_writer = eventservice.getEventWriter(member.getKey());
+				int mem_key = member.getKey();
+				
+				int limit = 9;//기본으로 9개의 글을 보여줌
+				int listcount = eventservice.getEventListCount();// 총 리스트를 받아옴
 			
-			int maxpage = (listcount + limit - 1)/limit;
-			int startpage = ((page - 1)/9) * 9 + 1;
-			int endpage = startpage + 9 - 1;
+				int maxpage = (listcount + limit - 1)/limit;
+				int startpage = ((page - 1)/9) * 9 + 1;
+				int endpage = startpage + 9 - 1;
 			
-			if (endpage > maxpage){endpage = maxpage;}		
+				if (endpage > maxpage){endpage = maxpage;}		
 			
-			List<Event> eventlist = eventservice.getEventList(page, limit);
-			mv.setViewName("event/event_list");
-			mv.addObject("page", page);
-			mv.addObject("maxpage", maxpage);
-			mv.addObject("startpage", startpage);
-			mv.addObject("endpage", endpage);
-			mv.addObject("listcount", listcount);
-			mv.addObject("eventlist", eventlist);
-			mv.addObject("limit", limit);
-			mv.addObject("event_writer", event_writer);
-			return mv;
+				List<Event> eventlist = eventservice.getEventList(page, limit);
+				mv.setViewName("event/event_list");
+				mv.addObject("page", page);
+				mv.addObject("maxpage", maxpage);
+				mv.addObject("startpage", startpage);
+				mv.addObject("endpage", endpage);
+				mv.addObject("listcount", listcount);
+				mv.addObject("eventlist", eventlist);
+				mv.addObject("limit", limit);
+				mv.addObject("event_writer", event_writer);
+				mv.addObject("mem_key", mem_key);
+				return mv;
+			} catch (NullPointerException e) {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+			    out.println("alert('로그인이 필요합니다.');");
+			    out.println("location.href = 'login.mem';");
+			    out.println("</script>");
+			}
+			return null;
 		}//EventList.eve end
 		
 		//이벤트 게시글 보기
 		@RequestMapping(value = "EventDetailAction.eve")
-		public ModelAndView eventGetDetail(int num, ModelAndView mv, HttpServletRequest request) {
+		public ModelAndView eventGetDetail(int num, ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			Event event = eventservice.getEventDetail(num);
-			HttpSession session=request.getSession();
-			//추후 확인 : 나중에 지우기
-			session.setAttribute("mem_key", 0);
-			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
+			Member member = (Member)session.getAttribute("member");			
+			
 			if (event == null) {
 				System.out.println("상세보기 실패");
 				mv.setViewName("redirect:eventList.eve");
@@ -151,36 +162,37 @@ public class EventController {
 			} else {
 				System.out.println("상세보기 성공");
 				int count = eventcommentservice.getEventListCount(num);
-				String event_writer = eventservice.getEventWriter(mem_key);
+				String event_writer = eventservice.getEventWriter(member.getKey());
+				int mem_key = member.getKey();
 				mv.setViewName("event/event_view");
 				mv.addObject("count", count);
 				mv.addObject("eventdata", event);
 				mv.addObject("event_writer", event_writer);
+				mv.addObject("mem_key", mem_key);
 			}				
 			return mv;
 		}//EventDetailAction.eve end
 		
 		//이벤트 수정 페이지 보기
 		@RequestMapping(value = "EventModifyView.eve", method = RequestMethod.GET)
-		public ModelAndView EventModify(int num, ModelAndView mv, HttpServletRequest request) 
+		public ModelAndView EventModify(int num, ModelAndView mv, HttpServletRequest request, HttpSession session) 
 				throws Exception {
 			Event eventdata = eventservice.getEventDetail(num);
-			HttpSession session=request.getSession();
-			//추후 확인 : 나중에 지우기
-			session.setAttribute("mem_key", 0);
-			int mem_key = Integer.parseInt(session.getAttribute("mem_key").toString());
+			Member member = (Member)session.getAttribute("member");	
+			String event_writer = eventservice.getEventWriter(member.getKey());
+			int mem_key = member.getKey();
 			if(eventdata == null) {
 				System.out.println("(수정)상세보기 실패");
 				mv.setViewName("redirect:eventList.eve");
 				mv.addObject("url", request.getRequestURL());
 				mv.addObject("message", "(수정)상세보기 실패입니다.");
 			} else {
-				String event_writer = eventservice.getEventWriter(mem_key);
 				System.out.println("(수정)상세보기 성공");
 				int count = eventcommentservice.getEventListCount(num);
 				mv.addObject("eventdata", eventdata);
 				mv.addObject("count", count);
 				mv.addObject("event_writer", event_writer);
+				mv.addObject("mem_key", mem_key);
 				mv.setViewName("event/event_modify");
 			}
 			return mv;
@@ -193,6 +205,8 @@ public class EventController {
 						throws Exception{
 			MultipartFile uploadfile = event.getEventPic_uploadfile();
 	
+			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
+			
 			if (uploadfile != null && !uploadfile.isEmpty()) {//파일을 변경한 경우
 					System.out.println("파일 변경한 경우");
 					String fileName = uploadfile.getOriginalFilename();//원래 파일명을 가져오기
@@ -205,6 +219,7 @@ public class EventController {
 					
 					//바뀐 파일명으로 저장
 					event.setEvent_pic(fileDBName);
+					System.out.println(fileDBName);
 			}
 			
 			//DAO에서 수정 메서드를 호출하여 수정합니다.
@@ -212,12 +227,16 @@ public class EventController {
 			
 			//수정에 실패한 경우
 			if (result == 0) {
-				System.out.println("게시판 수정 실패");
-				mv.setViewName("error/error");
+				System.out.println("이벤트 글 수정 실패");
+				mv.setViewName("redirect:EventModifyView.eve");
 				mv.addObject("url", request.getRequestURL());
-				mv.addObject("message", "게시판 수정 실패");
+				mv.addObject("message", "이벤트 글 수정 실패");
 			} else {//수정 성공한 경우
-				System.out.println("게시판 수정 완료");
+				System.out.println("이벤트 글 수정 완료");
+			    PrintWriter out = response.getWriter();
+			    out.println("<script>");
+			    out.println("alert('수정 되었습니다.');");
+			    out.println("</script>");
 				
 				String url = "redirect:EventDetailAction.eve?num=" + event.getEvent_num();
 				

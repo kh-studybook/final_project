@@ -31,16 +31,35 @@
 		order by event_date
 	</select>
 	
-	<update id = "modifyEvent" parameterType = "event">
+	<update id = "modifyEvent" parameterType = "Event">
 		update event
 		set 
-			title = #{title}, 
-	 		content =  #{content}, 
-	 		event_pic = #{event_pic}
-			where event_num = #{event_num}
+			event_pic = #{event_pic},
+			title = #{title},
+			event_date = #{event_date},
+			event_start = #{event_start},
+			event_end = #{event_end},
+			event_room = #{event_room}, 
+	 		content =  #{content}	 		
+		where event_num = #{event_num}
 	</update>
 	
 	<select id = "event_writer" resultType = "String">
 		select name from member where key = #{mem_key}
 	</select>
+	
+	<!-- 민지 시작  -->
+	<select id = "main_count" resultType = "int">
+		select count(*) from event where event_date >= sysdate
+	</select>
+	
+	<select id = "main_list" parameterType = "java.util.Map" resultType = "Event">
+		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic, event_status from event) 
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		and event_date >= sysdate
+		order by event_date
+	</select>
+	
+	<!-- 민지 끝 -->
 </mapper>

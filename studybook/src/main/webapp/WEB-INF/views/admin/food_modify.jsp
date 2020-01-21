@@ -4,25 +4,30 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+
+</script>
+<style>
+
+</style>
 </head>
 <body>
 	<!-- Header Start -->
 	<nav>
-		<jsp:include page="../main/header.jsp" flush="false" /><br> <br>
+		<jsp:include page="adheader.jsp" flush="false" /><br> <br>
 	</nav>
 	<!-- Header End -->
-	
+
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="registerEvent.jsp" />
+		<jsp:include page="updatefood.jsp" />
 	</main>
 	<!-- Body End -->
 
 	<!-- Footer Start -->
 	<footer>
-		<jsp:include page="../main/footer.jsp" flush="false" />
+		<jsp:include page="adfooter.jsp" flush="false" />
 	</footer>
 	<!-- Footer End -->
 </body>
-
 </html>

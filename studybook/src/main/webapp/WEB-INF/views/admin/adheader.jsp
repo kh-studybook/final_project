@@ -66,7 +66,7 @@
 
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark w_bgcolor">
-	<a class="navbar-brand" href="main.index">STUDYBOOK</a>
+	<a class="navbar-brand" href="RoomList.ro">STUDYBOOK</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -81,7 +81,8 @@
 			<li class="nav-item"><a class="nav-link"
 				href="javascript:void(0);"
 				onclick="javascript:location.href='RoomList.ro'">공간관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="FoodList.re">음식관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="FoodAdList.re">음식관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="ReserveAdList.re">예약관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="MemberList.bo">회원관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a>
 			</li>

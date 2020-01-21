@@ -1,10 +1,13 @@
 package kh.finalproject.studybook.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Food {
 	private int food_code;
 	private String food_name;
 	private int food_cost;
 	private String food_pic;
+	
 	
 	public int getFood_code() {
 		return food_code;
@@ -30,6 +33,8 @@ public class Food {
 	public void setFood_pic(String food_pic) {
 		this.food_pic = food_pic;
 	}
+	
+	
 	
 	
 }

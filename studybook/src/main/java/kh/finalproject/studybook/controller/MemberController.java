@@ -1,6 +1,5 @@
 package kh.finalproject.studybook.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +32,12 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/joinSuccess.mem", method = RequestMethod.GET)
-	public String joinSuccess_mem() {
-		return "member/join_success_index";
+	public ModelAndView joinSuccess_mem(String email, String name, ModelAndView mv) 
+	{
+		mv.addObject("email", email);
+		mv.addObject("name", name);
+		mv.setViewName("member/join_success_index");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/update.mem", method = RequestMethod.GET)
@@ -72,25 +75,24 @@ public class MemberController {
 		}
 	}
 
-	// joinSuccess 부분 수정하기!
+	// 회원가입 성공
 	@RequestMapping(value = "/joinProcess.mem")
-	public ModelAndView JoinProcess(Member member, HttpServletResponse response, ModelAndView mv) 
-			throws IOException {
+	public void JoinProcess(Member member, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = memberservice.insert(member);
 		out.println("<script>");
 		if (result == 1) {
 			out.println("alert('test 회원가입 축하한다');");
-			out.println("location.href='joinSuccess.mem';");
+			out.println("location.href='joinSuccess.mem?email=" + member.getEmail() + "&name=" + member.getName() + "';" );
 		} else if (result == -1) {
 			out.println("alert('이미 가입되어 있는 이메일입니다. 확인 후 다시 입력해주세요.');");
 			out.println("history.back();");
 		}
 		out.println("</script>");
 		out.close();
-		return mv;
 	}
+	
 	
 
 	@RequestMapping(value = "/findpw.mem", method = RequestMethod.GET)
@@ -132,6 +134,7 @@ public class MemberController {
 		out.println("</script>");
 		out.close();
 	}
+	
 	
 	//delete? 
 	@RequestMapping(value="delete.mem", method = RequestMethod.GET)

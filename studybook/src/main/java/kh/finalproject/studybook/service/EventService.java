@@ -19,4 +19,8 @@ public interface EventService {
 	public int eventDelete(int num);
 	//글쓴이 가져오기
 	public String getEventWriter(int mem_key);
+	//메인 화면 글 개수 구하기
+	public int getMainEventListCount();
+	//메인 화면 이벤트 리스트 구하기
+	public List<Event> getMainEventList(int page, int limit);
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
 <style>
-* {box-sizing: border-box; font-family:"맑은 고딕"}
+* {font-family:"맑은 고딕"}
 
 /** 글자 관련!!!!*/
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
@@ -13,7 +13,7 @@ textarea::placeholder, input[type=text]::placeholder{color:black;}
 
 /** 입력 폼 관련*/
 input[type=text], select, textarea {width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;}
-label {padding: 12px 12px 12px 0; display: inline-block;}
+.pp > label {display: inline-block;}
 input[type=date]{height:3rem;}
 
 /** 버튼 관련*/
@@ -31,7 +31,9 @@ input[type=date]{height:3rem;}
 /** 썸네일 관련*/
 .p_avatar{width:200px; height:200px;}
 #eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; 
-				background-color:#56D7D6; color:white; margin-top:5px; padding-right:0px; text-align:center;}
+				background-color:#56D7D6; color:white; padding:7px; margin-top:5px; padding-right:0px; text-align:center;}
+
+.navbar-brand{display: flex !important; font-size: 24px !important; width: 150px; padding:0px}
 
 /* Clear floats after the columns */
 .row:after { content: ""; display: table; clear: both;}
@@ -40,10 +42,14 @@ input[type=date]{height:3rem;}
 @media screen and (max-width: 600px) {.col-25, .col-75, input[type=submit] {width: 100%;margin-top: 0;}}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src = "https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script>
 	$(function(){
+		//textarea 자동 크기조절
+		autosize($("textarea"));
+		
 		var eventcheckid = false;
 		
 		//썸네일 이미지 변경하기
@@ -68,9 +74,10 @@ input[type=date]{height:3rem;}
 				return false;
 			}
 			
-			//파일 크기 제한 하기 추후 확인
+			//파일 크기 제한
 			var maxSize = 5 * 1024 * 1024;
-			var fileSize = file.getSize;
+			var fileSize = file.size;
+			console.log(fileSize + " : " + maxSize);
 			if (fileSize > maxSize) {
 				alert("5MB이하 파일만 등록할 수 있습니다.\n파일 용량을 확인해주세요.");
 				return false;
@@ -163,8 +170,7 @@ input[type=date]{height:3rem;}
 				alert("이벤트의 세부 내용을 4000자 이하로 입력해주세요.");
 				$("#event_content").focus();
 				return false;
-			}		
-			
+			}					
 		});
 		
 	});
@@ -173,22 +179,19 @@ input[type=date]{height:3rem;}
 </script>
 </head>
 <body>
-<div class="container">
-<br><br><br><br>
+<div class="container pp">
 	<!-- 상단 메뉴 -->
    	<div class="row pp_locate"">
-      <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 등록 페이지</span></div>
-      <div class="col-md-4"></div>
+     <a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 등록 페이지</span>
    	</div>
    	<br>
    	
 <h2 class = "p_title">이벤트 등록</h2>
-
+	<br>
 
   <form method="post" action="EventAddAction.eve" enctype="multipart/form-data" id = "p_event_write_form">
-  	<!--  작성자 : 추후 멤버키 다시 변경하기 admin 0-->
- 	<input name = "mem_key" id = "mem_key" value = 0 type = "hidden">
-  
+ 	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
+  	
 	<!--  썸네일 등록 -->
    <div class="row">
       <div class="col-25">
@@ -308,7 +311,7 @@ input[type=date]{height:3rem;}
     <br>
     <div class="p container" style="display: inline-block; text-align: center;">
     	<button type = "reset" class = "p_reset">취소</button>
-      	<button type = "submit" class = "p_submit">글등록</button>
+      	<button type = "submit" class = "p_submit">등록</button>
     </div>
   </form>
 </div>

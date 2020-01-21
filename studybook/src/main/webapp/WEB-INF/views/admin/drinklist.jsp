@@ -83,7 +83,7 @@ margin-top:50px;
 				<p class="w_title">음식관리</p>
 				<br>
 
-				<form action="FoodList.re">
+				<form action="FoodAdList.re">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
 							<option value="0" selected>음식이름</option>
@@ -116,16 +116,16 @@ margin-top:50px;
 						</thead>
 						<tbody>
 							<c:set var="num" value="${(page-1)*10+1}" />
-							<c:forEach var="m" items="${roomlist}">
+							<c:forEach var="m" items="${foodlist}">
 								<tr>
 									<td><c:out value="${num}" /> <c:set var="num"
 											value="${num+1}" /></td>
-									<td>${m.ROOM_CODE}</td>
-									<td>${m.ROOM_NAME}</td>
-									<td>${m.MAX_MEMBER}</td>
+									<td>${m.food_code}</td>
+									<td>${m.food_name}</td>
+									<td>${m.food_cost}</td>
 									<td class="text-center"><a class='btn btn-info btn-xs'
-										href="RoomModify.ro?room_code=${m.ROOM_CODE}">수정 </a> <a
-										href="RoomDelete.ro?room_code=${m.ROOM_CODE}"
+										href="FoodModify.re?food_code=${m.food_code}">수정 </a> <a
+										href="FoodDelete.re?food_code=${m.food_code}"
 										class="btn btn-danger btn-xs">삭제</a></td>
 								</tr>
 							</c:forEach>
@@ -141,7 +141,7 @@ margin-top:50px;
 									</c:if>
 									<c:if test="${page > 1 }">
 										<li class="page-item"><a
-											href="FoodList.ro?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
+											href="FoodAdList.ro?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link">이전</a>&nbsp;</li>
 									</c:if>
 
@@ -152,7 +152,7 @@ margin-top:50px;
 										</c:if>
 										<c:if test="${a != page }">
 											<li class="page-item"><a
-												href="FoodList.ro?page=${a}&search_field=${search_field}&search_word=${search_word}"
+												href="FoodAdList.ro?page=${a}&search_field=${search_field}&search_word=${search_word}"
 												class="page-link">${a}</a></li>
 										</c:if>
 									</c:forEach>
@@ -163,7 +163,7 @@ margin-top:50px;
 									</c:if>
 									<c:if test="${page < maxpage }">
 										<li class="page-item"><a
-											href="FoodList.ro?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
+											href="FoodAdList.ro?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link ">&nbsp;다음</a></li>
 									</c:if>
 								</ul>
