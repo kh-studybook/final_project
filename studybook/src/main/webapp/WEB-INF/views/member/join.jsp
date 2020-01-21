@@ -57,14 +57,17 @@ input[type=checkbox] {
 
 .col-100 {
 	width: 100%;
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+/* Responsive layout 
+- when the screen is less than 600px wide, 
+make the two columns stack on top of each other 
+instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
-		margin-bottom: 30px;
+		margin-bottom: 0px;
 	}
 }
 
@@ -111,6 +114,19 @@ input[type=checkbox] {
 	color: #555555;
 	margin-top:20px;
 }
+
+.message {
+	mergin-top:2px;
+}
+
+.height {
+	width: 330px;
+    height: 70px;
+}
+
+.submit {
+	margin-bottom: 30px;
+}
 </style>
 
 
@@ -135,7 +151,7 @@ input[type=checkbox] {
 	   });
 		    	   
 
-      $("#email").blur(function() {
+      $("#email").on('keyup',function(){
   		var re_id = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; //test
   		var userid=$("#email").val();
    		var param ="email="+email; 
@@ -175,49 +191,59 @@ input[type=checkbox] {
 	<div class="s_container">
 		<form name="joinform" action="joinProcess.mem" method="get">
 		
-			<div class="row">	
+			<div class="row height">	
 				<div class="col-100">
 					<input type="text" id="name" class="s_input" name="name" placeholder="이름">
-					<span class=namemsg></span>
 				</div>
+				<div class="col-100 message"> 
+					<span class="namemsg"></span>	
+				</div> 
 			</div>	
 			
-			<div class="row">
+			<div class="row height">
 				<div class="col-100">
 					<input type="text" id="email" class="s_input" name="email" placeholder="이메일">
-					<span class=emailmsg></span>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-100">
-					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
-					<span class=pwmsg></span>	
-				</div>
-			</div>
-			<div class="row">		
-				<div class="col-100">
-					<input type="password" id="pwcheck" class="s_input" name="pwcheck" placeholder="비밀번호 확인">
-					<span class=pwcheckmsg></span>	
-				</div>
-			</div>
-				
-			<div class="row">
-				<div class="col-100"> 
-					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="11" required>
-					<span class=phonemsg></span>	
+				<div class="col-100 message"> 
+					<span class="emailmsg"></span>	
 				</div> 
 			</div>
-
 			
-			<div class="row">
+			<div class="row height">
+				<div class="col-100">
+					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
+				</div>
+				<div class="col-100 message"> 
+					<span class="pwmsg"></span>	
+				</div> 
+			</div>
+			<div class="row height">		
+				<div class="col-100">
+					<input type="password" id="pwcheck" class="s_input" name="pwcheck" placeholder="비밀번호 확인">
+				</div>
+				<div class="col-100 message"> 
+					<span class="pwcheckmsg"></span>	
+				</div> 
+			</div>
+				
+			<div class="row height">
+				<div class="col-100"> 
+					<input type="text" name="phone" id="phone" class="s_input" name="phone" placeholder="전화번호" maxLength="11" required>
+					<span class="phonemsg message"></span>	
+				</div> 
+				<div class="col-100 message"> 
+					<span class="phonemsg"></span>	
+				</div> 
+			</div>
+			
+			<div class="row height">
 				<div class="col-100 joinus">
 					<span class="joinus"><input type="checkbox" name="priv"> 서비스 약관과 개인정보 보호정책에 동의합니다.</span>
 				</div>
 			</div>  
 			
 			<div class="row">
-				<div class="col-100">
+				<div class="col-100 submit">
 					<input type="submit" class="s_submit clear" value="회원가입">
 				</div>
 			</div>
