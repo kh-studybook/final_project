@@ -9,9 +9,14 @@ import kh.finalproject.studybook.domain.Room_ex;
 
 public interface FoodService {
 	//검색 리스트 가져오기
-	List<Food> getSearchList(int index, String search_word, int page, int limit);
+	public List<Food> getSearchList(int index, String search_word, int page, int limit);
 	//검색 리스트 카운트 가져오기
-	int getSearchListCount(int index, String search_word);
+	public int getSearchListCount(int index, String search_word);
+	//Foot 테이블 insert
+	public void insertFood(String food_name, int food_cost, String dBname);
+	//푸드 상세 조회
+	public Food getDetail(int food_code);
+	
 	
 	
 

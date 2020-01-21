@@ -56,6 +56,29 @@ public class FoodServiceImpl implements FoodService {
 		return fdao.getSearchListCount(map);
 	}
 	
+	//food 테이블 등록
+	@Override
+	public void insertFood(String food_name, int food_cost, String DBname) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("food_name", food_name);
+		map.put("food_cost", food_cost);
+		map.put("food_pic", DBname);
+		
+		fdao.insertFood(map);
+		System.out.println("FoodServiceImple에서 insertFood 메소드 처리끝");
+		
+	}
+	//푸드 상세 조회
+	@Override
+	public Food getDetail(int food_code) {
+		return fdao.getFoodDetail(food_code);
+	}
+	
+
+	
+	
+	
+	
 
 
 }
