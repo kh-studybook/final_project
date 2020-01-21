@@ -125,6 +125,22 @@ $(document).on(
 		 } //function end
 	
 	$(document).ready(function(){
+		
+		var d = new Date();
+		var now_hour=d.getHours();
+		console.log("현재시간:"+now_hour)
+		$('.swiper-wrapper input[name=time_slide]').each(function(){
+			var hour=this.value;
+				console.log(hour)
+			if (parseInt(hour) < parseInt(now_hour)) { 
+				console.log("지금 시간보다 이른 시간:"+this.value)
+				$(this).parent().addClass("not_active");
+
+
+				} 
+			});
+		
+		
 		 go(1);
 		
 		var mem_key=$("#mem_key").val();
@@ -177,7 +193,8 @@ $(document).on(
 		$(".e_to_reserve_page").click(function(){
 			location.href="room_reserve.re";
 		})
-	
+		
+		
 	});
  
 	

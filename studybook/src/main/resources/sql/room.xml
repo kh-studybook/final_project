@@ -3,171 +3,188 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Rooms">
-<!-- 지은 시작 -->
-<insert id="insertGallery" parameterType="Map">
-insert into gallery 
-values
-(#{ROOM_CODE},#{FILE_NAME},#{GALLERY_NUM})
-</insert>
+	<!-- 지은 시작 -->
+	<insert id="insertGallery" parameterType="Map">
+		insert into gallery
+		values
+		(#{ROOM_CODE},#{FILE_NAME},#{GALLERY_NUM})
+	</insert>
 
 
-<insert id="insertroom" parameterType="room">
-	<selectKey resultType="int" order="BEFORE" keyProperty="ROOM_CODE">
-	select nvl(max(ROOM_CODE),0)+1 from room
-	</selectKey>
-insert into room
-(ROOM_CODE,
-ROOM_NAME, ROOM_INFO, ROOM_TYPE, 
-MIN_MEMBER, MAX_MEMBER,
-MIN_HOUR, HOUR_COST,
-ROOM_INTRO,FAC_INTRO,HASHTAG)
-values
-(#{ROOM_CODE},
-#{ROOM_NAME},#{ROOM_INFO},#{ROOM_TYPE},
-#{MIN_MEMBER}, #{MAX_MEMBER},
-#{MIN_HOUR},#{HOUR_COST},
-#{ROOM_INTRO},#{FAC_INTRO},#{HASHTAG})
+	<insert id="insertroom" parameterType="room">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="ROOM_CODE">
+			select nvl(max(ROOM_CODE),0)+1 from room
+		</selectKey>
+		insert into room
+		(ROOM_CODE,
+		ROOM_NAME, ROOM_INFO, ROOM_TYPE,
+		MIN_MEMBER, MAX_MEMBER,
+		MIN_HOUR, HOUR_COST,
+		ROOM_INTRO,FAC_INTRO,HASHTAG)
+		values
+		(#{ROOM_CODE},
+		#{ROOM_NAME},#{ROOM_INFO},#{ROOM_TYPE},
+		#{MIN_MEMBER}, #{MAX_MEMBER},
+		#{MIN_HOUR},#{HOUR_COST},
+		#{ROOM_INTRO},#{FAC_INTRO},#{HASHTAG})
 
-</insert>
-
-
-<select id="selectRoomName" parameterType="String" resultType="room">
-select * from room where room_name=#{ROOM_NAME}
-</select>
-
-<select id="selectMaxNum" parameterType="int" resultType="gallery">
-select * from room where room_code=#{ROOM_CODE}
-</select>
-
-<insert id="insertRoom_ex" parameterType="room_ex">
-insert into room_ex 
-(ROOM_CODE,
-ALCOHOL, MIC, CHAIR, FOOD,
-TOILET, SMOKING, PARKING,
-TV, BOARD, WIFI)
-values
-(
-#{ROOM_CODE},
-#{ALCOHOL}, #{MIC}, #{CHAIR}, #{FOOD},
-#{TOILET}, #{SMOKING}, #{PARKING},
-#{TV}, #{BOARD}, #{WIFI}
-)
-
-</insert>
+	</insert>
 
 
-<!-- 룸이름 중복검사  -->
-<select id="roomnameCheck" resultType="room" parameterType="String">
-select * from room where room_name=#{ROOM_NAME}
-</select>
+	<select id="selectRoomName" parameterType="String"
+		resultType="room">
+		select * from room where room_name=#{ROOM_NAME}
+	</select>
 
-<!-- 검색관련 -->
-<select id="getSearchList" parameterType="map" resultType="room">
-select * 
-from (select rownum rnum, b.*
-							from(select * from room 
-<if test="search_field!=null">
-where
-	<choose>
-		<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
-		<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
-		<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
-		<when test="search_field=='HOUR_COST'">HOUR_COST</when>
-	</choose>
-	like #{search_word}
-</if>							
-order by room_code desc)b							
-)
-where rnum &gt;=#{start} and rnum &lt;=#{end}
-</select>
+	<select id="selectMaxNum" parameterType="int"
+		resultType="gallery">
+		select * from room where room_code=#{ROOM_CODE}
+	</select>
 
-<select id="searchcount" parameterType="map" resultType="int">
-select count(*)
-from room 
-<if test="search_field!=null">
-where
-<choose>
-		<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
-		<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
-		<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
-		<when test="search_field=='HOUR_COST'">HOUR_COST</when>
-	</choose>
-	like #{search_word}
-</if>
-</select>
-<!-- 룸상세정보 조회 -->
-<select id="roomDetail" parameterType="int" resultType="room">
-select * from room where ROOM_CODE=#{ROOM_CODE}
-</select>
+	<insert id="insertRoom_ex" parameterType="room_ex">
+		insert into room_ex
+		(ROOM_CODE,
+		ALCOHOL, MIC, CHAIR, FOOD,
+		TOILET, SMOKING, PARKING,
+		TV, BOARD, WIFI)
+		values
+		(
+		#{ROOM_CODE},
+		#{ALCOHOL}, #{MIC}, #{CHAIR}, #{FOOD},
+		#{TOILET}, #{SMOKING}, #{PARKING},
+		#{TV}, #{BOARD}, #{WIFI}
+		)
 
-<!-- 갤러리 리스트 조회 -->
-<select id="galleryList" parameterType="int" resultType="gallery">
-select * from gallery where ROOM_CODE=#{ROOM_CODE}
-</select>
+	</insert>
 
-<!-- Roomex 조회 -->
-<select id="roomexDetail" parameterType="int" resultType="room_ex">
-select * from room_ex where ROOM_CODE=#{ROOM_CODE}
-</select>
 
-<!-- 룸정보 업데이트-->
-<update id="updateRoom" parameterType="room">
-update room
-set ROOM_INFO = #{ROOM_INFO},
-ROOM_TYPE=#{ROOM_TYPE},
-MIN_MEMBER=#{MIN_MEMBER},
-MAX_MEMBER=#{MAX_MEMBER},
-MIN_HOUR=#{MIN_HOUR},
-HOUR_COST=#{HOUR_COST},
-ROOM_INTRO=#{ROOM_INTRO},
-FAC_INTRO=#{FAC_INTRO},
-HASHTAG=#{HASHTAG}
-where ROOM_CODE=#{ROOM_CODE}
-</update>
+	<!-- 룸이름 중복검사 -->
+	<select id="roomnameCheck" resultType="room"
+		parameterType="String">
+		select * from room where room_name=#{ROOM_NAME}
+	</select>
 
-<!-- 룸ex 정보 업데이트 -->
-<update id="updateRoomEx" parameterType="Map">
-update room_ex
-set ALCOHOL=#{ALCOHOL},
-MIC=#{MIC},
-CHAIR=#{CHAIR},
-FOOD=#{FOOD},
-TOILET=#{TOILET},
-SMOKING=#{SMOKING},
-PARKING=#{PARKING},
-TV=#{TV},
-BOARD=#{BOARD},
-WIFI=#{WIFI}
-where ROOM_CODE=#{ROOM_CODE}
-</update>
-<!-- 해당 룸넘버의 이미지 삭제하기 -->
-<delete id="deleteGallery" parameterType="int">
-delete from gallery where ROOM_CODE=#{ROOM_CODE}
-</delete>
+	<!-- 검색관련 -->
+	<select id="getSearchList" parameterType="map" resultType="room">
+		select *
+		from (select rownum rnum, b.*
+		from(select * from room
+		<if test="search_field!=null">
+			where
+			<choose>
+				<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
+				<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
+				<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
+				<when test="search_field=='HOUR_COST'">HOUR_COST</when>
+			</choose>
+			like #{search_word}
+		</if>
+		order by room_code desc)b
+		)
+		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
 
-<!-- 룸정보 삭제 -->
-<delete id="delete" parameterType="int">
-delete from room where ROOM_CODE=#{ROOM_CODE}
-</delete>
+	<select id="searchcount" parameterType="map" resultType="int">
+		select count(*)
+		from room
+		<if test="search_field!=null">
+			where
+			<choose>
+				<when test="search_field=='ROOM_NAME'">ROOM_NAME</when>
+				<when test="search_field=='ROOM_CODE'">ROOM_CODE</when>
+				<when test="search_field=='MAX_MEMBER'">MAX_MEMBER</when>
+				<when test="search_field=='HOUR_COST'">HOUR_COST</when>
+			</choose>
+			like #{search_word}
+		</if>
+	</select>
+	<!-- 룸상세정보 조회 -->
+	<select id="roomDetail" parameterType="int" resultType="room">
+		select * from room where ROOM_CODE=#{ROOM_CODE}
+	</select>
 
-<!-- 지은 끝 -->
+	<!-- 갤러리 리스트 조회 -->
+	<select id="galleryList" parameterType="int"
+		resultType="gallery">
+		select * from gallery where ROOM_CODE=#{ROOM_CODE}
+	</select>
 
-<!-- 민지 시작 -->
-<!-- room 총 list count -->
-<select id="count" resultType="int">
-	select count(*) from room
-</select>
+	<!-- Roomex 조회 -->
+	<select id="roomexDetail" parameterType="int"
+		resultType="room_ex">
+		select * from room_ex where ROOM_CODE=#{ROOM_CODE}
+	</select>
 
-<!-- room 총 list -->
-<select id="allList" parameterType="java.util.Map" resultType="room">
-	select * 
-		from (select rownum rnum, b.* 
-			  from (select room.ROOM_CODE, room.ROOM_NAME, room.MAX_MEMBER, room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
-			  		from room, gallery
-			  		where room.ROOM_CODE=gallery.ROOM_CODE
-			  		and gallery.gallery_num=1) b
-			  		)
+	<!-- 룸정보 업데이트 -->
+	<update id="updateRoom" parameterType="room">
+		update room
+		set ROOM_INFO = #{ROOM_INFO},
+		ROOM_TYPE=#{ROOM_TYPE},
+		MIN_MEMBER=#{MIN_MEMBER},
+		MAX_MEMBER=#{MAX_MEMBER},
+		MIN_HOUR=#{MIN_HOUR},
+		HOUR_COST=#{HOUR_COST},
+		ROOM_INTRO=#{ROOM_INTRO},
+		FAC_INTRO=#{FAC_INTRO},
+		HASHTAG=#{HASHTAG}
+		where ROOM_CODE=#{ROOM_CODE}
+	</update>
+
+	<!-- 룸ex 정보 업데이트 -->
+	<update id="updateRoomEx" parameterType="Map">
+		update room_ex
+		set ALCOHOL=#{ALCOHOL},
+		MIC=#{MIC},
+		CHAIR=#{CHAIR},
+		FOOD=#{FOOD},
+		TOILET=#{TOILET},
+		SMOKING=#{SMOKING},
+		PARKING=#{PARKING},
+		TV=#{TV},
+		BOARD=#{BOARD},
+		WIFI=#{WIFI}
+		where ROOM_CODE=#{ROOM_CODE}
+	</update>
+	<!-- 해당 룸넘버의 이미지 삭제하기 -->
+	<delete id="deleteGallery" parameterType="int">
+		delete from gallery where ROOM_CODE=#{ROOM_CODE}
+	</delete>
+
+	<!-- 룸정보 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from room where ROOM_CODE=#{ROOM_CODE}
+	</delete>
+
+	<!-- 지은 끝 -->
+
+	<!-- 민지 시작 -->
+	<!-- room 총 list count -->
+	<select id="count" resultType="int">
+		select count(*) from room
+	</select>
+
+	<!-- room 총 list -->
+	<select id="allList" parameterType="java.util.Map"
+		resultType="room">
+		select *
+		from (select rownum rnum, b.*
+		from (select room.ROOM_CODE, room.ROOM_NAME, room.MAX_MEMBER,
+		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
+		from room, gallery
+		where room.ROOM_CODE=gallery.ROOM_CODE
+		and gallery.gallery_num=1) b
+		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
-</select>
-<!-- 민지 끝 -->
+	</select>
+	<!-- 민지 끝 -->
+
+	<!-- 은지 메인사진포함 룸정보 얻기 -->
+	<select parameterType="int" id="getRoomInfo" resultType="room">
+		select r.room_code , r.room_name, r.room_info, r.room_type, g.file_name 
+		from room r, gallery g 
+		where r.room_code=g.room_code
+		and r.room_code=#{room_code} 
+		and g.gallery_num=1 
+	</select>
 </mapper>

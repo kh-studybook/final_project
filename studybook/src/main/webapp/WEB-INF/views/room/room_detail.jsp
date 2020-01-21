@@ -17,8 +17,8 @@
 </head>
 <body>
 <form action="room_reserve_page.re">
-		<input type="hidden" name="room_code" id="room_code" value="2">
-		<input type="hidden" name="mem_key" id="mem_key" value="2">
+		<input type="hidden" name="room_code" id="room_code" value="${room.ROOM_CODE }">
+		<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -225,20 +225,20 @@
 
 								<div class="swiper-container">
 									<div class="swiper-wrapper">
-										<div class="swiper-slide"><input type="hidden" id="9" value="9">9:00</div>
-										<div class="swiper-slide"><input type="hidden" id="10" value="10">10:00</div>
-										<div class="swiper-slide"><input type="hidden" id="11" value="11">11:00</div>
-										<div class="swiper-slide"><input type="hidden" id="12" value="12">12:00</div>
-										<div class="swiper-slide"><input type="hidden" id="13" value="13">13:00</div>
-										<div class="swiper-slide"><input type="hidden" id="14" value="14">14:00</div>
-										<div class="swiper-slide"><input type="hidden" id="15" value="15">15:00</div>
-										<div class="swiper-slide"><input type="hidden" id="16" value="16">16:00</div>
-										<div class="swiper-slide"><input type="hidden" id="17" value="17">17:00</div>
-										<div class="swiper-slide"><input type="hidden" id="18" value="18">18:00</div>
-										<div class="swiper-slide"><input type="hidden" id="19" value="19">19:00</div>
-										<div class="swiper-slide"><input type="hidden" id="20" value="20">20:00</div>
-										<div class="swiper-slide"><input type="hidden" id="21" value="21">21:00</div>
-										<div class="swiper-slide"><input type="hidden" id="22" value="22">22:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="9" value="9">9:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="10" value="10">10:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="11" value="11">11:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="12" value="12">12:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="13" value="13">13:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="14" value="14">14:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="15" value="15">15:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="16" value="16">16:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="17" value="17">17:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="18" value="18">18:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="19" value="19">19:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="20" value="20">20:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="21" value="21">21:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="22" value="22">22:00</div>
 									</div>
 								</div>
 

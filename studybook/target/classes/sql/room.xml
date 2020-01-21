@@ -151,6 +151,11 @@
 		delete from gallery where ROOM_CODE=#{ROOM_CODE}
 	</delete>
 
+	<!-- 룸정보 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from room where ROOM_CODE=#{ROOM_CODE}
+	</delete>
+
 	<!-- 지은 끝 -->
 
 	<!-- 민지 시작 -->
@@ -173,12 +178,13 @@
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	<!-- 민지 끝 -->
-	
-	<select id="getRoomInfo" parameterType="int" resultType="room">
-		select r.room_code , r.room_name, r.room_info, r.room_type, g.file_name
-		from room r, gallery g
- 		where r.room_code=g.room_code
- 		and r.room_code=#{room_code}
- 		and g.gallery_num=1
+
+	<!-- 은지 메인사진포함 룸정보 얻기 -->
+	<select parameterType="int" id="getRoomInfo" resultType="room">
+		select r.room_code , r.room_name, r.room_info, r.room_type, g.file_name 
+		from room r, gallery g 
+		where r.room_code=g.room_code
+		and r.room_code=#{room_code} 
+		and g.gallery_num=1 
 	</select>
 </mapper>

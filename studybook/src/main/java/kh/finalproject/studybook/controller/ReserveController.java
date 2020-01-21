@@ -4,16 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Food;
+import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
@@ -81,6 +85,25 @@ public class ReserveController {
 			//mv.addObject("foodlist",foodlist);
 			mv.addObject("reserve",reserve);
 			mv.setViewName("room/food_add_page");
+			return mv;
+		}
+
+		
+		@RequestMapping(value="GoPayment.re")
+		public ModelAndView goPayment(Reserve reserve,Food_reserve food_reservelist,ModelAndView mv)
+						throws Exception{
+			System.out.println("gay로 가는 GoPayment.re");
+			
+			int room_price=reserve.getTotal_cost();
+			System.out.println("룸 비용 : "+reserve.getTotal_cost());
+			
+			int food_price=0;
+			
+			int room_food_total_price=room_price+food_price;
+			
+			
+			mv.addObject("room_food_total_price",room_food_total_price);
+			mv.setViewName("room/pay");
 			return mv;
 		}
 
