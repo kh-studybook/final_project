@@ -100,40 +100,101 @@ $(document).ready(function(){
     	return Number(inputNumber).toLocalString('en').split(".")[0];
     }
     
-    function getList(){
+    $('.page-link').click(function(){
+		console.log(".page-link");
+		var page = this.innerText;
+		getList(page);
+	})
+   
+})//ready() end
+
+	function setPaging(href, digit){
+		output+="<li class='page-item'>";
+		gray = "";
+		if (href  == "href='#'") {
+			gray=" current";//현재 페이지에 회색이 나오도록 하기 위함
+		}
+		anchor = "<a class='page-link"+gray+"'" + href + ">" + digit + "</a></li>";
+		output += anchor;
+		console.log(output)
+	}//setPaging() end
+    
+    function getList(page){
+		console.log('page = ' + page);
 		$.ajax({
 			type:"post",
 			url:"getRoomList.net",
 			data : {"page" : page},
 			dataType:"json",
-			contentType:"application/json;charset=UTF-8",
+			cache: false,
 			success:function(rdata){
-				if(rdata.length>0){
-					$(".front").empty();
-					output = '';
-					$(rdata).each(function(){
-						output += '<div class="card" onClick="javascript:location.href=';
-						output += 'room_detail.ro?room_code=' + this.ROOM_CODE + '">';
-						output += '<img class="card-img-top img-fluid rounded mx-auto d-block" src="resources/image/room/' + this.FILE_NAME + '">';
-  						output += '<div class="card-body">';
-  						output += '<p class="card-text">';
-  						output += '<span class="j_room_name">' + this.ROOM_NAME + '</span>';
-  						output += '<span class="j_room_count">최대 ' + this.MAX_MEMBER + "인</span>";
-  						output += '</P>';
-  						output += '<p class="card-text">';
-  						output += '<span class="j_room_pay"><span class="j_room_pay_hour">' + this.HOUR_COST + '</span> 원/시간</span>';
-  						output += '<span class="j_room_tag">' + this.HASHTAG + '</span>';
-  						output += '</p></div></div>';
-						  						});
-					$(".front").append(output);
+				console.log(rdata);
+				if(rdata.listcount > 0){
+					$("#j_main_room").empty();
+					output = "";
+					output += '<p>스터디북의 추천공간</p>';
+					output += '<div class="row">';
+					$(rdata.roomlist).each(
+						function(index, item){
+							output += '<div class="col-md-4">';
+							output += '<div class="wrapper">';
+							output += '<div class="tile job-bucket">';
+							output += '<div class="front">'
+							output += '<div class="card" onClick="javascript:location.href=';
+							output += 'room_detail.ro?room_code=' + item.room_CODE + '">';
+							output += '<img class="card-img-top img-fluid rounded mx-auto d-block" src="resources/image/room/' + item.file_NAME + '">';
+	  						output += '<div class="card-body">';
+	  						output += '<p class="card-text">';
+	  						output += '<span class="j_room_name">' + item.room_NAME + '</span>';
+	  						output += '<span class="j_room_count">최대 ' + item.max_MEMBER + "인</span>";
+	  						output += '</P>';
+	  						output += '<p class="card-text">';
+	  						output += '<span class="j_room_pay"><span class="j_room_pay_hour">' + item.hour_COST + '</span> 원/시간</span>';
+	  						output += '<span class="j_room_tag">' + item.hashtag + '</span>';
+	  						output += '</p></div></div></div></div></div></div>';
+						})
+					output += '</div>';
+					output += '<br><br>';
+					
+					//페이지네이션 시작
+					output += '<div id = "center-block" class="center-block">';
+					output += '<div class="row">';
+					output += '<div class="col">';
+					output += '<ul class="pagination">';
+		            
+		            digit = '&lt';
+		            href="";   
+		            if (rdata.page > 1) {
+		               href = 'href=javascript:getList(' + (rdata.page - 1) + ')';
+		            }
+		            setPaging(href, digit);
+		            
+		            for (var i = rdata.startpage; i <= rdata.endpage; i++) {
+		               digit = i;
+		               href="href='#'";
+		               if (i != rdata.page) {
+		                 href = 'href="javascript:getList(' + i + ')"';
+		               }
+		               setPaging(href, digit);
+		            }
+		            
+		            digit = '&gt';
+		            href="";
+		            if (rdata.page < rdata.maxpage) {
+		               href = 'href=javascript:getList(' + (rdata.page + 1) + ')';
+		            } 
+		            setPaging( href, digit);
+		            
+		            output += '</ul></div></div></div>'
+		            
+		            $("#j_main_room").append(output);
 				} else {
-					$(".front").text("등록된 스터디룸이 없습니다.");
+					$(".front").empty();
+					$(".front").append("<font size=5>등록된 이벤트가 없습니다.</font>");
 				}
-			}
+			}, //success end
+			error : function() {
+		         console.log('roomlist ajax 에러')
+		    }
 		});// ajax end
-	}// function end
-
-	$('.page-link').click(function(){
-		getList();
-	})
-})
+	}// getList() end

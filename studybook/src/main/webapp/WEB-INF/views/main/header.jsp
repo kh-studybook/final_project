@@ -80,20 +80,16 @@ $(document).ready(function(){
 						<img src="resources/image/profile/default.png">
 						</c:if>
 						<c:if test="${member.profile!= null}">
-						<img src="resources/${member.profile}">
+						<img src="resources/image/profile/${member.profile}">
 						</c:if>
 					</div>
 				<c:if test="${member.email==null}">
-					<button id="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
+					<p id="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
 				</c:if>
 				<c:if test="${member.email!=null}">
 					<div class="j_menu_login">
 						<div class="j_menu_name">[${member.name}]</div>
-
-					<!--	<div class="j_menu_reg"><a href="#">프로필 관리</a></div> -->
-
-						<button id="menu_update" class="j_menu_reg">프로필 관리</button>
-
+						<div id="menu_update" class="j_menu_reg"><a href="#">프로필 관리</a></div>
 					</div>
 				</c:if>
 			</div>
@@ -112,9 +108,9 @@ $(document).ready(function(){
 		<div>
 			<ul>
 
-				<li class="j_menu_list" onclick="location.href='/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='/studybook/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
 				<li class="j_menu_list" onclick="location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
-				<li class="j_menu_list" onclick="location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+				<li class="j_menu_list" onclick="location.href='/studybook/event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 
 			</ul>
 		</div>

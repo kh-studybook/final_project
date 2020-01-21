@@ -98,29 +98,19 @@
 		
 		<br><br>
 		<!--  페이지네이션 -->
-		<div id = "center-block" class="center-block">
+		<div id="center-block" class="center-block">
 			<div class="row">
 				<div class="col">
 					<ul class="pagination">
-						<c:if test="${page <= 1}">
-							<li class="page-item"><a class="page-link" href="#">&lt;</a>
-							</li>
-						</c:if>
-						<c:if test="${page >1}">
-							<li class="page-item"><a
-								href="getRoomList.net?page = ${page-1}" class="page-link">&lt;</a>
-							</li>
-						</c:if>
+						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
 
 						<!-- 중간에 숫자 부분 -->
 						<c:forEach var="a" begin="${startpage}" end="${endpage}">
 							<c:if test="${a == page}">
-								<li class="page-item"><a class="page-link current"
-									href="#">${a}</a></li>
+								<li class="page-item"><a class="page-link current">${a}</a></li>
 							</c:if>
 							<c:if test="${a != page}">
-								<li class="page-item"><a href="getRoomList.net?page=${a}"
-									class="page-link">${a}</a></li>
+								<li class="page-item"><a class="page-link">${a}</a></li>
 							</c:if>
 						</c:forEach>
 
@@ -130,7 +120,7 @@
 						</c:if>
 						<c:if test="${page < maxpage}">
 							<li class="page-item"><a
-								href="getRoomList.net?page=${page+1}" class="page-link">&gt;</a>
+								href="javascript:go('${page+1}')" class="page-link">&gt;</a>
 							</li>
 						</c:if>
 					</ul>
@@ -144,6 +134,9 @@
 			<font size=5 margin="10">등록된 공간이 없습니다.</font>
 		</c:if>
 		
+	</div>
+	
+	<div id="j_main_event" class="container">
 		<div class="row">
 			<div class="j_event_title">UPCOMING EVENT</div>
 		</div>

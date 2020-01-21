@@ -243,6 +243,11 @@
 	cursor: pointer;
 }
 
+/*페이지네이션*/
+.page-item {
+	cursor: pointer;
+}
+
 /*event 좌우 버튼*/
 .carousel-indicators {
 	display: flex;

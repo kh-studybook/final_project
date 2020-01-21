@@ -41,9 +41,6 @@ public class RoomController {
 	private RoomService roomservice;
 
 	@Autowired
-	private ReserveService reserveservice;
-
-	@Autowired
 	private EventService eventservice;
 
 	@Value("${savefoldername}")
