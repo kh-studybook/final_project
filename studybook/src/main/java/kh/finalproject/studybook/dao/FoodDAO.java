@@ -14,7 +14,7 @@ import kh.finalproject.studybook.domain.Notice;
 @Repository
 public class FoodDAO { 
 
-	@Autowired
+@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	//목록리스트
@@ -35,7 +35,6 @@ public class FoodDAO {
 		return sqlSession.selectOne("Foods.foodDetail",food_code);
 	}
 	
-
 
 
 

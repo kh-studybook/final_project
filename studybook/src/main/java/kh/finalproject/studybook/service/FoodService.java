@@ -18,7 +18,6 @@ public interface FoodService {
 	public Food getDetail(int food_code);
 	
 	
-	
 
 }
 
