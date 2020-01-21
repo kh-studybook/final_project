@@ -366,24 +366,24 @@ public class RoomController {
 		List<Room> roomlist = roomservice.getRoomList(page, limit);
 
 		// 한 화면에 출력할 event 갯수
-		int event_limit = 4;
+		int event_limit = 3;
 
 		// 총 event 리스트 갯수
-		int event_listcount = eventservice.getEventListCount();
+		int event_listcount = eventservice.getMainEventListCount();
 
-		if (event_listcount >= 8) {
-			event_listcount = 8;
-			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+		if (event_listcount >= 6) {
+			event_listcount = 6;
+			List<Event> eventlist = eventservice.getMainEventList(1, event_limit);
 			mv.addObject("eventlist", eventlist);
-			List<Event> eventlist2 = eventservice.getEventList(2, event_limit);
+			List<Event> eventlist2 = eventservice.getMainEventList(2, event_limit);
 			mv.addObject("eventlist2", eventlist2);
-		} else if (event_listcount >= 4) {
-			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+		} else if (event_listcount >= 3) {
+			List<Event> eventlist = eventservice.getMainEventList(1, event_limit);
 			mv.addObject("eventlist", eventlist);
-			List<Event> eventlist2 = eventservice.getEventList(2, event_limit);
+			List<Event> eventlist2 = eventservice.getMainEventList(2, event_limit);
 			mv.addObject("eventlist2", eventlist2);
 		} else {
-			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+			List<Event> eventlist = eventservice.getMainEventList(1, event_limit);
 			mv.addObject("eventlist", eventlist);
 			List<Event> eventlist2 = null;
 			mv.addObject("eventlist2", eventlist2);

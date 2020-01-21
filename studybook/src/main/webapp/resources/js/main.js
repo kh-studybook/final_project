@@ -102,16 +102,78 @@ $(document).ready(function(){
     
     $('.page-link').click(function(){
 		console.log(".page-link");
-		var page = this.innerText;
+		if(this.innerText == '>'){
+			var page = 2
+		} else {
+			var page = this.innerText;
+		}
 		getList(page);
 	})
-   
+	
+	/*
+	//카카오지도 api 사용
+	var container = document.getElementById('j_map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	
+	//카카오지도 api 검색 사용
+	var places = new kakao.maps.services.Places();
+	var callback = function(result, status) {
+	    if (status === kakao.maps.services.Status.OK) {
+	        console.log(result);
+	    }
+	};
+
+	places.keywordSearch('KH정보교육원 종로지점', callback);
+	*/
+	
+	
+	//카카오지도 api 키워드로 장소 검색하기
+	var mapContainer = document.getElementById('j_map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('서울특별시 중구 남대문로 120', function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;font-weight:bold">StudyBook</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
 })//ready() end
 
 	function setPaging(href, digit){
 		output+="<li class='page-item'>";
 		gray = "";
-		if (href  == "href='#'") {
+		if (href  == "#") {
 			gray=" current";//현재 페이지에 회색이 나오도록 하기 위함
 		}
 		anchor = "<a class='page-link"+gray+"'" + href + ">" + digit + "</a></li>";
@@ -171,7 +233,7 @@ $(document).ready(function(){
 		            
 		            for (var i = rdata.startpage; i <= rdata.endpage; i++) {
 		               digit = i;
-		               href="href='#'";
+		               href="#";
 		               if (i != rdata.page) {
 		                 href = 'href="javascript:getList(' + i + ')"';
 		               }

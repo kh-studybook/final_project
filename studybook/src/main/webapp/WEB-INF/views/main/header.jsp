@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,7 +22,7 @@
 	crossorigin="anonymous" />
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="">
+<link rel="shortcut icon" href="resources/icon/pavicon.png">
 
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="resources/css/header.css" />
@@ -32,30 +31,11 @@
 <script src="resources/js/header.js"></script>
 
 <!-- title -->
-
-<!--
-<c:if test="${!empty id }">
-<title>StudyBook | ${id} </title>
+<c:if test="${!empty member }">
+	<title>StudyBook | ${member.name}</title>
 </c:if>
-<c:if test="${empty id }">
-
-<script>
-$(document).ready(function(){
-	
-	$("#menu_login").click(function(){
-		location.href="login.mem";
-	})
-	
-	$("#menu_update").click(function(){
-		location.href="update.mem";
-	})
-	
-})
-
-</script>
-
--->
-<title>StudyBook</title>
+<c:if test="${empty member }">
+	<title>StudyBook</title>
 </c:if>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -89,7 +69,7 @@ $(document).ready(function(){
 				<c:if test="${member.email!=null}">
 					<div class="j_menu_login">
 						<div class="j_menu_name">[${member.name}]</div>
-						<div id="menu_update" class="j_menu_reg"><a href="#">프로필 관리</a></div>
+						<div id="menu_update" class="j_menu_reg"><a href="update.mem">프로필 관리</a></div>
 					</div>
 				</c:if>
 			</div>

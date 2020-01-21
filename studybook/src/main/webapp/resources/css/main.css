@@ -227,6 +227,10 @@
 }
 
 /*event*/
+#j_main_event {
+	min-height: 250px;
+}
+
 .row {
 	justify-content: center;
 }
@@ -241,6 +245,11 @@
 	color: #7F7F7F;
 	margin-bottom: 20px;
 	cursor: pointer;
+	font-size: 14px;
+}
+
+.j_event_more:hover{
+	font-weight: bold;
 }
 
 /*페이지네이션*/
@@ -268,4 +277,17 @@
     width: 8px;
     height: 8px;
     color: white;
+}
+
+/* map */
+#j_main_root {
+	min-height: 600px;
+}
+
+#j_map {
+	height: 400px;
+}
+.j_address {
+	font-size: 14px;
+	color: #7F7F7F;
 }

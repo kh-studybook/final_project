@@ -4,9 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<!-- 캘린더 css 불러오기 -->
 	<link rel="stylesheet" href="resources/css/jsCalendar.css">
+	<!-- main css 불러오기 -->
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<!-- 카카오지도 services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96ef4dc13ca9a8b7e395102cddc78d5f&libraries=services"></script>
+	<!-- 카카오지도 api 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96ef4dc13ca9a8b7e395102cddc78d5f"></script>
+	<!-- 캘린더 js 불러오기 -->
 	<script src="resources/js/jsCalendar.js"></script>
+	<!-- main js 불러오기 -->
 	<script src="resources/js/main.js"></script>
 </head>
 <body>
@@ -131,14 +139,14 @@
 		
 		<%-- 게시글이 없는 경우 --%>
 		<c:if test="${listcount == 0}">
-			<font size=5 margin="10">등록된 공간이 없습니다.</font>
+			<font>등록된 공간이 없습니다.</font>
 		</c:if>
 		
 	</div>
 	
-	<div id="j_main_event" class="container">
+	<div class="container"  id="j_main_event">
 		<div class="row">
-			<div class="j_event_title">UPCOMING EVENT</div>
+			<div class="col-md-center j_event_title">UPCOMING EVENT</div>
 		</div>
 		
 		<%-- 이벤트 있는 경우 --%>
@@ -153,43 +161,18 @@
 	            <div class="row blog">
 	                <div class="col-md-12">
 	                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
-	                        <ol class="carousel-indicators">
-	                            <li data-target="#blogCarousel" data-slide-to="0" class="active">&lt</li>
-	                            <li data-target="#blogCarousel" data-slide-to="1">&gt</li>
-	                        </ol>
-	
+	             
 	                        <!-- Carousel items -->
 	                        <div class="carousel-inner">
 	                            <div class="carousel-item active">
+	                            	<div class="row">
 	                            	<c:forEach var="list" items="${eventlist}" varStatus="status">
-	                                <c:if test="${status.count%4==1}">
-	                                <div class="row">
-	                                    <div class="col-md-3">
+	                                	<div class="col-md-4">
 	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
 	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
 	                                        </a>
 	                                    </div>
-	                                </c:if>
-	                                <c:if test="${status.count%4==2}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
-	                                </c:if>
-	                                <c:if test="${status.count%4==3}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
-	                                </c:if>
 	                                <c:if test="${status.last}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
 	                                </div>
 	                                </c:if>
 	                                </c:forEach>
@@ -198,36 +181,21 @@
 	                            <!--.item-->
 	
 								<c:if test="${!empty eventlist2}">
+								<!-- event 좌우 버튼 -->
+								<ol class="carousel-indicators">
+		                            <li data-target="#blogCarousel" data-slide-to="0" class="active">&lt</li>
+		                            <li data-target="#blogCarousel" data-slide-to="1">&gt</li>
+		                        </ol>
+		                        
 	                            <div class="carousel-item">
+	                            	<div class="row">
 	                                <c:forEach var="list" items="${eventlist2}" varStatus="status">
-	                                <c:if test="${status.count%4==1}">
-	                                <div class="row">
-	                                    <div class="col-md-3">
+	                                	<div class="col-md-4">
 	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
 	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
 	                                        </a>
 	                                    </div>
-	                                </c:if>
-	                                <c:if test="${status.count%4==2}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
-	                                </c:if>
-	                                <c:if test="${status.count%4==3}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
-	                                </c:if>
 	                                <c:if test="${status.last}">
-	                                    <div class="col-md-3">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
-	                                    </div>
 	                                </div>
 	                                </c:if>
 	                                </c:forEach>
@@ -248,11 +216,50 @@
 		
 		<c:if test="${event_listcount == 0}">
 			<div class="row">
-				<div class="col-md-4">
-					<font size=5 margin="10">등록된 이벤트가 없습니다.</font>
+				<div class="col-md-center">
+					<font>등록된 이벤트가 없습니다.</font>
 				</div>
 			</div>
 		</c:if>
+	</div>
+	
+	<%-- 찾아오시는 길 --%>
+	<div class="container" id="j_main_root">
+		<div class="row">
+			<div class="col-md-center j_event_title">찾아오시는 길</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8" id="j_map">
+				카카오지도API 예정
+			</div>
+			<div class="col-md-4">
+				<p class="j_room_name">스터디북</p>
+				<p class="j_address">
+					<br>
+					<br>
+					서울특별시 중구 남대문로 120 대일빌딩 2F, 3F
+					<br>
+					<br>
+					T: 1544-9970 / F: 02-722-0858
+					<br>
+					<br>
+					<br>
+					버스 : 우리은행 종로지점 정류장
+					<br>
+					<br>
+					지선버스 163 / 172 / 201 / 262 / 401 / 406 / 701 / 704 / N15 / N62
+					<br>
+					<br>
+					마을버스 7017 / 7021 / 7022
+					<br>
+					<br>
+					간선버스 8110
+					<br>
+					<br>
+					지하철 2호선 을지로입구역 3번출구 100M / 1호선 종각역 4번, 5번 출구 200M
+				</p>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
