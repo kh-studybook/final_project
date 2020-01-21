@@ -14,7 +14,7 @@ textarea::placeholder, input[type=text]::placeholder{color:black;}
 
 /** 입력 폼 관련*/
 input[type=text], select, #event_content {width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;}
-label {padding: 12px 12px 12px 0; display: inline-block;}
+.pp > label {display: inline-block;}
 input[type=date]{height:3rem;}
 
 /** 버튼 관련*/
@@ -30,8 +30,25 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:200px; height:200px; border-radius: 5px}
-#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; background-color:#56D7D6; color:white; margin-top:5px; text-align:center;}
+.p_avatar{width:200px; height:200px; }
+#eventPic_button{border:none; border-radius: 5px; display:inline-block; padding:7px; width:200px; background-color:#56D7D6; color:white; margin-top:5px; text-align:center;}
+
+.navbar-brand{display:flex !important; font-size:24px !important; width:150px;     width: 150px;
+    background-color: #F2F2F2;
+    font-size: 24px;
+    height: 50px;
+    color: black !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: inline-block;
+    padding-top: .3125rem !important;
+    padding-bottom: .3125rem !important;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit !important;
+    white-space: nowrap;}
 
 /* Clear floats after the columns */
 .row:after { content: ""; display: table; clear: both;}
@@ -51,11 +68,25 @@ input[type=date]{height:3rem;}
 		//이벤트 날짜 가져오기
 
 		//이벤트 시작 시간 가져오기
-		$("#event_start").val("${event_start}").attr("selected", true);
+		$("#event_start option").each(function(){
+			if (this.value == "${eventdata.event_start}") {
+				$(this).prop("selected", "selected");
+			}
+		});		
+	
 		//이벤트 종료 시간 가져오기
+		$("#event_end option").each(function(){
+			if (this.value == "${eventdata.event_end}") {
+				$(this).prop("selected", "selected");
+			}
+		});
 		
 		//이벤트 장소 가져오기
-		
+		$("#event_room option").each(function(){
+			if (this.value == "${eventdata.event_room}") {
+				$(this).prop("selected", "selected");
+			}
+		});
 		
 		
 		//썸네일 이미지 변경하기
@@ -70,9 +101,10 @@ input[type=date]{height:3rem;}
 				return false;
 			}
 			
-			//파일 크기 제한 하기
+			//파일 크기 제한
 			var maxSize = 5 * 1024 * 1024;
-			var fileSize = file.getSize;
+			var fileSize = file.size;
+			console.log(fileSize + " : " + maxSize);
 			if (fileSize > maxSize) {
 				alert("5MB이하 파일만 등록할 수 있습니다.\n파일 용량을 확인해주세요.");
 				return false;
@@ -172,17 +204,16 @@ input[type=date]{height:3rem;}
 <div class="p container">
 	<!-- 상단 메뉴 -->
    	<div class="row pp_locate"">
-      <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 수정 페이지</span></div>
-      <div class="col-md-4"></div>
+     <a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 수정 페이지</span>
    	</div>
    	<br>
    	
 <h2 class = "p_title">이벤트 수정</h2>
 
-
   <form method="post" action="EventModifyAction.eve" enctype="multipart/form-data" id = "p_event_modify_form">
   	<!--  작성자 추후 멤버키 다시 변경하기 admin 0 -->
- 	<input name = "mem_key" id = "mem_key" value = 0 type = "hidden">
+ 	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
+	<input type = "hidden" name = "event_num" value = "${eventdata.event_num}">
   
 	<!--  썸네일 등록 -->
    <div class="row">
@@ -207,7 +238,7 @@ input[type=date]{height:3rem;}
         <label for="event_title">이벤트명</label>
       </div>
       <div class="col-75">
-        <input type="text" id="event_title" name="event_title" placeholder="이벤트명" value = "${eventdata.title}">
+        <input type="text" id="event_title" name="title" placeholder="이벤트명" value = "${eventdata.title}">
       </div>
     </div>
     
@@ -217,7 +248,7 @@ input[type=date]{height:3rem;}
         <label for="event_date">이벤트 날짜</label>
       </div>
       <div class="col-75">
-        <input type="date" id="event_date" name="event_date" class = "form-control" value = "${eventdata.event_date}">
+        <input type="date" id="event_date" name="event_date" class = "form-control" value = "${fn:substring(eventdata.event_date,0,10)}">
       </div>
     </div>
 
@@ -227,7 +258,7 @@ input[type=date]{height:3rem;}
         <label for="country">이벤트 시작 시간</label>
       </div>
       <div class="col-75">
-		<select id = "event_start">
+		<select id = "event_start" name = "event_start">
 			<option value = "none">이벤트 시작시간</option>
 			<option value = "09:00">09:00</option>
 			<option value = "10:00">10:00</option>
@@ -251,7 +282,7 @@ input[type=date]{height:3rem;}
         <label for="country">이벤트 종료시간</label>
       </div>
       <div class="col-75">
-		<select id = "event_end">
+		<select id = "event_end" name = "event_end">
 			<option value = "none">이벤트 종료 시간</option>
 			<option value = "10:00">10:00</option>
 			<option value = "11:00">11:00</option>
@@ -293,7 +324,7 @@ input[type=date]{height:3rem;}
         <label for="event_content">세부내용</label>
       </div>
       <div class="col-75">
-        <textarea id="event_content" name="event_content" placeholder="이벤트 내용을 4000자까지 입력해주세요.">${eventdata.content}</textarea>
+        <textarea id="event_content" name="content" placeholder="이벤트 내용을 4000자까지 입력해주세요.">${eventdata.content}</textarea>
         <span id = "p_event_content"></span>
       </div>
     </div>
@@ -302,7 +333,7 @@ input[type=date]{height:3rem;}
     <br>
     <div class="p container" style="display: inline-block; text-align: center;">
     	<button type = "reset" class = "p_reset">취소</button>
-      	<button type = "submit" class = "p_submit">글등록</button>
+      	<button type = "submit" class = "p_submit">글수정</button>
     </div>
   </form>
 </div>

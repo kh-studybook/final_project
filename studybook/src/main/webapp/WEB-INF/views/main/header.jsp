@@ -55,12 +55,13 @@ $(document).ready(function(){
 </c:if>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+
    <a class="navbar-brand" href="main.net">StudyBook</a>
    
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
          <li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
-         <li class="nav-item"><a class="nav-link" href="#">이벤트 홍보</a></li>
+         <li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
          <li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
       </ul>
    </div>   
@@ -127,5 +128,6 @@ $(document).ready(function(){
       </c:if>
       </div>
    </div>
+
 
 </nav>

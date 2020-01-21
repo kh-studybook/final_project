@@ -10,8 +10,8 @@
 	
 	/** 글자 관련 */
 	.event_title_view{font-family:"맑은 고딕"; font_size:32px; text-align:center}
-	#event_comment_text{font-weight:bold;font-family:"맑은 고딕";}
-	.p_title{font-family:"맑은 고딕"; font-weight:bold; text-align:center; font-size:32px; maxLength:20}
+	#event_comment_text{font-weight:bold;font-family:"맑은 고딕"; font-size:18px;}
+	.p_title{font-family:"맑은 고딕"; text-align:center; font-size:32px; maxLength:20}
 	
 	/** 위치 관련 */
 	.motifyEvent{text-align:right;}
@@ -56,9 +56,9 @@
 </script>
 </head>
 <body>
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
 	<div class = "container">
-	<input type = "hidden" id = "mem_key" name = "mem_key" value = 0><!--  추후 확인 : mem_key -->
+	<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
 	<input type = "hidden" name = "event_num" value = "${eventdata.event_num}">
 	<!-- 상단 메뉴 -->
    	<div class="row p_locate">
@@ -92,14 +92,16 @@
    	<hr>	
    	<p id = "event_comment_text">댓글</p><br>
    	<div id = "comment"><!--  추후확인 : 여기서부터 다시 하기 -->
-		<button class = "btn btn-info float-left">총 50자까지 가능합니다.</button>
 		<button id = "write" class = "btn btn-info float-right">등록</button>
 		<textarea rows = 3 class = "form-control" id = "content" maxLength = "50"></textarea>
 		<table class = "table table_striped"><!-- #comment table -->
 		<thead>
-			<tr><td>아이디</td><td>내용</td><td>날짜</td></tr>
+			<tr>닉네임</tr>
+			<tr>날짜</tr>
+
 		</thead>
 		<tbody>
+			<tr>내용</tr>
 		</tbody>
 		</table>
 		<div id = "message"></div>

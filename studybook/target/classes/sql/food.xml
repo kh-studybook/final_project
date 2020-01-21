@@ -3,42 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Foods">
-
 	<select id="getFoodListAll" resultType="food">
 		select * from food
 	</select>
-
-<!-- 검색관련 -->
-<select id="getSearchList" parameterType="map" resultType="room">
-select * 
-from (select rownum rnum, b.*
-							from(select * from food 
-<if test="search_field!=null">
-where
-	<choose>
-		<when test="search_field=='FOOD_NAME'">FOOD_NAME</when>
-		<when test="search_field=='FOOD_CODE'">FOOD_CODE</when>
-		<when test="search_field=='FOOD_COST'">FOOD_COST</when>
-	</choose>
-	like #{search_word}
-</if>							
-order by food_code desc)b							
-)
-where rnum &gt;=#{start} and rnum &lt;=#{end}
-</select>
-
-<select id="searchcount" parameterType="map" resultType="int">
-select count(*)
-from food 
-<if test="search_field!=null">
-where
-<choose>
-		<when test="search_field=='FOOD_NAME'">FOOD_NAME</when>
-		<when test="search_field=='FOOD_CODE'">FOOD_CODE</when>
-		<when test="search_field=='FOOD_COST'">FOOD_COST</when>
-	</choose>
-	like #{search_word}
-</if>
-</select>
-
 </mapper>

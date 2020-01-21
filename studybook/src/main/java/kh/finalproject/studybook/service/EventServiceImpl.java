@@ -51,7 +51,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public String getEventWriter(int mem_key) {
+	public String getEventWriter(int mem_key) {//작성자 가져오기
 		return dao.getEventWriter(mem_key);
 	}
 
