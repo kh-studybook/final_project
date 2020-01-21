@@ -25,6 +25,7 @@ insert into member values('관리자', '1234', 'admin@studybook.com', '010111111
 insert into member values('관리자', 1234, 'admin@studybook.com', '0101111111', 999,'');
 
 insert into member values('admin@studybook.com', 1234,'관리자' , '0101111111', 998,'');
+update member set key = 999 where name = 'admin';
 
 commit
 

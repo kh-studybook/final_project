@@ -46,16 +46,12 @@ create table event(
 	event_room varchar2(50) not null,
 	event_pic varchar2(200) not null
 );
-
+alter table event add event_status number(10) default 0;
 
 drop table event;
 
 select * from event;
 delete from event;
-
-delete from event where event_num = 3;
-select * from (select rownum rnum, event_num, mem_key, title, content, event_pic from event) 
-	order by event_num desc
 	
 	
 	

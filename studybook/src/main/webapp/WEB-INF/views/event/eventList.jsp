@@ -4,21 +4,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
 <meta charset="UTF-8">
-<style>
+<style>	
 /** 글자 관련!!!!*/
 .p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px;}
-alt{color:White; font-weight:bold; z-index:10}
 .p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
 #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
 
 /** 버튼 관련*/
 #p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
 	color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
-#event_modify_btn:hover, #event_delete_btn:hover {cursor: pointer;color: #3EF4F3}
 #delete_modify_btn{padding:10px; z-index:10; float:right;}
 #delete_modify_btn:after{clear:both}
 #event_modify_btn:visited{color:black}
 #event_delete_btn:visited{color:black}
+#event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
+#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
@@ -38,19 +38,11 @@ alt{color:White; font-weight:bold; z-index:10}
 		//글쓰기 이동 & 미로그인시에 로그인 화면으로 이동
 		$("#p_register_event").click(function() {
 			if ("${mem_key}" != null) {
-				location.href = "registerEvent.eve";
+				location.href = "registerEvent.eve?mem_key="+ ${mem_key};
 			} else {
 				location.href = "/login.mem";
 			}
 		});//p_register_event end
-
-		//게시글 수정 버튼 클릭 했을 때
-		$("#event_modify_btn").click(function(){
-			var event_num = $(this).find($("input[name=event_num2]")).val();
-			location.href = "EventModifyView.eve?num="+parseInt(event_num);
-			System.out.println(event_num);
-			console.log(event_num);
-		});
 
 		//게시글 상세보기로 이동하기
 		$(".click_detail").click(function(){
@@ -79,14 +71,14 @@ alt{color:White; font-weight:bold; z-index:10}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+
 				<br> <br>
 				<p class="p_title">이벤트 홍보 게시판</p>
 				<br> <br>
 				<p class="p_p_title">여러분의 이벤트를 등록해주시면 메인에 홍보해드립니다.</p>
 				<br><br>
 
-				<input type="hidden" name="mem_key" id="mem_key" value=0>
-				<!--  추후 확인 : admin 0 -->
+				<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
 			</div>
 		</div>
 		<%-- 게시글이 있는 경우 --%>
@@ -124,10 +116,13 @@ alt{color:White; font-weight:bold; z-index:10}
     							</div>
 								
 								</div>
+								
+								<c:if test = "${event_writer == 'admin'}">
 							  	<div id = "delete_modify_btn">
-									<a id="event_modify_btn">수정</a> | 
+									<a id="event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
 									<a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 								</div>
+								</c:if>
 							</div>  
 						</div>
 					</c:forEach>
@@ -181,7 +176,7 @@ alt{color:White; font-weight:bold; z-index:10}
 			<br><br><br><br><br><br>
 		</c:if>
 
-		<button id="p_register_event">글등록</button>
+		<button id="p_register_event">이벤트등록</button>
 		<br><br>
 	</div>
 

@@ -64,7 +64,7 @@ $(document).ready(function(){
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">이벤트 홍보</a></li>
+			<li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
 		</ul>
 	</div>	
@@ -84,7 +84,7 @@ $(document).ready(function(){
 						</c:if>
 					</div>
 				<c:if test="${member.email==null}">
-					<button id="menu_login" class="j_menu_login">로그인이 필요합니다.</button>
+					<p class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
 				</c:if>
 				<c:if test="${member.email!=null}">
 					<div class="j_menu_login">
@@ -130,7 +130,7 @@ $(document).ready(function(){
 			</div>
 			<div>Powered by STUDYBOOK</div>
 		
-		<c:if test="${id=='admin'}">
+		<c:if test="${member.key==999}">
 			<div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='/studybook/admin'">관리자 센터로 이동</div>
 		</c:if>
 		</div>

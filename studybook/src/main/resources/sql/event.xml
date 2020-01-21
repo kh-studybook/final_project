@@ -31,13 +31,17 @@
 		order by event_date
 	</select>
 	
-	<update id = "modifyEvent" parameterType = "event">
+	<update id = "modifyEvent" parameterType = "Event">
 		update event
 		set 
-			title = #{title}, 
-	 		content =  #{content}, 
-	 		event_pic = #{event_pic}
-			where event_num = #{event_num}
+			event_pic = #{event_pic},
+			title = #{title},
+			event_date = #{event_date},
+			event_start = #{event_start},
+			event_end = #{event_end},
+			event_room = #{event_room}, 
+	 		content =  #{content}	 		
+		where event_num = #{event_num}
 	</update>
 	
 	<select id = "event_writer" resultType = "String">

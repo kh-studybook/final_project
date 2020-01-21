@@ -14,12 +14,6 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-	<!-- 민지 추가 : gson -->
-	<dependency>
-		<groupId>com.google.code.gson</groupId>
-		<artifactId>gson</artifactId>
-		<version>2.8.5</version>
-	</dependency>
 		
 	<!-- 지은 추가: jackson json converter : 멀티이미지 업로드 용도 -->
 	<dependency>
