@@ -17,6 +17,6 @@ public interface EventService {
 	public int eventModify(Event modifyevent);
 	//글 삭제
 	public int eventDelete(int num);
-	//글쓴이인지 확인
-	public boolean isEventWriter(int num);
+	//글쓴이 가져오기
+	public String getEventWriter(int mem_key);
 }

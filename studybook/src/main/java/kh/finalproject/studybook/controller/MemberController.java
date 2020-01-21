@@ -1,5 +1,6 @@
 package kh.finalproject.studybook.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ import kh.finalproject.studybook.service.MemberService;
 @Controller
 public class MemberController { 
 
-	@Autowired
+	@Autowired 
 	private MemberService memberservice;
 
 	@RequestMapping(value = "/login.mem", method = RequestMethod.GET)
@@ -35,6 +36,12 @@ public class MemberController {
 	public String joinSuccess_mem() {
 		return "member/join_success_index";
 	}
+	
+	@RequestMapping(value = "/update.mem", method = RequestMethod.GET)
+	public String my_update() {
+		return "member/my_update_index"; 
+	}
+	
 	
 	@RequestMapping(value = "/loginProcess.mem",  method = RequestMethod.POST)
 	public String loginProcess(@RequestParam("email") String email, @RequestParam("password") String password,
@@ -65,9 +72,10 @@ public class MemberController {
 		}
 	}
 
-	
+	// joinSuccess 부분 수정하기!
 	@RequestMapping(value = "/joinProcess.mem")
-	public void JoinProcess(Member member, HttpServletResponse response) throws Exception {
+	public ModelAndView JoinProcess(Member member, HttpServletResponse response, ModelAndView mv) 
+			throws IOException {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int result = memberservice.insert(member);
@@ -81,18 +89,24 @@ public class MemberController {
 		}
 		out.println("</script>");
 		out.close();
+		return mv;
 	}
 	
 
-	@RequestMapping(value = "/login_findpw.mem")
+	@RequestMapping(value = "/findpw.mem", method = RequestMethod.GET)
 	public String findpw() {
 		return "member/login_findpw_index";
 	}
-
+	
+	
+	@RequestMapping(value = "/updatepw.mem", method = RequestMethod.GET)
+	public String updatepw() {
+		return "member/my_password_index";
+	}
 	
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
-	public ModelAndView member_update(HttpSession session, ModelAndView mv) {
+	public ModelAndView memberUpdate(HttpSession session, ModelAndView mv) {
 		int key = (int) session.getAttribute("key");
 		Member member = memberservice.myinfo(key);
 		mv.setViewName("member/my_update_index");
@@ -119,5 +133,36 @@ public class MemberController {
 		out.close();
 	}
 	
+	//delete? 
+	@RequestMapping(value="delete.mem", method = RequestMethod.GET)
+	public int delete(int key, HttpServletResponse response) throws Exception {
+		int result = memberservice.delete(key);
+	
+		if (result != 1) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('뭐지?');");
+			out.println("location.href='main.net';");
+			out.println("</script>");
+			out.close();
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping (value = "/logout.mem", method = RequestMethod.GET)
+	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
+		session.invalidate();
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('test 로그아웃♡');");
+		out.println("location.href='main.net';");
+		out.println("</script>");
+		out.close();
+		return "redirect:main.net";
+		
+	}
 	
 }

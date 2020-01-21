@@ -23,12 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.finalproject.studybook.domain.Event;
 import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.domain.Room_ex;
+import kh.finalproject.studybook.service.EventService;
 import kh.finalproject.studybook.service.ReserveService;
 import kh.finalproject.studybook.service.ReserveServiceImpl;
 import kh.finalproject.studybook.service.RoomService;
@@ -40,6 +42,9 @@ public class RoomController {
 
 	@Autowired
 	private ReserveService reserveservice;
+
+	@Autowired
+	private EventService eventservice;
 
 	@Value("${savefoldername}")
 	private String saveFolder;
@@ -122,7 +127,7 @@ public class RoomController {
 			}
 
 		}
-		
+
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -207,7 +212,7 @@ public class RoomController {
 	// 룸 상세 수정
 	@PostMapping("RoomModifyAction.ro")
 	public ModelAndView RoomModifyAction(Room room, Room_ex room_ex, ModelAndView mv,
-			MultipartHttpServletRequest mtfRequest,HttpServletResponse response) throws Exception {
+			MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws Exception {
 
 		String content = room.getROOM_INTRO();
 		content = content.replace("\r\n", "<br>");
@@ -282,10 +287,9 @@ public class RoomController {
 			}
 			String url = "redirect:RoomList.ro";
 			mv.setViewName(url);
-			
-			
+
 		}
-		
+
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -296,12 +300,13 @@ public class RoomController {
 		return null;
 
 	}
+
 	@GetMapping("RoomDelete.ro")
-	public String RoomDeleteAction(int room_code,HttpServletResponse response) throws Exception{
-		
+	public String RoomDeleteAction(int room_code, HttpServletResponse response) throws Exception {
+
 		int result = roomservice.roomDelete(room_code);
-		
-		if(result==0) {
+
+		if (result == 0) {
 			System.out.println("룸 삭제 실패");
 		}
 		System.out.println("룸 삭제 성공");
@@ -314,8 +319,6 @@ public class RoomController {
 		out.close();
 		return null;
 	}
-	
-	
 
 	// 지은 끝--
 
@@ -345,13 +348,13 @@ public class RoomController {
 	@RequestMapping(value = "/main.net")
 	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
-		// 한 화면에 출력할 갯수
+		// 한 화면에 출력할 room 갯수
 		int limit = 9;
 
-		// 총 리스트 갯수
+		// 총 room 리스트 갯수
 		int listcount = roomservice.getListCount();
 
-		// 총 페이지 수
+		// 총 room 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
 
 		// 시작 페이지(1, 6, 11, ...)
@@ -365,6 +368,30 @@ public class RoomController {
 
 		List<Room> roomlist = roomservice.getRoomList(page, limit);
 
+		// 한 화면에 출력할 event 갯수
+		int event_limit = 4;
+
+		// 총 event 리스트 갯수
+		int event_listcount = eventservice.getEventListCount();
+
+		if (event_listcount >= 8) {
+			event_listcount = 8;
+			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+			mv.addObject("eventlist", eventlist);
+			List<Event> eventlist2 = eventservice.getEventList(2, event_limit);
+			mv.addObject("eventlist2", eventlist2);
+		} else if (event_listcount >= 4) {
+			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+			mv.addObject("eventlist", eventlist);
+			List<Event> eventlist2 = eventservice.getEventList(2, event_limit);
+			mv.addObject("eventlist2", eventlist2);
+		} else {
+			List<Event> eventlist = eventservice.getEventList(1, event_limit);
+			mv.addObject("eventlist", eventlist);
+			List<Event> eventlist2 = null;
+			mv.addObject("eventlist2", eventlist2);
+		}
+
 		mv.setViewName("main/main");
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
@@ -373,8 +400,46 @@ public class RoomController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("list", roomlist);
 		mv.addObject("limit", limit);
+		mv.addObject("event_limit", event_limit);
+		mv.addObject("event_listcount", event_listcount);
 
 		return mv;
+	}
+
+	//ajax roomList 불러오기
+	@ResponseBody
+	@RequestMapping(value = "getRoomList.net")
+	public Object getRoomList(@RequestParam(value = "page", defaultValue = "1", required = false) int page)
+			throws Exception {
+		// 한 화면에 출력할 room 갯수
+		int limit = 9;
+
+		// 총 room 리스트 갯수
+		int listcount = roomservice.getListCount();
+
+		// 총 room 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 시작 페이지(1, 6, 11, ...)
+		int startpage = ((page - 1) / 5) * 5 + 1;
+
+		// 마지막 페이지(5, 10, 15, ...)
+		int endpage = startpage + 5 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		List<Room> roomlist = roomservice.getRoomList(page, limit);
+		
+		Map<String, Object> obj = new HashMap<String, Object>();
+		obj.put("page", page);
+		obj.put("maxpage", maxpage);
+		obj.put("startpage", startpage);
+		obj.put("endpage", endpage);
+		obj.put("listcount", listcount);
+		obj.put("roomlist", roomlist);
+		
+		return obj;
 	}
 
 }

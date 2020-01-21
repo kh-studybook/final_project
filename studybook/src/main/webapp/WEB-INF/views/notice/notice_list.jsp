@@ -16,7 +16,7 @@ body {
 }
 
 .center-block {
-	display: flex;
+	display: flex; 
 	justify-content: center; /*가운데 정렬*/
 }
 
@@ -27,7 +27,7 @@ select.form-control {
 }
 
 .rows {
-	text-align: right;
+	text-align: right; 
 }
 
 .row {

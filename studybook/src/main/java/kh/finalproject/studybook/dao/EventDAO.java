@@ -39,6 +39,9 @@ public class EventDAO {
 		return sqlSession.update("event.modifyEvent", modifyevent);
 	}
 
+	public String getEventWriter(int mem_key) {//작성자 가져오기
+		return sqlSession.selectOne("event.event_writer", mem_key);
+	}
 	
 	
 }

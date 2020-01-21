@@ -11,19 +11,21 @@ alt{color:White; font-weight:bold; z-index:10}
 .p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
 #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
 
-/** 버튼 관련 : 추후 글쓰기 버튼 위치 다시 확인하기*/
+/** 버튼 관련*/
 #p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
 	color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
 #event_modify_btn:hover, #event_delete_btn:hover {cursor: pointer;color: #3EF4F3}
 #delete_modify_btn{padding:10px; z-index:10; float:right;}
 #delete_modify_btn:after{clear:both}
+#event_modify_btn:visited{color:black}
+#event_delete_btn:visited{color:black}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
 .wrapper{width:350px; height:300px; margin:20px; background-color:#F2F2F2;}
-.title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-9rem; position:relative; z-index:10}
-.title_z_index_big{font-size:24px; font-weight:bold; }
-.card_contents{padding:20px; font-family:"맑은 고딕"}
+.title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-10rem; position:relative; z-index:10}
+.title_z_index_big{font-size:24px; font-weight:bold; height: 48px;}
+.card_contents{padding:10px; padding-bottom:0px; font-family:"맑은 고딕"}
 		
 /**  모달 관련 */
 .p_modal-title {font_size: 36px;font-weight: bold;}
@@ -43,8 +45,11 @@ alt{color:White; font-weight:bold; z-index:10}
 		});//p_register_event end
 
 		//게시글 수정 버튼 클릭 했을 때
-		$("#event_modify_btn").click(function() {
-			location.href = "EventModifyView.eve";//추후 확인 : 가지고 가야 할 정보
+		$("#event_modify_btn").click(function(){
+			var event_num = $(this).find($("input[name=event_num2]")).val();
+			location.href = "EventModifyView.eve?num="+parseInt(event_num);
+			System.out.println(event_num);
+			console.log(event_num);
 		});
 
 		//게시글 상세보기로 이동하기
@@ -103,6 +108,7 @@ alt{color:White; font-weight:bold; z-index:10}
       									<div style = "filter: brightness(80%)">
         									<img class="card-img-top" src="resources/upload${b.event_pic}">
         								</div>
+        								<br><br>
         								<div class = "title_z_index"><p class = "title_z_index_big">${b.title}</p><br>
         									<p>${fn:substring(b.event_date,0,11)}<br>${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;<br>
         									<span>${b.event_room}</span></p>
@@ -113,7 +119,7 @@ alt{color:White; font-weight:bold; z-index:10}
         								<p>${b.title}</p>
         								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;
         								<span style = "color : #7F56D2">${b.event_room}</span></p>
-        								<p style = "padding-top:5px">작성자</p>
+        								<p style = "padding-top:5px">${event_writer}</p>
 									</div>
     							</div>
 								

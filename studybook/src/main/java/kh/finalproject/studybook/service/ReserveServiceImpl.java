@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.finalproject.studybook.dao.ReserveDAO;
+import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.ReviewInfo;
 
 @Service
@@ -33,6 +34,12 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getreviewcount(int room_code) {
 		// TODO Auto-generated method stub
 		return reserveDAO.getReviewCount(room_code);
+	}
+
+	@Override
+	public List<Food> getFoodListAll() {
+		// TODO Auto-generated method stub
+		return reserveDAO.getFoodListAll();
 	}
 	
 }

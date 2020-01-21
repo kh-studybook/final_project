@@ -6,30 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="resources/css/food_add.css" />
+<script src="resources/js/food_add.js"></script>
 <script>
-$(document).on('click', '.number-spinner button', function () {    
-	var btn = $(this),
-		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-		newVal = 0;
-	
-	if (btn.attr('data-dir') == 'up') {
-		newVal = parseInt(oldValue) + 1;
-	} else {
-		if (oldValue > 1) {
-			newVal = parseInt(oldValue) - 1;
-		} else {
-			newVal = 0;
-		}
-	}
-	btn.closest('.number-spinner').find('input').val(newVal);
-	
-	return false;
-});
 
 </script>
 </head>
 <body>
-<form action="reserve_ok_page.re">
+<form action="reserve_ok_page.re" method="post">
 	<div class="container">
 		<div class="col-md-12 e_food_page_title">
 			<span>음료 추가 페이지</span>
@@ -46,12 +29,13 @@ $(document).on('click', '.number-spinner button', function () {
 								<img src="http://bit.ly/2tMBBTd" height="420" width="327">
 							</div>
 							<div class="e_product-info">
+								<input type="hidden" name="food_code" value="1">
 								<div class="e_product-text">
-									<h1>아이스 아메리카노</h1>		
+									<h1 name="product_text">아이스 아메리카노</h1>		
 								</div>
 								<div class="e_product-price-btn">
 									<p>
-										<span>3000</span>\
+										<span name="product_price">3000</span>\
 									</p>
 									
 									<div class="input-group number-spinner">
@@ -59,7 +43,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="0">
+									</span> <input type="text" class="form-control text-center" name="ice_americano1" id="ice_americano1" value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
@@ -78,12 +62,13 @@ $(document).on('click', '.number-spinner button', function () {
 								<img src="http://bit.ly/2tMBBTd" height="420" width="327">
 							</div>
 							<div class="e_product-info">
+								<input type="hidden" name="food_code" value="2">
 								<div class="e_product-text">
-									<h1>아이스 아메리카노</h1>		
+									<h1 name='product_text'>아이스 아메리카노</h1>		
 								</div>
 								<div class="e_product-price-btn">
 									<p>
-										<span>3000</span>\
+										<span name="product_price">3500</span>\
 									</p>
 									
 									<div class="input-group number-spinner">
@@ -91,7 +76,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="0">
+									</span> <input type="text" class="form-control text-center" name="ice_americano2" id="ice_americano2"  value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
@@ -110,12 +95,13 @@ $(document).on('click', '.number-spinner button', function () {
 								<img src="http://bit.ly/2tMBBTd" height="420" width="327">
 							</div>
 							<div class="e_product-info">
+								<input type="hidden" name="food_code" value="3">
 								<div class="e_product-text">
-									<h1>아이스 아메리카노</h1>		
+									<h1 name='product_text'>아이스 아메리카노</h1>		
 								</div>
 								<div class="e_product-price-btn">
 									<p>
-										<span>3000</span>\
+										<span name="product_price">4000</span>\
 									</p>
 									
 									<div class="input-group number-spinner">
@@ -123,7 +109,7 @@ $(document).on('click', '.number-spinner button', function () {
 										<button class="btn btn-default" data-dir="dwn">
 											<span class="glyphicon glyphicon-minus">-</span>
 										</button>
-									</span> <input type="text" class="form-control text-center" value="0">
+									</span> <input type="text" class="form-control text-center" name="ice_americano3" id="ice_americano3" value="0">
 									<span class="input-group-btn">
 										<button class="btn btn-default" data-dir="up">
 											<span class="glyphicon glyphicon-plus">+</span>
@@ -145,20 +131,22 @@ $(document).on('click', '.number-spinner button', function () {
 			<div class="e_food_add_div">				
 				<h2 class="e_head">공간 결제 예정금액</h2>
 				<ul class="e_list_detail">
-					<li><span class="e_tit">예약 날짜</span> <span class="e_data">2020.01.01 (수)</span></li>
-					<li><span class="e_tit">예약 시간</span> <span class="e_data">11 ~ 13시, 2시간</span></li>
-					<li><span class="e_tit">추가 예약 인원</span> <span class="e_data">1명</span></li>
+					<li><span class="e_tit">예약 날짜</span> <span class="e_data">${reserve.reserve_date }</span></li>
+					<li><span class="e_tit">예약 시간</span> <span class="e_data">${reserve.start_time } ~  ${reserve.end_time }시</span></li>
+					<li><span class="e_tit">추가 예약 인원</span> <span class="e_data">${reserve.extra_num }명</span></li>
 				</ul>
 				
 				<div class="e_total_price_div">
 					<span class="e_total_name">공간 예약 금액</span>
-					<span class="e_total_price">22,000</span>
+					<span class="e_total_price">${reserve.total_cost }</span>
 				</div>			
 			</div>
 			
 			<div class="e_food_add_div">				
 				<h2 class="e_head">음료 결제 예정금액</h2>
-				<ul class="e_list_detail">
+				<ul class="e_list_detail food_list">
+					
+		<!-- 			
 					<li><div class="e_food_price_div">
 						<span class="e_tit">아이스 아메리카노</span><span class="e_drink_num">1</span> <span class="e_data">4000</span>
 					</div></li>
@@ -166,11 +154,13 @@ $(document).on('click', '.number-spinner button', function () {
 					<li><div class="e_food_price_div">
 						<span class="e_tit">아이스 카라멜 마끼야또</span><span class="e_drink_num">1</span> <span class="e_data">3500</span>
 					</div></li>
+				 -->
+				
 				</ul>
 				
 				<div class="e_total_price_div">
 					<span class="e_total_name">음료 결제 금액</span>
-					<span class="e_total_price">22,000</span>
+					<span class="e_total_price"></span>
 				</div>			
 			</div>
 			

@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-md">
 					<div class="m_main_header_column">
-						<div class="m_main_select" onClick="">
+						<div class="m_main_select">
 							<div class="m_write" id="m_write_date">
 								<div>
 									<i class="far fa-calendar-alt"></i>
@@ -30,7 +30,7 @@
 							</div>
 							<div id="my-calendar" class="e_calendar"></div>
 	            		</div>
-						<div class="m_main_select" onClick="">
+						<div class="m_main_select">
 							<div class="m_write" id="m_write_time">
 								<i class="far fa-clock"></i>
 								시간
@@ -45,7 +45,7 @@
 								</ul>
 				        	</div>
 						</div>
-						<div class="m_main_select" onClick="">
+						<div class="m_main_select">
 							<div class="m_write" id="m_write_count">
 								<i class="fas fa-user"></i>
 								인원
@@ -107,8 +107,8 @@
 							</li>
 						</c:if>
 						<c:if test="${page >1}">
-							<li class="page -item"><a
-								href="main.net?page = ${page-1}" class="page-link">&lt;</a>
+							<li class="page-item"><a
+								href="getRoomList.net?page = ${page-1}" class="page-link">&lt;</a>
 							</li>
 						</c:if>
 
@@ -119,7 +119,7 @@
 									href="#">${a}</a></li>
 							</c:if>
 							<c:if test="${a != page}">
-								<li class="page-item"><a href="main.net?page=${a}"
+								<li class="page-item"><a href="getRoomList.net?page=${a}"
 									class="page-link">${a}</a></li>
 							</c:if>
 						</c:forEach>
@@ -130,7 +130,7 @@
 						</c:if>
 						<c:if test="${page < maxpage}">
 							<li class="page-item"><a
-								href="main.net?page=${page+1}" class="page-link">&gt;</a>
+								href="getRoomList.net?page=${page+1}" class="page-link">&gt;</a>
 							</li>
 						</c:if>
 					</ul>
@@ -147,88 +147,119 @@
 		<div class="row">
 			<div class="j_event_title">UPCOMING EVENT</div>
 		</div>
-		<div class="row">
-			<div class="j_event_more">더보기</div>
-		</div>
 		
-		<!-- Carousel -->
-		<div class="row">
-			<div class="container">
-            <div class="row blog">
-                <div class="col-md-12">
-                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
-
-                        <ol class="carousel-indicators">
-                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#blogCarousel" data-slide-to="1"></li>
-                        </ol>
-
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--.row-->
-                            </div>
-                            <!--.item-->
-
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#">
-                                            <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--.row-->
-                            </div>
-                            <!--.item-->
-
-                        </div>
-                        <!--.carousel-inner-->
-                    </div>
-                    <!--.Carousel-->
-                </div>
-            </div>
+		<%-- 이벤트 있는 경우 --%>
+		<c:if test="${event_listcount > 0}">
+			<div class="row j_event_more_div">
+				<div class="j_event_more" onClick="javascript:location.href='event_list.eve'">더보기</div>
 			</div>
-		</div>
-	</div>
+			
+			<!-- Carousel -->
+			<div class="row">
+				<div class="container">
+	            <div class="row blog">
+	                <div class="col-md-12">
+	                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+	                        <ol class="carousel-indicators">
+	                            <li data-target="#blogCarousel" data-slide-to="0" class="active">&lt</li>
+	                            <li data-target="#blogCarousel" data-slide-to="1">&gt</li>
+	                        </ol>
 	
+	                        <!-- Carousel items -->
+	                        <div class="carousel-inner">
+	                            <div class="carousel-item active">
+	                            	<c:forEach var="list" items="${eventlist}" varStatus="status">
+	                                <c:if test="${status.count%4==1}">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.count%4==2}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.count%4==3}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.last}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </div>
+	                                </c:if>
+	                                </c:forEach>
+	                                <!--.row-->
+	                            </div>
+	                            <!--.item-->
+	
+								<c:if test="${!empty eventlist2}">
+	                            <div class="carousel-item">
+	                                <c:forEach var="list" items="${eventlist2}" varStatus="status">
+	                                <c:if test="${status.count%4==1}">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.count%4==2}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.count%4==3}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </c:if>
+	                                <c:if test="${status.last}">
+	                                    <div class="col-md-3">
+	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
+	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
+	                                        </a>
+	                                    </div>
+	                                </div>
+	                                </c:if>
+	                                </c:forEach>
+	                                <!--.row-->
+	                            </div>
+	                            </c:if>
+	                            <!--.item-->
+	
+	                        </div>
+	                        <!--.carousel-inner-->
+	                    </div>
+	                    <!--.Carousel-->
+	                </div>
+	            </div>
+				</div>
+			</div>
+		</c:if>
+		
+		<c:if test="${event_listcount == 0}">
+			<div class="row">
+				<div class="col-md-4">
+					<font size=5 margin="10">등록된 이벤트가 없습니다.</font>
+				</div>
+			</div>
+		</c:if>
+	</div>
 </body>
 </html>

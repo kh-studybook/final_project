@@ -65,7 +65,6 @@ public class NoticeController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("noticelist", noticelist);
 		mv.addObject("limit", limit);
-
 		return mv;
 	}
 
@@ -86,7 +85,7 @@ public class NoticeController {
 			mv.setViewName("notice/notice_detail");
 			mv.addObject("noticedata", notice);
 		}
-		return mv;
+		return mv;  
 	}
 
 	
@@ -97,6 +96,7 @@ public class NoticeController {
 	public String notice_write() throws Exception {
 		return "notice/notice_write";
 	}
+	
 	
 	
 	//공지 수정 상세페이지 보기 (관리자)
@@ -138,6 +138,7 @@ public class NoticeController {
 	}
 	
 
+	
 	//공지 삭제 (관리자)
 	@PostMapping("NoticeDeleteAction.bo")
 	public String NoticeDeleteAction(int num, HttpServletResponse response) throws Exception {
@@ -167,6 +168,8 @@ public class NoticeController {
 
 	}
 
+	
+	
 	//paging
 	@ResponseBody
 	@PostMapping("NoticeListAjax.bo")
