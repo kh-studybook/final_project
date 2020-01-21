@@ -14,7 +14,7 @@ import kh.finalproject.studybook.domain.Notice;
 @Repository
 public class FoodDAO { 
 
-	@Autowired
+@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	//목록리스트
@@ -24,8 +24,17 @@ public class FoodDAO {
 	//목록 리스트 카운트
 	public int getSearchListCount(Map<String, Object> map) {
 		return sqlSession.selectOne("Foods.searchcount",map);
-	} 
-
+	}
+	//Food 테이블 삽입
+	public void insertFood(Map<String, Object> map) {
+		System.out.println("FoodDAO의 insertFood까지 옴");
+		sqlSession.insert("Foods.insertFood",map);
+	}
+	//푸드 상세 조회
+	public Food getFoodDetail(int food_code) {
+		return sqlSession.selectOne("Foods.foodDetail",food_code);
+	}
+	
 
 
 

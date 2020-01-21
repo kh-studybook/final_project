@@ -167,12 +167,17 @@ instead of next to each other */
 	padding: 40px;
 	margin-top: 160px;
 	margin-left: auto;
-	width:300px;
+	width: 400px;
+    height: 300px;
 	background-color:white;
 }
 
+.modal_intro {
+	height: 80px;
+}
+
 .modal_body {
-	
+	height: 80px;
 }
 
 .modal_title {
