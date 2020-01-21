@@ -5,6 +5,8 @@ create table food_reserve(
 	count number(5) not null,
 	total_cost number(10) not null
 );
+ALTER TABLE food_reserve
+RENAME COLUMN total_cost TO food_total_cost;
 
 
 

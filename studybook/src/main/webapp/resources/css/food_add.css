@@ -84,7 +84,7 @@ background: #eeeeee;
 
 .e_food_add_div .e_list_detail li .e_food_price_div{
 	 display: grid;
-    grid-template-columns: 200px 70px 90px;
+    grid-template-columns: 210px 60px 80px;
 }
 
 .e_food_add_div .e_list_detail .e_food_price_div .e_data{

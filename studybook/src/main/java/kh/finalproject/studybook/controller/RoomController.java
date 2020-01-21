@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -321,8 +322,8 @@ public class RoomController {
 
 	// 룸 정보 보기 - 은지
 	@RequestMapping(value = "/room_detail.ro")
-	public ModelAndView room_detail(int room_code, ModelAndView mv, HttpServletRequest request) {
-
+	public ModelAndView room_detail(int room_code, ModelAndView mv,HttpSession session, HttpServletRequest request) {
+		Member member=(Member)session.getAttribute("member");
 		Room room = roomservice.getRoomDetail(room_code);
 		// Room_ex room_ex=roomservice.getRoomExDetail(room_code);
 		// List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
@@ -333,8 +334,10 @@ public class RoomController {
 			mv.addObject("message", "룸 상세보기 실패입니다.");
 		} else {
 			System.out.println("룸 상세보기 성공");
-			mv.setViewName("room/room_detail_page");
+			mv.addObject("mem_key",member.getKey());
 			mv.addObject("room", room);
+			System.out.println("룸코드="+room.getROOM_CODE());
+			mv.setViewName("room/room_detail_page");
 			// mv.addObject("room_ex",room_ex);
 			// mv.addObject("gallerylist",gallerylist);
 		}

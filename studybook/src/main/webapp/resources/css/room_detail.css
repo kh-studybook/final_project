@@ -499,6 +499,10 @@ html {
     align-items: center;
 	cursor:pointer;
 }
+.swiper-container .swiper-wrapper .not_active{
+ background:lightgray;
+ pointer-events:none;
+}
 .jsCalendar table {
     width: 99%!important;
 }

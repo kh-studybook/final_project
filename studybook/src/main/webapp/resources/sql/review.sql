@@ -10,3 +10,5 @@ create table review(
 drop table review;
 
 select * from review;
+
+insert into review values(2,2,'공부하기 좋은 분위기였습니다 너무조았아용','2019/12/31',1000);
