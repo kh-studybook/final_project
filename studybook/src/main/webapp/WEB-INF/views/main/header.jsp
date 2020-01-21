@@ -22,7 +22,7 @@
    crossorigin="anonymous" />
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="">
+<link rel="shortcut icon" href="resources/icon/pavicon.png">
 
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="resources/css/header.css" />
@@ -103,9 +103,11 @@ $(document).ready(function(){
       <div class="j_menu_event" onClick="#">이 달의 이벤트</div>
       <div>
          <ul>
-            <li class="j_menu_list" onClick="#">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+
+            <li class="j_menu_list" onClick="javascript:location.href='/studybook/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
             <li class="j_menu_list" onClick="#">공지사항<i class="fas fa-chevron-right"></i></li>
-            <li class="j_menu_list" onClick="#">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+            <li class="j_menu_list" onClick="javascript:location.href='/studybook/event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+
          </ul>
       </div>
       <div class="j_menu_bottom">
@@ -125,4 +127,5 @@ $(document).ready(function(){
       </c:if>
       </div>
    </div>
+
 </nav>

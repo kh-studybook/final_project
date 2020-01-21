@@ -55,5 +55,20 @@ public class EventServiceImpl implements EventService {
 		return dao.getEventWriter(mem_key);
 	}
 
+	@Override
+	public int getMainEventListCount() {
+		return dao.getMainEventListCount();
+	}
+
+	@Override
+	public List<Event> getMainEventList(int page, int limit) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page - 1)*limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getMainEventList(map);
+	}
+
 	
 }
