@@ -6,7 +6,8 @@ public class Food {
 	private int food_code;
 	private String food_name;
 	private int food_cost;
-	private MultipartFile food_pic;
+	private String food_pic;
+	
 	
 	public int getFood_code() {
 		return food_code;
@@ -26,12 +27,14 @@ public class Food {
 	public void setFood_cost(int food_cost) {
 		this.food_cost = food_cost;
 	}
-	public MultipartFile getFood_pic() {
+	public String getFood_pic() {
 		return food_pic;
 	}
-	public void setFood_pic(MultipartFile food_pic) {
+	public void setFood_pic(String food_pic) {
 		this.food_pic = food_pic;
 	}
+	
+	
 	
 	
 }
