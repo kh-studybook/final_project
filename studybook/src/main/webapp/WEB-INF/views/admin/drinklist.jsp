@@ -124,8 +124,8 @@ margin-top:50px;
 									<td>${m.food_name}</td>
 									<td>${m.food_cost}</td>
 									<td class="text-center"><a class='btn btn-info btn-xs'
-										href="FoodModify.re?room_code=${m.food_code}">수정 </a> <a
-										href="FoodDelete.re?room_code=${m.food_code}"
+										href="FoodModify.re?food_code=${m.food_code}">수정 </a> <a
+										href="FoodDelete.re?food_code=${m.food_code}"
 										class="btn btn-danger btn-xs">삭제</a></td>
 								</tr>
 							</c:forEach>

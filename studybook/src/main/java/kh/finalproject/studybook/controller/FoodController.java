@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Food;
@@ -79,13 +81,18 @@ public class FoodController {
 	//음식 등록 FoodAddAction.re
 	@PostMapping("/FoodAddAction.re")
 	
-	public String food_write_ok(Food food, HttpServletResponse response) throws Exception{
+	public String food_write_ok(Food food, MultipartHttpServletRequest mtfRequest,HttpServletResponse response) throws Exception{
 		String food_name=food.getFood_name();
 		int food_cost=food.getFood_cost();
-		MultipartFile uploadfile = food.getFood_pic();
+		
+		MultipartFile uploadfile = mtfRequest.getFile("filename");
+		System.out.println("filename="+uploadfile);
+		
 		String path=saveFolder;
 		
+		
 		if(!uploadfile.isEmpty()) {
+			
 			String fileName = uploadfile.getOriginalFilename();//원래파일명
 
 			String safeFile=path+ System.currentTimeMillis() + fileName;
@@ -93,27 +100,60 @@ public class FoodController {
 			try {
 				uploadfile.transferTo(new File(safeFile));
 				foodservice.insertFood(food_name,food_cost,DBname);
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('음식이 등록되었습니다.')");
+				out.println("location.href='FoodAdList.re';");
+				out.println("</script>");
+				out.close();
+				return null;
 			}catch(IllegalStateException e) {
 				e.printStackTrace();
 				System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
 			}
+			
+			
+		}else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('음식 등록에 실패하였습니다.')");
+			out.println("location.href='FoodAdList.re';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
+			
 		}
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('음식이 등록되었습니다.')");
-		out.println("location.href='FoodAdList.re';");
-		out.println("</script>");
-		out.close();
+		
 		return null;
 		
 	}
 	//수정 FoodModify.re
-	/*
-	 * @GetMapping("FoodModify.re") public ModelAndView foodModifyView(int
-	 * room_code, ModelAndView)
-	 */
+	
+	 @GetMapping("FoodModify.re") 
+	 public ModelAndView foodModifyView(int
+	 food_code, ModelAndView mv, HttpServletRequest request) throws Exception {
+		 System.out.println("푸드 수정 getDetail전");
+		 Food food = foodservice.getDetail(food_code);
+		 
+		 if(food ==null) {
+			 System.out.println("(수정)푸드 상세보기 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url", request.getRequestURL());
+				mv.addObject("message", "(수정) 상세보기 실패입니다.");
+				return mv;
+		 }
+		System.out.println("사진"+food.getFood_pic());
+		 System.out.println("(수정) 상세보기 성공");
+			mv.addObject("fooddata", food);
+			mv.setViewName("admin/food_modify");
+			return mv;
+	 }
+	
 	
 }

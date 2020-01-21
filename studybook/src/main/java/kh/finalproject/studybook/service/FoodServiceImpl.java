@@ -68,6 +68,14 @@ public class FoodServiceImpl implements FoodService {
 		System.out.println("FoodServiceImple에서 insertFood 메소드 처리끝");
 		
 	}
+	//푸드 상세 조회
+	@Override
+	public Food getDetail(int food_code) {
+		return fdao.getFoodDetail(food_code);
+	}
+	
+
+	
 	
 	
 
