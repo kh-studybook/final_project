@@ -36,8 +36,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public Notice getDetail(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return ndao.getDetail(num);
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService{
 			return false;
 		else
 			return true;
-	}
+	} 
 
 	@Override
 	public int noticeDelete(int num) {
@@ -69,8 +68,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int noticeModify(Notice noticemodify) {
-		// TODO Auto-generated method stub
-		return 0;
+		return ndao.noticeModify(noticemodify);
 	}
 
 }
