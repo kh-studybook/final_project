@@ -17,3 +17,11 @@ drop table event;
 select * from event;
 delete from event;
 delete from event where event_num = 1
+
+select name from member where key = (select mem_key from event) and num
+
+select me.name 
+from member me, event ev
+where me.key=ev.mem_key and ev.event_num=5
+
+select name from member, event where member.key = event.mem_key and event.event_num = event.event_num

@@ -18,9 +18,11 @@ public interface EventService {
 	//글 삭제
 	public int eventDelete(int num);
 	//글쓴이 가져오기
-	public String getEventWriter(int mem_key);
+	public String getEventWriter(int num);
 	//메인 화면 글 개수 구하기
 	public int getMainEventListCount();
 	//메인 화면 이벤트 리스트 구하기
 	public List<Event> getMainEventList(int page, int limit);
+	//작성자 키 값 가져오기
+	public int getEventWriterNum(int num);
 }

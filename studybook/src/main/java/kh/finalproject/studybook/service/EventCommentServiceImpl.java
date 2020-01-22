@@ -2,15 +2,19 @@ package kh.finalproject.studybook.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kh.finalproject.studybook.dao.EventDAO;
 import kh.finalproject.studybook.domain.Event_comment;
 
 @Service
 public class EventCommentServiceImpl implements EventCommentService {
-
+	@Autowired
+	private EventDAO dao;
+	
 	@Override
 	public int getEventListCount(int event_num) {
-		// TODO Auto-generated method stub!!!!
 		return 0;
 	}
 

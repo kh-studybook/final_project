@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.service.EventCommentService;
 import kh.finalproject.studybook.service.EventService;
 import kh.finalproject.studybook.domain.Event;
+import kh.finalproject.studybook.domain.Event_comment;
 import kh.finalproject.studybook.domain.Member;
 
 @Controller
@@ -36,15 +38,17 @@ public class EventController {
 		private EventService eventservice;
 		
 		@Autowired
-		private EventCommentService eventcommentservice; 
+		private EventCommentService eventEvent_commentservice; 
 		
 		@Value("${savefolder2name}")
-		private String saveFolder;
+		private String saveFolder;s
 
-		//이벤트 등록 화면으로 이동!!!!
+		//이벤트 등록 화면으로 이동
 		@RequestMapping(value = "/registerEvent.eve")
-		public String event_write_view() throws Exception{
-			return "event/event_main";
+		public ModelAndView event_write_view(ModelAndView mv, int mem_key) throws Exception{
+			mv.addObject("mem_key", mem_key);
+			mv.setViewName("event/event_main");
+			return mv;
 		}//event_write view end
 		
 		//이벤트 등록하기
@@ -111,11 +115,11 @@ public class EventController {
 				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
 				ModelAndView mv, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 			
-			try {						
+			try {
+				//현재 세션에서 mem_key 가져오기
 				Member member = (Member)session.getAttribute("member");
-				String event_writer = eventservice.getEventWriter(member.getKey());
 				int mem_key = member.getKey();
-				
+					
 				int limit = 9;//기본으로 9개의 글을 보여줌
 				int listcount = eventservice.getEventListCount();// 총 리스트를 받아옴
 			
@@ -134,7 +138,7 @@ public class EventController {
 				mv.addObject("listcount", listcount);
 				mv.addObject("eventlist", eventlist);
 				mv.addObject("limit", limit);
-				mv.addObject("event_writer", event_writer);
+				//현재 mem_key 보내기
 				mv.addObject("mem_key", mem_key);
 				return mv;
 			} catch (NullPointerException e) {
@@ -152,7 +156,15 @@ public class EventController {
 		@RequestMapping(value = "EventDetailAction.eve")
 		public ModelAndView eventGetDetail(int num, ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			Event event = eventservice.getEventDetail(num);
-			Member member = (Member)session.getAttribute("member");			
+			//현재 세션에서 mem_key 가져오기
+			Member member = (Member)session.getAttribute("member");
+			int mem_key = member.getKey();
+			//작성자 키 값 가져오기
+			int key = eventservice.getEventWriterNum(num);			
+			
+			//작성자 가져오기
+			String event_writer = eventservice.getEventWriter(num);
+			System.out.println(event_writer);
 			
 			if (event == null) {
 				System.out.println("상세보기 실패");
@@ -161,14 +173,13 @@ public class EventController {
 				mv.addObject("message", "상세보기 실패입니다.");
 			} else {
 				System.out.println("상세보기 성공");
-				int count = eventcommentservice.getEventListCount(num);
-				String event_writer = eventservice.getEventWriter(member.getKey());
-				int mem_key = member.getKey();
+				int count = eventEvent_commentservice.getEventListCount(num);				
 				mv.setViewName("event/event_view");
 				mv.addObject("count", count);
 				mv.addObject("eventdata", event);
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
+				mv.addObject("key", key);
 			}				
 			return mv;
 		}//EventDetailAction.eve end
@@ -179,7 +190,7 @@ public class EventController {
 				throws Exception {
 			Event eventdata = eventservice.getEventDetail(num);
 			Member member = (Member)session.getAttribute("member");	
-			String event_writer = eventservice.getEventWriter(member.getKey());
+			String event_writer = eventservice.getEventWriter(num);
 			int mem_key = member.getKey();
 			if(eventdata == null) {
 				System.out.println("(수정)상세보기 실패");
@@ -188,11 +199,12 @@ public class EventController {
 				mv.addObject("message", "(수정)상세보기 실패입니다.");
 			} else {
 				System.out.println("(수정)상세보기 성공");
-				int count = eventcommentservice.getEventListCount(num);
+				int count = eventEvent_commentservice.getEventListCount(num);
 				mv.addObject("eventdata", eventdata);
 				mv.addObject("count", count);
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
+				System.out.println(mem_key);
 				mv.setViewName("event/event_modify");
 			}
 			return mv;
@@ -205,7 +217,11 @@ public class EventController {
 						throws Exception{
 			MultipartFile uploadfile = event.getEventPic_uploadfile();
 	
-			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
+		/*
+		 * String saveFolder =
+		 * request.getSession().getServletContext().getRealPath("resources") +
+		 * "/upload/";
+		 */
 			
 			if (uploadfile != null && !uploadfile.isEmpty()) {//파일을 변경한 경우
 					System.out.println("파일 변경한 경우");
@@ -255,7 +271,7 @@ public class EventController {
 			int date = c.get(Calendar.DATE);
 			
 			String homedir = saveFolder + year + "-" + month + "-" + date;
-			System.out.println(homedir);
+			System.out.println("homedir = " + homedir);
 			File path1 = new File(homedir);
 			if (!(path1.exists())) {
 				path1.mkdir();//새로운 폴더를 생성
@@ -306,4 +322,34 @@ public class EventController {
 		      out.close();
 		      return null;
 		   }
+		
+		
+		/**Event_comment 관련 시작*/
+		@PostMapping(value = "Event_commentAdd.bo")
+		public void Event_commentAdd(Event_comment co, HttpServletResponse response) throws Exception{
+			System.out.println(co.getBOARD_RE_REF());
+			int ok = Event_commentService.Event_commentsInsert(co);
+			response.getWriter().print(ok);
+		}
+				
+		@ResponseBody
+		@RequestMapping("Event_commentList.bo")
+		public List<Event_comment> Event_commentList(@RequestParam("BOARD_RE_REF") int BOARD_RE_REF){
+			List<Event_comment> list = Event_CommentService.getEvent_commentList(BOARD_RE_REF);
+			return list;
+		}
+		
+		@RequestMapping("Event_commentDelete.bo")
+		public void Event_commentsDelete(int num, HttpServletResponse response) throws Exception {
+			int ok = Event_commentService.Event_commentsDelete(num);
+			response.getWriter().print(ok);
+		} 
+		
+		@RequestMapping("Event_commentUpdate.bo")
+		public void Event_commentsUpdate(Event_comment co, HttpServletResponse response) throws Exception {
+			int ok = Event_commentService.Event_commentsUpdate(co);
+			response.getWriter().print(ok);
+		} 
+		
+		
 }
