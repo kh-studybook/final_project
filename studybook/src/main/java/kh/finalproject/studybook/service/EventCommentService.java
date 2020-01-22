@@ -4,14 +4,15 @@ import java.util.List;
 import kh.finalproject.studybook.domain.Event_comment;
 
 public interface EventCommentService {
-	//글의 개수 구하기!!!!
-	public int getEventListCount(int event_num);	
+	//글의 개수 구하기!!
+	int getEventListCount(int num);
+	//글의 개수 구하기
+	int Event_commentsInsert(Event_comment co);
 	//댓글 목록 가져가기
-	public List<Event_comment> getEventCommentList(int event_num);
-	//댓글 등록하기
-	public int eventCommentsInsert(Event_comment c);
-	//댓글 삭제 추후 확인 : int num
-	public int eventCommentsDelete(int num);
+	List<Event_comment> getEvent_commentList(int event_num);
+	//댓글 삭제
+	int Event_commentsDelete(int event_com_num);
 	//댓글 수정
-	public int eventCommentsUpdate(Event_comment co);
+	int Event_commentsUpdate(Event_comment co);
+
 }

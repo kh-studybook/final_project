@@ -41,9 +41,9 @@ public class EventController {
 		private EventCommentService eventEvent_commentservice; 
 		
 		@Value("${savefolder2name}")
-		private String saveFolder;s
+		private String saveFolder;
 
-		//이벤트 등록 화면으로 이동
+		//이벤트 등록 화면으로 이동!!
 		@RequestMapping(value = "/registerEvent.eve")
 		public ModelAndView event_write_view(ModelAndView mv, int mem_key) throws Exception{
 			mv.addObject("mem_key", mem_key);
@@ -201,7 +201,7 @@ public class EventController {
 				System.out.println("(수정)상세보기 성공");
 				int count = eventEvent_commentservice.getEventListCount(num);
 				mv.addObject("eventdata", eventdata);
-				mv.addObject("count", count);
+				mv.addObject("count", count);//추후 확인!!
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
 				System.out.println(mem_key);
@@ -327,27 +327,27 @@ public class EventController {
 		/**Event_comment 관련 시작*/
 		@PostMapping(value = "Event_commentAdd.bo")
 		public void Event_commentAdd(Event_comment co, HttpServletResponse response) throws Exception{
-			System.out.println(co.getBOARD_RE_REF());
-			int ok = Event_commentService.Event_commentsInsert(co);
+			System.out.println(co.getEvent_num());
+			int ok = eventEvent_commentservice.Event_commentsInsert(co);
 			response.getWriter().print(ok);
 		}
 				
 		@ResponseBody
 		@RequestMapping("Event_commentList.bo")
-		public List<Event_comment> Event_commentList(@RequestParam("BOARD_RE_REF") int BOARD_RE_REF){
-			List<Event_comment> list = Event_CommentService.getEvent_commentList(BOARD_RE_REF);
+		public List<Event_comment> Event_commentList(@RequestParam("com_re_ref") int event_num){
+			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);
 			return list;
 		}
 		
 		@RequestMapping("Event_commentDelete.bo")
-		public void Event_commentsDelete(int num, HttpServletResponse response) throws Exception {
-			int ok = Event_commentService.Event_commentsDelete(num);
+		public void Event_commentsDelete(int event_com_num, HttpServletResponse response) throws Exception {
+			int ok = eventEvent_commentservice.Event_commentsDelete(event_com_num);
 			response.getWriter().print(ok);
 		} 
 		
 		@RequestMapping("Event_commentUpdate.bo")
 		public void Event_commentsUpdate(Event_comment co, HttpServletResponse response) throws Exception {
-			int ok = Event_commentService.Event_commentsUpdate(co);
+			int ok = eventEvent_commentservice.Event_commentsUpdate(co);
 			response.getWriter().print(ok);
 		} 
 		

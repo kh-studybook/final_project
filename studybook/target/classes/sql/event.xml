@@ -4,7 +4,7 @@
 
 <mapper namespace="event">
 	<insert id = "insertEvent" parameterType = "Event">
-		<!--  글번호!!!! -->
+		<!--  글번호!!!!!! -->
 		<selectKey resultType = "int" order = "BEFORE" keyProperty = "event_num">
 			select nvl(max(event_num), 0)+1 from event
 		</selectKey>
