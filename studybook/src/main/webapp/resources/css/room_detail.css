@@ -1,11 +1,13 @@
 @charset "UTF-8";
-
+body{
+background: #eeeeee;
+}
 .carousel-inner{
 	height:400px;
 }
 
-.row{
-	background:#f6f6f6;
+.container{
+	background:#eeeeee;
 }
 
 .row::after {

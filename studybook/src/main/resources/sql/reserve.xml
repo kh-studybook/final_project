@@ -23,6 +23,38 @@
 		select count(*) from review
 		where room_code=#{room_code}
 	</select>
+
+	
+	<insert id="insertReserve" parameterType="reserve">
+		<selectKey resultType="int" order="BEFORE" keyProperty="r_code">
+			select nvl(max(r_code),1000)+1 from reserve
+		</selectKey>
+		insert into reserve
+		values(#{r_code},#{mem_key},#{room_code},#{reserve_date},#{start_time},#{end_time},
+			#{total_cost},#{require},#{status},#{extra_num},#{reserver_name},#{reserver_phone},#{reserver_email},sysdate)
+	</insert>
+	
+	<select id="getMaxR_code" resultType="int">
+		select max(r_code) from reserve
+	</select>
+	
+	<select id="getReserveDetail" resultType="reserve" parameterType="int">
+			select r.* , room.ROOM_NAME 
+			from reserve r, room 
+			where r.r_code = #{r_code}
+			and r.room_code=room.room_code
+	</select>
+	
+	<insert id="insertFood_reserve" parameterType="food_reserve">
+		insert into food_reserve
+		values(#{r_code},#{food_code},#{count},#{food_total_cost})
+	</insert>
+	
+	<select id="getFood_reservelist" parameterType="int" resultType="food_reserve">
+		select fr.*, food.food_name from food_reserve fr,food
+		where r_code=#{r_code}
+		and fr.food_code=food.food_code
+
 	<!-- 나의 후기 검색관련 -->
 	<select id="getSearchList" parameterType="map"
 		resultType="review">
@@ -37,5 +69,6 @@
 	<select id="searchcount" parameterType="int" resultType="int">
 		select count(*)
 		from review where mem_key=#{key}
+
 	</select>
 </mapper>

@@ -28,7 +28,7 @@ main {
 
 .navbar {
 	width: 100%;
-	z-index: 16;
+	z-index: 17;
 	background: linear-gradient(to right, #56D7D6, #7F56D2);
 }
 
@@ -48,7 +48,7 @@ main {
 }
 
 .navbar-toggler {
-	z-index: 2;
+	z-index: 17;
 	font-size: 24px;
 	color: white;
 	hover: pointer;

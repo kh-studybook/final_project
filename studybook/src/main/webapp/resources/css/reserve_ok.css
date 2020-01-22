@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body{
+background: #eeeeee;
+}
 .container{
 background: #eeeeee;
 }
@@ -48,7 +51,7 @@ background: #eeeeee;
     font-size: 15px;
     border-bottom: 1px solid #ebebeb;
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 40% 60%;
 }
 
 

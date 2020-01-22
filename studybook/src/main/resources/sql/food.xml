@@ -52,6 +52,12 @@
 		select * from food where food_code=#{food_code}
 	</select>
 	
+	<select id="getFoodListAll" resultType="food">
+		select * from food
+		order by food_code
+	</select>
+	
+
 	<!-- 푸드정보 업데이트(사진포함) -->
 	<update id="updateFoodIncPic" parameterType="map">
 	update food
@@ -69,6 +75,7 @@
 	<delete id="delete" parameterType="int">
 		delete from food where food_code=#{food_code}
 	</delete>
+
 
 
 </mapper>
