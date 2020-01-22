@@ -6,6 +6,7 @@ create table review(
 	mem_key number(10) not null constraint review_mem_key_fk references member(key)
 );
 
+alter table review add r_code number(10) not null constraint review_r_code_fk references reserve(r_code);
 
 drop table review;
 

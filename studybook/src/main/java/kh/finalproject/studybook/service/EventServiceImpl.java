@@ -51,8 +51,8 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public String getEventWriter(int mem_key) {//작성자 가져오기
-		return dao.getEventWriter(mem_key);
+	public String getEventWriter(int num) {//작성자 가져오기
+		return dao.getEventWriter(num);
 	}
 
 	@Override
@@ -68,6 +68,11 @@ public class EventServiceImpl implements EventService {
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getMainEventList(map);
+	}
+
+	@Override
+	public int getEventWriterNum(int num) {
+		return dao.getEventWriterNum(num);
 	}
 
 	
