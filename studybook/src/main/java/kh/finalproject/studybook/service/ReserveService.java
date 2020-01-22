@@ -5,6 +5,7 @@ import java.util.List;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Reserve;
+import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
 
 public interface ReserveService {

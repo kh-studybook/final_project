@@ -54,7 +54,8 @@
 		select fr.*, food.food_name from food_reserve fr,food
 		where r_code=#{r_code}
 		and fr.food_code=food.food_code
-
+	</select>
+	
 	<!-- 나의 후기 검색관련 -->
 	<select id="getSearchList" parameterType="map"
 		resultType="review">
@@ -71,4 +72,5 @@
 		from review where mem_key=#{key}
 
 	</select>
+
 </mapper>

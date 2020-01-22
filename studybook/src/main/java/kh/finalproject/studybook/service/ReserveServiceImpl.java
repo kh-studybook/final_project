@@ -11,7 +11,7 @@ import kh.finalproject.studybook.dao.ReserveDAO;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Reserve;
-
+import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
 
 @Service
@@ -75,7 +75,8 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getR_code() {
 		// TODO Auto-generated method stub
 		return reserveDAO.getMaxR_code();
-
+	}
+	
 	//지은 시작
 	@Override
 	public List<Review> getSearchList(int page, int limit, int key) {

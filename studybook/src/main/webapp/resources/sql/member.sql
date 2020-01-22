@@ -13,6 +13,8 @@ drop table member;
 
 select * from member;
 
+delete member where email='admin@studybook.com';
+delete member where key=999;
 
 delete from member where name = '관리자';
 
