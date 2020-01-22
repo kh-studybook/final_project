@@ -25,7 +25,7 @@ footer{height: 150px;}
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="notice_list.jsp" />
+		<jsp:include page="notice_detail.jsp" />
 	</main>
 	<!-- Body End -->
 

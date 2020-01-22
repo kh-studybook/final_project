@@ -4,7 +4,6 @@
 
 <mapper namespace="Notice">
 
-
 	<select id="count" resultType="int">
 		select count(*)
 		from notice
@@ -13,8 +12,7 @@
 
 	<select id="list" resultType="Notice" parameterType="HashMap">
 		select * from notice
-		where rnum &gt;= #{start} 
-			and rnum &lt;= #{end}
+		order by NOTICE_NUM desc
 	</select>
 
 
@@ -23,14 +21,12 @@
 			select nvl(max(NOTICE_NUM),0)+1 from notice
 		</selectKey>
 		insert into notice
-		values(#{NOTICE_NUM}, #{NOTICE_TITLE}, #{NOTICE_CONTENT},
-		sysdate)
+		values(#{NOTICE_NUM}, #{NOTICE_TITLE}, #{NOTICE_CONTENT}, sysdate)
 	</insert>
 
 
 	<select id="getDetail" parameterType="int" resultType="notice">
-		select *
-		from notice
+		select * from notice
 		where NOTICE_NUM = #{num}
 	</select>
 
@@ -39,13 +35,14 @@
 		update notice
 		set NOTICE_TITLE = #{NOTICE_TITLE},
 		NOTICE_CONTENT = #{NOTICE_CONTENT},
-		where NOTICE_NUM= #{NOTICE_NUM}
+		where NOTICE_NUM = #{NOTICE_NUM} 
 	</update>
 
 	
 	<delete id="delete" parameterType="notice">
-		delete from board
+		delete from notice
 		where NOTICE_NUM= #{NOTICE_NUM}
 	</delete>
+
 
 </mapper>
