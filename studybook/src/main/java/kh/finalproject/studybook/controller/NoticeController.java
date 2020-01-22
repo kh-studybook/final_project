@@ -27,12 +27,11 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-	
-	@RequestMapping(value = "/notice.bo", method = RequestMethod.GET)
-	public String notice() {
-		return "notice/notice_list_index"; 
+
+	@RequestMapping(value = "/noticedetail.bo", method = RequestMethod.GET)
+	public String noticeDetail() {
+		return "notice/notice_detail_index"; 
 	}
-	
 	
 	//공지사항 리스트
 	@RequestMapping(value = "/NoticeList.bo", method = RequestMethod.GET)
@@ -69,9 +68,15 @@ public class NoticeController {
 	}
 
 	
+	@PostMapping(value = "/NoticeAddAction.bo")
+	public String notice_write_ok(Notice notice, HttpServletRequest request) throws Exception {
+
+		noticeService.insertNotice(notice);
+		return "redirect:NoticeList.bo";
+	}
 	
 	//공지 상세 보기
-	@GetMapping(value = "/noticeDetailAction.bo")
+	@RequestMapping(value = "/NoticeDetailAction.bo", method = RequestMethod.GET)
 	public ModelAndView notice_detail(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
 
 		Notice notice = noticeService.getDetail(num);
@@ -82,13 +87,12 @@ public class NoticeController {
 			mv.addObject("message", "공지 상세 보기 실패!");
 		} else {
 			System.out.println("공지 상세 보기 성공");
-			mv.setViewName("notice/notice_detail");
+			mv.setViewName("notice/notice_detail_index");
 			mv.addObject("noticedata", notice);
 		}
 		return mv;  
 	}
 
-	
 	
 	
 	//공지 쓰기 (관리자)
@@ -113,7 +117,7 @@ public class NoticeController {
 		}
 		System.out.println("공지 수정 보기 성공~");
 		mv.addObject("noticedata", noticedata);
-		mv.setViewName("notice/notice_modify");
+		mv.setViewName("notice/notice_modify_index");
 		return mv;
 	}
 	
@@ -122,7 +126,7 @@ public class NoticeController {
 	@PostMapping("/NoticeModifyAction.bo")
 	public ModelAndView NoticeModifyAction(Notice notice, ModelAndView mv, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		boolean usercheck = noticeService.isNoticeWriter(notice.getNotice_num());
+		boolean usercheck = noticeService.isNoticeWriter(notice.getNOTICE_NUM());
 
 		if (usercheck == false) {
 			response.setContentType("text/html;charset=utf-8");
