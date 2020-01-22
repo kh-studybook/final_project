@@ -34,6 +34,19 @@ public class FoodDAO {
 	public Food getFoodDetail(int food_code) {
 		return sqlSession.selectOne("Foods.foodDetail",food_code);
 	}
+	//푸드 정보 업데이트(사진 포함)
+	public void updateFoodIncPic(Map<String, Object> map) {
+		sqlSession.update("Foods.updateFoodIncPic",map);
+		
+	}
+	//푸드 정보 업데이트(사진 없이)
+	public void updateFood(Map<String, Object> map) {
+		sqlSession.update("Foods.updateFood",map);
+	}
+	//푸드 정보 삭제
+	public int deleteFood(int food_code) {
+		return sqlSession.delete("Foods.delete",food_code);
+	}
 	
 
 

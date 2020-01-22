@@ -124,7 +124,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label class="control-label">이미지 등록 필수(썸네일 클릭)*</label>
 							<div class="imgcontainer">

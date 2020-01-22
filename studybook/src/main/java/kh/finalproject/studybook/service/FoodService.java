@@ -16,6 +16,12 @@ public interface FoodService {
 	public void insertFood(String food_name, int food_cost, String dBname);
 	//푸드 상세 조회
 	public Food getDetail(int food_code);
+	//푸드 정보 업데이트(사진포함)
+	public void updateFoodIncPic(String food_name, int food_cost, String dBname);
+	//푸드 정보 업데이트(사진 없음)
+	public void updateFood(String food_name, int food_cost);
+	//푸드 정보 삭제
+	public int foodDelete(int food_code);
 	
 	
 
