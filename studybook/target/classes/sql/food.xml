@@ -3,7 +3,79 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Foods">
+	<!-- 검색관련 -->
+	<select id="getSearchList" parameterType="map" resultType="food">
+		select *
+		from (select rownum rnum, b.*
+		from(select * from food
+		<if test="search_field!=null">
+			where
+			<choose>
+				<when test="search_field=='food_name'">food_name</when>
+				<when test="search_field=='food_code'">food_code</when>
+				<when test="search_field=='food_cost'">food_cost</when>
+			</choose>
+			like #{search_word}
+		</if>
+		order by food_code desc)b
+		)
+		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
+
+	<select id="searchcount" parameterType="map" resultType="int">
+		select count(*)
+		from food
+		<if test="search_field!=null">
+			where
+			<choose>
+				<when test="search_field=='food_name'">food_name</when>
+				<when test="search_field=='food_code'">food_code</when>
+				<when test="search_field=='food_cost'">food_cost</when>
+			</choose>
+			like #{search_word}
+		</if>
+	</select>
+	<insert id="insertFood">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="food_code">
+			select nvl(max(food_code),0)+1 from food
+		</selectKey>
+		insert into food
+		(food_code, food_name, food_cost, food_pic)
+		values
+		(#{food_code},#{food_name},#{food_cost},#{food_pic})
+
+	</insert>
+
+	<!-- 푸드상세조회 -->
+	<select id="foodDetail" parameterType="int" resultType="food">
+		select * from food where food_code=#{food_code}
+	</select>
+	
 	<select id="getFoodListAll" resultType="food">
 		select * from food
+		order by food_code
 	</select>
+	
+
+	<!-- 푸드정보 업데이트(사진포함) -->
+	<update id="updateFoodIncPic" parameterType="map">
+	update food
+	set food_name=#{food_name},
+	food_cost=#{food_cost},
+	food_pic=#{food_pic}
+	</update>
+	<!-- 푸드정보 업데이트(사진 없이) -->
+	<update id="updateFood" parameterType="map">
+	update food
+	set food_name=#{food_name},
+	food_cost=#{food_cost}
+	</update>
+	<!-- 푸드 정보 삭제-->
+	<delete id="delete" parameterType="int">
+		delete from food where food_code=#{food_code}
+	</delete>
+
+
+
 </mapper>

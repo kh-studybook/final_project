@@ -8,7 +8,7 @@ create table food_reserve(
 ALTER TABLE food_reserve
 RENAME COLUMN total_cost TO food_total_cost;
 
-
+alter table food_reserve drop column mem_key;
 
 drop table food_reserve;
 

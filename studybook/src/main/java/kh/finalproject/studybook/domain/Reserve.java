@@ -14,7 +14,23 @@ public class Reserve {
 	private String reserver_name;
 	private String reserver_phone;
 	private String reserver_email;
+	private String pay_date;
 	
+	//룸이름만 필요
+	private String room_name;
+	
+	public String getRoom_name() {
+		return room_name;
+	}
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
+	}
+	public String getPay_date() {
+		return pay_date;
+	}
+	public void setPay_date(String pay_date) {
+		this.pay_date = pay_date;
+	}
 	public String getReserver_name() {
 		return reserver_name;
 	}

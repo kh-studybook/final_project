@@ -73,8 +73,39 @@ public class FoodServiceImpl implements FoodService {
 	public Food getDetail(int food_code) {
 		return fdao.getFoodDetail(food_code);
 	}
-	
+	//푸드 정보 업데이트(사진포함)
+	@Override
+	public void updateFoodIncPic(String food_name, int food_cost, String DBname) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("food_name", food_name);
+		map.put("food_cost", food_cost);
+		map.put("food_pic", DBname);
+		fdao.updateFoodIncPic(map);
+		
+	}
+	//푸드 정보 업데이트(사진 없이)
+	@Override
+	public void updateFood(String food_name, int food_cost) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("food_name", food_name);
+		map.put("food_cost", food_cost);
+		fdao.updateFood(map);
+	}
 
+	//음식 정보 삭제
+	@Override
+	public int foodDelete(int food_code) {
+		
+		int result =0;
+		result = fdao.deleteFood(food_code);
+		if(result !=1) {
+			System.out.println("음식정보 삭제 완료");
+			return result;
+		}
+		return result;
+	}
+	
+	
 	
 	
 	

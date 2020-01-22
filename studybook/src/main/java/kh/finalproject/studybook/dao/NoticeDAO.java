@@ -17,11 +17,11 @@ public class NoticeDAO {
 	private SqlSessionTemplate sqlSession; 
 
 	public void insertNotice(Notice notice) { 
-		sqlSession.insert("Notice.insert", notice);
+		sqlSession.insert("Notice.insert", notice); 
 	}  
 	
 	public int getListCount() { 
-		return 0;
+		return sqlSession.selectOne("Notice.count");
 	}
 	
 	public List<Notice> getNoticeList(HashMap<String, Integer> map) {
@@ -43,8 +43,5 @@ public class NoticeDAO {
 	public Notice isNoticeWriter(Map<String, Object> map) {
 		return sqlSession.selectOne("Notice.NoticeWriter", map);
 	}
-
-
-
 
 }

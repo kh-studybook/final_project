@@ -12,7 +12,7 @@ public interface NoticeService {
 
 	public Notice getDetail(int num);
 	
-	public void insertNotice(Notice notice);
+	public void insertNotice(Notice notice); 
 
 	public boolean isNoticeWriter(int notice_num);
 

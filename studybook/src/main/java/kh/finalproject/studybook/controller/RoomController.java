@@ -326,7 +326,7 @@ public class RoomController {
 		Member member=(Member)session.getAttribute("member");
 		Room room = roomservice.getRoomDetail(room_code);
 		// Room_ex room_ex=roomservice.getRoomExDetail(room_code);
-		// List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		 List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
 		if (room == null) {
 			System.out.println("룸 상세보기 실패");
 			mv.setViewName("error/error");
@@ -339,7 +339,7 @@ public class RoomController {
 			System.out.println("룸코드="+room.getROOM_CODE());
 			mv.setViewName("room/room_detail_page");
 			// mv.addObject("room_ex",room_ex);
-			// mv.addObject("gallerylist",gallerylist);
+			 mv.addObject("gallerylist",gallerylist);
 		}
 		return mv;
 	}

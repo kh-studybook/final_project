@@ -1,7 +1,11 @@
 @charset "UTF-8";
+body{
+background: #eeeeee;
+}
 .container{
 background: #eeeeee;
 }
+
 .e_reserve_page_title{
 	height: 150px;
     text-align: center;

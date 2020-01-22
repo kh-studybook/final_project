@@ -95,7 +95,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<li class="nav-item"><a class="nav-link loginbtn"
-				href="logout.net">(${member.name}) 로그아웃</a></li>
+				href="logout.mem">(${member.name}) 로그아웃</a></li>
 		</ul>
 
 

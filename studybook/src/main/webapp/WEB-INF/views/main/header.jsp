@@ -63,6 +63,7 @@
                <p id="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
             </c:if>
             <c:if test="${member.email!=null}">
+
 				<div id="j_menu_profile">
 		            <c:if test="${member.profile == ''}">
 		            <img src="resources/image/profile/default.png">
@@ -75,6 +76,7 @@
                 	<div class="j_menu_name">[${member.name}]</div>
                 	<div id="menu_update" class="j_menu_reg"><a href="update.mem">프로필 관리</a></div>
                 </div>
+
             </c:if>
          </div>
       </div>
@@ -83,7 +85,7 @@
             <div><i class="far fa-list-alt"></i></div>
             <div>예약 관리</div>
          </div>
-         <div class="j_menu_org" onClick="#">
+         <div class="j_menu_org" onClick="javascript:location.href='/studybook/myReviewList.re?key=${member.key}'">
             <div><i class="far fa-edit"></i></div>
             <div>후기 관리</div>
          </div>
@@ -112,6 +114,7 @@
       
       <c:if test="${member.key=='999'}">
          <div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='admin'">관리자 센터로 이동</div>
+
       </c:if>
       </div>
    </div>

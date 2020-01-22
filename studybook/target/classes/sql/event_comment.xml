@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Event_comments">
+<!--  추후 확인!! -->
 	<delete id = "delete_event_comment" parameterType = "event">
 			<![CDATA[	
 		delete from event_event 
@@ -21,4 +22,27 @@
 			                   )
 	]]>
 	</delete>
+	
+		<select id = "count" resultType = "int" parameterType = "int">
+			select count(*) from comment where event_num = #{event_num}	
+		</select>
+	
+		<select id = "getList" parameterType = "int" resultType = "event_comment">
+			select event_num, mem_key, content, com_date from comment
+			where event_num = #{event_num} order by com_date desc
+		</select>
+	
+		<insert id = "insert" parameterType = "event_comment">
+			insert into comment
+			values(com_seq.nextval, #{event_num}, #{mem_key}, #{com_content}, sysdate)
+		</insert>
+	
+		<delete id = "delete" parameterType = "int">
+			delete comment where num = #{num}
+		</delete>
+	
+		<update id = "update" parameterType = "event_comment">
+			update comment set content=#{content} where num = #{num}
+		</update>
+	
 </mapper>

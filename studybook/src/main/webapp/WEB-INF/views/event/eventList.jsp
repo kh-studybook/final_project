@@ -15,10 +15,10 @@
 	color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
 #delete_modify_btn{padding:10px; z-index:10; float:right;}
 #delete_modify_btn:after{clear:both}
-#event_modify_btn:visited{color:black}
-#event_delete_btn:visited{color:black}
+#event_modify_btn, #event_modify_btn{color:black}
 #event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 #event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
+#event_delete_btn:visited{color:black}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
@@ -68,6 +68,7 @@
 </script>
 </head>
 <body>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -79,6 +80,7 @@
 				<br><br>
 
 				<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
+				<input type = "hidden" id = "key" name = "key" value = "${key}">
 			</div>
 		</div>
 		<%-- 게시글이 있는 경우 --%>
@@ -111,13 +113,14 @@
         								<p>${b.title}</p>
         								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;
         								<span style = "color : #7F56D2">${b.event_room}</span></p>
-        								<p style = "padding-top:5px">${event_writer}</p>
+        								<p style = "padding-top:5px">${b.event_writer}</p>
 									</div>
     							</div>
 								
 								</div>
 								
-								<c:if test = "${event_writer == 'admin'}">
+								<!--  추후 확인 -->
+								<c:if test = "${mem_key == '999'||b.mem_key == mem_key}">
 							  	<div id = "delete_modify_btn">
 									<a id="event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
 									<a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
