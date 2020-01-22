@@ -108,7 +108,7 @@ public class ReserveController {
 	public String reserve_ok_page() {
 		return "room/reserve_ok_page";
 	}
-
+ 
 	// 지은 시작
 	@GetMapping(value = "myReviewList.re")
 	public ModelAndView reviewlist(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
