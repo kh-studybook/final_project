@@ -8,6 +8,8 @@ public class Notice {
 	private String NOTICE_TITLE;
 	private String NOTICE_CONTENT;
 	private Date NOTICE_DATE;
+	
+	
 	public int getNOTICE_NUM() {
 		return NOTICE_NUM; 
 	}

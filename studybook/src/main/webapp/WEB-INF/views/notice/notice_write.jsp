@@ -45,8 +45,17 @@ h1 {
 	color: #1a92b9
 }
 
+.s_title {
+	margin-top: 230px;
+	margin-bottom: 35px;
+	font-size: 32px;
+	text-align: center;
+}
+
 .s_container {
-	width: 60%
+	width:60%;
+	display: flex;
+	justify-content: center;
 }
 
 label {
@@ -55,10 +64,11 @@ label {
 </style>
 </head>
 <body>
+
+<p class=s_title></p>
 	<div class="s_container">
 		<form action="NoticeAddAction.bo" method="post"
 			enctype="multipart/form-data" name="noticeform">
-			<h1>write</h1>
 
 			<div class="form-group">
 				<label for="notice_title">제목</label> <input name="NOTICE_TITLE"

@@ -40,22 +40,7 @@ th {
 </style>
 
 <script>
-   	$(function(){
-   	
-   		$(".start").click(function(){
-   			getList();
-   		});
-   		
-   		$("#content").on('input',function(){
-   			length=$(this).val().length;
-   			if(length>50){
-   				length=50;
-   				content=content.substring(0,length);
-   			}
-   			$(".float-left").text(length+"/50");
-   		});
-   		
-   	});
+  
 </script>
 </head>
 

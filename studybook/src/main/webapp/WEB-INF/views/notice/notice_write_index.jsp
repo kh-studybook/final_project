@@ -26,7 +26,7 @@ footer{height: 150px;}
 	<!-- Body Start -->
 	<main>		
 		<jsp:include page="notice_write.jsp" />
-	</main>
+	</main> 
 	<!-- Body End -->
 
 	<!-- Footer Start -->
