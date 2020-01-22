@@ -17,4 +17,14 @@ $(document).ready(function(){
 	$('.close').click(function(){
 		$('.menu').removeClass('nav-expanded');
 	})
+	
+	/*
+	$('html').click(function(e) {
+		if($('.menu').hasClass('nav-expanded')){
+			if(!$(e.target).hasClass("menu")) { 
+				$('.menu').removeClass('nav-expanded');
+			}
+		}
+	});
+	*/
 });

@@ -186,13 +186,13 @@ public class RoomServiceImpl implements RoomService {
 
 	// 지은 끝
 
-	// 룸 총 리스트 갯수 가져오기
+	// 룸 총 리스트 갯수 가져오기 - 민지
 	@Override
 	public int getListCount() {
 		return dao.getListCount();
 	}
 
-	// 룸 총 리스트 가져오기
+	// 룸 총 리스트 가져오기 - 민지
 	@Override
 	public List<Room> getRoomList(int page, int limit) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -211,16 +211,39 @@ public class RoomServiceImpl implements RoomService {
 		return dao.getRoomInfo(room_code);
 	}
 
+	// 룸 검색 결과 총 리스트 갯수 가져오기 - 민지
+	@Override
+	public int getRoomSearchListCount(String date, String starttime, String endtime, String MIN_MEMBER,
+			String MAX_MEMBER, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("date", date);
+		map.put("starttime", starttime);
+		map.put("endtime", endtime);
+		map.put("MIN_MEMBER", MIN_MEMBER);
+		map.put("MAX_MEMBER", MAX_MEMBER);
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getRoomSearchListCount(map);
+	}
 
+	// 룸 검색 결과 총 리스트 가져오기 - 민지
+	@Override
+	public List<Room> getSearchRoomList(String date, String starttime, String endtime, String MIN_MEMBER,
+			String MAX_MEMBER, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("date", date);
+		map.put("starttime", starttime);
+		map.put("endtime", endtime);
+		map.put("MIN_MEMBER", MIN_MEMBER);
+		map.put("MAX_MEMBER", MAX_MEMBER);
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getRoomSearchList(map);
+	}
 
 	
-
-	
-
-	
-
-	
-	
-
-
 }
