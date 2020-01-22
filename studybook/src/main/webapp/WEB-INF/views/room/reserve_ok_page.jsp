@@ -8,7 +8,7 @@
 <body>
    <!-- Header Start -->
    <nav>
-      <jsp:include page="header.jsp" flush="false" /><br> <br>
+      <jsp:include page="../main/header.jsp" flush="false" /><br> <br>
    </nav>
    <!-- Header End -->
    
@@ -20,7 +20,7 @@
 
    <!-- Footer Start -->
    <footer>
-      <jsp:include page="footer.jsp" flush="false" />
+      <jsp:include page="../main/footer.jsp" flush="false" />
    </footer>
    <!-- Footer End -->
 </body>

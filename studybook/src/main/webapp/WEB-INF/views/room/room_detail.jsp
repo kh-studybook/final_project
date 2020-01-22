@@ -16,7 +16,7 @@
 <script src="resources/js/room_detail.js"></script>
 </head>
 <body>
-<form action="room_reserve_page.re">
+<form action="room_reserve_page.re" method="post">
 		<input type="hidden" name="room_code" id="room_code" value="${room.ROOM_CODE }">
 		<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
 		<div class="container">
@@ -37,25 +37,20 @@
 						<div class="e_container">
 							<div id="carouselExampleIndicators" class="carousel slide"
 								data-ride="carousel">
+								
 								<ol class="carousel-indicators">
-									<li data-target="#carouselExampleIndicators" data-slide-to="0"
+								<c:forEach var="gallery" items="${gallerylist}" varStatus="status">
+									<li data-target="#carouselExampleIndicators" data-slide-to="${status.index}"
 										class="active"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-									<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+								</c:forEach>
 								</ol>
 								<div class="carousel-inner">
+									<c:forEach var="gallery" items="${gallerylist}" varStatus="status">
 									<div class="carousel-item active">
 										<img class="d-block w-100"
-											src="resources/image/default_thumnail.png" alt="First slide">
+											src="resources/image/room/${gallery.FILE_NAME }" alt="First slide">
 									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100"
-											src="resources/image/default_thumnail.png" alt="Second slide">
-									</div>
-									<div class="carousel-item">
-										<img class="d-block w-100"
-											src="resources/image/default_thumnail.png" alt="Third slide">
-									</div>
+									</c:forEach>
 								</div>
 								<a class="carousel-control-prev"
 									href="#carouselExampleIndicators" role="button"
@@ -100,52 +95,9 @@
 							<div class="e_review_box">
 								<ul class="e_review_list">
 									
-			<%-- 
-									<!-- 리뷰 1번째 -->
-									<li class="e_rlist">
-										<div class="e_rbox_mine">
-											<div class="e_pf_info">
-												<div class="e_pf_pic">
-													<img src="resources/image/profile/default.png">
-												</div>
-
-												<h2 class="e_guest_name">긍졍화</h2>
-											</div>
-											<div class="e_review_info">
-												<class="e_review_manage"> <a href="#">수정</a>/<a
-													href="#">삭제</a>
-											<div class="e_review_info">
-												<span class="e_review_manage"> <a href="#">수정</a>/<a
-													href="#">삭제</a>
-												</span>
-												<p class="e_p_review">너무 이쁘게 잘 꾸며놓으시고 좋았어요 ! 안에 식기류, 풍선,
-													거울, 냉장고, 토스트기, 커피포트, 커피머신, 블루투스 스피커까지 다 있어요 ! 단점은 화장실이 없어서
-													공원 화장실까지 가야한다는 건데 그래도 좋았어요 ㅎㅎㅎㅎ 파티 어떻게 준비해야 될지 모르시겠다면 이쁘게
-													꾸며져있는 실버라 스튜디오 추천드려요 ✨💛</p>
-												<!---->
-
-												<div class="e_rbox_info_base">
-													<span class="e_time_info"> 2020.01.09 23:12:50 </span>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- 리뷰 2 end -->
-
- --%>
 								</ul>
 								<div class="pagination p1">
 									<ul>
-		<!-- 							
-										<a href="#"><li><</li></a>
-										<a class="is-active" href="#"><li>1</li></a>
-										<a href="#"><li>2</li></a>
-										<a href="#"><li>3</li></a>
-										<a href="#"><li>4</li></a>
-										<a href="#"><li>5</li></a>
-										<a href="#"><li>6</li></a>
-										<a href="#"><li>></li></a>
-										 -->
 										 
 									</ul>
 								</div>
@@ -344,7 +296,7 @@
 		    if (day.length < 2) 
 		        day = '0' + day;
 
-		    return [year, month, day].join('-')+"("+ weekName[E]+")";
+		    return [year, month, day].join('.')+"("+ weekName[E]+")";
 		}
   
  		myCalendar.onDateClick(function(event, date){

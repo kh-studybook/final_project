@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import kh.finalproject.studybook.dao.ReserveDAO;
 import kh.finalproject.studybook.domain.Food;
+import kh.finalproject.studybook.domain.Food_reserve;
+import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.ReviewInfo;
 
 @Service
@@ -40,6 +42,36 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<Food> getFoodListAll() {
 		// TODO Auto-generated method stub
 		return reserveDAO.getFoodListAll();
+	}
+
+	@Override
+	public int insertReserve(Reserve reserve) {
+		// TODO Auto-generated method stub
+		return reserveDAO.insertReserve(reserve);
+	}
+
+	@Override
+	public Reserve getReserveDetail(int r_code) {
+		// TODO Auto-generated method stub
+		return reserveDAO.getReserveDetail(r_code);
+	}
+
+	@Override
+	public void insertFood_reserve(Food_reserve fr) {
+		// TODO Auto-generated method stub
+		reserveDAO.insertFood_reserve(fr);
+	}
+
+	@Override
+	public List<Food_reserve> getFood_reservelist(int r_code) {
+		// TODO Auto-generated method stub
+		return reserveDAO.getFood_reservelist(r_code);
+	}
+
+	@Override
+	public int getR_code() {
+		// TODO Auto-generated method stub
+		return reserveDAO.getMaxR_code();
 	}
 	
 }

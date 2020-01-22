@@ -2,7 +2,6 @@ $(document).ready(function(){
 	room_total_cost=$(".e_total_price_div:eq(0) .e_total_price").text();
 	$(".e_total_price_div:eq(2) .e_total_price").text(room_total_cost);
 	
-	
 })
 
 $(document).on('click', '.number-spinner button', function () {    
@@ -70,3 +69,5 @@ $(document).on('click', '.number-spinner button', function () {
 	return false;
 });
 
+
+	

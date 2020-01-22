@@ -1,6 +1,5 @@
 package kh.finalproject.studybook.domain;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class Food {
 	private int food_code;

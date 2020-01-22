@@ -14,7 +14,7 @@ create table reserve(
 	reserver_email varchar2(40) not null
 );
 
-
+alter table reserve add pay_date date;
 
 drop table reserve;
 

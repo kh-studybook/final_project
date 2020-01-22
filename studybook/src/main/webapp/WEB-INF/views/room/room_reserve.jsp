@@ -26,8 +26,9 @@
 </script>
 </head>
 <body>
-<form action="food_add_page.re">
+<form action="food_add_page.re" method="post">
 	<input type="hidden" name="room_code" value="${room.ROOM_CODE }">
+	<input type="hidden" name="mem_key" value="${member.key }">
 	<div class="container">
 		<div class="col-md-12 e_reserve_page_title">
 		<span>예약 페이지</span>

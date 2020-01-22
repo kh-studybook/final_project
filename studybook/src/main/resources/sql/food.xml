@@ -52,6 +52,11 @@
 		select * from food where food_code=#{food_code}
 	</select>
 	
+	<select id="getFoodListAll" resultType="food">
+		select * from food
+		order by food_code
+	</select>
+	
 
 
 </mapper>
