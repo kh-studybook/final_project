@@ -43,7 +43,7 @@ public class EventController {
 		@Value("${savefolder2name}")
 		private String saveFolder;
 
-		//이벤트 등록 화면으로 이동
+		//이벤트 등록 화면으로 이동!!
 		@RequestMapping(value = "/registerEvent.eve")
 		public ModelAndView event_write_view(ModelAndView mv, int mem_key) throws Exception{
 			mv.addObject("mem_key", mem_key);
@@ -201,7 +201,7 @@ public class EventController {
 				System.out.println("(수정)상세보기 성공");
 				int count = eventEvent_commentservice.getEventListCount(num);
 				mv.addObject("eventdata", eventdata);
-				mv.addObject("count", count);//추후 확인
+				mv.addObject("count", count);//추후 확인!!
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
 				System.out.println(mem_key);

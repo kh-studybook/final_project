@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Event_comments">
-<!--  추후 확인 -->
+<!--  추후 확인!! -->
 	<delete id = "delete_event_comment" parameterType = "event">
 			<![CDATA[	
 		delete from event_event 

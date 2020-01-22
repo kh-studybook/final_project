@@ -33,7 +33,7 @@
 	#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 	#event_delete_btn:visited{color:black}
 	
-	/** comment 관련 */
+	/** comment 관련!! */
 	#event_comment_write{background-color:#7F56D2; border:0px; opacity:0.8; color:white; width:20%;}
 	#event_comment_write:hover{opacity:1}
 	#comment_content{width:80%;}
@@ -42,7 +42,7 @@
 <script>
 	$(function(){
 
-	//게시글 상세보기로 이동하기
+	//게시글 상세보기로 이동하기!!
 	$(".click_detail").click(function(){
 		var event_num = $(this).find($("input[name=event_num]")).val();
 		location.href = "EventDetailAction.eve?num="+parseInt(event_num);
