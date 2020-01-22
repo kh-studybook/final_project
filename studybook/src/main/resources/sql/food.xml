@@ -58,5 +58,24 @@
 	</select>
 	
 
+	<!-- 푸드정보 업데이트(사진포함) -->
+	<update id="updateFoodIncPic" parameterType="map">
+	update food
+	set food_name=#{food_name},
+	food_cost=#{food_cost},
+	food_pic=#{food_pic}
+	</update>
+	<!-- 푸드정보 업데이트(사진 없이) -->
+	<update id="updateFood" parameterType="map">
+	update food
+	set food_name=#{food_name},
+	food_cost=#{food_cost}
+	</update>
+	<!-- 푸드 정보 삭제-->
+	<delete id="delete" parameterType="int">
+		delete from food where food_code=#{food_code}
+	</delete>
+
+
 
 </mapper>

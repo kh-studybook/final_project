@@ -39,8 +39,8 @@ public class EventDAO {
 		return sqlSession.update("event.modifyEvent", modifyevent);
 	}
 
-	public String getEventWriter(int mem_key) {//작성자 가져오기
-		return sqlSession.selectOne("event.event_writer", mem_key);
+	public String getEventWriter(int num) {//작성자 가져오기
+		return sqlSession.selectOne("event.event_writer", num);
 	}
 
 	public int getMainEventListCount() {//메인화면 이벤트 총 갯수 가져오기
@@ -49,6 +49,10 @@ public class EventDAO {
 
 	public List<Event> getMainEventList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("event.main_list", map);
+	}
+
+	public int getEventWriterNum(int num) {
+		return sqlSession.selectOne("event.event_writer_num", num);
 	}
 	
 }

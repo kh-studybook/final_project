@@ -2,6 +2,7 @@ package kh.finalproject.studybook.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import kh.finalproject.studybook.dao.ReserveDAO;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Reserve;
+
 import kh.finalproject.studybook.domain.ReviewInfo;
 
 @Service
@@ -44,6 +46,7 @@ public class ReserveServiceImpl implements ReserveService {
 		return reserveDAO.getFoodListAll();
 	}
 
+
 	@Override
 	public int insertReserve(Reserve reserve) {
 		// TODO Auto-generated method stub
@@ -72,6 +75,26 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getR_code() {
 		// TODO Auto-generated method stub
 		return reserveDAO.getMaxR_code();
+
+	//지은 시작
+	@Override
+	public List<Review> getSearchList(int page, int limit, int key) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		//검색 없는 경우 조회로 구현
+		int startrow =(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("key", key);
+		
+		return reserveDAO.getReviewSearchList(map);
+	}
+
+	@Override
+	public int getSearchListCount(int key) {
+		return reserveDAO.getReviewSearchListCount(key);
 	}
 	
+	//지은 끝
 }

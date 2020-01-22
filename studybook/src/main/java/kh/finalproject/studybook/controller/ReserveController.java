@@ -4,22 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
+import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
 import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.service.MemberService;
@@ -81,12 +79,15 @@ public class ReserveController {
 
 	}
 
+
 	// 음료추가 페이지로
 	@RequestMapping(value = "food_add_page.re")
 	public ModelAndView food_add_page(Reserve reserve, ModelAndView mv) {
 		System.out.println("룸코드=" + reserve.getRoom_code());
+
 		List<Food> foodlist=reserveservice.getFoodListAll();
 		mv.addObject("foodlist",foodlist);
+
 		mv.addObject("reserve", reserve);
 		mv.setViewName("room/food_add_page");
 		return mv;
@@ -178,5 +179,45 @@ public class ReserveController {
 		
 		return mv;
 	}
+
+ 
+	// 지은 시작
+	@GetMapping(value = "myReviewList.re")
+	public ModelAndView reviewlist(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "limit", defaultValue = "5", required = false) int limit, int key, ModelAndView mv)
+			throws Exception {
+		List<Review> list = null;
+		int listcount = 0;
+
+		list = reserveservice.getSearchList(page, limit, key);
+		System.out.println("ReserveController의 reserveservice.getSearchList 끝");
+		listcount = reserveservice.getSearchListCount(key);
+		System.out.println("ReserveController의 reserveservice.getSearchListCount 끝");
+
+		// 총페이지수
+		int maxpage = (listcount + limit - 1) / limit;
+		// 현재 페이지에 보여줄 시작 페이지수 11, 21,31
+		int startpage = ((page - 1) / 5) * 5 + 1;
+
+		// endpage : 현재 페이지 그룹에서 보여줄 마지막 페이지수 10,20,30
+		int endpage = startpage + 5 - 1;
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		mv.setViewName("member/review_index");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		System.out.println("listcount=" + listcount);
+		mv.addObject("reviewlist", list);
+
+		return mv;
+
+	}
+
+	// 지은 끝
+
 
 }

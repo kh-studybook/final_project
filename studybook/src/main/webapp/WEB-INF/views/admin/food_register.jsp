@@ -19,7 +19,7 @@
 
 	<!-- Body Start -->
 	<main>		
-		<%-- <jsp:include page="foodwrite.jsp" /> --%>
+		 <jsp:include page="foodwrite.jsp" /> 
 	</main>
 	<!-- Body End -->
 

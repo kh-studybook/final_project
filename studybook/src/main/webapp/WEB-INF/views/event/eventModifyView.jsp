@@ -211,9 +211,9 @@ input[type=date]{height:3rem;}
 <h2 class = "p_title">이벤트 수정</h2>
 
   <form method="post" action="EventModifyAction.eve" enctype="multipart/form-data" id = "p_event_modify_form">
-  	<!--  작성자 추후 멤버키 다시 변경하기 admin 0 -->
  	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
 	<input type = "hidden" name = "event_num" value = "${eventdata.event_num}">
+	<input type = "hidden" name = "event_pic" value = "${eventdata.event_pic}">
   
 	<!--  썸네일 등록 -->
    <div class="row">
@@ -225,7 +225,7 @@ input[type=date]{height:3rem;}
       	<label for = "eventPic_uploadfile">
         	<input type="file" name="eventPic_uploadfile" id = "eventPic_uploadfile" accept="image/gif, image/jpeg, image/png" 
         	style = "display:none"><!-- 파일 선택하는 부분 --> 
-        	<img src="resources/upload/${eventdata.event_pic}" id = "eventPic_image" class="p_avatar"><!-- 이미지 -->
+        	<img src="resources/upload${eventdata.event_pic}" id = "eventPic_image" class="p_avatar" name = "event_pic"><!-- 이미지 -->
         	<br>
         	<label for = "eventPic_uploadfile" id = "eventPic_button">이미지 등록</label>
         </label>

@@ -93,7 +93,7 @@
 </script>
 </head>
 <div class="container w_wrap">
-	<form action="FoodAddAction.re" id="frm" name="frm" method="post"
+	<form action="FoodModifyAction.re" id="frm" name="frm" method="post"
 		enctype="multipart/form-data">
 		<div class="row">
 			<div class="col">
@@ -139,11 +139,11 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label class="control-label">이미지 교체(썸네일 클릭)*</label>
 							<div class="imgcontainer">
-								<label> <input type="file" name="food_pic"
+								<label> <input type="file" name="filename"
 									accept="image/gif, image/jpeg, image/png" style="display: none">
 									<img src="resources/image/food/food_thumbnail.jpeg" alt="Food"
 									class="w_food">
@@ -172,7 +172,7 @@
 					<button type=reset class="btn btn-info" id="cancel"
 						onclick="history.back();">취소</button>
 					<button type=submit class="btn btn-success" id="btnSubmit">
-						<i class="fa fa-save"></i>등록
+						<i class="fa fa-save"></i>수정
 					</button>
 				</div>
 			</div>
