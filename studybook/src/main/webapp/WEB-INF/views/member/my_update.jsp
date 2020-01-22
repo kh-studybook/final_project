@@ -224,10 +224,8 @@ instead of next to each other */
 						<p>프로필 사진 변경</p>
 					</div>
 				</div>
-
 				
 				<hr class=hr1>
-				
 				
 				<div class="row">
 					<div class="col-30"></div>
