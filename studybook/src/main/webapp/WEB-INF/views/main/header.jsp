@@ -35,22 +35,6 @@
 <title>StudyBook | ${id} </title>
 </c:if>
 <c:if test="${empty id }">
-
-<script>
-$(document).ready(function(){
-   
-   $("#menu_login").click(function(){
-      location.href="login.mem";
-   })
-   
-   $("#menu_update").click(function(){
-      location.href="update.mem";
-   })
-   
-})
-
-</script>
-
 <title>StudyBook</title>
 </c:if>
 
@@ -69,25 +53,30 @@ $(document).ready(function(){
          <li class="nav-item" id="menu_icon"><i class="fas fa-bars"></i></li>
       </ul>
    <div class="menu">
-      <a href="#" class="close"><i class="fas fa-arrow-right"></i></a>
+      <i class="fas fa-arrow-right close"></i>
       <div class="j_menu__header">
          <div class="j_menu_member">
+         	<c:if test="${member.email==null}">
                <div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 보기 -->
-                  <c:if test="${member.profile == null}">
                   <img src="resources/image/profile/default.png">
-                  </c:if>
-                  <c:if test="${member.profile!= null}">
-                  <img src="resources/${member.profile}">
-                  </c:if>
                </div>
-          	<c:if test="${member.email==null}">
                <p id="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
             </c:if>
             <c:if test="${member.email!=null}">
-               <div class="j_menu_login">
-                  <div class="j_menu_name"><b>${member.name}</b></div>
-                  <div id="menu_update" class="j_menu_reg"><a href="#">프로필 관리</a></div>
-               </div>
+
+				<div id="j_menu_profile">
+		            <c:if test="${member.profile == ''}">
+		            <img src="resources/image/profile/default.png">
+		            </c:if>
+		            <c:if test="${member.profile != ''}">
+		            <img src="resources/image/profile/${member.profile}">
+		            </c:if>
+              	</div>
+                <div class="j_menu_login">
+                	<div class="j_menu_name">[${member.name}]</div>
+                	<div id="menu_update" class="j_menu_reg"><a href="update.mem">프로필 관리</a></div>
+                </div>
+
             </c:if>
          </div>
       </div>
@@ -105,9 +94,9 @@ $(document).ready(function(){
       <div>
          <ul>
 
-            <li class="j_menu_list" onClick="javascript:location.href='/studybook/main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
-            <li class="j_menu_list" onClick="#">공지사항<i class="fas fa-chevron-right"></i></li>
-            <li class="j_menu_list" onClick="javascript:location.href='/studybook/event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
+            <li class="j_menu_list" onClick="javascript:location.href='main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
+            <li class="j_menu_list" onClick="javascript:location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
+            <li class="j_menu_list" onClick="javascript:location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 
          </ul>
       </div>
@@ -123,11 +112,10 @@ $(document).ready(function(){
          </div>
          <div>Powered by STUDYBOOK</div>
       
-      <c:if test="${member.key==999}">
-         <div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='/studybook/admin'">관리자 센터로 이동</div>
+      <c:if test="${member.key=='999'}">
+         <div id="j_menu_center" class="j_menu_event" onClick="javascript:location.href='admin'">관리자 센터로 이동</div>
+
       </c:if>
       </div>
    </div>
-
-
 </nav>

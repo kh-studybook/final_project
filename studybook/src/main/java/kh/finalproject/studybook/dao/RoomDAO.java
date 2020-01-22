@@ -69,18 +69,20 @@ public class RoomDAO {
 	public List<Room> getRoomList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("Rooms.allList", map);
 	}
-	// --민지 끝
-
 	
-
+	public int getRoomSearchListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("Rooms.searchRoomCount", map);
+	}
+	
+	public List<Room> getRoomSearchList(Map<String, Object> map) {
+		return sqlSession.selectList("Rooms.searchRoom", map);
+	}
+	// --민지 끝
 
 	//메인사진 포함한 room detail
 	public Room getRoomInfo(int room_code) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Rooms.getRoomInfo",room_code);
-	}
-
-
-	
+	}	
 
 }

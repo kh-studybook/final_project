@@ -1,17 +1,14 @@
 @charset "UTF-8";
 
 /* main header 부분 */
-#m_main_header {
+#m_search_header {
 	width: 100%;
-	height: 400px;
+	height: 200px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	background-image:
-		url("https://images.unsplash.com/photo-1561489413-985b06da5bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
-	background-size: cover;
-	background-position: center;
+	background-color: #d9f7f7;
 }
 
 .m_header_text {
@@ -87,7 +84,6 @@
 }
 
 /* 시간 및 인원수 selected 박스 모양 */
-
 #m_main_time, #m_main_count {
 	width: 125px;
 	background: white;
@@ -173,26 +169,6 @@
 	justify-content: center;
 }
 
-/*carousel*/
-.blog .carousel-indicators {
-   left: 0;
-   top: auto;
-    bottom: -40px;
-
-}
-
-/* The colour of the indicators */
-.blog .carousel-indicators li {
-    background: #a3a3a3;
-    border-radius: 50%;
-    width: 8px;
-    height: 8px;
-}
-
-.blog .carousel-indicators .active {
-	background: #707070;
-}
-
 /* Calendar */
 .jsCalendar{
 	display:none;
@@ -229,82 +205,30 @@
 }
 
 .jsCalendar tbody td.jsCalendar-current {
-	width: 46px;
-	height: 46px;
-	border-radius: 23px;
+	border-radius: 24px;
     background-color: white;
     border: 1px solid #7F56D2;
     color: black;
 }
 
-.jsCalendar tbody td.j_selected {
+.j_selected {
 	border-radius: 24px;
 	background-color: #7F56D2;
 	color: white;
 }
 
-/*event*/
-#j_main_event {
-	min-height: 250px;
-}
-
-.row {
-	justify-content: center;
-}
-
-.j_event_title {
-	font-size: 32px;
-	margin: 40px auto;
-}
-
-.j_event_more_div {
-	justify-content: flex-end;
-	color: #7F7F7F;
-	margin-bottom: 20px;
-	cursor: pointer;
-	font-size: 14px;
-}
-
-.j_event_more:hover{
-	font-weight: bold;
-}
-
-/*페이지네이션*/
+/* 페이지네이션 */
 .page-item {
 	cursor: pointer;
 }
 
-/*event 좌우 버튼*/
-.carousel-indicators {
-	display: flex;
-	justify-content: space-between;	
-}
-
-.blog .carousel-indicators {
-   left: 0;
-   top: auto;
-   bottom: 90px;
-   margin-right: 0;
-   margin-left: 0;
-}
-
-.blog .carousel-indicators li {
-	background: #a3a3a3;
-    border-radius: 4px;
-    width: 8px;
-    height: 8px;
-    color: white;
-}
-
-/* map */
-#j_main_root {
-	min-height: 600px;
-}
-
-#j_map {
+/* 예약 가능 공간 없는 경우 */
+#m_none {
+	font-size: 32px;
+	font-weight: bold;
 	height: 400px;
-}
-.j_address {
-	font-size: 14px;
-	color: #7F7F7F;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }

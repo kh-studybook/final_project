@@ -89,15 +89,16 @@ main {
 	right: 0;
 }
 
-.menu .close{
+.close{
 	color: #7F56D2;
 	font-weight: bold;
 	margin-right: 10px;
-	margin-top:10px;
+	margin-top: 10px;
 	width: 100%;
 	font-size: 30px;
 	display: inline-flex;
 	justify-content: flex-end;
+	cursor: pointer;
 }
 
 .j_menu__header {

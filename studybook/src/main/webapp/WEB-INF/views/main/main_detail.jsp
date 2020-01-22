@@ -18,6 +18,11 @@
 	<script src="resources/js/main.js"></script>
 </head>
 <body>
+<input type="hidden" name="date" id="date" value="">
+<input type="hidden" name="starttime" id="starttime" value="">
+<input type="hidden" name="endtime" id="endtime" value="">
+<input type="hidden" name="MIN_MEMBER" id="MIN_MEMBER" value="">
+<input type="hidden" name="MAX_MEMBER" id="MAX_MEMBER" value="">
 	<div id="m_main_header">
 		<div class="container">
 			<div class="row">
@@ -46,7 +51,7 @@
 							</div>
 							<div id="m_main_time">
 								<ul>
-									<li>전체</li>
+									<li>전체(09~22시)</li>
 									<li>오전(09~12시)</li>
 									<li>오후(12~18시)</li>
 									<li>저녁(18~22시)</li>
@@ -68,7 +73,7 @@
 								</ul>
 				        	</div>
 						</div>
-						<button id="m_main_search" class="m_main_select">검색</button>
+						<button id="m_main_search" class="m_main_select" onclick="search()">검색</button>
 				</div>
 			</div>
 		</div>
@@ -106,6 +111,7 @@
 		
 		<br><br>
 		<!--  페이지네이션 -->
+		<c:if test="${listcount > 0}">
 		<div id="center-block" class="center-block">
 			<div class="row">
 				<div class="col">
@@ -135,7 +141,7 @@
 				</div>
 			</div>
 		</div>
-				
+		</c:if>
 		
 		<%-- 게시글이 없는 경우 --%>
 		<c:if test="${listcount == 0}">

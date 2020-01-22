@@ -1,6 +1,8 @@
 package kh.finalproject.studybook.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Room;
@@ -47,6 +49,10 @@ public interface RoomService {
 	
 	public Room getRoomInfo(int room_code);
 	
-
+	//룸 검색 결과 총 리스트 갯수 가져오기
+	public int getRoomSearchListCount(String date, String starttime, String endtime, String MIN_MEMBER, 
+			String MAX_MEMBER, int page, int limit);
+	//룸 검색 결과 총 리스트 가져오기
+	public List<Room> getSearchRoomList(String date, String starttime, String endtime, String MIN_MEMBER,
+			String MAX_MEMBER, int page, int limit);
 }
-

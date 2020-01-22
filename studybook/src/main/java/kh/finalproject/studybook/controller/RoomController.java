@@ -406,7 +406,7 @@ public class RoomController {
 		return mv;
 	}
 
-	//ajax roomList 불러오기
+	//ajax roomList 불러오기 -- 민지
 	@ResponseBody
 	@RequestMapping(value = "getRoomList.net")
 	public Object getRoomList(@RequestParam(value = "page", defaultValue = "1", required = false) int page)
@@ -442,4 +442,44 @@ public class RoomController {
 		return obj;
 	}
 
+	@RequestMapping(value="RoomSearch.ro")
+	public ModelAndView roomSearch(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam String date,
+			@RequestParam String starttime,
+			@RequestParam String endtime,
+			@RequestParam String MIN_MEMBER,
+			@RequestParam String MAX_MEMBER,
+			ModelAndView mv) {		
+		System.out.println("date="+date);
+		// 한 화면에 출력할 room 갯수
+		int limit = 9;
+
+		// 총 room 리스트 갯수
+		int listcount = roomservice.getRoomSearchListCount(date, starttime, endtime, MIN_MEMBER, MAX_MEMBER, page, limit);
+
+		// 총 room 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 시작 페이지(1, 6, 11, ...)
+		int startpage = ((page - 1) / 5) * 5 + 1;
+
+		// 마지막 페이지(5, 10, 15, ...)
+		int endpage = startpage + 5 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		List<Room> roomlist = roomservice.getSearchRoomList(date, starttime, endtime, MIN_MEMBER, MAX_MEMBER, page, limit);
+		
+		mv.setViewName("room/room_search");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("list", roomlist);
+		mv.addObject("limit", limit);
+		return mv;
+	}
 }

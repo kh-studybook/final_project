@@ -17,3 +17,25 @@ drop table room;
 select * from room;
 
 truncate table room;
+
+select *
+		from (select rownum rnum, b.*
+		from (select room.ROOM_CODE, room.ROOM_NAME, room.MIN_MEMBER, room.MAX_MEMBER,
+		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME,
+		reserve.reserve_date, reserve.start_time, reserve.end_time
+		from room, gallery, reserve
+		where room.ROOM_CODE=gallery.ROOM_CODE
+		and room.ROOM_CODE=reserve.room_code
+		and gallery.gallery_num=1
+		and reserve.reserve_date!=TO_DATE(2020-01-01)
+		and reserve.start_time not between 1 and 4
+		and reserve.end_time-1 not between 1 and 4
+		and 1 not between reserve.start_time and reserve.end_time-1
+		and 3 not between reserve.start_time and reserve.end_time
+		and room.MIN_MEMBER not between 4 and 8
+		and room.MAX_MEMBER not between 4 and 8
+		and 4 not between room.MIN_MEMBER and room.MAX_MEMBER
+		and 8 not between room.MIN_MEMBER and room.MAX_MEMBER
+		order by room.room_code) b
+		)
+		where rnum >= 1 and rnum <= 9;
