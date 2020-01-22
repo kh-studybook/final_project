@@ -17,7 +17,7 @@ public class NoticeDAO {
 	private SqlSessionTemplate sqlSession; 
 
 	public void insertNotice(Notice notice) { 
-		sqlSession.insert("Notice.insert", notice);
+		sqlSession.insert("Notice.insert", notice); 
 	}  
 	
 	public int getListCount() { 

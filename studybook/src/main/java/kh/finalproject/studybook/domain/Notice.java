@@ -9,7 +9,7 @@ public class Notice {
 	private String NOTICE_CONTENT;
 	private Date NOTICE_DATE;
 	public int getNOTICE_NUM() {
-		return NOTICE_NUM;
+		return NOTICE_NUM; 
 	}
 	public void setNOTICE_NUM(int nOTICE_NUM) {
 		NOTICE_NUM = nOTICE_NUM;

@@ -48,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService{
 			return false;
 		else
 			return true;
-	}
+	} 
 
 	@Override
 	public int noticeDelete(int num) {

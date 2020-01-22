@@ -31,7 +31,7 @@ public class NoticeController {
 	@RequestMapping(value = "/noticedetail.bo", method = RequestMethod.GET)
 	public String noticeDetail() {
 		return "notice/notice_detail_index"; 
-	}
+	} 
 	
 	//공지사항 리스트
 	@RequestMapping(value = "/NoticeList.bo", method = RequestMethod.GET)

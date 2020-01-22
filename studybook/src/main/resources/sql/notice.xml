@@ -35,7 +35,7 @@
 		update notice
 		set NOTICE_TITLE = #{NOTICE_TITLE},
 		NOTICE_CONTENT = #{NOTICE_CONTENT},
-		where NOTICE_NUM = #{NOTICE_NUM}
+		where NOTICE_NUM = #{NOTICE_NUM} 
 	</update>
 
 	

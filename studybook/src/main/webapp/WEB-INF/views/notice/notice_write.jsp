@@ -50,7 +50,7 @@ h1 {
 }
 
 label {
-	font-weight: bold
+	font-weight: bold 
 }
 </style>
 </head>
