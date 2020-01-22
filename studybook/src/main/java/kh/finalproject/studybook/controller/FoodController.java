@@ -154,6 +154,78 @@ public class FoodController {
 			mv.setViewName("admin/food_modify");
 			return mv;
 	 }
-	
+	 //수정 FoodModifyAction.re
+	 @PostMapping("FoodModifyAction.re")
+	 public ModelAndView foodModifyAction(Food food, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws Exception{
+		 String food_name=food.getFood_name();
+			int food_cost=food.getFood_cost();
+			
+			MultipartFile uploadfile = mtfRequest.getFile("filename");
+			System.out.println("filename="+uploadfile);
+			
+			String path=saveFolder;
+			
+			
+			if(!uploadfile.isEmpty()) {
+				
+				String fileName = uploadfile.getOriginalFilename();//원래파일명
+
+				String safeFile=path+ System.currentTimeMillis() + fileName;
+				String DBname = System.currentTimeMillis() + fileName;
+				try {
+					uploadfile.transferTo(new File(safeFile));
+					foodservice.updateFoodIncPic(food_name,food_cost,DBname);
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('음식 정보가 수정되었습니다.(사진포함)')");
+					out.println("location.href='FoodAdList.re';");
+					out.println("</script>");
+					out.close();
+					return null;
+				}catch(IllegalStateException e) {
+					e.printStackTrace();
+					System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
+				}
+				
+				
+			}else {
+				foodservice.updateFood(food_name,food_cost);
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('음식 정보가 수정되었습니다.')");
+				out.println("location.href='FoodAdList.re';");
+				out.println("</script>");
+				out.close();
+				
+				return null;
+				
+			}
+			
+			return null;
+		 
+	 }
+	 //푸드 정보 삭제 FoodDelete.re
+	@GetMapping("FoodDelete.re")
+	public String FoodDeleteAction(int food_code, HttpServletResponse response)throws Exception{
+		int result = foodservice.foodDelete(food_code);
+		
+		if(result==0) {
+			System.out.println("음식 정보 삭제 실패");
+		}
+		System.out.println("음식 정보 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('삭제 되었습니다.');");
+		out.println("location.href='FoodAdList.re';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
 	
 }

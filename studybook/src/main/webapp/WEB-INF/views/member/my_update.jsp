@@ -124,9 +124,10 @@ instead of next to each other */
 	margin-bottom:50px;
 }
 
-.hr {
-	margin:50px;
-	width:100%
+.hr1 {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 .hr2 {
@@ -223,10 +224,8 @@ instead of next to each other */
 						<p>프로필 사진 변경</p>
 					</div>
 				</div>
-
 				
-				<hr class=hr>
-				
+				<hr class=hr1>
 				
 				<div class="row">
 					<div class="col-30"></div>
