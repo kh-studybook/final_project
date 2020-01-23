@@ -30,11 +30,11 @@ body {
 	border: 1px solid #C1C1C1;
 	padding: 20px;
 	background: white;
-	margin-bottom:25px;
+	margin-bottom: 25px;
 }
 
 .w_img {
-width:140px;	
+	width: 140px;
 }
 
 .w_content {
@@ -73,100 +73,224 @@ width:140px;
 	justify-content: center; /* 가운데 정렬 */
 	margin-bottom: 20px;
 }
-.w_topmargin{
-margin-top:30px;}
-.w_margin-top{
-margin-top:50px;
+
+.w_topmargin {
+	margin-top: 30px;
+}
+
+.w_margin-top {
+	margin-top: 50px;
+}
+
+.w_modal {
+	font-size: 18px;
+	width: 140px;
 }
 </style>
+
 </head>
 <body>
 	<p class=w_title>후기 관리</p>
 	<div class=container>
-	<%--후기 데이터가 있는 경우 --%>
-	<c:if test="${listcount>0}">
-	<c:forEach var="m" items="${reviewlist}">
-		<div class="w_card">
-			<div class="row">
-				<div class="col-md-2">
-					<a href="#" class="thumbnail"> <img class="card-img-top w_img"
-											src="resources/image/room/${m.FILE_NAME}">
-					</a>
-				</div>
-				<div class="col-md-6 w_padding">
-					<span class="badge badge-secondary w_badge">예약번호: ${m.r_code}</span>
-					<p class="w_name">${m.ROOM_NAME}</p>
-					<br>
-					<p class="w_time">${m.reserve_date} ${m.start_time}~${m.end_time}시, <c:set var="start" value="${m.start_time}"/><c:set var="end" value="${m.end_time}"/><c:set var="result" value="${end-start}"/><c:out value="${result}"/>시간</p>
+		<%--후기 데이터가 있는 경우 --%>
+		<c:if test="${listcount>0}">
+			<c:forEach var="m" items="${reviewlist}">
+				<div class="w_card">
+					<div class="row">
+						<div class="col-md-2">
+							<a href="room_detail.ro?room_code=${m.room_code}"
+								class="thumbnail"> <img class="card-img-top w_img"
+								src="resources/image/room/${m.FILE_NAME}">
+							</a>
+						</div>
+						<div class="col-md-6 w_padding">
+							<span class="badge badge-secondary w_badge">예약번호:
+								${m.r_code}</span>
+							<p class="w_name">${m.ROOM_NAME}</p>
+							<br>
+							<p class="w_time">${m.reserve_date}
+								${m.start_time}~${m.end_time}시,
+								<c:set var="start" value="${m.start_time}" />
+								<c:set var="end" value="${m.end_time}" />
+								<c:set var="result" value="${end-start}" />
+								<c:out value="${result}" />
+								시간
+							</p>
 
+						</div>
+						<div class="col-md-2">
+							<p class="w_content">후기 등록 날짜</p>
+							<p>${m.review_date}</p>
+						</div>
+						<div class="col-md-2">
+							<p class="pull-right w_btn">
+								<a id="modify_${m.review_code}" class="modify">수정</a>
+								| <a id="delete_${m.review_code}" class="delete"
+									data-toggle="modal" data-target="#deletemodal">삭제</a>
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<hr>
+							<p class="w_content">${m.content}</p>
+
+						</div>
+					</div>
 				</div>
-				<div class="col-md-2">
-					<p class="w_content">후기 등록 날짜</p>
-					<p>${m.review_date}</p>
-				</div>
-				<div class="col-md-2">
-					<p class="pull-right w_btn">
-						<a href="ReviewModify.re?review_code=${m.review_code}">수정</a> | 
-						<a href="ReviewDelete.re?review_code=${m.review_code}">삭제</a>
-					</p>
-				</div>
-			</div>
+			</c:forEach>
 			<div class="row">
 				<div class="col">
-					<hr>
-					<p class="w_content">${m.content}</p>
+					<div class="w_center-block w_topmargin">
+						<div class="row">
+							<div class="col">
+								<ul class="pagination">
+									<c:if test="${page <= 1 }">
+										<li class="page-item"><a class="page-link current"
+											href="#">이전&nbsp;</a></li>
+									</c:if>
+									<c:if test="${page > 1 }">
+										<li class="page-item"><a
+											href="myReviewList.re?page=${page-1}&key=${member.key}"
+											class="page-link">이전</a>&nbsp;</li>
+									</c:if>
 
-				</div>
-			</div>
-		</div>
-		</c:forEach>
-		<div class="row">
-		<div class="col">
-			<div class="w_center-block w_topmargin">
-				<div class="row">
-					<div class="col">
-						<ul class="pagination">
-							<c:if test="${page <= 1 }">
-								<li class="page-item"><a class="page-link current" href="#">이전&nbsp;</a></li>
-							</c:if>
-							<c:if test="${page > 1 }">
-								<li class="page-item"><a
-									href="myReviewList.re?page=${page-1}&key=${member.key}"
-									class="page-link">이전</a>&nbsp;</li>
-							</c:if>
+									<c:forEach var="a" begin="${startpage}" end="${endpage}">
+										<c:if test="${a == page }">
+											<li class="page-item"><a class="page-link current"
+												href="#">${a}</a></li>
+										</c:if>
+										<c:if test="${a != page }">
+											<li class="page-item"><a
+												href="myReviewList.re?page=${a}&key=${member.key}"
+												class="page-link">${a}</a></li>
+										</c:if>
+									</c:forEach>
 
-							<c:forEach var="a" begin="${startpage}" end="${endpage}">
-								<c:if test="${a == page }">
-									<li class="page-item"><a class="page-link current"
-										href="#">${a}</a></li>
-								</c:if>
-								<c:if test="${a != page }">
-									<li class="page-item"><a
-										href="myReviewList.re?page=${a}&key=${member.key}"
-										class="page-link">${a}</a></li>
-								</c:if>
-							</c:forEach>
-
-							<c:if test="${page >= maxpage }">
-								<li class="page-item"><a class="page-link current" href="#">&nbsp;다음</a></li>
-							</c:if>
-							<c:if test="${page < maxpage }">
-								<li class="page-item"><a
-									href="myReviewList.re?page=${page+1}&key=${member.key}"
-									class="page-link ">&nbsp;다음</a></li>
-							</c:if>
-						</ul>
+									<c:if test="${page >= maxpage }">
+										<li class="page-item"><a class="page-link current"
+											href="#">&nbsp;다음</a></li>
+									</c:if>
+									<c:if test="${page < maxpage }">
+										<li class="page-item"><a
+											href="myReviewList.re?page=${page+1}&key=${member.key}"
+											class="page-link ">&nbsp;다음</a></li>
+									</c:if>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</div>
 		</c:if>
 		<%--후기 리스트가 없는 경우 --%>
 		<c:if test="${listcount==0}">
-					<p class="w_p w_margin-top">작성된 후기가 없습니다.</p>
-				</c:if>
-		
+			<p class="w_p w_margin-top">작성된 후기가 없습니다.</p>
+		</c:if>
+
 	</div>
+	<!-- 삭제모달 -->
+	<div class="modal" id="deletemodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title w_modal">후기 삭제</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">정말로 삭제하시겠습니까?</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<input type="button" class="btn btn-light" data-dismiss="modal"
+						value=취소>
+					<form id=deletemodalForm action="ReviewDelete.re" method="post">
+						<input type=hidden name=review_code value="" id=deleteReview>
+						<input type=hidden name=key value="${member.key}" id="mem_key">
+						<input type="submit" class="btn btn-dark" data-dismiss="modal"
+							id=deletemodalSubmit value=삭제>
+					</form>
+
+					<!-- 닫기버튼 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 수정 모달 -->
+	<div class="modal" id="modifymodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title w_modal">후기 수정</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<p>스터디룸A 사용후기</p>
+					<br>
+					<textarea class="form-control" id="contents" rows="10">
+				</textarea>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<form id=deletemodalForm action="ReviewModify.re" method="post">
+						<input type=hidden name=review_code value="" id=modifyReview>
+						<input type=hidden name="key" value="${member.key}" id="key">
+						<input type="submit" class="btn btn-dark" data-dismiss="modal"
+							id=deletemodalSubmit value=수정>
+					</form>
+					<input type="button" class="btn btn-light" data-dismiss="modal"
+						value=취소>
+					<!-- 닫기버튼 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		//삭제하기 버튼 클릭
+		$(".delete").click(function() {
+			var deletecode = $(this).attr("id");
+			var review_code = deletecode.split("_")[1];
+			console.log(review_code);
+			$("#deleteReview").val(review_code);
+
+		})
+
+		$("#deletemodalSubmit").click(function() {
+			$("#deletemodalForm").submit();
+		})
+		//수정하기 버튼
+		$(".modify").click(function(event) {
+			event.preventDefault();
+			var modifycode = $(this).attr("id");
+			var review_code = modifycode.split("_")[1];
+			console.log(review_code);
+			$.ajax({
+				type : "post",
+				url : "reviewDetail.re",
+				data : {
+					"review_code" : review_code
+				},
+				dataType:"json",
+				success : function(resp) {
+					$("#contents").text(resp.content);
+				}
+			})
+			$("#modifymodal").modal();
+
+		})
+	</script>
 </body>
 </html>

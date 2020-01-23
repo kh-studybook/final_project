@@ -30,6 +30,7 @@
 <!-- js -->
 <script src="resources/js/header.js"></script>
 
+
 <!-- title -->
 <c:if test="${!empty id }">
 <title>StudyBook | ${id} </title>
@@ -85,10 +86,18 @@
             <div><i class="far fa-list-alt"></i></div>
             <div>예약 관리</div>
          </div>
+         <c:if test="${!empty member}">
          <div class="j_menu_org" onClick="javascript:location.href='/studybook/myReviewList.re?key=${member.key}'">
             <div><i class="far fa-edit"></i></div>
             <div>후기 관리</div>
          </div>
+         </c:if>
+         <c:if test="${empty member}">
+         <div class="j_menu_org" onClick="javascript:location.href='/studybook/login.mem'">
+            <div><i class="far fa-edit"></i></div>
+            <div>후기 관리</div>
+         </div>
+         </c:if>
       </div>
       <div class="j_menu_event" onClick="#">이 달의 이벤트</div>
       <div>

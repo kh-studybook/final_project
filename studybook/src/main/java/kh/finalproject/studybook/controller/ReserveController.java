@@ -1,14 +1,17 @@
 package kh.finalproject.studybook.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -217,7 +220,38 @@ public class ReserveController {
 		return mv;
 
 	}
+	
+	//나의 후기 삭제
+	@PostMapping("ReviewDelete.re")
+	public String ReviewDeleteAction(int review_code, int key, HttpServletResponse response)throws Exception{
+		System.out.println("멤버키"+key);
+		
+		int result = reserveservice.reviewDelete(review_code);
+		
+		if(result==0) {
+			System.out.println("후기 삭제 실패");
+		}
+		System.out.println("후기 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('삭제 되었습니다.');");
+		out.println("location.href='myReviewList.re?key="+key+"';");
+		out.println("</script>");
+		out.close();
+		return null;
+		
+	}
+	//나의 후기 상세불러오기
+	@ResponseBody
+	@PostMapping("reviewDetail.re")
+	public Review reviewDetailView(int review_code) throws Exception{
+		Review review = reserveservice.getReviewDetail(review_code);
+		return review;
+	}
 
+	
+	
 	// 지은 끝
 
 

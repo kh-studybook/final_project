@@ -96,6 +96,20 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getSearchListCount(int key) {
 		return reserveDAO.getReviewSearchListCount(key);
 	}
+	//후기삭제
+	@Override
+	public int reviewDelete(int review_code) {
+		int result= reserveDAO.reviewDelete(review_code);
+		return result;
+	}
+
+	@Override
+	public Review getReviewDetail(int review_code) {
+		
+		return reserveDAO.reviewDetailAction(review_code);
+	}
+	
+	
 	
 	//지은 끝
 }

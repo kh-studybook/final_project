@@ -23,5 +23,9 @@ public interface ReserveService {
 	public List<Review> getSearchList(int page, int limit, int key);
 	//나의 리뷰 리스트 카운트 조회
 	public int getSearchListCount(int key);
+	//후기 삭제
+	public int reviewDelete(int review_code);
+	//후기 상세 조회
+	public Review getReviewDetail(int review_code);
 
 }
