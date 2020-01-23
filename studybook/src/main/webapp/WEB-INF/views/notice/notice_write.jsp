@@ -8,30 +8,7 @@
 <title>notice write</title>
 
 <script>
-	$(document).ready(function() {
-		var check = 0;
 
-		$('form').submit(function() {
-			/* if($.trim($("input").eq(1).val())==""){
-				alert("비밀번호를 입력하세요");
-				$("input:eq(1)").focus();
-				return false;
-			}
-			if($.trim($("input").eq(2).val())==""){
-				alert("제목을 입력하세요");
-				$("input:eq(2)").focus();
-				return false;
-			}
-			
-			if($.trim($("input").eq(3).val())==""){
-				alert("내용을 입력하세요");
-				$("input:eq(3)").focus();
-				return false;
-			}  */
-
-		});
-
-	});
 </script>
 
 <style>
@@ -82,8 +59,9 @@ label {
 			</div>
 			<div class="form-group">
 				<button type="submit" class="submitbtn">등록</button>
-				<button type="reset" class="resetbtn">취소</button>
+				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>
 			</div>
+			
 		</form>
 	</div>
 
