@@ -66,7 +66,17 @@ public class ReserveDAO {
 	public int getReviewSearchListCount(int key) {
 		return sqlSession.selectOne("Reserves.searchcount",key);
 	}
-	//--지은 끝
 	
+	//후기 삭제
+	public int reviewDelete(int review_code) {
+		return sqlSession.delete("Reserves.deletereview",review_code);
+	}
+
+	//상세내용 불러오기
+	public Review reviewDetailAction(int review_code) {
+		return sqlSession.selectOne("Reserves.reviewDetail",review_code);
+	}
+	
+	//--지은 끝
 
 }
