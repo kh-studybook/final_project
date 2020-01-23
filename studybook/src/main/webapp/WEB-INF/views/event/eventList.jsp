@@ -119,7 +119,6 @@
 								
 								</div>
 								
-								<!--  추후 확인 -->
 								<c:if test = "${mem_key == '999'||b.mem_key == mem_key}">
 							  	<div id = "delete_modify_btn">
 									<a id="event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 

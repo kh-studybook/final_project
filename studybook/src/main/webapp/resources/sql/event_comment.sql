@@ -9,6 +9,11 @@ create table event_comment(
 	com_re_seq number(10) not null   --<!--  추후 확인!! -->답변 글의 순서(원문글 기준으로 보여주는 순서)
 );
 
-drop table event_comment;
+delete from event_comment;
 
+
+
+drop table event_comment;
 select * from event_comment;
+create sequence event_com_seq;
+drop sequence event_com_seq;

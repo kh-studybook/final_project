@@ -172,10 +172,8 @@ public class EventController {
 				mv.addObject("url", request.getRequestURL());//위의 request는 어디에서 에러가 났는지 알려주기 위해서 넣는다.
 				mv.addObject("message", "상세보기 실패입니다.");
 			} else {
-				System.out.println("상세보기 성공");
-				int count = eventEvent_commentservice.getEventListCount(num);				
+				System.out.println("상세보기 성공");				
 				mv.setViewName("event/event_view");
-				mv.addObject("count", count);
 				mv.addObject("eventdata", event);
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
@@ -199,9 +197,7 @@ public class EventController {
 				mv.addObject("message", "(수정)상세보기 실패입니다.");
 			} else {
 				System.out.println("(수정)상세보기 성공");
-				int count = eventEvent_commentservice.getEventListCount(num);
 				mv.addObject("eventdata", eventdata);
-				mv.addObject("count", count);//추후 확인!!
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
 				System.out.println(mem_key);
@@ -325,27 +321,31 @@ public class EventController {
 		
 		
 		/**Event_comment 관련 시작*/
-		@PostMapping(value = "Event_commentAdd.bo")
+		//댓글 가져오기
+		@ResponseBody
+		@RequestMapping("Event_commentList.eve")
+		public List<Event_comment> Event_commentList(int event_num){
+			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);
+			return list;
+		}
+		
+		//댓글 추가하기
+		@PostMapping(value = "Event_commentAdd.eve")
 		public void Event_commentAdd(Event_comment co, HttpServletResponse response) throws Exception{
 			System.out.println(co.getEvent_num());
 			int ok = eventEvent_commentservice.Event_commentsInsert(co);
 			response.getWriter().print(ok);
 		}
-				
-		@ResponseBody
-		@RequestMapping("Event_commentList.bo")
-		public List<Event_comment> Event_commentList(@RequestParam("com_re_ref") int event_num){
-			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);
-			return list;
-		}
 		
-		@RequestMapping("Event_commentDelete.bo")
+		//댓글 삭제하기
+		@RequestMapping("Event_commentDelete.eve")
 		public void Event_commentsDelete(int event_com_num, HttpServletResponse response) throws Exception {
 			int ok = eventEvent_commentservice.Event_commentsDelete(event_com_num);
 			response.getWriter().print(ok);
 		} 
 		
-		@RequestMapping("Event_commentUpdate.bo")
+		//댓글 업데이트하기
+		@RequestMapping("Event_commentUpdate.eve")
 		public void Event_commentsUpdate(Event_comment co, HttpServletResponse response) throws Exception {
 			int ok = eventEvent_commentservice.Event_commentsUpdate(co);
 			response.getWriter().print(ok);

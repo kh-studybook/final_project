@@ -12,20 +12,15 @@ import kh.finalproject.studybook.domain.Event_comment;
 public class EventCommentServiceImpl implements EventCommentService {
 	@Autowired
 	private EventDAO dao;
-	//추후 확인
-	@Override
-	public int getEventListCount(int event_num) {
-		return dao.getEventListCount(event_num);
-	}
-
-	@Override
-	public int Event_commentsInsert(Event_comment co) {
-		return dao.Event_commentsInsert(co);
-	}
 
 	@Override
 	public List<Event_comment> getEvent_commentList(int event_num) {
 		return dao.getEvent_commentList(event_num);
+	}
+	
+	@Override
+	public int Event_commentsInsert(Event_comment co) {
+		return dao.Event_commentsInsert(co);
 	}
 
 	@Override
