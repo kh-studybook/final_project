@@ -194,10 +194,8 @@
 		and reserve.end_time-1 not between #{starttime} and #{endtime}
 		and #{starttime} not between reserve.start_time and reserve.end_time-1
 		and #{endtime}-1 not between reserve.start_time and reserve.end_time
-		and room.MIN_MEMBER not between #{MIN_MEMBER} and #{MAX_MEMBER}
-		and room.MAX_MEMBER not between #{MIN_MEMBER} and #{MAX_MEMBER}
-		and #{MIN_MEMBER} not between room.MIN_MEMBER and room.MAX_MEMBER
-		and #{MAX_MEMBER} not between room.MIN_MEMBER and room.MAX_MEMBER
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
 		order by room.room_code) b
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
@@ -214,11 +212,9 @@
 		and reserve.start_time not between #{starttime} and #{endtime}-1
 		and reserve.end_time-1 not between #{starttime} and #{endtime}
 		and #{starttime} not between reserve.start_time and reserve.end_time-1
-		and #{endtime}-1 not between reserve.start_time and reserve.end_time
-		and room.MIN_MEMBER not between #{MIN_MEMBER} and #{MAX_MEMBER}
-		and room.MAX_MEMBER not between #{MIN_MEMBER} and #{MAX_MEMBER}
-		and #{MIN_MEMBER} not between room.MIN_MEMBER and room.MAX_MEMBER
-		and #{MAX_MEMBER} not between room.MIN_MEMBER and room.MAX_MEMBER
+		and #{endtime}-1 not between reserve.start_time-1 and reserve.end_time
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
 	</select>
 	<!-- 민지 끝 -->
 
