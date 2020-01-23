@@ -57,17 +57,14 @@ public class EventDAO {
 	}
 	
 	/** Comment 관련*/
-	public int getEventListCount(int event_num) {
-		return sqlSession.selectOne("event_comment.count", event_num);
+	public List<Event_comment> getEvent_commentList(int event_num) {
+		return sqlSession.selectList("event_comment.getList", event_num);
 	}
-
+	
 	public int Event_commentsInsert(Event_comment co) {
 		return sqlSession.insert("event_comment.insert", co);
 	}
 
-	public List<Event_comment> getEvent_commentList(int event_num) {
-		return sqlSession.selectList("event_comment.getList", event_num);
-	}
 
 	public int Event_commentsDelete(int event_com_num) {
 		return sqlSession.delete("event_comment.delete", event_com_num);
