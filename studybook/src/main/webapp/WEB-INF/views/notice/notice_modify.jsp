@@ -90,7 +90,6 @@ label {
 					rows="10" class="form-control">${noticedata.NOTICE_CONTENT }</textarea>
 			</div>
 
-
 			<div class="form-group">
 				<button type="submit" class="submitbtn">수정</button>
 				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>
