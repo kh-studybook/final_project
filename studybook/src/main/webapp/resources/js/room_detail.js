@@ -1,6 +1,4 @@
-$(document).on(
-			'click',
-			'.number-spinner button',
+$(document).on('click','.number-spinner button',
 			function() {
 				var btn = $(this), oldValue = btn.closest('.number-spinner')
 						.find('input').val().trim(), newVal = 0;
@@ -123,69 +121,73 @@ $(document).on(
 		 } //function end
 	
 	$(document).ready(function(){
-		$(".swiper-container").css("visibility","hidden");
+		
 		 go(1);
 		
 		var mem_key=$("#mem_key").val();
 		
 		var time_check=0;
-		$(".swiper-slide").click(function(){
-			
-			if(time_check==0){
+			$(".swiper-slide").click(function(){
+				
+				if(time_check==0){
 
-				if($(".swiper-slide").hasClass("not_active")==false){
-					$(".swiper-slide").css("background","#57D7D5");
-					$(".swiper-slide").css("color","black");
-				}
-				
-				$(".swiper-wrapper").find('input').removeAttr('name');
-				var time=$(this).find($("input")).val();
-				console.log("시작시간"+time)
-				$(this).css("background","#855FD4");
-				$(this).find($("input")).attr("name","start_time");
-				time_check=1;
-				
-			}else if(time_check==1){
-				var time2=$(this).find($("input")).val();
-				console.log("종료시간"+time2)
-				$(this).find($("input")).attr("name","end_time");
-				
-				var start_time=$(".swiper-slide").find($("input[name=start_time]")).val();
-				$("#start_time_span").text(start_time);	
-				var end_time=$(".swiper-slide").find($("input[name=end_time]")).val();
-				$("#end_time_span").text(end_time);
-				
-				var total_time=end_time-start_time;
-				$("#select_time_span").text(total_time);
-				var time_price=$("#time_price").text();
-				$("#total_time_price").text((time_price*total_time));
-				
-				
-					for(var i=parseInt(start_time);i<=parseInt(end_time);i++){
-						console.log("for문의 i값="+i)
-						if($(".swiper-slide").find($("input[id="+i+"]")).parent().hasClass("not_active")==true){
-							alert("이미 예약된 시간을 포함하였습니다.\n다시 골라주세요!");
-							location.reload();
-						}
-						console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
-						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
-						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
+					if($(".swiper-slide").hasClass("not_active")==false){
+						$(".swiper-slide").css("background","#57D7D5");
+						$(".swiper-slide").css("color","black");
 					}
-				var extra_price=$("#extra_num_price").text();
-				var room_price=$("#total_time_price").text();
-				$("#total_cost_span").text(parseInt(extra_price)+parseInt(room_price));
-				$("#total_cost").val(parseInt(extra_price)+parseInt(room_price));
-				time_check=0;
-			}
-		});	
-		
+					
+					$(".swiper-wrapper").find('input').removeAttr('name');
+					var time=$(this).find($("input")).val();
+					console.log("시작시간"+time)
+					$(this).css("background","#855FD4");
+					$(this).find($("input")).attr("name","start_time");
+					time_check=1;
+					
+				}else if(time_check==1){
+					var time2=$(this).find($("input")).val();
+					console.log("종료시간"+time2)
+					$(this).find($("input")).attr("name","end_time");
+					
+					var start_time=$(".swiper-slide").find($("input[name=start_time]")).val();
+					$("#start_time_span").text(start_time);	
+					var end_time=$(".swiper-slide").find($("input[name=end_time]")).val();
+					$("#end_time_span").text(end_time);
+					if(parseInt(start_time)>=parseInt(end_time)){
+						alert("잘못된 선택입니다.");
+						location.reload();
+					}
+					
+					var total_time=end_time-start_time;
+					$("#select_time_span").text(total_time);
+					var time_price=$("#time_price").text();
+					$("#total_time_price").text((time_price*total_time));
+					
+					
+						for(var i=parseInt(start_time);i<=parseInt(end_time);i++){
+							console.log("for문의 i값="+i)
+							if($(".swiper-slide").find($("input[id="+i+"]")).parent().hasClass("not_active")==true){
+								alert("이미 예약된 시간을 포함하였습니다.\n다시 골라주세요!");
+								history.go(0);
+								break;
+							}
+							console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
+							$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
+							$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
+						}
+					var extra_price=$("#extra_num_price").text();
+					var room_price=$("#total_time_price").text();
+					$("#total_cost_span").text(parseInt(extra_price)+parseInt(room_price));
+					$("#total_cost").val(parseInt(extra_price)+parseInt(room_price));
+					time_check=0;
+				}
+			});
+			
 		$(".e_to_reserve_page").click(function(){
 			location.href="room_reserve.re";
 		})
 		
 	});
  
-	
 	function reserve_ajax(data) {
 		   console.log(data)
 		    $.ajax({

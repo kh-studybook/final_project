@@ -121,6 +121,12 @@ public class ReserveServiceImpl implements ReserveService {
 		map.put("room_code", room_code);
 		return reserveDAO.getReserve_timelist(map);
 	}
+
+	@Override
+	public int reserve_cancel(int r_code) {
+		// TODO Auto-generated method stub
+		return reserveDAO.reserve_cancel(r_code);
+	}
 	
 
 }

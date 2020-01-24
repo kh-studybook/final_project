@@ -322,8 +322,19 @@ public class RoomController {
 
 	// 룸 정보 보기 - 은지
 	@RequestMapping(value = "/room_detail.ro")
-	public ModelAndView room_detail(int room_code, ModelAndView mv,HttpSession session, HttpServletRequest request) {
+	public ModelAndView room_detail(int room_code, ModelAndView mv,HttpSession session,
+			HttpServletResponse response,HttpServletRequest request) throws IOException {
 		Member member=(Member)session.getAttribute("member");
+		if(member==null) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out=response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 먼저 해주세요');");
+			out.println("location.href='login.mem';");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
 		Room room = roomservice.getRoomDetail(room_code);
 		// Room_ex room_ex=roomservice.getRoomExDetail(room_code);
 		 List<Gallery> gallerylist=roomservice.getGallerylist(room_code);

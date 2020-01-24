@@ -1,6 +1,7 @@
 
 package kh.finalproject.studybook.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -272,6 +273,49 @@ public class ReserveController {
 		List<Reserve> reservelist=reserveservice.getReserve_timelist(search_date,room_code);
 		
 		return reservelist;
+	}
+	
+	//은지- 예약취소하기
+	@GetMapping(value="reserve_cancel_action.re")
+	public void reserve_cancel(int r_code,HttpServletResponse response) throws IOException  {
+		int result=reserveservice.reserve_cancel(r_code);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		if(result==1) {
+			System.out.println("예약 취소 완료");
+					
+			out.println("alert('취소 완료 되었습니다.');");
+			out.println("location.href='reserve_cancel_page.re?r_code="+r_code+"';");
+
+		}else {
+			out.println("alert('취소 실패입니다.');");
+			out.println("history.back();");
+			
+		}
+		out.println("</script>");
+		out.close();
+				
+	}
+	
+	//은지- 예약취소페이지
+	@RequestMapping(value="reserve_cancel_page.re")
+	public ModelAndView reserve_cancel_page(int r_code,ModelAndView mv) {
+		Reserve reserve=reserveservice.getReserveDetail(r_code);
+		List<Food_reserve> foodlist=reserveservice.getFood_reservelist(r_code);
+		int room_food_total=reserve.getTotal_cost();
+		int foods_total=0;
+			for(int i=0;i<foodlist.size();i++) {
+				foods_total+=foodlist.get(i).getFood_total_cost();
+			}
+		room_food_total+=foods_total;
+		
+		mv.addObject("room_food_total",room_food_total);
+		mv.addObject("foods_total",foods_total);
+		mv.addObject("reserve",reserve);
+		mv.addObject("food_reservelist",foodlist);
+		mv.setViewName("room/reserve_cancel_page");
+		return mv;
 	}
 
 }
