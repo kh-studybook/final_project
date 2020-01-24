@@ -29,6 +29,7 @@ public interface ReserveService {
 	//후기 상세 조회
 	public Review getReviewDetail(int review_code);
 	public List<Reserve> getReserve_timelist(String search_date, int room_code);
+	public int reserve_cancel(int r_code);
 
 }
 

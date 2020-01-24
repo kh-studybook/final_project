@@ -85,6 +85,10 @@ public class ReserveDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Reserves.getReserve_timelist",map);
 	}
+	public int reserve_cancel(int r_code) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("Reserves.reserve_cancel",r_code);
+	}
 	
 
 }

@@ -76,14 +76,14 @@ background: #eeeeee;
     font-size: 1.3rem;
 }
 
-.reserve_cancel_div{
+.e_reserve_cancel_div{
 	display: inline-table;
-    padding: 7px 0px 15px 15px;
+    padding: 15px 0px 15px 0px;
     width: 90%;
     margin-bottom: 20px;
 }
 
-.reserve_cancel_div input{
+.e_reserve_cancel_div input{
 	height: 45px;
     border: none;
     width: 180px;
@@ -92,5 +92,16 @@ background: #eeeeee;
     color: white;
     font-weight: 900;
     float:right;
+}
+
+.e_reserve_cancel_div div{
+	height: 3rem;
+    text-align: center;
+    background: #969696;
+    color: white;
+    font-weight: 900;
+    line-height: 3rem;
+    font-size: 1rem;
+    width: 400px;
 }
 

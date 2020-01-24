@@ -178,7 +178,9 @@
 								</h2>
 								<!-- 시간 선택 -->
 
+
 								<div class="swiper-container">
+						 	
 									<div class="swiper-wrapper">
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="9" value="9">9:00</div>
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="10" value="10">10:00</div>
@@ -195,7 +197,9 @@
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="21" value="21">21:00</div>
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="22" value="22">22:00</div>
 									</div>
+							
 								</div>
+
 
 									<!-- 시간 선택 끝 -->
 									<!-- e_room_reserve end -->
@@ -304,23 +308,30 @@
 		}
   
  		myCalendar.onDateClick(function(event, date){
- 			$(".swiper-container").css("visibility","visible");
+ 			
  	 		console.log("클릭한 날짜 :"+formatDate(date))
  	 		var today=new Date();
  	 		console.log("오늘:"+formatDate(today))
  				if(formatDate(date)<formatDate(today)){
  					alert("오늘 이후를 골라주세요");
- 					location.reload();
- 					}
+ 					
+ 				}else{
   				$("#reserve_date_span").text(formatDate(date));
   	 			$("#reserve_date").val(formatDate(date));
   	 			myCalendar.clearselect();
   				myCalendar.select([date]);
+  				
   				//날짜별로 예약되어있는 시간 알아내기
+  				
+  				$(".swiper-slide").removeClass("not_active");
   				var search="room_code="+${room.ROOM_CODE}+"&search_date="+formatDate(date).substring(0,10);
   				reserve_ajax(search);
+  	 		
   				
-  				var d = new Date();
+  				
+  				
+  				
+ 			}
   				
   				
   	 
