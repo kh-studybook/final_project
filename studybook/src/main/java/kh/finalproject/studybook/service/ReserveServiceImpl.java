@@ -109,8 +109,19 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		return reserveDAO.reviewDetailAction(review_code);
 	}
+
+	//지은 끝
 	
-}
+	//날짜별로 예약되어있는 시간 찾기-은지
+	@Override
+	public List<Reserve> getReserve_timelist(String search_date, int room_code) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("search_date",search_date);
+		map.put("room_code", room_code);
+		return reserveDAO.getReserve_timelist(map);
+	}
+	
 
 }
 

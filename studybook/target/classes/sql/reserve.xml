@@ -61,18 +61,33 @@
 		resultType="review">
 		select *
 		from (select rownum rnum, b.*
-		from (select re.r_code, ro.room_name, re.reserve_date, re.start_time,
+		from (select
+		rv.room_code, re.r_code, ro.room_name, re.reserve_date, re.start_time,
 		re.end_time,rv.review_code, rv.review_date, rv.content,go.file_name
 		from room ro, reserve re, review rv, gallery go
-		where ro.room_code=re.room_code and re.r_code=rv.r_code and go.room_code =re.room_code and go.gallery_num=1 and re.mem_key=#{key} order by rv.r_code desc ) b)
+		where
+		ro.room_code=re.room_code and re.r_code=rv.r_code and go.room_code
+		=re.room_code and go.gallery_num=1 and re.mem_key=#{key} order by
+		rv.r_code desc ) b)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	<select id="searchcount" parameterType="int" resultType="int">
-		select count(*)
+		select
+		count(*)
 		from review where mem_key=#{key}
 
 	</select>
+	<!-- 후기 삭제 -->
+	<delete id="deletereview" parameterType="int">
+		delete from review
+		where review_code=#{review_code}
+	</delete>
+	<!-- 후기 상세 내용  -->
+	<select id="reviewDetail" parameterType="int" resultType="review">
+	select * from review where review_code=#{num}
+	</select>
 	
+  <!--날짜별 예약된 시간 불러오기-->
 	<select id="getReserve_timelist" parameterType="map" resultType="reserve">
 		select start_time ,end_time
 		from reserve 
@@ -81,3 +96,4 @@
 	</select>
 
 </mapper>
+

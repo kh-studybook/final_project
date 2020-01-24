@@ -72,6 +72,6 @@
 		and event_date >= sysdate
 		order by event_date
 	</select>
-
+	
 	<!-- 민지 끝 -->
 </mapper>
