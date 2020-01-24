@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){	
 	$('#m_write_date').click(function(){
 		if($('.jsCalendar').css("display") == "none"){
 			$('.jsCalendar').css("display", "inline-grid");
@@ -9,38 +9,37 @@ $(document).ready(function(){
 	})
 	
 	$('.m_main_select').eq(1).click(function(){
-		if($('#m_main_time').css("opacity") == '0'){
-			$('#m_main_time').css("opacity", "1");
+		if($('#m_main_starttime').css("opacity") == '0'){
+			$('#m_main_starttime').css("opacity", "1");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(1).css("position", "relative");
 		} else {
-			$('#m_main_time').css("opacity", "0");
+			$('#m_main_starttime').css("opacity", "0");
 			$('.m_main_select').eq(1).css("position", "");
 		}
 	})
 	
 	$('.m_main_select').eq(2).click(function(){
-		if($('#m_main_count').css("opacity") == '0'){
-			$('#m_main_count').css("opacity", "1");
+		if($('#m_main_endtime').css("opacity") == '0'){
+			$('#m_main_endtime').css("opacity", "1");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(2).css("position", "relative");
 		} else {
-			$('#m_main_count').css("opacity", "0");
+			$('#m_main_endtime').css("opacity", "0");
 			$('.m_main_select').eq(2).css("position", "");
 		}
 	})
 	
-	/*
-	$('#my-calendar table tbody tr td').click(function(){
-		$('#m_write_date').empty();
-		$('#m_write_date').append($(this).text());
-		$('#m_write_date').append(" ");
-		$('#m_write_date').append($('.jsCalendar-title-name').text())
-		$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_date').css('padding','10px');
-		$('.jsCalendar').css("display", "none");
+	$('.m_main_select').eq(3).click(function(){
+		if($('#m_main_count').css("opacity") == '0'){
+			$('#m_main_count').css("opacity", "1");
+			$('.m_main_select').eq(0).css("position", "");
+			$('.m_main_select').eq(3).css("position", "relative");
+		} else {
+			$('#m_main_count').css("opacity", "0");
+			$('.m_main_select').eq(3).css("position", "");
+		}
 	})
-	*/
 	
 	// calendar 만들기
 	// Get the element
@@ -51,69 +50,96 @@ $(document).ready(function(){
     // 검색 - 달력 눌렀을 때 날짜 표시
     myCalendar.onDateClick(function(event, date){
     	var date2str = jsCalendar.tools.dateToString(date, "yyyy-MM-DD");
+    	console.log('date2str='+date2str);
+    	var new_today = new Date();
+    	var year = new_today.getFullYear();
+    	var month = (1+new_today.getMonth());
+    	var day = new_today.getDate();
+    	var today = new Date(year+', '+month+', '+day);
+    	
+    	console.log('date='+date);
+    	console.log('today='+today);
+    	console.log('date.getTime()='+date.getTime());
+    	console.log('today.getTime()='+today.getTime());
+    	console.log('date.getTime() < today.getTime()'+ (date.getTime() < today.getTime()));
+    	if(date.getTime()< today.getTime()){
+    		alert('오늘 날짜부터 선택해주세요.');
+    		return false;
+    	}
+    	
+    	if(date.getTime() == today.getTime()){
+    		var now_hour = new_today.getHours();
+    		
+    		$('#m_main_starttime ul li').each(function(){
+    			var starttime = $(this).text();
+    			var hour=starttime.substring(0, starttime.length-1);
+    			if(parseInt(hour) < parseInt(now_hour)){
+    				$(this).addClass("m_black");
+    			}
+    		})
+    		
+    		$('#m_main_endtime ul li').each(function(){
+    			var endtime = $(this).text();
+    			var hour=endtime.substring(0, endtime.length-1);
+    			if(parseInt(hour)-1 < parseInt(now_hour)){
+    				$(this).addClass("m_black");
+    			}
+    		})
+    	} else {
+    		$('#m_main_starttime ul li').each(function(){
+    			$(this).removeClass("m_black");
+    		})
+    		$('#m_main_endtime ul li').each(function(){
+    			$(this).removeClass("m_black");
+    		})
+    	}
+    	
     	$('#m_write_date').empty();
     	$('#m_write_date').append('<i class="far fa-calendar-alt"></i>');
-        $('#m_write_date').append(date2str);
-		$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_date').css('padding','10px');
-		$('#m_write_date').css('font-weight','bold');
-		$('#m_write_date').css('font-size','18px');
-		$('.jsCalendar').css("display", "none");
-		$(this).addClass('j_selected');
-		$('#date').val(date2str);
+    	$('#m_write_date').append(date2str);
+    	$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
+    	$('#m_write_date').css('padding','10px');
+    	$('#m_write_date').css('font-weight','bold');
+    	$('#m_write_date').css('font-size','18px');
+    	$('.jsCalendar').css("display", "none");
+    	$(this).addClass('j_selected');
+    	$('#date').val(date2str);
+    	
     });
 	
     // 검색 - 시간 눌렀을 때
-	$('#m_main_time').children().children().eq(0).click(function(){
-		$('#m_write_time').empty();
-		$('#m_write_time').append('<i class="far fa-clock"></i>');
-		$('#m_write_time').append('09~22시');
-		$('#m_write_time').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_time').css('font-weight','bold');
+	$('#m_main_starttime').children().children().click(function(){
+		if($(this).hasClass('m_black')){
+			alert('가능한 시간을 선택하세요.');
+			return false;
+		}
+		var starttime = $(this).text();
+		$('#m_write_starttime').empty();
+		$('#m_write_starttime').append('<i class="far fa-clock"></i>');
+		$('#m_write_starttime').append(starttime);
+		$('#m_write_starttime').append('<i class="fas fa-chevron-down"></i>');
+		$('#m_write_starttime').css('font-weight','bold');
 		$('.m_write>i:nth-child(1)').css('margin-right', '0');
 		$('.m_write>i:nth-child(2)').css('margin-left', '0');
 		$(this).css('font-size', '14px');
-		$('#starttime').val('9');
-		$('#endtime').val('22');
+		$('#starttime').val(starttime.substring(0, starttime.length-1));
 	})
 	
-	$('#m_main_time').children().children().eq(1).click(function(){
-		$('#m_write_time').empty();
-		$('#m_write_time').append('<i class="far fa-clock"></i>');
-		$('#m_write_time').append('09~12시');
-		$('#m_write_time').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_time').css('font-weight','bold');
+	$('#m_main_endtime').children().children().click(function(){
+		if($(this).hasClass('m_black')){
+			alert('가능한 시간을 선택하세요.');
+			return false;
+		}
+		var endtime = $(this).text();
+		$('#m_write_endtime').empty();
+		$('#m_write_endtime').append('<i class="far fa-clock"></i>');
+		$('#m_write_endtime').append(endtime);
+		$('#m_write_endtime').append('<i class="fas fa-chevron-down"></i>');
+		$('#m_write_endtime').css('font-weight','bold');
 		$('.m_write>i:nth-child(1)').css('margin-right', '0');
 		$('.m_write>i:nth-child(2)').css('margin-left', '0');
 		$(this).css('font-size', '14px');
-		$('#starttime').val('9');
-		$('#endtime').val('12');
-	})
-	
-	$('#m_main_time').children().children().eq(2).click(function(){
-		$('#m_write_time').empty();
-		$('#m_write_time').append('<i class="far fa-clock"></i>');
-		$('#m_write_time').append('12~18시');
-		$('#m_write_time').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_time').css('font-weight','bold');
-		$('.m_write>i:nth-child(1)').css('margin-right', '0');
-		$('.m_write>i:nth-child(2)').css('margin-left', '0');
-		$(this).css('font-size', '14px');
-		$('#starttime').val('12');
-		$('#endtime').val('18');
-	})
-	
-	$('#m_main_time').children().children().eq(3).click(function(){
-		$('#m_write_time').empty();
-		$('#m_write_time').append('<i class="far fa-clock"></i>');
-		$('#m_write_time').append('18~22시');
-		$('#m_write_time').append('<i class="fas fa-chevron-down"></i>');
-		$('#m_write_time').css('font-weight','bold');
-		$('.m_write>i:nth-child(1)').css('margin-right', '0');
-		$('.m_write>i:nth-child(2)').css('margin-left', '0');
-		$(this).css('font-size', '14px');
-		$('#starttime').val('18');
-		$('#endtime').val('22');
+		$('#endtime').val(endtime.substring(0, endtime.length-1));
 	})
 
 	// 검색 - 인원 눌렀을 때	
@@ -311,6 +337,24 @@ $(document).ready(function(){
     	var endtime = $('#endtime').val();
     	var MIN_MEMBER = $('#MIN_MEMBER').val();
     	var MAX_MEMBER = $('#MAX_MEMBER').val();
-    	return location.href='RoomSearch.ro?date='+date+'&starttime='+starttime+'&endtime='+endtime
+    	
+    	if(date==''){
+    		alert('날짜를 선택해 주세요');
+    		return false;
+    	}else if(starttime==''){
+    		alert('시작 시간을 선택해 주세요');
+    		return false;
+    	}else if(endtime==''){
+    		alert('끝나는 시간을 선택해 주세요');
+    		return false;
+    	} else if(starttime >= endtime){
+    		alert('시간을 확인해 주세요');
+    		return false;
+    	} else if(MIN_MEMBER==''){
+    		alert('인원수를 선택해 주세요');
+    		return false;
+    	}    	
+    	
+    	window.location.href='RoomSearch.ro?date='+date+'&starttime='+starttime+'&endtime='+endtime
     	+'&MIN_MEMBER='+MIN_MEMBER+'&MAX_MEMBER='+MAX_MEMBER;
     }

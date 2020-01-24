@@ -33,14 +33,21 @@
 	#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 	#event_delete_btn:visited{color:black}
 	
-	/** comment 관련!! */
+	/** comment 관련 */
 	#event_comment_write{background-color:#7F56D2; border:0px; opacity:0.8; color:white; width:20%;}
 	#event_comment_write:hover{opacity:1}
 	#comment_content{width:80%;}
+	#eventCommentModify:hover, #eventCommentDelete:hover{color:#7F56D2; text-decoration:none; cursor:pointer}
+	#message{padding-top:10px;}
+	.comment_btn{float:right; display:flex}
+	.pt{padding-left:5px; padding-right:5px}
+	.reply_img{float:right}
 		
 </style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src = "https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <script>
-	$(function(){
+$(function(){
 
 	//게시글 상세보기로 이동하기!!
 	$(".click_detail").click(function(){
@@ -63,120 +70,105 @@
 	
 	
 	/** comment 시작*/
-	$("#comment table").hide();
+	$("#comment_form").hide();
+	
+	getList();
 	
 	function getList(){
 		$.ajax({
 			type : "post",
-			url : "CommentList.bo",
-			data : {"event_num" : $("#BOARD_RE_REF").val()},
+			url : "Event_commentList.eve",
+			data : {"event_num" : $("#event_num").val()},
 			dataType : "json",
 			success : function(rdata){
 				if (rdata.length > 0) {
-					$("#comment table").show();
-					$("#comment thead").show();
-					$("#comment tbody").empty();
+					$("#comment_form").empty();
+					$("#comment_form").show();
+					$("#comment_content").empty();
 					$("#message").text('');
 					output = '';
 					$(rdata).each(function(){
-						img = '';
-						if($("#loginid").val() == this.id){//로그인한 아이디와 글쓴 사람의 아이디가 같을 때
-							img = "<img src = 'image/pencil2.png' width='15px' " 
-								+ "class='update'>"
-							+ "<img src = 'image/remove.png' width='15px' "
-							 	+ "class='remove'>"
-							+ "<input type = 'hidden' value = '" + this.num
-							+ "' > ";									 
+						comment_btn = '';
+						//현재 접속한 mem_key와 글쓴 men_key가 같을 때
+						if("${mem_key}" == '999' || mem_key == key){
+							comment_btn = "<span class = 'comment_btn'><a id = 'eventCommentModify' class='update'>수정</a><span class = 'pt'>|</span> "
+							+ "<a id = 'eventCommentDelete' class='remove'>삭제</a></span> "
+							+ "<input type = 'hidden' value = '" + this.event_num + "'> "
+							+ "<input type = 'hidden' value = '" + this.event_com_num + "' > ";									 
 						} 
-						output += "<tr><td>" + this.id + "</td>";
-						output += "<td>" + this.content + "</td>";
-						output += "<td>" + this.reg_Date + img + "</td></tr>";
+						
+						output += "<div><span>" + this.mem_key + comment_btn + "</span><br>";
+						output += "<span>" +  moment(this.com_date).format("YYYY-MM-DD HH시 mm분 ss") + "</span><br><br>";
+						output += "<span style = 'max-width:960px; word-break:break-all;'>" + this.com_content + "</span>"
+						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
 					});
-					$("#comment tbody").append(output);
+					$("#comment_form").append(output);
 				} else {
-					$("#message").text("등록된 댓글이 없습니다.");
-					$("#comment thead").hide();
-					$("#comment tbody").empty();
+					$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
+					$("#comment_content").empty();
 				}
-				$("#count").text(rdata.length);
-			}
+		}
 		});
-	}//getList end
-	
-	$(".start").click(function(){
-		getList();
-	});//click end
-	//댓글 버튼을 눌렀을 때 댓글 목록 가져오기
+	}//getList end	
+
+	autosize($("#comment_content"));
 	
 	//글자수 4000자 제한
-	$("#content").on('input', function(){
+	$("#comment_content").on('input', function(){
 		length = $(this).val().length;
 		if (length > 4000) {
-			lenght = 4000;
-			content = content.substring(0, length);
+			alert("댓글은 4000자까지 가능합니다.");
 		}
-		$(".float-left").text(length + "/4000");
 	});//content input end
 	
 	//등록 또는 수정완료 버튼을 클릭한 경우
 	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
 	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
-	$("#write").click(function(){
-		buttonText = $("#write").text();
-		content = $("#content").val();
-		$(".float-left").text('총 4000자까지 가능합니다.');
-		if (buttonText == "등록") {//댓글을 추가하는 경우
-			url = "CommentAdd.bo";
-			data = {"content" : content,
-					"mem_key" : $("#mem_key").val(),
-					"event_num" : $("#event_num").val()};		
-		} else {//댓글을 수정하는 경우
-			url = "CommentUpdate.bo";
-			data = {"num" : num, "content" : content};
-			$("#write").text("등록");//다시 등록으로 변경
-		}
+	$("#event_comment_write").click(function(){
+		content = $("#comment_content").val();
+		event_num = $("#event_num").val();
+		url = "Event_commentAdd.eve";
+		data = {"com_content" : content,
+				"mem_key" : $("#mem_key").val(),
+				"event_num" : event_num};		
 
 		$.ajax({
 			type : "post",
 			url : url,
 			data : data,
 			success : function(result){
-				$("#content").val('');
-				if (result == 1) {
-					getList();
-				}
+				$("#comment_content").val('');
+				getList();
 			}
-			
 		});//ajax end
+		
 	});//write end
 	
 	//pencil2.png를 클릭하는 경우(수정)
-	$("#comment").on('click', '.update', function(){
+	$("#eventCommentModify").on('click', '.update', function(){
 		before = $(this).parent().prev().text();
-		$("#content").focus().val(before);
+		$("#comment_content").focus().val(before);
 		num = $(this).next().next().val();//수정할 댓글번호를 저장
-		$("#write").text("수정완료");//등록 버튼의 라벨을 '수정완료'로 변경
 		$(this).parent().parent().css('background', 'lightgray');
 	});//pendil2 end
 	
 	//remove.png를 클릭하는 경우
-	$("#comment").on('click', 'remove', function(){
+	$("#eventCommentDelete").on('click', 'remove', function(){
 		var num = $(this).next().val();//댓글 번호
 		
 		$.ajax({
 			type : "post",
-			url : "CommentDelete.bo",
-			data : {"num" :  num},
+			url : "Event_commentDelete.eve",
+			data : {"event_com_num" :  event_com_num},
 			success : function(result){
 				if (result == 1) {
 					getList();
 				}
 			}
 		})
-	})//remove end
+	})//remove end	
 	
-	
-	});
+});
 </script>
 </head>
 <body>
@@ -207,7 +199,7 @@
 	</div>
 	<hr>	
 	<div class="row">
-		<div class = "img_avatar"><img class = "p_avatar" src = "resources/upload${eventdata.event_pic}"></div>
+		<div class = "img_avatar"><img class = "p_avatar" id = "reply_img" src = "resources/upload${eventdata.event_pic}"></div>
    	</div>
    	<br>
    	<br>
@@ -215,23 +207,20 @@
    		${eventdata.content}   	
    	</div>
    	<br>
-   	<hr>	
+   	<hr>
    	<p id = "event_comment_text">댓글</p><br>
-   	<div id = "comment" class = "row">
-		<textarea rows = 8 id = "comment_content" maxLength = "50"></textarea>
-		<button id = "event_comment_write" class = "float-right">댓글 등록</button>
-		<br>
-		<table class = "table table_striped"><!-- #comment table -->
-			<thead>
-				<tr>사진&nbsp;닉네임</tr>
-				<tr>날짜</tr>
-			</thead>
-			<tbody>
-				<tr>내용</tr>
-			</tbody>
-		</table>
-			<div id = "message"></div>
+   	<div id = "comment_register" class = "row">
+			<textarea rows = 8 id = "comment_content" maxLength = "40000"></textarea>
+			<button id = "event_comment_write" class = "float-right">댓글 등록</button>
 	</div>	  		  
+		<br><br>
+		
+		<!-- #comment_form -->
+		<div id = "comment_form">
+		</div>			
+		
+		<!-- 댓글이 없을 때 멘트 출력 부분 -->
+		<div id = "message"></div>
 	</div>
 	
 	<!--  삭제 모달 -->

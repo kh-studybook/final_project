@@ -1,3 +1,4 @@
+
 package kh.finalproject.studybook.controller;
 
 import java.util.HashMap;
@@ -224,7 +225,41 @@ public class ReserveController {
 		return mv;
 
 	}
+	
+	//나의 후기 삭제
+	@PostMapping("ReviewDelete.re")
+	public String ReviewDeleteAction(int review_code, int key, HttpServletResponse response)throws Exception{
+		System.out.println("멤버키"+key);
+		
+		int result = reserveservice.reviewDelete(review_code);
+		
+		if(result==0) {
+			System.out.println("후기 삭제 실패");
+		}
+		System.out.println("후기 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('삭제 되었습니다.');");
+		out.println("location.href='myReviewList.re?key="+key+"';");
+		out.println("</script>");
+		out.close();
+		return null;
+		
+	}
+	//나의 후기 상세불러오기
+	@ResponseBody
+	@PostMapping("reviewDetail.re")
+	public Review reviewDetailView(int review_code) throws Exception{
+		Review review = reserveservice.getReviewDetail(review_code);
+		return review;
+	}
+
+	
+	
 	// 지은 끝
+
+
 
 	//은지- 날짜별 예약된 시간체크
 	@ResponseBody
@@ -237,3 +272,4 @@ public class ReserveController {
 	}
 
 }
+

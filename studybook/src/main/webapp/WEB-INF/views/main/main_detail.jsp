@@ -44,17 +44,50 @@
 							<div id="my-calendar" class="e_calendar"></div>
 	            		</div>
 						<div class="m_main_select">
-							<div class="m_write" id="m_write_time">
+							<div class="m_write" id="m_write_starttime">
 								<i class="far fa-clock"></i>
-								시간
+								START
 								<i class="fas fa-chevron-down"></i>
 							</div>
-							<div id="m_main_time">
+							<div id="m_main_starttime">
 								<ul>
-									<li>전체(09~22시)</li>
-									<li>오전(09~12시)</li>
-									<li>오후(12~18시)</li>
-									<li>저녁(18~22시)</li>
+									<li>9시</li>
+									<li>10시</li>
+									<li>11시</li>
+									<li>12시</li>
+									<li>13시</li>
+									<li>14시</li>
+									<li>15시</li>
+									<li>16시</li>
+									<li>17시</li>
+									<li>18시</li>
+									<li>19시</li>
+									<li>20시</li>
+									<li>21시</li>
+								</ul>
+				        	</div>
+						</div>
+						<div class="m_main_select">
+							<div class="m_write" id="m_write_endtime">
+								<i class="far fa-clock"></i>
+								END
+								<i class="fas fa-chevron-down"></i>
+							</div>
+							<div id="m_main_endtime">
+								<ul>
+									<li>10시</li>
+									<li>11시</li>
+									<li>12시</li>
+									<li>13시</li>
+									<li>14시</li>
+									<li>15시</li>
+									<li>16시</li>
+									<li>17시</li>
+									<li>18시</li>
+									<li>19시</li>
+									<li>20시</li>
+									<li>21시</li>
+									<li>22시</li>
 								</ul>
 				        	</div>
 						</div>
