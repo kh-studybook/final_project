@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -8,19 +9,15 @@
 		resultType="reviewinfo">
 		select *
 		from (select rownum rnum, reviewInfo.*
-		from (select
-		r.review_code, r.room_code, r.content, r.review_date,
-		r.mem_key,
-		m.name, m.profile
+		from (select r.review_code, r.room_code, r.content, r.review_date,
+		r.mem_key, m.name, m.profile
 		from review r, member m
 		where
 		r.mem_key=m.key
-		and
-		r.room_code=#{room_code}
+		and r.room_code=#{room_code}
 		order by r.review_date)
 		reviewInfo )
-		where rnum
-		&gt;= #{start} and rnum &lt;= #{end}
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 
 	<select id="getReviewCount" parameterType="int" resultType="int">
@@ -28,44 +25,38 @@
 		where room_code=#{room_code}
 	</select>
 
-
+	
 	<insert id="insertReserve" parameterType="reserve">
-		<selectKey resultType="int" order="BEFORE"
-			keyProperty="r_code">
+		<selectKey resultType="int" order="BEFORE" keyProperty="r_code">
 			select nvl(max(r_code),1000)+1 from reserve
 		</selectKey>
 		insert into reserve
 		values(#{r_code},#{mem_key},#{room_code},#{reserve_date},#{start_time},#{end_time},
-		#{total_cost},#{require},#{status},#{extra_num},#{reserver_name},#{reserver_phone},#{reserver_email},sysdate)
+			#{total_cost},#{require},#{status},#{extra_num},#{reserver_name},#{reserver_phone},#{reserver_email},sysdate)
 	</insert>
-
+	
 	<select id="getMaxR_code" resultType="int">
-		select max(r_code) from
-		reserve
+		select max(r_code) from reserve
 	</select>
-
-	<select id="getReserveDetail" resultType="reserve"
-		parameterType="int">
-		select r.* , room.ROOM_NAME
-		from reserve r, room
-		where r.r_code = #{r_code}
-		and r.room_code=room.room_code
+	
+	<select id="getReserveDetail" resultType="reserve" parameterType="int">
+			select r.* , room.ROOM_NAME 
+			from reserve r, room 
+			where r.r_code = #{r_code}
+			and r.room_code=room.room_code
 	</select>
-
+	
 	<insert id="insertFood_reserve" parameterType="food_reserve">
-		insert into
-		food_reserve
+		insert into food_reserve
 		values(#{r_code},#{food_code},#{count},#{food_total_cost})
 	</insert>
-
-	<select id="getFood_reservelist" parameterType="int"
-		resultType="food_reserve">
+	
+	<select id="getFood_reservelist" parameterType="int" resultType="food_reserve">
 		select fr.*, food.food_name from food_reserve fr,food
-		where
-		r_code=#{r_code}
+		where r_code=#{r_code}
 		and fr.food_code=food.food_code
 	</select>
-
+	
 	<!-- 나의 후기 검색관련 -->
 	<select id="getSearchList" parameterType="map"
 		resultType="review">
@@ -96,4 +87,14 @@
 	<select id="reviewDetail" parameterType="int" resultType="review">
 	select * from review where review_code=#{num}
 	</select>
+	
+  <!--날짜별 예약된 시간 불러오기-->
+	<select id="getReserve_timelist" parameterType="map" resultType="reserve">
+		select start_time ,end_time
+		from reserve 
+		where reserve_date = #{search_date}
+		and room_code = #{room_code}
+	</select>
+
 </mapper>
+

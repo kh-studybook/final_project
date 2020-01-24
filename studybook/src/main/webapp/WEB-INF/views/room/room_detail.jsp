@@ -14,11 +14,14 @@
 <script src="resources/js/jsCalendar.js"></script>
 <script src="resources/js/swiper.min.js"></script>
 <script src="resources/js/room_detail.js"></script>
+
 </head>
 <body>
 <form action="room_reserve_page.re" method="post">
 		<input type="hidden" name="room_code" id="room_code" value="${room.ROOM_CODE }">
+		<c:if test="${!empty mem_key}">
 		<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
+		</c:if>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7">
@@ -119,7 +122,7 @@
 									</span></li>
 
 									<li><span class="e_tit">예약시간</span> <span class="e_data">
-											최소 1시간 부터 </span></li>
+											최소 ${room.MIN_HOUR }시간 부터 </span></li>
 
 									<li><span class="e_tit">예약인원</span> <span class="e_data">최소
 											${room.MIN_MEMBER }명~최대 ${room.MAX_MEMBER }명 </span></li>
@@ -153,7 +156,7 @@
 								</h2>
 
 									
-								<div id="my-calendar" date-format="yyyy-##-dd"></div>									
+								<div id="my-calendar"></div>									
 								
 								
 							</div>
@@ -223,7 +226,7 @@
 										<div class="e_price_div">
 											<span class="e_price_name">추가 인원(<span name="extra_num_span" id="extra_num_span">0</span>명)</span> 
 											<span class="e_price"><span name="extra_num_price" id="extra_num_price">0</span>원</span>
-											<input type="hidden" name="extra_num" id="extra_num">
+											<input type="hidden" name="extra_num" id="extra_num" value="0">
 										</div>
 										<hr>
 										<div class="e_price_div">
@@ -282,6 +285,7 @@
 	   	  min : "now",
   	  max : false  
   	});
+  
  
   function formatDate(date) {
   	var weekName = ["일", "월", "화", "수", "목", "금", "토"];
@@ -300,15 +304,25 @@
 		}
   
  		myCalendar.onDateClick(function(event, date){
- 		
- 	 	
- 		if(date<"now"){
- 			alert("다음날짜를 골라주세요");
- 		}
-  	 $("#reserve_date_span").text(formatDate(date));
-  	 $("#reserve_date").val(formatDate(date));
-  	 myCalendar.clearselect();
-  	 myCalendar.select([date]);
+ 			$(".swiper-container").css("visibility","visible");
+ 	 		console.log("클릭한 날짜 :"+formatDate(date))
+ 	 		var today=new Date();
+ 	 		console.log("오늘:"+formatDate(today))
+ 				if(formatDate(date)<formatDate(today)){
+ 					alert("오늘 이후를 골라주세요");
+ 					location.reload();
+ 					}
+  				$("#reserve_date_span").text(formatDate(date));
+  	 			$("#reserve_date").val(formatDate(date));
+  	 			myCalendar.clearselect();
+  				myCalendar.select([date]);
+  				//날짜별로 예약되어있는 시간 알아내기
+  				var search="room_code="+${room.ROOM_CODE}+"&search_date="+formatDate(date).substring(0,10);
+  				reserve_ajax(search);
+  				
+  				var d = new Date();
+  				
+  				
   	 
   	});
 </script>

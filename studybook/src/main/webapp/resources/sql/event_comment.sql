@@ -1,3 +1,4 @@
+
 create table event_comment(
 	event_com_num number(10) constraint event_com_num primary key, -- 이벤트 댓글 번호
 	mem_key number(10) not null constraint event_comment_mem_key references member(key),
@@ -17,3 +18,4 @@ drop table event_comment;
 select * from event_comment;
 create sequence event_com_seq;
 drop sequence event_com_seq;
+
