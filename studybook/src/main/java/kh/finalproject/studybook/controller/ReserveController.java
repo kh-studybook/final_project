@@ -106,20 +106,25 @@ public class ReserveController {
 		int room_price = reserve.getTotal_cost();
 		System.out.println("룸 비용 : " + reserve.getTotal_cost());
 
-		System.out.println("음식 갯수 : " + food_total_cost.size());
+		
 		int food_price = 0;
-		for (int i = 0; i < food_total_cost.size(); i++) {
-			food_price += food_total_cost.get(i);
+		if(count!=null) {
+			System.out.println("음식 갯수 : " + count.size());
+			for (int i = 0; i < food_total_cost.size(); i++) {
+				food_price += food_total_cost.get(i);
+				}
+		
+			mv.addObject("food_code", food_code);
+			mv.addObject("count", count);
+			mv.addObject("food_total_cost", food_total_cost);
 		}
+		
 		System.out.println("음식 총액 : " + food_price);
 		int room_food_total_price = room_price + food_price;
 		System.out.println("총 금액: " + room_food_total_price);
 
 		System.out.println("room_code="+reserve.getRoom_code());
 		mv.addObject("reserve", reserve);
-		mv.addObject("food_code", food_code);
-		mv.addObject("count", count);
-		mv.addObject("food_total_cost", food_total_cost);
 		mv.addObject("room_food_total_price", room_food_total_price);
 		mv.setViewName("room/pay");
 		
@@ -134,11 +139,11 @@ public class ReserveController {
 			@RequestParam(value = "food_total_cost", required = false) List<Integer> food_total_costs, ModelAndView mv) {
 		
 		System.out.println("예약완료 페이지");
-		
-		reserve.setReserve_date(reserve.getReserve_date().substring(0, 9));
+		System.out.println(reserve.getReserver_phone());
+		reserve.setReserve_date(reserve.getReserve_date().substring(0, 10));
 		int result=reserveservice.insertReserve(reserve);
 		if(result==1) {
-		
+			if(counts!=null) {
 			for(int i=0;i<food_codes.size();i++) {
 				Food_reserve fr=new Food_reserve();
 				fr.setR_code(reserve.getR_code());
@@ -146,6 +151,8 @@ public class ReserveController {
 				fr.setCount(counts.get(i));
 				fr.setFood_total_cost(food_total_costs.get(i));
 				reserveservice.insertFood_reserve(fr);
+				
+				}
 			}
 		
 		int r_code=reserveservice.getR_code();		
@@ -217,8 +224,16 @@ public class ReserveController {
 		return mv;
 
 	}
-
 	// 지은 끝
 
+	//은지- 날짜별 예약된 시간체크
+	@ResponseBody
+	@RequestMapping(value="reserve_time_check.re")
+	public Object reserve_time_check(String search_date,int room_code) {
+		
+		List<Reserve> reservelist=reserveservice.getReserve_timelist(search_date,room_code);
+		
+		return reservelist;
+	}
 
 }

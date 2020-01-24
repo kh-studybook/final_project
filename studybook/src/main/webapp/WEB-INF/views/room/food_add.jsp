@@ -36,7 +36,7 @@
 								<img src="resources/image/food/${food.food_pic }" height="420" width="327">
 							</div>
 							<div class="e_product-info">
-								<input type="hidden" name="food_code_info" value="${status.index}">
+								<input type="hidden" name="food_code_info" value="${food.food_code }">
 								<div class="e_product-text">
 									<h1 name="product_text">${food.food_name }</h1>		
 								</div>

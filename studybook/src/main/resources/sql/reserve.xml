@@ -72,5 +72,12 @@
 		from review where mem_key=#{key}
 
 	</select>
+	
+	<select id="getReserve_timelist" parameterType="map" resultType="reserve">
+		select start_time ,end_time
+		from reserve 
+		where reserve_date = #{search_date}
+		and room_code = #{room_code}
+	</select>
 
 </mapper>

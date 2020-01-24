@@ -1,5 +1,3 @@
-
-
 $(document).on(
 			'click',
 			'.number-spinner button',
@@ -125,22 +123,7 @@ $(document).on(
 		 } //function end
 	
 	$(document).ready(function(){
-		
-		var d = new Date();
-		var now_hour=d.getHours();
-		console.log("현재시간:"+now_hour)
-		$('.swiper-wrapper input[name=time_slide]').each(function(){
-			var hour=this.value;
-				console.log(hour)
-			if (parseInt(hour) < parseInt(now_hour)) { 
-				console.log("지금 시간보다 이른 시간:"+this.value)
-				$(this).parent().addClass("not_active");
-
-
-				} 
-			});
-		
-		
+		$(".swiper-container").css("visibility","hidden");
 		 go(1);
 		
 		var mem_key=$("#mem_key").val();
@@ -149,11 +132,13 @@ $(document).on(
 		$(".swiper-slide").click(function(){
 			
 			if(time_check==0){
+
+				if($(".swiper-slide").hasClass("not_active")==false){
+					$(".swiper-slide").css("background","#57D7D5");
+					$(".swiper-slide").css("color","black");
+				}
 				
-				$(".swiper-slide").css("background","#57D7D5");
-				$(".swiper-slide").css("color","black");
 				$(".swiper-wrapper").find('input').removeAttr('name');
-				
 				var time=$(this).find($("input")).val();
 				console.log("시작시간"+time)
 				$(this).css("background","#855FD4");
@@ -178,6 +163,10 @@ $(document).on(
 				
 					for(var i=parseInt(start_time);i<=parseInt(end_time);i++){
 						console.log("for문의 i값="+i)
+						if($(".swiper-slide").find($("input[id="+i+"]")).parent().hasClass("not_active")==true){
+							alert("이미 예약된 시간을 포함하였습니다.\n다시 골라주세요!");
+							location.reload();
+						}
 						console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
 						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
 						$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
@@ -194,7 +183,42 @@ $(document).on(
 			location.href="room_reserve.re";
 		})
 		
-		
 	});
  
 	
+	function reserve_ajax(data) {
+		   console.log(data)
+		    $.ajax({
+  			      type : "POST",
+  			      data : data,
+  			      url : "reserve_time_check.re",
+  			      dataType : "json",
+  			      cache : false,
+  			      success : function(data) {
+  			    	  console.log(data)
+  			      
+  			         if (data!=null) { // 총갯수가 0개이상인 경우
+  	
+  			            $(data).each(
+  			               function(index, item) {
+  			            	 $('.swiper-wrapper input[name=time_slide]').each(function(){
+  			       					var hour=this.value;
+  			       					console.log(hour)
+  			       					if (parseInt(hour) >= parseInt(item.start_time) 
+  			       							&& parseInt(hour) <= parseInt(item.end_time)) { 
+  			       					console.log("예약되어있는 시간:"+this.value);
+  			       					$(this).parent().addClass("not_active");
+  			       								}
+  			       				}) ;
+  			               }
+  			              )
+  			       }else {
+  			            	console.log("예약되어있는 시간이 없다. == 모든 시간 예약 가능");
+  			         }
+  			      }, //success end
+  			      error : function() {
+  			         console.log('에러')
+  			      }
+  			   });// ajax end
+		  
+		   }

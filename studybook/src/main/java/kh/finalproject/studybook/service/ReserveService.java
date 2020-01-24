@@ -23,5 +23,6 @@ public interface ReserveService {
 	public List<Review> getSearchList(int page, int limit, int key);
 	//나의 리뷰 리스트 카운트 조회
 	public int getSearchListCount(int key);
+	public List<Reserve> getReserve_timelist(String search_date, int room_code);
 
 }

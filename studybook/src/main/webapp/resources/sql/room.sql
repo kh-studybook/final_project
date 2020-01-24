@@ -10,7 +10,7 @@ create table room(
 	fac_intro varchar2(4000) not null,
 	hashtag varchar2(1000) not null
 );
-
+alter table room add min_hour number(10) not null;
 
 drop table room;
 

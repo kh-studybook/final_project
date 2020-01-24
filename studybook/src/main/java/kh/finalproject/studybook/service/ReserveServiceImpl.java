@@ -96,6 +96,15 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getSearchListCount(int key) {
 		return reserveDAO.getReviewSearchListCount(key);
 	}
+
+	@Override
+	public List<Reserve> getReserve_timelist(String search_date, int room_code) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("search_date",search_date);
+		map.put("room_code", room_code);
+		return reserveDAO.getReserve_timelist(map);
+	}
 	
 	//지은 끝
 }
