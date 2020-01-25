@@ -80,6 +80,7 @@
 					<input type="hidden" name="reserve_date" value="${reserve.reserve_date }">
 					<input type="hidden" name="start_time" value="${reserve.start_time }">
 					<input type="hidden" name="end_time" value="${reserve.end_time }">
+					<input type="hidden" name="extra_num" value="${reserve.extra_num }">
 				
 				<div class="e_total_price_div">
 					<span class="e_total_name">공간 예약 금액</span>
