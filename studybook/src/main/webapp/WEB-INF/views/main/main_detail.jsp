@@ -207,9 +207,15 @@
 	                            	<div class="row">
 	                            	<c:forEach var="list" items="${eventlist}" varStatus="status">
 	                                	<div class="col-md-4">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
+		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?num=${list.event_num}'">
+			                                   	<img class="col-md" src="resources/upload/${list.event_pic}">
+			                                    <div class="col-md j_event_inner">
+					                                <div class="j_event_name">${list.title}</div>
+					                                <br><br><br>
+					                                <div class="j_event_date">${list.event_date},</div>
+					                                <div class="j_event_date">${list.event_room}</div>
+				                                </div>
+		                                    </div>
 	                                    </div>
 	                                <c:if test="${status.last}">
 	                                </div>
