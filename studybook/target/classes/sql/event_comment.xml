@@ -35,11 +35,20 @@
 		</insert>
 	
 		<delete id = "delete" parameterType = "int">
-			delete event_comment where num = #{num}
+			delete event_comment where event_com_num = #{event_com_num}
 		</delete>
 	
 		<update id = "update" parameterType = "event_comment">
-			update event_comment set content=#{com_content} where num = #{num}
+			update event_comment set com_content=#{com_content} where event_num = #{event_num} and event_com_num = #{event_com_num}
 		</update>
+		
+		<select id = "commentWriter" resultType = "String">
+			select name from member where key = #{mem_key}
+		</select>
+		
+		<insert id = "replyreply" parameterType = "event_comment">
+			
+		</insert>
+		
 	
 </mapper>

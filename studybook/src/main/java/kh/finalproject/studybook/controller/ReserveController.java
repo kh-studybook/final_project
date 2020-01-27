@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
+import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
@@ -317,6 +319,54 @@ public class ReserveController {
 		mv.setViewName("room/reserve_cancel_page");
 		return mv;
 	}
+	
+	/** 선아 시작*/
+	//내 예약 확인 페이지로 이동
+	@RequestMapping("reservePage.re")
+	public ModelAndView reserPagemove(@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
+			ModelAndView mv, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		
+		try {
+			//현재 세션에서 mem_key 가져오기
+			Member member = (Member)session.getAttribute("member");
+			int mem_key = member.getKey();
+			
+			//사진 가져오기
+			List<Gallery> room_picture = reserveservice.getRoomPicture(mem_key);
+				
+			int limit = 10;//기본으로 10개의 글을 보여줌
+			int listcount = reserveservice.getReserveListCount(mem_key);// 총 리스트를 받아옴
+		
+			int maxpage = (listcount + limit - 1)/limit;
+			int startpage = ((page - 1)/10) * 10 + 1;
+			int endpage = startpage + 10 - 1;
+		
+			if (endpage > maxpage){endpage = maxpage;}		
+		
+			List<Reserve> reservelist = reserveservice.getReserveList(page, limit);
+			mv.setViewName("room/reserve_list");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("reservelist", reservelist);
+			mv.addObject("limit", limit);
+			//현재 mem_key 보내기
+			mv.addObject("mem_key", mem_key);
+			mv.addObject("room_picture", room_picture);
+			return mv;
+		} catch (NullPointerException e) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+		    out.println("alert('로그인이 필요합니다.');");
+		    out.println("location.href = 'login.mem';");
+		    out.println("</script>");
+		}
+		return null;
+	}
+
 
 }
 

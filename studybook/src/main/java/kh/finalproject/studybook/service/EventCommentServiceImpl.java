@@ -33,4 +33,15 @@ public class EventCommentServiceImpl implements EventCommentService {
 		return dao.Event_commentsUpdate(co);
 	}
 
+	@Override
+	public int Event_commentReply(Event_comment co) {
+		return dao.Event_commentReply(co);
+	}
+
+	@Override
+	public String getEvent_commentWriter(int mem_key) {
+		return dao.Event_commentWriter(mem_key);
+	}
+
+
 }

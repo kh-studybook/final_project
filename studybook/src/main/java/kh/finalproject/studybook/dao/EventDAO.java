@@ -73,5 +73,14 @@ public class EventDAO {
 	public int Event_commentsUpdate(Event_comment co) {
 		return sqlSession.update("event_comment.update", co);
 	}
+
+	public int Event_commentReply(Event_comment co) {
+		return sqlSession.insert("event_comment.replyreply", co);
+	}
+
+	public String Event_commentWriter(int mem_key) {
+		return sqlSession.selectOne("event_comment.commentWriter", mem_key);
+	}
+
 	
 }

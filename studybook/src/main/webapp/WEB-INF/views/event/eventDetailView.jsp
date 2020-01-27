@@ -4,46 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>EventDetailView.jsp</title>
-<style>
-	/** a 태그 관련!!!! */
-	.p_locate{text-decoration:none; font-size:12px;}
-	
-	/** 글자 관련 */
-	.event_title_view{font-family:"맑은 고딕"; font_size:32px; text-align:center}
-	#event_comment_text{font-weight:bold;font-family:"맑은 고딕"; font-size:18px;}
-	.p_title{font-family:"맑은 고딕"; text-align:center; font-size:32px; maxLength:20}
-	
-	/** 위치 관련 */
-	.motifyEvent{text-align:right;}
-	
-	/** 이미지 관련 */
-	.p_avatar{width:300px; height:200px;}
-	.img_avatar{display:block; margin:0 auto}
-	
-	/**  모달 관련 */
-	.p_modal-title {font_size: 36px;font-weight: bold;}
-	
-	/** 버튼 관련*/
-	#p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
-		color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
-	#delete_modify_btn{padding:10px; z-index:10; float:right;}
-	#delete_modify_btn:after{clear:both}
-	#event_modify_btn, #event_modify_btn{color:black}
-	#event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-	#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-	#event_delete_btn:visited{color:black}
-	
-	/** comment 관련 */
-	#event_comment_write{background-color:#7F56D2; border:0px; opacity:0.8; color:white; width:20%;}
-	#event_comment_write:hover{opacity:1}
-	#comment_content{width:80%;}
-	#eventCommentModify:hover, #eventCommentDelete:hover{color:#7F56D2; text-decoration:none; cursor:pointer}
-	#message{padding-top:10px;}
-	.comment_btn{float:right; display:flex}
-	.pt{padding-left:5px; padding-right:5px}
-	.reply_img{float:right}
-		
-</style>
+<link rel="stylesheet" type="text/css" href="resources/css/eventDetailView_css.css" />
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src = "https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <script>
@@ -62,11 +23,11 @@ $(function(){
 		$("input[name=event_num]").val(event_num);
 		console.log(event_num);
 	
-	$(".deletemodalSubmit").click(function(){
-		console.log("delete");
-		location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
-			});
+		$(".deletemodalSubmit").click(function(){
+			console.log("delete");
+			location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
 		});
+	});
 	
 	
 	/** comment 시작*/
@@ -89,27 +50,120 @@ $(function(){
 					output = '';
 					$(rdata).each(function(){
 						comment_btn = '';
-						//현재 접속한 mem_key와 글쓴 men_key가 같을 때
-						if("${mem_key}" == '999' || mem_key == key){
-							comment_btn = "<span class = 'comment_btn'><a id = 'eventCommentModify' class='update'>수정</a><span class = 'pt'>|</span> "
-							+ "<a id = 'eventCommentDelete' class='remove'>삭제</a></span> "
-							+ "<input type = 'hidden' value = '" + this.event_num + "'> "
-							+ "<input type = 'hidden' value = '" + this.event_com_num + "' > ";									 
+						//현재 접속한 mem_key가 관리자이거나, 글쓴 men_key가 같을 때
+						if("${mem_key}" == '999' || "${mem_key}" == this.mem_key){
+							comment_btn = "<span class = 'comment_btn'><a id = 'eventCommentModify' class='updateComment'>수정</a><span class = 'pt'>|</span> "
+							+ "<a id = 'eventCommentDelete' class='removeComment'>삭제</a> "
+							+ "<input type = 'hidden' class = 'event_num' value = '" + this.event_num + "'> "
+							+ "<input type = 'hidden' id = 'event_com_num' value = '" + this.event_com_num + "' ></span> ";									 
 						} 
+									
 						
-						output += "<div><span>" + this.mem_key + comment_btn + "</span><br>";
+						output += "<div><span>" + ${commentWriter} + comment_btn + "</span><br>";
 						output += "<span>" +  moment(this.com_date).format("YYYY-MM-DD HH시 mm분 ss") + "</span><br><br>";
-						output += "<span style = 'max-width:960px; word-break:break-all;'>" + this.com_content + "</span>"
+						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + this.com_content + "</span>"
 						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
 					});
 					$("#comment_form").append(output);
+					$("#comment_content").empty();
 				} else {
 					$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
 					$("#comment_content").empty();
+					$("#comment_form").hide();
 				}
+				
+				//등록 또는 수정완료 버튼을 클릭한 경우
+				//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
+				//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
+				$("#event_comment_write").click(function(){
+					//댓글 등록
+					if ($("#event_comment_write").text() == "댓글 등록"){
+						url = "Event_commentAdd.eve";
+						data = {"com_content" : $("#comment_content").val(),
+								"mem_key" : $("#mem_key").val(),
+								"event_num" : $("#event_num").val()};
+						
+						$.ajax({
+							type : "post",
+							url : url,
+							data : data,
+							success : function(result){
+								if (result == 1){
+									console.log("등록한 event_com_num = " + $("#event_com_num").val());
+									$("#comment_content").val('');
+									getList();
+								}
+							}
+						});//ajax end						
+					} 
+					//댓글 수정
+					else if ($("#event_comment_write").text() == "댓글 수정") {
+						url = "Event_commentUpdate.eve";
+						data = {"event_num" : $("#event_num").val(),
+								"event_com_num" : event_com_num,
+								"com_content" : $("#comment_content").val()}
+						
+					$.ajax({
+						type : "post",
+						url : url,
+						data : data,
+						success : function(result){
+							if (result == 1){
+								$("#event_comment_write").text("댓글 등록").css("background-color", "#7F56D2");
+								$("#comment_content").val('');
+								getList();
+							}
+						}
+					});//ajax end	
+					
+					}
+				});//write end
+				
+				
+				//댓글 수정하기
+				$(".updateComment").click(function(){
+					if (confirm("댓글을 수정합니다.")){
+						$("#event_comment_write").text("댓글 수정");
+						$("#event_comment_write").css('backgroundColor', "#20B2AA");
+						before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
+						$("#comment_content").focus().val(before);//원래 글 가져오기
+						event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
+					}
+				});//수정하기 end
+				
+				
+				//댓글 삭제하기
+				$(".removeComment").click(function(){
+					if (confirm("댓글을 삭제합니다.")){
+						var event_com_num = $(this).next().next().val();//댓글 번호
+						console.log("삭제한 event_com_num = " + event_com_num);
+						
+						$.ajax({
+							type : "post",
+							url : "Event_commentDelete.eve",
+							data : {"event_com_num" :  event_com_num},
+							success : function(result){
+									if (result == 1) {
+										alert("댓글을 삭제했습니다.");
+										getList();
+									}																		
+							}
+						})//ajax end
+						
+					}//if end
+				});//삭제하기 end
+				
+				
+				//대댓글 달기
+				$(".reply_img").click(function(){
+					var event_com_num = $(this).next().next().val();//댓글 번호
+					
+				});//대댓글 달기 end
+				
 		}
-		});
-	}//getList end	
+		});		
+		
+	};//getList end	
 
 	autosize($("#comment_content"));
 	
@@ -117,56 +171,11 @@ $(function(){
 	$("#comment_content").on('input', function(){
 		length = $(this).val().length;
 		if (length > 4000) {
-			alert("댓글은 4000자까지 가능합니다.");
+			alert("댓글은 4000자까지 가능합니다.\n현재 입력된 글자수는 " + length + "입니다.");
+			return false;
 		}
 	});//content input end
 	
-	//등록 또는 수정완료 버튼을 클릭한 경우
-	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
-	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
-	$("#event_comment_write").click(function(){
-		content = $("#comment_content").val();
-		event_num = $("#event_num").val();
-		url = "Event_commentAdd.eve";
-		data = {"com_content" : content,
-				"mem_key" : $("#mem_key").val(),
-				"event_num" : event_num};		
-
-		$.ajax({
-			type : "post",
-			url : url,
-			data : data,
-			success : function(result){
-				$("#comment_content").val('');
-				getList();
-			}
-		});//ajax end
-		
-	});//write end
-	
-	//pencil2.png를 클릭하는 경우(수정)
-	$("#eventCommentModify").on('click', '.update', function(){
-		before = $(this).parent().prev().text();
-		$("#comment_content").focus().val(before);
-		num = $(this).next().next().val();//수정할 댓글번호를 저장
-		$(this).parent().parent().css('background', 'lightgray');
-	});//pendil2 end
-	
-	//remove.png를 클릭하는 경우
-	$("#eventCommentDelete").on('click', 'remove', function(){
-		var num = $(this).next().val();//댓글 번호
-		
-		$.ajax({
-			type : "post",
-			url : "Event_commentDelete.eve",
-			data : {"event_com_num" :  event_com_num},
-			success : function(result){
-				if (result == 1) {
-					getList();
-				}
-			}
-		})
-	})//remove end	
 	
 });
 </script>
@@ -176,7 +185,7 @@ $(function(){
 	<div class = "container">
 	<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
 	<input type = "hidden" id = "key" name = "key" value = "${key}">
-	<input type = "hidden" id = "event_num" name = "event_num" value = "${eventdata.event_num}">
+	<input type = "hidden" id = "event_num" class = "event_num" name = "event_num" value = "${eventdata.event_num}">
 	<!-- 상단 메뉴 -->
    	<div class="row p_locate">
       <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 상세 페이지</span></div>

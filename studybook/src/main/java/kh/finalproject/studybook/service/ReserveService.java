@@ -5,6 +5,7 @@ import java.util.List;
 
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
+import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
@@ -30,6 +31,13 @@ public interface ReserveService {
 	public Review getReviewDetail(int review_code);
 	public List<Reserve> getReserve_timelist(String search_date, int room_code);
 	public int reserve_cancel(int r_code);
+	
+	//선아 - 예약 내역 리스트 수 구하기
+	public int getReserveListCount(int mem_key);
+	//예약 내역 리스트 가져오기
+	public List<Reserve> getReserveList(int page, int limit);
+	//방 사진 가져오기
+	public List<Gallery> getRoomPicture(int mem_key);
 
 }
 

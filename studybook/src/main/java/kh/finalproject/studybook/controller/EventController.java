@@ -67,11 +67,13 @@ public class EventController {
 		      int month=c.get(Calendar.MONTH) + 1 ;
 		      int date=c.get(Calendar.DATE);
 		      
-		    String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
+		    //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
 			/*
 			 * String saveFolder=
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
+		      String saveFolder = "C:\\Users\\박선아\\git\\final_project[0125]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
+		      
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -159,12 +161,13 @@ public class EventController {
 			//현재 세션에서 mem_key 가져오기
 			Member member = (Member)session.getAttribute("member");
 			int mem_key = member.getKey();
+			System.out.println("현재 세션 사용자 = " + mem_key);
 			//작성자 키 값 가져오기
 			int key = eventservice.getEventWriterNum(num);			
 			
 			//작성자 가져오기
 			String event_writer = eventservice.getEventWriter(num);
-			System.out.println(event_writer);
+			System.out.println("게시글 작성자  = " + event_writer);
 			
 			if (event == null) {
 				System.out.println("상세보기 실패");
@@ -175,9 +178,9 @@ public class EventController {
 				System.out.println("상세보기 성공");				
 				mv.setViewName("event/event_view");
 				mv.addObject("eventdata", event);
-				mv.addObject("event_writer", event_writer);
-				mv.addObject("mem_key", mem_key);
-				mv.addObject("key", key);
+				mv.addObject("event_writer", event_writer);//게시글 작성자
+				mv.addObject("mem_key", mem_key);//현재 mem_key(현재 사용자)
+				mv.addObject("key", key);//게시글 작성자 key 값
 			}				
 			return mv;
 		}//EventDetailAction.eve end
@@ -324,15 +327,18 @@ public class EventController {
 		//댓글 가져오기
 		@ResponseBody
 		@RequestMapping("Event_commentList.eve")
-		public List<Event_comment> Event_commentList(int event_num){
-			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);
-			return list;
+		public ModelAndView Event_commentList(int event_num, int mem_key, ModelAndView mv, HttpServletRequest request, HttpSession session){
+			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);			
+			String commentWriter = eventEvent_commentservice.getEvent_commentWriter(mem_key);		
+			mv.addObject("commentWriter", commentWriter);
+			mv.addObject("list", list);
+			return mv;
 		}
-		
+			
 		//댓글 추가하기
 		@PostMapping(value = "Event_commentAdd.eve")
 		public void Event_commentAdd(Event_comment co, HttpServletResponse response) throws Exception{
-			System.out.println(co.getEvent_num());
+			System.out.println("co.getEvent_num() = " + co.getEvent_num());
 			int ok = eventEvent_commentservice.Event_commentsInsert(co);
 			response.getWriter().print(ok);
 		}
@@ -351,5 +357,12 @@ public class EventController {
 			response.getWriter().print(ok);
 		} 
 		
+		//대댓글 달기
+		@RequestMapping("Event_commentReply.eve")
+		public void Event_commentReply(Event_comment co, HttpServletResponse response) throws Exception {
+			int ok = eventEvent_commentservice.Event_commentReply(co);
+			response.getWriter().print(ok);
+			
+		}
 		
 }

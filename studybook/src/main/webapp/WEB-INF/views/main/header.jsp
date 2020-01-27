@@ -70,7 +70,7 @@
 		            <img src="resources/image/profile/default.png">
 		            </c:if>
 		            <c:if test="${member.profile != ''}">
-		            <img src="resources/image/profile/${member.profile}">
+		            <img src="resources/image/profile${member.profile}">
 		            </c:if>
               	</div>
                 <div class="j_menu_login">
@@ -82,7 +82,7 @@
          </div>
       </div>
       <div class="j_menu_orgs">
-         <div class="j_menu_org" onClick="#">
+         <div class="j_menu_org" onClick="javascript:location.href = 'reservePage.re'">
             <div><i class="far fa-list-alt"></i></div>
             <div>예약 관리</div>
          </div>

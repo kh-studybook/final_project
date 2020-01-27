@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
+import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
@@ -90,5 +91,15 @@ public class ReserveDAO {
 		return sqlSession.update("Reserves.reserve_cancel",r_code);
 	}
 	
+	//선아 시작
+	public int getReserveListCount(int mem_key) {
+		return sqlSession.selectOne("Reserves.reserveListCount", mem_key);
+	}
+	public List<Reserve> getReserveList(HashMap<String, Integer> map) {
+		return sqlSession.selectList("Reserves.reservelist", map);
+	}
+	public List<Gallery> getRoomPicture(int mem_key) {
+		return sqlSession.selectList("Reserves.reserveRoomPicture", mem_key);
+	}
 
 }
