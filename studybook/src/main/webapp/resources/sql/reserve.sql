@@ -50,3 +50,8 @@ insert into reserve values (1006,999,8,'2019/02/14','14','16',
 8000,'꽃보다 할배 모임',
 1,2,'이서진','01014545124','love@studybook.com','2019/2/14')
 
+		select * from (	
+			select file_name from 
+			(select * from member m, reserve r, gallery g
+			where  m.key = r.mem_key and r.room_code = g.room_code)
+		where mem_key = 1)

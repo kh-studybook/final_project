@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kh.finalproject.studybook.dao.ReserveDAO;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
+import kh.finalproject.studybook.domain.Gallery;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
 import kh.finalproject.studybook.domain.ReviewInfo;
@@ -128,6 +129,26 @@ public class ReserveServiceImpl implements ReserveService {
 		return reserveDAO.reserve_cancel(r_code);
 	}
 	
+	/** 선아 시작 */
+	@Override
+	public int getReserveListCount(int mem_key) {
+		return reserveDAO.getReserveListCount(mem_key);
+	}
+
+	@Override
+	public List<Reserve> getReserveList(int page, int limit) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page - 1)*limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return reserveDAO.getReserveList(map);
+	}
+
+	@Override
+	public List<Gallery> getRoomPicture(int mem_key) {
+		return reserveDAO.getRoomPicture(mem_key);
+	}
 
 }
 

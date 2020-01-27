@@ -103,5 +103,28 @@
 		where r_code=#{r_code}
 	</update>
 
+
+	<!--  선아 : 예약 내역 개수 불러오기 -->
+	<select id = "reserveListCount" parameterType = "int" resultType = "int">
+		select count(*) from reserve where mem_key = #{mem_key}
+	</select>
+	
+	<select id = "reservelist" parameterType = "java.util.Map" resultType="reserve">
+		select * from
+			(select rownum rnum, reserve.r_code, reserve.mem_key, reserve.room_code, reserve.reserve_date, reserve.start_time, reserve.end_time, reserve.total_cost, reserve.require, 
+			reserve.status, reserve.extra_num, reserve.reserver_name, reserve.reserver_phone, reserve.reserver_email, reserve.pay_date
+   			from reserve, member 
+  			where reserve.mem_key = member.key)
+ 		where rnum &gt;= #{start} and rnum &lt;= #{end}
+      	order by reserve_date
+	</select>
+	
+	<select id = "reserveRoomPicture" parameterType = "int" resultType = "String">
+		select * from (	
+			select file_name from 
+			(select * from member m, reserve r, gallery g
+			where  m.key = r.mem_key and r.room_code = g.room_code)
+		where mem_key = #{mem_key})
+	</select>
 </mapper>
 

@@ -113,7 +113,6 @@ input[type=date]{height:3rem;}
 			$("#eventPic_image").prop("src", "resources/image/default_thumnail.png").css("opacity", 0.2);
 		});
 		
-		
 		//등록시 필수 항목 입력 여부 검사
 		$("#p_event_write_form").submit(function(){
 			if (eventcheckid == false){
@@ -132,6 +131,17 @@ input[type=date]{height:3rem;}
 				$("#event_date").focus();
 				return false;
 			}
+			//추후 확인
+	 		if ($("#event_date").val() != "") {
+				var today = new Date();
+				if (formatDate($("#event_date").val()) <  formatDate(today)) {
+					console.log(formatDate($("#event_date").val()));
+					alert("날짜는 오늘 이후여야 합니다.");
+					$("#event_date").focus();
+					return false;
+				}
+			}
+			
 						
 			if ($("#event_start option:selected").val() == "none") {
 				alert("이벤트의 시작 시간을 선택해주세요.");

@@ -26,9 +26,10 @@
 .title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-10rem; position:relative; z-index:10}
 .title_z_index_big{font-size:24px; font-weight:bold; height: 48px;}
 .card_contents{padding:10px; padding-bottom:0px; font-family:"맑은 고딕"}
+.click_detail{cursor:pointer}
 		
 /**  모달 관련 */
-.p_modal-title {font_size: 36px;font-weight: bold;}
+.p_modal-title {font_size: 36px;font-weight: bold; width:100%}
 
 /** 페이지 네이션*/
 .center-block {display: flex;justify-content: center}

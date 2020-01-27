@@ -12,5 +12,9 @@ public interface EventCommentService {
 	int Event_commentsDelete(int event_com_num);
 	//댓글 수정
 	int Event_commentsUpdate(Event_comment co);
+	//대댓글 달기
+	int Event_commentReply(Event_comment co);
+	//댓글 작성자 가져가기
+	String getEvent_commentWriter(int mem_key);
 
 }
