@@ -18,7 +18,26 @@ public class Reserve {
 	
 	//룸이름만 필요
 	private String room_name;
+	//어드민 필요
+	private int count;
+	private int food_code;
 	
+	
+	
+	
+	
+	public int getFood_code() {
+		return food_code;
+	}
+	public void setFood_code(int food_code) {
+		this.food_code = food_code;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getRoom_name() {
 		return room_name;
 	}
