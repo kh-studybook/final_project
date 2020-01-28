@@ -73,7 +73,7 @@ $(document).ready(function(){
     		$('#m_main_starttime ul li').each(function(){
     			var starttime = $(this).text();
     			var hour=starttime.substring(0, starttime.length-1);
-    			if(parseInt(hour) < parseInt(now_hour)){
+    			if(parseInt(hour)-1 < parseInt(now_hour)){
     				$(this).addClass("m_black");
     			}
     		})
@@ -81,7 +81,7 @@ $(document).ready(function(){
     		$('#m_main_endtime ul li').each(function(){
     			var endtime = $(this).text();
     			var hour=endtime.substring(0, endtime.length-1);
-    			if(parseInt(hour)-1 < parseInt(now_hour)){
+    			if(parseInt(hour)-2 < parseInt(now_hour)){
     				$(this).addClass("m_black");
     			}
     		})
@@ -237,7 +237,7 @@ $(document).ready(function(){
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
 	    } 
-	});//카카오지도 api 끝   
+	});//카카오지도 api 끝
 })//ready() end
 
 	function setPaging(href, digit){
