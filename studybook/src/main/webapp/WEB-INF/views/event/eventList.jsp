@@ -48,7 +48,8 @@
 		//게시글 상세보기로 이동하기
 		$(".click_detail").click(function(){
 			var event_num = $(this).find($("input[name=event_num2]")).val();
-			location.href = "EventDetailAction.eve?num="+parseInt(event_num);
+			console.log("event_num = " + event_num);
+			location.href = "EventDetailAction.eve?event_num=" + parseInt(event_num) ;
 		});
 		
 		///이벤트 삭제하기
@@ -59,7 +60,7 @@
 			
 			$(".deletemodalSubmit").click(function(){
 				console.log("delete");
-				location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
+				location.href = "EventDeleteAction.eve?event_num=" + parseInt(event_num);
 			});
 		});
 		
@@ -101,7 +102,7 @@
 							    <div class="front">
       								<div class = "card-img">
       									<div style = "filter: brightness(80%)">
-        									<img class="card-img-top" src="resources/upload${b.event_pic}">
+        									<img class="card-img-top" src="resources/upload/${b.event_pic}">
         								</div>
         								<br><br>
         								<div class = "title_z_index"><p class = "title_z_index_big">${b.title}</p><br>

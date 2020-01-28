@@ -57,8 +57,8 @@ public class EventDAO {
 	}
 	
 	/** Comment 관련*/
-	public List<Event_comment> getEvent_commentList(int event_num) {
-		return sqlSession.selectList("event_comment.getList", event_num);
+	public List<Event_comment> getEvent_commentList(HashMap<String, Object> map) {
+		return sqlSession.selectList("event_comment.getList", map);
 	}
 	
 	public int Event_commentsInsert(Event_comment co) {
@@ -76,10 +76,6 @@ public class EventDAO {
 
 	public int Event_commentReply(Event_comment co) {
 		return sqlSession.insert("event_comment.replyreply", co);
-	}
-
-	public String Event_commentWriter(int mem_key) {
-		return sqlSession.selectOne("event_comment.commentWriter", mem_key);
 	}
 
 	
