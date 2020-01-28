@@ -86,6 +86,10 @@ body {
 	font-size: 18px;
 	width: 140px;
 }
+
+#contents {
+	font-size: 14px;
+}
 </style>
 
 </head>
@@ -124,9 +128,9 @@ body {
 						</div>
 						<div class="col-md-2">
 							<p class="pull-right w_btn">
-								<a id="modify_${m.review_code}" class="modify">수정</a>
-								| <a id="delete_${m.review_code}" class="delete"
-									data-toggle="modal" data-target="#deletemodal">삭제</a>
+								<a id="modify_${m.review_code}" class="modify">수정</a> | <a
+									id="delete_${m.review_code}" class="delete" data-toggle="modal"
+									data-target="#deletemodal">삭제</a>
 							</p>
 						</div>
 					</div>
@@ -225,34 +229,35 @@ body {
 	<div class="modal" id="modifymodal">
 		<div class="modal-dialog">
 			<div class="modal-content">
+				<form id=modifymodalForm action="ReviewModify.re" method="post">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title w_modal">후기 수정</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
+					</div>
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title w_modal">후기 수정</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<p>스터디룸A 사용후기</p>
-					<br>
-					<textarea class="form-control" id="contents" rows="10">
+					<!-- Modal body -->
+					<div class="modal-body">
+						<p>
+							<span id="room_name"></span> 사용후기
+						</p>
+						<br>
+						<textarea class="form-control" name="contents" id="contents" rows="10">
 				</textarea>
-				</div>
+					</div>
 
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<form id=deletemodalForm action="ReviewModify.re" method="post">
+					<!-- Modal footer -->
+					<div class="modal-footer">
+
 						<input type=hidden name=review_code value="" id=modifyReview>
 						<input type=hidden name="key" value="${member.key}" id="key">
 						<input type="submit" class="btn btn-dark" data-dismiss="modal"
-							id=deletemodalSubmit value=수정>
-					</form>
-					<input type="button" class="btn btn-light" data-dismiss="modal"
-						value=취소>
-					<!-- 닫기버튼 -->
-				</div>
+							id=ModifymodalSubmit value=수정> <input type="button"
+							class="btn btn-light" data-dismiss="modal" value=취소>
+						<!-- 닫기버튼 -->
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -277,19 +282,27 @@ body {
 			var modifycode = $(this).attr("id");
 			var review_code = modifycode.split("_")[1];
 			console.log(review_code);
+			$("#modifyReview").val(review_code);
 			$.ajax({
 				type : "post",
 				url : "reviewDetail.re",
 				data : {
 					"review_code" : review_code
 				},
-				dataType:"json",
+				dataType : "json",
 				success : function(resp) {
+					console.log(resp);
 					$("#contents").text(resp.content);
+					$("#room_name").text(resp.room_NAME);
 				}
 			})
 			$("#modifymodal").modal();
 
+		})
+
+		//수정 모달- 수정 버튼
+		$("#ModifymodalSubmit").click(function() {
+			$("#modifymodalForm").submit();
 		})
 	</script>
 </body>

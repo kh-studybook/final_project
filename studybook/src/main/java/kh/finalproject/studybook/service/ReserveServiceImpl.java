@@ -111,6 +111,45 @@ public class ReserveServiceImpl implements ReserveService {
 		return reserveDAO.reviewDetailAction(review_code);
 	}
 
+	@Override
+	public int updateReview(String contents, int review_code) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("contents", contents);
+		map.put("review_code", review_code);
+		
+		return reserveDAO.updateReviewAction(map);
+	}
+	
+	@Override
+	public List<Reserve> getSearchList(int index, String search_word, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 검색한다면
+		if (index != -1) {
+			String[] search_field = new String[] { "r_code", "room_name", "reserver_name", "reserver_phone", "reserver_email" };
+			map.put("search_field", search_field[index]);
+			map.put("search_word", "%" + search_word + "%");
+		}
+		// 검색 안한다면
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return reserveDAO.getSearchList2(map);
+	}
+
+	@Override
+	public int getSearchListCount(int index, String search_word) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 검색한 경우
+		if (index != -1) {
+			String[] search_field = new String[] {  "r_code", "room_name", "reserver_name", "reserver_phone", "reserver_email" };
+			map.put("search_field", search_field[index]);
+			map.put("search_word", "%" + search_word + "%");
+		}
+		System.out.println("RoomServiceImpl의 getSearchListCount");
+		return reserveDAO.getSearchListCount2(map);
+	}
+	
 	//지은 끝
 	
 	//날짜별로 예약되어있는 시간 찾기-은지
@@ -149,6 +188,10 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<Gallery> getRoomPicture(int mem_key) {
 		return reserveDAO.getRoomPicture(mem_key);
 	}
+
+
+
+	
 
 }
 

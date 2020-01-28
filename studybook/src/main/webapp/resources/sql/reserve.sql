@@ -21,6 +21,21 @@ delete reserve
 
 select * from reserve;
 
+select ro.room_name, rv.* from reserve rv, room ro
+
+select rownum rnum, c.* from (select * 
+from(select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc)b left outer join food_reserve fd on fd.r_code=b.r_code)c
+
+select * from
+(select rownum rnum, c.* from (select * 
+from(select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+and rv.r_code like 1006
+order by rv.r_code desc)b left outer join food_reserve fd on fd.r_code=b.r_code)c)
+where rnum >=1 and rnum <=10
+
+
+
 insert into reserve values (1004,999,2,'2019/10/30','13','15',
 26000,'요구사항',
 1,1,'우지','01020014124','admin@studybook.com','2019/10/30')
