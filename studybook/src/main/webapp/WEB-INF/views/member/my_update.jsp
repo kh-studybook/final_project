@@ -203,7 +203,6 @@ instead of next to each other */
 		<div class="s_container">
 			<form action="#">
 
-
 				<div class="row">
 					<div class="col-100">
 						<label> <input type="file" name="uploadfile"
@@ -284,9 +283,7 @@ instead of next to each other */
 		</div>
 	</div>
 	
-	
-	
-	
+
 	<!-- modal 시작! -->
 	<div class="modal" id="modalforupdate">
 		<div class="modal_dialog">

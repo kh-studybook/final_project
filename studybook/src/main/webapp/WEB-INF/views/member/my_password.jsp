@@ -61,7 +61,10 @@ input[type=checkbox] {
 	margin-bottom: 30px;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+/* Responsive layout 
+- when the screen is less than 600px wide, 
+make the two columns stack on top of each other 
+instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
@@ -132,15 +135,11 @@ input[type=checkbox] {
 	          $('.pwcheckmsg').html('비밀번호 일치함');
 	          $('.pwcheckmsg').attr('color', 'blue');
 	        }
+	   });   	   
 
-	   });
-		    	   
-      
       $(".tologin").click(function(){
 			location.href="login.mem";
 	  }); 
-      
-      
 });
    
 </script>

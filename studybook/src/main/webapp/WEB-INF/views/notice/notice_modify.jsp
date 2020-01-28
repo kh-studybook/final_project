@@ -33,6 +33,12 @@
 	});
 </script>
 <style>
+
+* {
+	box-sizing: border-box;
+	font-family: "맑은 고딕";   
+}
+
 .s_title {
 	margin-top: 230px;
 	margin-bottom: 35px;
@@ -90,10 +96,13 @@ label {
 					rows="10" class="form-control">${noticedata.NOTICE_CONTENT }</textarea>
 			</div>
 
+			<!-- 관리자한테만 보이게 test 넣기 -->
+			<c:if test="${member.name== '손연수' }">
 			<div class="form-group">
 				<button type="submit" class="submitbtn">수정</button>
 				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>
 			</div>
+			</c:if>
 		</form>
 	</div>
 </body>

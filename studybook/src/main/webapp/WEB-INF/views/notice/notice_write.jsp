@@ -38,11 +38,14 @@ h1 {
 label {
 	font-weight: bold 
 }
+
 </style>
 </head>
+
 <body>
 
-<p class=s_title></p>
+	<p class=s_title></p>
+	
 	<div class="s_container">
 		<form action="NoticeAddAction.bo" method="post"
 			enctype="multipart/form-data" name="noticeform">
