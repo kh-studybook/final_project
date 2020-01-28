@@ -40,10 +40,18 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@RequestMapping(value = "/update.mem", method = RequestMethod.GET)
 	public String my_update() {
 		return "member/my_update_index"; 
 	}
+	
+	
+	@RequestMapping(value = "/delete.mem", method = RequestMethod.GET)
+	public String my_delete() {
+		return "member/my_delete_index"; 
+	}
+
 	
 	
 	@RequestMapping(value = "/loginProcess.mem",  method = RequestMethod.POST)
@@ -53,9 +61,9 @@ public class MemberController {
 		System.out.println("결과는(key값)=" + result);
 		if (result == 0) {
 			
-			String message = "비밀번호 일치 X";
+			String message = "비밀번호가 일치하지 않습니다.";
 			if (result == -1)
-				message = "이메일 존재 X";
+				message = "존재하지 않는 이메일입니다.";
 
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -83,7 +91,7 @@ public class MemberController {
 		int result = memberservice.insert(member);
 		out.println("<script>");
 		if (result == 1) {
-			out.println("alert('test 회원가입 축하한다');");
+	//		out.println("alert('회원가입 축하');");
 			out.println("location.href='joinSuccess.mem?email=" + member.getEmail() + "&name=" + member.getName() + "';" );
 		} else if (result == -1) {
 			out.println("alert('이미 가입되어 있는 이메일입니다. 확인 후 다시 입력해주세요.');");
@@ -137,7 +145,7 @@ public class MemberController {
 	
 	
 	//delete? 
-	@RequestMapping(value="delete.mem", method = RequestMethod.GET)
+	@RequestMapping(value="deleteProcess.mem", method = RequestMethod.GET)
 	public int delete(int key, HttpServletResponse response) throws Exception {
 		int result = memberservice.delete(key);
 	
@@ -160,7 +168,7 @@ public class MemberController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('test 로그아웃♡');");
+		out.println("alert('정상적으로 로그아웃 하셨습니다.');");
 		out.println("location.href='main.net';");
 		out.println("</script>");
 		out.close();

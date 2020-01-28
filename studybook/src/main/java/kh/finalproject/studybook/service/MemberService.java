@@ -14,6 +14,4 @@ public interface MemberService {
 
 	public int delete(int key);
  
-
-
 }
