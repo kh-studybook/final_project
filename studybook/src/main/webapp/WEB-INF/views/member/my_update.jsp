@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,21 +46,21 @@ input[type=text], select, textarea {
 	float: left;
 	width: 20%;
 	margin-top: 20px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-30 {
 	float: left;
 	width: 30%;
 	margin-top: 25px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-50 {
 	float: left;
 	width: 50%;
 	margin-top: 25px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-100 {
@@ -89,59 +89,57 @@ make the two columns stack on top of each other
 instead of next to each other */
 @media screen and (max-width: 600px) {
 	{
-		width: 100%;
-		margin-top: 0;
-	}
+	width:100%;
+	margin-top:0;
 }
 
+}
 .picupdate {
 	cursor: pointer;
-	background-color:#56D7D6;
-	color:white;
-	border:0px;
+	background-color: #56D7D6;
+	color: white;
+	border: 0px;
 }
 
 .picupdate:hover {
-	opacity:70%
+	opacity: 70%
 }
 
 .s_update, .s_delete {
-	background-color:#ffffff;
-	border:0px;
-	text-decoration:none;
-	font-weight:bold;
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
 	cursor: pointer;
-	color:#56D7D6;
+	color: #56D7D6;
 }
 
 .s_update:hover, .s_delete:hover {
-	text-decoration:none;
-	border:0px;
-	color:#7F56D2;
+	text-decoration: none;
+	border: 0px;
+	color: #7F56D2;
 }
 
 .s_delete {
-	margin-bottom:50px;
+	margin-bottom: 50px;
 }
 
 .hr1 {
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 30px;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
 .hr2 {
-	margin-bottom:30px;
-	margin-top:80px;
-	width:100%
+	margin-bottom: 30px;
+	margin-top: 80px;
+	width: 100%
 }
 
-
 /*modal*/
-
 #modalforupdate {
 	display: none;
-} 
+}
 
 .modal {
 	text-align: center;
@@ -161,7 +159,6 @@ instead of next to each other */
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
-	
 }
 
 .modal_wrap {
@@ -169,8 +166,8 @@ instead of next to each other */
 	margin-top: 160px;
 	margin-left: auto;
 	width: 400px;
-    height: 300px;
-	background-color:white;
+	height: 300px;
+	background-color: white;
 }
 
 .modal_intro {
@@ -182,18 +179,44 @@ instead of next to each other */
 }
 
 .modal_title {
-	font-size:20pt;
+	font-size: 20pt;
 }
 
 .modal_text {
-	font-size:12pt;
+	font-size: 12pt;
 }
 
 #modal_phone {
-
+	
 }
-
 </style>
+
+<script>
+	$(function() {
+
+		$('.uploadfile').on('change', preview);
+
+		function preview(e) {
+			var file = e.target.files[0];//File 객체 리스트에서 첫번째 File 객체를 가져옵니다.
+
+			//파일 크기 제한
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize = file.size;
+			console.log(fileSize + " : " + maxSize);
+			if (fileSize > maxSize) {
+				alert("5MB이하 파일만 등록할 수 있습니다.\n파일 용량을 확인해주세요.");
+				return false;
+			}
+
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+
+			reader.onload = function(e) {
+				$(".uploadfile").attr("src", e.target.result).css("opacity", 1);
+			}
+		}
+	});
+</script>
 </head>
 <body>
 
@@ -205,16 +228,16 @@ instead of next to each other */
 
 				<div class="row">
 					<div class="col-100">
-						<label> <input type="file" name="uploadfile"
-							accept="image/gif, image/jpeg, image/png" style="display: none">
-								<c:if test="${member.profile == null}">
+						<label class=uploadfile> <input type="file"
+							name="uploadfile" accept="image/gif, image/jpeg, image/png"
+							style="display: none"> <c:if
+								test="${member.profile == null}">
 								<img src="resources/image/profile/default.png" alt="Avatar"
-							class="avatar">
-								</c:if>
-								<c:if test="${member.profile!= null}">
+									class="avatar">
+							</c:if> <c:if test="${member.profile!= null}">
 								<img src="resources/${member.profile}" alt="Avatar"
-							class="avatar">
-								</c:if>
+									class="avatar">
+							</c:if>
 						</label>
 					</div>
 				</div>
@@ -223,9 +246,9 @@ instead of next to each other */
 						<p>프로필 사진 변경</p>
 					</div>
 				</div>
-				
+
 				<hr class=hr1>
-				
+
 				<div class="row">
 					<div class="col-30"></div>
 					<div class="col-20">
@@ -241,21 +264,21 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="email">이메일</label>
 					</div>
-					<div class="col-50"> 
+					<div class="col-50">
 						<span id="email">${member.email}</span>
 					</div>
 				</div>
-				<div class="row">  
+				<div class="row">
 					<div class="col-30"></div>
 					<div class="col-20">
 						<label for="phone">연락처</label>
-					</div> 
+					</div>
 					<div class="col-20">
 						<span id="modal_phone">${member.phone}</span>
 					</div>
 					<div class="col-30">
 						<button data-toggle="modal" data-target="#modalforupdate"
-												class=s_update id="v1">변경하기</button>
+							class=s_update id="v1">변경하기</button>
 					</div>
 				</div>
 				<div class="row">
@@ -263,17 +286,17 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="password">비밀번호</label>
 					</div>
-					<div class="col-30">	
+					<div class="col-30">
 						<a href="updatepw.mem" class=s_update>변경하기</a>
-						
+
 					</div>
 					<div class="col-20"></div>
 				</div>
-				
-				
+
+
 				<hr class=hr2>
-				
-				
+
+
 				<div class="row">
 					<div class="col-100">
 						<a href="delete.mem" class=s_delete>계정 삭제하기</a>
@@ -282,34 +305,35 @@ instead of next to each other */
 			</form>
 		</div>
 	</div>
-	
+
 
 	<!-- modal 시작! -->
 	<div class="modal" id="modalforupdate">
 		<div class="modal_dialog">
 			<div class="modal_wrap">
-			
+
 				<!-- modal body -->
 				<div class="modal_body">
-					<form >
+					<form>
 						<div class="phoneupdate">
-						
+
 							<div class=modal_intro>
 								<p class=modal_title>연락처 변경</p>
 								<p class=modal_text>변경할 전화번호를 입력하세요.</p>
 							</div>
-							
+
 							<div class="modal_content">
-								<input type="text" id="phone" name="phone" placeholder="${member.phone}">
-								<span style="color: #141414; font-size: 10pt;" id="counter"></span>
+								<input type="text" id="phone" name="phone"
+									placeholder="${member.phone}"> <span
+									style="color: #141414; font-size: 10pt;" id="counter"></span>
 							</div>
-								
+
 							<div class=modal_submit>
-								<button type="button" class="modalclose"
-								data-dismiss="modal" aria-label="Close">취소</button>
+								<button type="button" class="modalclose" data-dismiss="modal"
+									aria-label="Close">취소</button>
 								<button type=submit class="submtbutton">저장</button>
 							</div>
-							
+
 						</div>
 					</form>
 				</div>

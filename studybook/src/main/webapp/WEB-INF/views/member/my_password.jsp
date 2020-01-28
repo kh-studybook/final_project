@@ -14,8 +14,8 @@
 	font-family: "맑은 고딕";
 }
 
-.s_title { 
-	margin-top: 230px; 
+.s_title {
+	margin-top: 230px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -36,10 +36,11 @@
 	font-size: 12px;
 }
 
+
 .s_submit {
 	width: 330px;
 	height: 43px;
-	line-height:43px;
+	line-height: 43px;
 	background-color: #9f9f9f;
 	color: white;
 	margin-top: 10px;
@@ -48,17 +49,22 @@
 	cursor: pointer;
 }
 
-input[type=checkbox] {
-	background:#ffffff;	
+.s_submit:hover {
+	opacity:70%;
 }
 
-.findpw {
-	text-decoration: none;
+input[type=checkbox] {
+	background: #ffffff;
+}
+
+
+.pwmsg, .pwcheckmsg {
+	font-size:12px;
 }
 
 .col-100 {
 	width: 100%;
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 
 /* Responsive layout 
@@ -68,53 +74,20 @@ instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
-		margin-bottom: 30px;
+		margin-bottom: 0px;
 	}
 }
 
-.floatl {
-	float:left;
-	font-size: 12px;
-	color: #555555;
+
+.message {
+	mergin-top: 2px;
 }
 
-.floatr {
-	float:right;
-	font-size: 12px;
-	color: #555555;
+.height {
+	width: 330px;
+	height: 70px;
 }
 
-.clear {
-	clear:both;
-}
-
-
-.schonangemeldet {
-	margin-bottom: 40px;
-	font-size: 12px;
-	color: #555555;
-	display: flex;
-	justify-content: center;
-}
-
-.tologin {
-	font-size: 12px;
-	color: #7F56D2;
-	font-weight : bolder;
-	cursor: pointer;
-	margin-left: 20px;
-}
-
-.tologin:hover {
-	color:#56D7D6;
-}
-
-.joinus {
-	text-align:center;
-	font-size: 12px;
-	color: #555555;
-	margin-top:20px;
-}
 </style>
 
 
@@ -123,19 +96,23 @@ instead of next to each other */
 
    $(document).ready(function() {
 	      
-	   $('#password').on('keyup',function(){
-		      $('.pwcheckmsg').html('');
-		    });
-	   
-	   $('#pwcheck').on('keyup',function(){
-	        if($('#password').val() != $('#pwcheck').val()){
-	          $('.pwcheckmsg').html('비밀번호 일치하지 않음');
-	          $('.pwcheckmsg').attr('color', 'red');
-	        } else {
-	          $('.pwcheckmsg').html('비밀번호 일치함');
-	          $('.pwcheckmsg').attr('color', 'blue');
-	        }
-	   });   	   
+		$('#password').on('keyup', function() {
+			$('.pwcheckmsg').html('');
+		});
+
+		$('#pwcheck').on('keyup', function() {
+			if ($('#password').val() != $('#pwcheck').val()) {
+				$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
+				$('.pwcheckmsg').css('color', 'LightCoral');
+				$('.s_submit').attr('disabled', true); 
+			} else {
+				$('.pwcheckmsg').text('비밀번호 일치');
+				$('.pwcheckmsg').css('color', '#56D7D6');
+				$('.s_submit').attr('disabled', false); 
+				$('.s_submit').css('background', '#56D7D6');
+			}
+
+		});	   
 
       $(".tologin").click(function(){
 			location.href="login.mem";
@@ -149,29 +126,31 @@ instead of next to each other */
 <body>
 
 <p class=s_title>비밀번호 변경</p>
-
+<br><br><br>
 	<div class="s_container">
 		<form name="updatepwform" action="updatepw.mem" method="post">
 			
-			<div class="row"> 
-				<div class="col-100">
-					<input type="password" id="password" class="s_input" name="password" placeholder="${member.password}" readOnly>
-				</div>
-			</div> 
 			
-			<div class="row">
+
+			<div class="row height">
 				<div class="col-100">
-					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
-					<span class=pwmsg></span>	
+					<input type="password" id="password" class="s_input"
+						name="password" placeholder="새 비밀번호 입력">
+				</div>
+				<div class="col-100 message">
+					<span class="pwmsg"></span>
 				</div>
 			</div>
-			<div class="row">		
+			<div class="row height">
 				<div class="col-100">
-					<input type="password" id="pwcheck" class="s_input" name="pwcheck" placeholder="비밀번호 확인">
-					<span class=pwcheckmsg></span>	
+					<input type="password" id="pwcheck" class="s_input" name="pwcheck"
+						placeholder="새 비밀번호 확인">
+				</div>
+				<div class="col-100 message">
+					<span class="pwcheckmsg"></span>
 				</div>
 			</div>
-				
+
 			 
 			<div class="row">
 				<div class="col-100"> 
