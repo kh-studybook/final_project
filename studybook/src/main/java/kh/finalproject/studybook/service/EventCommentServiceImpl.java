@@ -1,6 +1,8 @@
 package kh.finalproject.studybook.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,11 @@ public class EventCommentServiceImpl implements EventCommentService {
 	private EventDAO dao;
 
 	@Override
-	public List<Event_comment> getEvent_commentList(int event_num) {
-		return dao.getEvent_commentList(event_num);
+	public List<Event_comment> getEvent_commentList(int event_num, int mem_key) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("event_num", event_num);
+		map.put("mem_key", mem_key);
+		return dao.getEvent_commentList(map);
 	}
 	
 	@Override
@@ -38,10 +43,6 @@ public class EventCommentServiceImpl implements EventCommentService {
 		return dao.Event_commentReply(co);
 	}
 
-	@Override
-	public String getEvent_commentWriter(int mem_key) {
-		return dao.Event_commentWriter(mem_key);
-	}
 
 
 }

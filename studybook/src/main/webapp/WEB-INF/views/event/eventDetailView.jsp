@@ -10,13 +10,6 @@
 <script>
 $(function(){
 
-	//게시글 상세보기로 이동하기!!
-	$(".click_detail").click(function(){
-		var event_num = $(this).find($("input[name=event_num]")).val();
-		location.href = "EventDetailAction.eve?num="+parseInt(event_num);
-		console.log(event_num);
-	});
-
 	//이벤트 삭제하기
 	$("#deletemodal").on("show.bs.modal", function(){
 		var event_num = $("input[name=event_num]").val();
@@ -27,8 +20,7 @@ $(function(){
 			console.log("delete");
 			location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
 		});
-	});
-	
+	});	
 	
 	/** comment 시작*/
 	$("#comment_form").hide();
@@ -36,32 +28,39 @@ $(function(){
 	getList();
 	
 	function getList(){
+		var event_num = $("#event_num").val();
+		var mem_key = $("#mem_key").val();
+		console.log("event_num = " + event_num + " mem_key = " + mem_key);
 		$.ajax({
 			type : "post",
 			url : "Event_commentList.eve",
-			data : {"event_num" : $("#event_num").val()},
+			data : {"event_num" : $("#event_num").val(),
+					"mem_key" : $("#mem_key").val()},
 			dataType : "json",
 			success : function(rdata){
-				if (rdata.length > 0) {
+				console.log("success event_num = " + event_num);
+				if (rdata.listcount > 0) {
+					console.log("댓글을 달을 event_num = " + event_num);
 					$("#comment_form").empty();
 					$("#comment_form").show();
 					$("#comment_content").empty();
 					$("#message").text('');
 					output = '';
+					
 					$(rdata).each(function(){
 						comment_btn = '';
 						//현재 접속한 mem_key가 관리자이거나, 글쓴 men_key가 같을 때
-						if("${mem_key}" == '999' || "${mem_key}" == this.mem_key){
+						if("${mem_key}" == '999' || "${mem_key}" == mem_key){
 							comment_btn = "<span class = 'comment_btn'><a id = 'eventCommentModify' class='updateComment'>수정</a><span class = 'pt'>|</span> "
 							+ "<a id = 'eventCommentDelete' class='removeComment'>삭제</a> "
-							+ "<input type = 'hidden' class = 'event_num' value = '" + this.event_num + "'> "
-							+ "<input type = 'hidden' id = 'event_com_num' value = '" + this.event_com_num + "' ></span> ";									 
+							+ "<input type = 'hidden' class = 'event_num' value = '" + rdata.event_num + "'> "
+							+ "<input type = 'hidden' id = 'event_com_num' value = '" + rdata.event_com_num + "' ></span> ";									 
 						} 
 									
 						
-						output += "<div><span>" + ${commentWriter} + comment_btn + "</span><br>";
-						output += "<span>" +  moment(this.com_date).format("YYYY-MM-DD HH시 mm분 ss") + "</span><br><br>";
-						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + this.com_content + "</span>"
+						output += "<div><span>" + rdata.commentWriter + comment_btn + "</span><br>";
+						output += "<span>" +  moment(com_date).format("YYYY-MM-DD HH시 mm분 ss") + "</span><br><br>";
+						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + com_content + "</span>"
 						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
 					});
 					$("#comment_form").append(output);
@@ -81,7 +80,7 @@ $(function(){
 						url = "Event_commentAdd.eve";
 						data = {"com_content" : $("#comment_content").val(),
 								"mem_key" : $("#mem_key").val(),
-								"event_num" : $("#event_num").val()};
+								"event_num" : $("#event_num").val()}
 						
 						$.ajax({
 							type : "post",
@@ -89,7 +88,6 @@ $(function(){
 							data : data,
 							success : function(result){
 								if (result == 1){
-									console.log("등록한 event_com_num = " + $("#event_com_num").val());
 									$("#comment_content").val('');
 									getList();
 								}

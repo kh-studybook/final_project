@@ -70,7 +70,7 @@
 		            <img src="resources/image/profile/default.png">
 		            </c:if>
 		            <c:if test="${member.profile != ''}">
-		            <img src="resources/image/profile${member.profile}">
+		            <img src="resources/${member.profile}">
 		            </c:if>
               	</div>
                 <div class="j_menu_login">
