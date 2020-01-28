@@ -278,6 +278,12 @@
 
 .j_event {
 	position: relative;
+	cursor: pointer;
+}
+
+.j_event_img {
+	max-width: 100%;
+	height: auto;
 }
 
 .j_event_inner {
@@ -291,7 +297,7 @@
 	flex-direction: column;
 	top: 50%;
 	left: 50%;
-	transform: translate( -50%, -50% );
+	transform: translate(-50%, -50%);
 }
 
 .j_event_date {
@@ -312,8 +318,7 @@
 
 .blog .carousel-indicators {
 	left: 0;
-	top: auto;
-	bottom: 90px;
+	top: 50%;
 	margin-right: 0;
 	margin-left: 0;
 }
