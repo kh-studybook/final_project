@@ -159,7 +159,7 @@ public class NoticeController {
 			out.close();
 			return null;
 		}
-
+// 이부분 다시 찾아보기
 		System.out.println("삭제 성공");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

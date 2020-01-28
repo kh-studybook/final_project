@@ -1,5 +1,7 @@
 package kh.finalproject.studybook.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private String name;
 	private String email;
@@ -7,7 +9,8 @@ public class Member {
 	private String phone; 
 	private int key;
 	private String profile = "/image/profile/default.png";
-	 
+	private MultipartFile uploadfile;	
+	
 	
 	public String getName() {
 		return name;
@@ -45,8 +48,11 @@ public class Member {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
-	
-	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	
 }

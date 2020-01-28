@@ -8,6 +8,12 @@
 <title>notice view</title>
 
 <style>
+
+* {
+	box-sizing: border-box;
+	font-family: "맑은 고딕";   
+}
+
 .s_title {
 	margin-top: 230px;
 	margin-bottom: 35px;
@@ -47,20 +53,16 @@ th {
 
 <body>
 <input type="hidden" id="memberkey" value="${key }" name="memberkey">
-
-
 <p class=s_title></p>
 
-   <div class="container">
+   <div class="s_container">
       <table class="table table-striped">
 
          <tr>
-
             <td>${noticedata.NOTICE_TITLE }</td>
          </tr>
          
          <tr>
-
             <td><textarea class="form-control" rows="5" readOnly style="width:102%">${noticedata.NOTICE_CONTENT }</textarea></td>
          </tr>
          
@@ -68,7 +70,9 @@ th {
             <td></td>
             <td colspan="2" class="center">
                
-           <!-- 이 부분에 c test 넣기 관리자만 보이게 -->
+           <!-- 관리자만 수정/삭제 가능 -->    
+           <c:if test="${member.name== '손연수' }">
+           
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
                   <button class="modifybtn">수정</button>
                </a>
@@ -77,13 +81,10 @@ th {
                   <button class="deletebtn" data-toggle="modal" 
                   				data-target="#myModal">삭제</button>
                </a>
-
+            </c:if>
             <!-- 여기까지 -->
-               <a href="NoticeList.bo">
-                  <button class="listbtn">list</button>
-               </a>
-               
-              
+            
+               <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
          </tr>
       </table>
       
@@ -91,11 +92,9 @@ th {
 		<div class="modal-dialog">
 			<div class="modal-content">
 
-
 				<!-- Modal body -->
 				<div class="modal-body">
-					<form name="deleteForm" action="NoticeDeleteAction.bo"
-						method="post">
+					<form name="deleteForm" action="NoticeDeleteAction.bo" method="post">
 						<div class="form-group">
 							<label for="pwd">비밀번호</label> 
 						</div>
