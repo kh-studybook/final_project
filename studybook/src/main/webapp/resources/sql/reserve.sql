@@ -16,10 +16,15 @@ create table reserve(
 
 alter table reserve add pay_date date;
 
+update reserve set reserve_date = '2020-01-25' where r_code = '1002';
+
 drop table reserve;
 delete reserve
 
 select * from reserve;
+
+
+insert into reserve values (1001, 1001, 2, '2020-02-03 00:00:00.0', '15', '17', 11000, NULL, 1, 1, lala, '01022222222', 'lala@naver.com', sysdate);
 
 select * from reserve rv, room ro where ro.room_code=rv.room_code
 

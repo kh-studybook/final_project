@@ -22,6 +22,54 @@ $(function(){
 		});
 	});	
 	
+	//등록 또는 수정완료 버튼을 클릭한 경우
+	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
+	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
+	$("#event_comment_write").click(function(){
+		//댓글 등록
+		if ($("#event_comment_write").text() == "댓글 등록"){
+			url = "Event_commentAdd.eve";
+			data = {"com_content" : $("#comment_content").val(),
+					"mem_key" : $("#mem_key").val(),
+					"event_num" : $("#event_num").val()}
+			
+			$.ajax({
+				type : "post",
+				url : url,
+				data : data,
+				success : function(result){
+					if (result == 1){
+						$("#comment_content").val('');
+						getList();
+					}
+				}
+			});//ajax end						
+		} 
+		//댓글 수정
+		else if ($("#event_comment_write").text() == "댓글 수정") {
+			url = "Event_commentUpdate.eve";
+			data = {"event_num" : $("#event_num").val(),
+					"event_com_num" : $("#event_com_num").val(),
+					"com_content" : $("#comment_content").val()}
+			
+		$.ajax({
+			type : "post",
+			url : url,
+			data : data,
+			success : function(result){
+				if (result == 1){
+					$("#event_comment_write").text("댓글 등록").css("background-color", "#7F56D2");
+					$("#comment_content").val('');
+					getList();
+				}
+			}
+		});//ajax end	
+		
+		}
+	});//write end
+	
+	
+	
 	/** comment 시작*/
 	$("#comment_form").hide();
 	
@@ -39,7 +87,7 @@ $(function(){
 			dataType : "json",
 			success : function(rdata){
 				console.log("success event_num = " + event_num);
-				if (rdata.listcount > 0) {
+				if (rdata.list) {
 					console.log("댓글을 달을 event_num = " + event_num);
 					$("#comment_form").empty();
 					$("#comment_form").show();
@@ -47,20 +95,21 @@ $(function(){
 					$("#message").text('');
 					output = '';
 					
-					$(rdata).each(function(){
+					 $(rdata.list).each(
+				               function(index, item) {
 						comment_btn = '';
 						//현재 접속한 mem_key가 관리자이거나, 글쓴 men_key가 같을 때
-						if("${mem_key}" == '999' || "${mem_key}" == mem_key){
+						if("${mem_key}" == '999' || "${mem_key}" == item.mem_key){
 							comment_btn = "<span class = 'comment_btn'><a id = 'eventCommentModify' class='updateComment'>수정</a><span class = 'pt'>|</span> "
 							+ "<a id = 'eventCommentDelete' class='removeComment'>삭제</a> "
-							+ "<input type = 'hidden' class = 'event_num' value = '" + rdata.event_num + "'> "
-							+ "<input type = 'hidden' id = 'event_com_num' value = '" + rdata.event_com_num + "' ></span> ";									 
+							+ "<input type = 'hidden' class = 'event_num' value = '" + item.event_num + "'> "
+							+ "<input type = 'hidden' id = 'event_com_num' value = '" + item.event_com_num + "' ></span> ";									 
 						} 
 									
 						
-						output += "<div><span>" + rdata.commentWriter + comment_btn + "</span><br>";
-						output += "<span>" +  moment(com_date).format("YYYY-MM-DD HH시 mm분 ss") + "</span><br><br>";
-						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + com_content + "</span>"
+						output += "<div><span>" + item.name + comment_btn + "</span><br>";
+						output += "<span>" +  item.com_date + "</span><br><br>";
+						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + item.com_content + "</span>"
 						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
 					});
 					$("#comment_form").append(output);
@@ -71,51 +120,6 @@ $(function(){
 					$("#comment_form").hide();
 				}
 				
-				//등록 또는 수정완료 버튼을 클릭한 경우
-				//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
-				//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
-				$("#event_comment_write").click(function(){
-					//댓글 등록
-					if ($("#event_comment_write").text() == "댓글 등록"){
-						url = "Event_commentAdd.eve";
-						data = {"com_content" : $("#comment_content").val(),
-								"mem_key" : $("#mem_key").val(),
-								"event_num" : $("#event_num").val()}
-						
-						$.ajax({
-							type : "post",
-							url : url,
-							data : data,
-							success : function(result){
-								if (result == 1){
-									$("#comment_content").val('');
-									getList();
-								}
-							}
-						});//ajax end						
-					} 
-					//댓글 수정
-					else if ($("#event_comment_write").text() == "댓글 수정") {
-						url = "Event_commentUpdate.eve";
-						data = {"event_num" : $("#event_num").val(),
-								"event_com_num" : event_com_num,
-								"com_content" : $("#comment_content").val()}
-						
-					$.ajax({
-						type : "post",
-						url : url,
-						data : data,
-						success : function(result){
-							if (result == 1){
-								$("#event_comment_write").text("댓글 등록").css("background-color", "#7F56D2");
-								$("#comment_content").val('');
-								getList();
-							}
-						}
-					});//ajax end	
-					
-					}
-				});//write end
 				
 				
 				//댓글 수정하기
@@ -181,9 +185,10 @@ $(function(){
 <body>
 	<br><br>
 	<div class = "container">
-	<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
-	<input type = "hidden" id = "key" name = "key" value = "${key}">
-	<input type = "hidden" id = "event_num" class = "event_num" name = "event_num" value = "${eventdata.event_num}">
+		<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
+		<input type = "hidden" id = "key" name = "key" value = "${key}">
+		<input type = "hidden" id = "event_num" class = "event_num" name = "event_num" value = "${eventdata.event_num}">
+	
 	<!-- 상단 메뉴 -->
    	<div class="row p_locate">
       <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 상세 페이지</span></div>

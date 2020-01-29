@@ -34,13 +34,13 @@ public class EventCommentServiceImpl implements EventCommentService {
 	}
 
 	@Override
-	public int Event_commentsUpdate(Event_comment co) {
-		return dao.Event_commentsUpdate(co);
+	public int Event_commentReply(Event_comment co) {
+		return dao.Event_commentReply(co);
 	}
 
 	@Override
-	public int Event_commentReply(Event_comment co) {
-		return dao.Event_commentReply(co);
+	public int Event_commentsUpdate(Map<Object, Object> obj) {
+		return dao.Event_commentsUpdate(obj);
 	}
 
 

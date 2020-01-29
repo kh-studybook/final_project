@@ -7,11 +7,18 @@ public class Event_comment {
 	private int mem_key;
 	private int event_num;
 	private String com_content;
-	private Date com_date;
+	private String com_date;
 	private int com_re_ref;
 	private int com_re_lev;
 	private int com_re_seq;
+	private String name;//DB에 없는 값 - 댓글 사용자 출력을 위함
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getEvent_com_num() {
 		return event_com_num;
 	}
@@ -36,10 +43,10 @@ public class Event_comment {
 	public void setCom_content(String com_content) {
 		this.com_content = com_content;
 	}
-	public Date getCom_date() {
+	public String getCom_date() {
 		return com_date;
 	}
-	public void setCom_date(Date com_date) {
+	public void setCom_date(String com_date) {
 		this.com_date = com_date;
 	}
 	public int getCom_re_ref() {

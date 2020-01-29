@@ -10,26 +10,20 @@ create table event_comment(
 	com_re_seq number(10) not null   --<!--  추후 확인!! -->답변 글의 순서(원문글 기준으로 보여주는 순서)
 );
 
-			select event_comment.*, me.name 
-			from event_comment, member me
-			where event_num = 5
-			and me.key= 999
-			order by com_date desc
+		
+select * from event_comment, member where event_comment.mem_key = member.key and event_comment.event_num = 5 
+	
+		
 
 delete from event_comment;
 
 
-select me.name from member me, event_comment ev where me.key=ev.mem_key and ev.mem_key= 999
-select me.name from member me join event_comment ev on me.key=ev.mem_key where ev.mem_key= 1000
-			
-select me.name from member me, event ev where me.key=ev.mem_key and ev.event_num=#{num}
-			
-			select * from member;
-
-select me.name from member me, event_comment ev where me.key=ev.mem_key and ev.mem_key = 1000
+select event_comment.*, me.name from event_comment, member me where event_num = 5
+and me.key= 1000 order by com_date desc
 
 drop table event_comment;
 select * from event_comment;
 create sequence event_com_seq;
 drop sequence event_com_seq;
 
+update event_comment set com_content='dddddddddd' where event_num = 5 and event_com_num = 14

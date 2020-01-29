@@ -24,11 +24,11 @@
 	</delete>-->
 	
 		<select id = "getList" parameterType = "Map" resultType = "event_comment">
-			select event_comment.*, me.name 
-			from event_comment, member me
-			where event_num = #{event_num} 
-			and me.key= #{mem_key}
-			order by com_date desc
+			select * 
+			from event_comment, member 
+			where event_comment.mem_key = member.key 
+			and event_comment.event_num = #{event_num} 
+        	order by com_date desc
 		</select>
 	
 		<insert id = "insert" parameterType = "event_comment">
@@ -41,7 +41,7 @@
 			delete event_comment where event_com_num = #{event_com_num}
 		</delete>
 	
-		<update id = "update" parameterType = "event_comment">
+		<update id = "update">
 			update event_comment set com_content=#{com_content} where event_num = #{event_num} and event_com_num = #{event_com_num}
 		</update>
 		

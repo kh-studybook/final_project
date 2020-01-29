@@ -15,6 +15,7 @@ alter table room add min_hour number(10) not null;
 drop table room;
 
 select * from room;
+delete from room;
 
 truncate table room;
 

@@ -87,7 +87,6 @@
 		</div>
 		<%-- 게시글이 있는 경우 --%>
 		<c:if test="${listcount > 0}">
-			<div class="p_evenList">
 
 				<div class="row">
 					<c:set var="num" value="${listcount - (page - 1)*9}" />
