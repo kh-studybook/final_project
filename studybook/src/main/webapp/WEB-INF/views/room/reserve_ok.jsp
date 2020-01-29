@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
 				<ul class="e_list_detail">
 					<li><span class="e_tit">신청일</span> <span class="e_data">${reserve_check.pay_date }</span></li>
 					<li><span class="e_tit">예약 공간</span> <span class="e_data">${reserve_check.room_name}</span></li>
-					<li><span class="e_tit">예약 내용</span> <span class="e_data">${reserve_check.reserve_date } ${reserve_check.start_time } ~ ${reserve_check.end_time }시 </span></li>
+					<li><span class="e_tit">예약 내용</span> <span class="e_data">${reserve_check.reserve_date } , ${reserve_check.start_time } ~ ${reserve_check.end_time }시 </span></li>
 					<li><span class="e_tit">추가 예약 인원</span> <span class="e_data">${reserve_check.extra_num }명</span></li>
 					<li><span class="e_tit">요청 사항</span> <span class="e_data">${reserve_check.require }</span></li>
 				</ul>
@@ -64,7 +65,7 @@
 				<div class="e_reserve_check_div">				
 				<h2 class="e_head">공간 결제 금액</h2>
 				<ul class="e_list_detail">
-					<li><span class="e_tit">예약 날짜</span> <span class="e_data">${reserve_check.reserve_date }</span></li>
+					<li><span class="e_tit">예약 날짜</span> <span class="e_data">${reserve_check.reserve_date}</span></li>
 					<li><span class="e_tit">예약 시간</span> <span class="e_data">${reserve_check.start_time } ~ ${reserve_check.end_time }시 </span></li>
 					<li><span class="e_tit">추가 예약 인원</span> <span class="e_data">${reserve_check.extra_num }명</span></li>
 				</ul>

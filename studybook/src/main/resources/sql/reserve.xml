@@ -130,7 +130,7 @@
 
 	<select id="getSearchList2" parameterType="map"
 		resultType="reserve">
-		select *
+select *
 		from (select rownum rnum, b.*
 		from (select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
 		<if test="search_field!=null">

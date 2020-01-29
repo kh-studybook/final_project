@@ -35,7 +35,6 @@
 	font-size: 12px;
 }
 
-
 .s_submit {
 	width: 330px;
 	height: 43px;
@@ -52,9 +51,8 @@ input[type=checkbox] {
 	background: #ffffff;
 }
 
-
 .namemsg, .emailmsg, .pwmsg, .pwcheckmsg, .phonemsg {
-	font-size:12px;
+	font-size: 12px;
 }
 
 .col-100 {
@@ -196,17 +194,24 @@ instead of next to each other */
 						var emailtest = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 						var phonetest = /^010?([0-9]{4})?([0-9]{4})$/;
 
-						$("#name").blur(function() {
-							var value = $('#name').val().trim();
-							if (nametest.test($(this).val())) {
-								console.log(nametest.test($(this).val()));
-								$(".namemsg").background-image(url('resources/image/check.png'));
-								
-							} else {
-								$('.namemsg').text('! 이름은 한글/영문만 입력 가능합니다.');
-								$('.namemsg').css('color', 'LightCoral');
-							}
-						});
+						$("#name")
+								.blur(
+										function() {
+											var value = $('#name').val().trim();
+											if (nametest.test($(this).val())) {
+												console.log(nametest.test($(
+														this).val()));
+												$(".namemsg").background
+														- image(url('resources/image/check.png'));
+
+											} else {
+												$('.namemsg')
+														.text(
+																'! 이름은 한글/영문만 입력 가능합니다.');
+												$('.namemsg').css('color',
+														'LightCoral');
+											}
+										});
 
 						$("#email").blur(function() {
 							var value = $('#email').val().trim();
@@ -229,7 +234,7 @@ instead of next to each other */
 								$('.pwcheckmsg').css('color', 'LightCoral');
 							} else {
 								$('.pwcheckmsg').text('비밀번호 일치');
-								$('.pwcheckmsg').css('color', '#56D7D6');
+								$('.pwcheckmsg').css('color', '#7F56D2');
 							}
 
 						});
@@ -242,12 +247,20 @@ instead of next to each other */
 								$('.phonemsg').text('! 연락처는 숫자만 입력해주세요.');
 								$('.phonemsg').css('color', 'LightCoral');
 							}
-						});
+						}); 
+
+						if ($("#name").val() != "" || $("#email").val() != ""
+								|| $("#password").val() != ""
+								|| $("#pwcheck").val() != ""
+								|| $("#phone").val() != "") {
+
+							$('.s_submit').attr('disabled', false);
+							$('.s_submit').css('background', '#56D7D6');
+						}
 
 						$(".tologin").click(function() {
 							location.href = "login.mem";
 						});
-
 					});
 </script>
 
