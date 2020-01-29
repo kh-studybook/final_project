@@ -462,7 +462,7 @@ ol.e_info_list li {
 }
 
 .e_color_desc .e_color_disable::before {
-    content: "○";
+    content: "■";
     color: #ccc;
     margin-right: 8px;
 }
