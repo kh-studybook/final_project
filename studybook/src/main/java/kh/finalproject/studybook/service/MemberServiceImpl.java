@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member myinfo(int key) {
 		return dao.myinfo(key);
-	}
+	} 
 
 	@Override 
 	public int myupdate(Member member) {
@@ -41,8 +41,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int delete(int key) {
-		return dao.delete(key);
+	public int delete(Member member) {
+		return dao.delete(member);
+	}
+
+	@Override
+	public int pwupdate(Member member) {
+		return dao.pwupdate(member);
+	}
+
+	@Override
+	public int phoneupdate(Member member) {
+		return dao.phoneupdate(member);
+	}
+
+	@Override
+	public int profileupdate(Member member) {
+		return dao.profileupdate(member);
 	}
 	
 }

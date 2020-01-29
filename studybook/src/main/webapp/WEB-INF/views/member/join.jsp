@@ -115,7 +115,11 @@ instead of next to each other */
 }
 
 .message {
-	mergin-top: 2px;
+	mergin-bottom: 5px;
+}
+
+.msg {
+	font-size:10px;
 }
 
 .height {
@@ -126,6 +130,8 @@ instead of next to each other */
 .submit {
 	margin-bottom: 30px;
 }
+
+
 
 /*modal*/
 #modalforupdate {
@@ -191,41 +197,41 @@ instead of next to each other */
 					function() {
 
 						var nametest = /^[가-힣a-zA-Z]+$/;
+						var passwordtest = /^[0-9a-zA-Z]{6,20}$/;
 						var emailtest = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 						var phonetest = /^010?([0-9]{4})?([0-9]{4})$/;
 
-						$("#name")
-								.blur(
-										function() {
-											var value = $('#name').val().trim();
-											if (nametest.test($(this).val())) {
-												console.log(nametest.test($(
-														this).val()));
-												$(".namemsg").background
-														- image(url('resources/image/check.png'));
-
-											} else {
-												$('.namemsg')
-														.text(
-																'! 이름은 한글/영문만 입력 가능합니다.');
-												$('.namemsg').css('color',
-														'LightCoral');
-											}
-										});
+						$("#name").blur(function() {
+							var value = $('#name').val().trim();
+							if (nametest.test($(this).val())) {
+								console.log(emailtest.test($(this).val()));
+								$(".namemsg").html('<img src=resources/image/check.png width=17px>');
+								
+							} else {
+								$('.namemsg').text('! 이름은 한글/영문만 입력 가능합니다.');
+								$('.namemsg').css('color', 'LightCoral');
+							}
+						});
 
 						$("#email").blur(function() {
 							var value = $('#email').val().trim();
 							if (emailtest.test($(this).val())) {
 								console.log(emailtest.test($(this).val()));
-								$(".emailmsg").text('');
+								$(".emailmsg").html('<img src=resources/image/check.png width=17px>');
 							} else {
 								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
 								$('.emailmsg').css('color', 'LightCoral');
 							}
 						});
 
-						$('#password').on('keyup', function() {
-							$('.pwcheckmsg').html('');
+						$('#password').blur(function() {
+							if (passwordtest.test($(this).val())) {
+								console.log(passwordtest.test($(this).val()));
+								$('.pwmsg').html('<img src=resources/image/check.png width=17px>');
+							} else {
+								$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
+								$('.pwmsg').css('color', 'LightCoral');
+							}
 						});
 
 						$('#pwcheck').on('keyup', function() {
@@ -233,8 +239,7 @@ instead of next to each other */
 								$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
 								$('.pwcheckmsg').css('color', 'LightCoral');
 							} else {
-								$('.pwcheckmsg').text('비밀번호 일치');
-								$('.pwcheckmsg').css('color', '#7F56D2');
+								$('.pwcheckmsg').html('<img src=resources/image/check.png width=17px>');
 							}
 
 						});
@@ -242,9 +247,9 @@ instead of next to each other */
 						$("#phone").blur(function() {
 							if (phonetest.test($(this).val())) {
 								console.log(phonetest.test($(this).val()));
-								$(".phonemsg").text('');
+								$(".phonemsg").html('<img src=resources/image/check.png width=17px>');
 							} else {
-								$('.phonemsg').text('! 연락처는 숫자만 입력해주세요.');
+								$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
 								$('.phonemsg').css('color', 'LightCoral');
 							}
 						}); 
@@ -264,7 +269,6 @@ instead of next to each other */
 					});
 </script>
 
-
 </head>
 <body>
 
@@ -281,7 +285,7 @@ instead of next to each other */
 						placeholder="이름">
 				</div>
 				<div class="col-100 message">
-					<span class="namemsg"></span>
+					<span class="namemsg msg"></span>
 				</div>
 			</div>
 
@@ -291,7 +295,7 @@ instead of next to each other */
 						placeholder="이메일">
 				</div>
 				<div class="col-100 message">
-					<span class="emailmsg"></span>
+					<span class="emailmsg msg"></span>
 				</div>
 			</div>
 
@@ -301,7 +305,7 @@ instead of next to each other */
 						name="password" placeholder="비밀번호">
 				</div>
 				<div class="col-100 message">
-					<span class="pwmsg"></span>
+					<span class="pwmsg msg"></span>
 				</div>
 			</div>
 			<div class="row height">
@@ -310,14 +314,14 @@ instead of next to each other */
 						placeholder="비밀번호 확인">
 				</div>
 				<div class="col-100 message">
-					<span class="pwcheckmsg"></span>
+					<span class="pwcheckmsg msg"></span>
 				</div>
 			</div>
 
 			<div class="row height">
 				<div class="col-100">
 					<input type="text" name="phone" id="phone" class="s_input"
-						name="phone" placeholder="전화번호" maxLength="11" required>
+						name="phone" placeholder="연락처" maxLength="11" required>
 				</div>
 				<div class="col-100 message">
 					<span class="phonemsg"></span>

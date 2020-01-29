@@ -14,7 +14,7 @@
 	
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="join_success.jsp" />
+		<jsp:include page="my_phone.jsp" />
 	</main>
 	<!-- Body End -->
 
