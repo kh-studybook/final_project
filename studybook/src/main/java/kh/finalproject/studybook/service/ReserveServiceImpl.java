@@ -149,6 +149,17 @@ public class ReserveServiceImpl implements ReserveService {
 		System.out.println("RoomServiceImpl의 getSearchListCount");
 		return reserveDAO.getSearchListCount2(map);
 	}
+	//예약 정보 가져오기(룸네임 포함)
+	@Override
+	public Reserve getReserveFullDetail(int r_code) {
+		return reserveDAO.getReserveFullDetail(r_code);
+	}
+	//예약정보 수정 액션
+	@Override
+	public int updateReserve(Reserve reserve) {
+		
+		return reserveDAO.updateReserve(reserve);
+	}
 	
 	//지은 끝
 	
@@ -188,6 +199,13 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<Gallery> getRoomPicture(int mem_key) {
 		return reserveDAO.getRoomPicture(mem_key);
 	}
+
+	
+
+	
+
+
+	
 
 
 

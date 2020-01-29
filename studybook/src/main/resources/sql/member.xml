@@ -36,5 +36,53 @@
 		select * from member where key=#{mem_key}
 	</select>
 	
+	<!-- 검색관련 -->
+	<select id="getSearchList" parameterType="map" resultType="member">
+		select *
+		from (select rownum rnum, b.*
+		from(select * from member
+		where key !=999
+		<if test="search_field!=null">
+			and
+			<choose>
+				<when test="search_field=='key'">key</when>
+				<when test="search_field=='name'">name</when>
+				<when test="search_field=='phone'">phone</when>
+				<when test="search_field=='email'">email</when>
+			</choose>
+			like #{search_word}
+		</if>
+		order by key desc)b
+		)
+		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
+
+	<select id="searchcount" parameterType="map" resultType="int">
+		select count(*)
+		from member
+		where key !=999
+		<if test="search_field!=null">
+			and
+			<choose>
+				<when test="search_field=='key'">key</when>
+				<when test="search_field=='name'">name</when>
+				<when test="search_field=='phone'">phone</when>
+				<when test="search_field=='email'">email</when>
+			</choose>
+			like #{search_word}
+		</if>
+	</select>
+	<!-- 멤버상세조회 -->
+	<select id="memberdetail" parameterType="int" resultType="member">
+		select * from member where key=#{key}
+	</select>
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="member">
+	update member
+	set 
+	name=#{name},
+	phone=#{phone} where key=#{key}
+	</update>
+	
 	
 </mapper>

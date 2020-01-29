@@ -1,18 +1,24 @@
 package kh.finalproject.studybook.controller;
 
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Member;
+import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.service.MemberService;
 
 @Controller
@@ -174,6 +180,83 @@ public class MemberController {
 		out.close();
 		return "redirect:main.net";
 		
+	}
+	//어드민 -회원 리스트 MemberList.mem
+	@RequestMapping(value = "/MemberList.mem", method = RequestMethod.GET)
+	public ModelAndView foodlist(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv,
+			@RequestParam(value = "search_field", defaultValue = "-1") int index,
+			@RequestParam(value = "search_word", defaultValue = "") String search_word) throws Exception {
+		List<Member> list = null;
+		int listcount = 0;
+		list = memberservice.getSearchList(index, search_word, page, limit);
+		System.out.println("MemberController의 memberservice.getSearchList 끝");
+		listcount = memberservice.getSearchListCount(index, search_word);
+		System.out.println("MemberController의 memberservice.getSearchListCount 끝");
+
+		// 총페이지수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 현재 페이지에 보여줄 시작 페이지수 11, 21,31
+		int startpage = ((page - 1) / 10) * 10 + 1;
+
+		// endpage : 현재 페이지 그룹에서 보여줄 마지막 페이지수 10,20,30
+		int endpage = startpage + 10 - 1;
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		mv.setViewName("admin/member_list");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		System.out.println("listcount=" + listcount);
+		mv.addObject("userlist", list);
+		mv.addObject("search_field", index);
+		mv.addObject("search_word", search_word);
+
+		return mv;
+
+	}
+	//어드민 - 멤버 수정 - 상세화면 memberModify.re
+	@GetMapping("memberModify.re")
+	public ModelAndView memberModifyView(int key, ModelAndView mv, HttpServletRequest request) throws Exception{
+		System.out.println("멤버 상세 조회");
+		Member member = memberservice.getDetail(key);
+		
+		if(member ==null) {
+			 System.out.println("(수정)멤버 상세보기 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url", request.getRequestURL());
+				mv.addObject("message", "(수정) 상세보기 실패입니다.");
+				return mv;
+		 }
+		 System.out.println("(수정)멤버 상세보기 성공");
+			mv.addObject("userdata", member);
+			mv.setViewName("admin/member_modify");
+			return mv;
+	}
+	//어드민 - 멤버 수정 액션 memberModifyAction.mem
+	@PostMapping("memberModifyAction.mem")
+	public ModelAndView MemberModifyAction(Member member, ModelAndView mv, HttpServletRequest request, HttpServletResponse response ) throws Exception{
+		int result = memberservice.updateMember(member);
+		//수정 실패하는 경우
+		if (result == 0) {
+			System.out.println("Member 멤버 수정 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "Reserve 테이블 수정 실패");
+		} 
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정되었습니다.')");
+		out.println("location.href='MemberList.mem';");
+		out.println("</script>");
+		out.close();
+		return null;
 	}
 	
 }
