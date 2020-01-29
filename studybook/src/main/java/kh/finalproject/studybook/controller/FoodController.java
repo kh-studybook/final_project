@@ -89,7 +89,8 @@ public class FoodController {
 		System.out.println("filename="+uploadfile);
 		
 		String path=saveFolder;
-		
+		//String path="C:\\Users\\user1\\git\\0129\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+
 		
 		if(!uploadfile.isEmpty()) {
 			

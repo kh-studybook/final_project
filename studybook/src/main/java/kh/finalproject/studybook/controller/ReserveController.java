@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Gallery;
+import kh.finalproject.studybook.domain.Mail;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
@@ -32,6 +34,7 @@ import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.service.MemberService;
 import kh.finalproject.studybook.service.ReserveService;
 import kh.finalproject.studybook.service.RoomService;
+import kh.finalproject.studybook.task.SendMail;
 
 @Controller
 public class ReserveController {
@@ -42,7 +45,7 @@ public class ReserveController {
 	private ReserveService reserveservice;
 
 	@Autowired
-	private MemberService memberservice;
+	private SendMail sendMail;
 
 	// 리뷰 가져오기
 	@ResponseBody
@@ -158,14 +161,11 @@ public class ReserveController {
 				fr.setFood_code(food_codes.get(i));
 				fr.setCount(counts.get(i));
 				fr.setFood_total_cost(food_total_costs.get(i));
-				reserveservice.insertFood_reserve(fr);
-				
+				reserveservice.insertFood_reserve(fr);			
 				}
-			}
-		
+			}	
 		int r_code=reserveservice.getR_code();		
 		mv.setViewName("redirect:reserve_check.re?r_code="+r_code);
-		
 		return mv;
 		
 		}else {
@@ -179,6 +179,7 @@ public class ReserveController {
 	public ModelAndView reserve_ok_page(int r_code, ModelAndView mv) {
 		
 		Reserve reserve_check=reserveservice.getReserveDetail(r_code);
+		reserve_check.setReserve_date(reserve_check.getReserve_date().substring(0, 10));
 		List<Food_reserve> food_reservelist=reserveservice.getFood_reservelist(r_code);
 		int room_food_total=reserve_check.getTotal_cost();
 		int foods_total=0;
@@ -193,6 +194,19 @@ public class ReserveController {
 		mv.addObject("food_reservelist",food_reservelist);
 		mv.setViewName("room/reserve_ok_page");
 		
+		//메일 보내기
+		Mail mail=new Mail();
+		mail.setTo(reserve_check.getReserver_email());
+		mail.setContent("<예약 확인서><br>"+
+				"예약 번호 : "+reserve_check.getR_code()+"<br>"+
+				"예약자 : "+reserve_check.getReserver_name()+"<br>"+
+				"예약자 번호 : "+reserve_check.getReserver_phone()+"<br>"+
+				"예약날짜 : "+reserve_check.getReserve_date()+"<br>"+
+				"예약시간 : "+reserve_check.getStart_time()+"~"+reserve_check.getEnd_time()+"시<br>"+
+				"예약한 룸 : "+reserve_check.getRoom_name()+"<br>"+
+				"예약 총액 : "+room_food_total+"<br>"
+						);
+		sendMail.sendMail(mail);
 		return mv;
 	}
 
@@ -319,7 +333,6 @@ public class ReserveController {
 	
 	
 	// 지은 끝
-
 
 
 	//은지- 날짜별 예약된 시간체크

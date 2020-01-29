@@ -101,7 +101,11 @@
 	</select>
 	<!-- 룸상세정보 조회 -->
 	<select id="roomDetail" parameterType="int" resultType="room">
-		select * from room where ROOM_CODE=#{ROOM_CODE}
+		select r.* , g.file_name
+		from room r, gallery g
+		where r.room_code = #{ROOM_CODE}
+		and r.room_code=g.room_code
+		and gallery_num=1
 	</select>
 
 	<!-- 갤러리 리스트 조회 -->
@@ -176,6 +180,44 @@
 		and gallery.gallery_num=1) b
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<!-- room reserve table roomnumber 비교 -->
+	<select id="searchRoomCode" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from room, reserve
+		where room.ROOM_CODE=reserve.room_code
+		and reserve.reserve_date=TO_DATE(#{date})
+		and reserve.start_time between #{starttime} and #{endtime}-1
+		and reserve.end_time-1 between #{starttime} and #{endtime}
+		and #{starttime} between reserve.start_time and reserve.end_time-1
+		and #{endtime}-1 between reserve.start_time-1 and reserve.end_time
+	</select>
+	
+	<!-- 예약 없을 때 room 검색 결과 -->
+	<select id="searchRoomInfo" parameterType="java.util.Map" resultType="room">
+		select *
+		from (select rownum rnum, b.*
+		from (select room.ROOM_CODE, room.ROOM_NAME, room.MIN_MEMBER, room.MAX_MEMBER,
+		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
+		from room, gallery
+		where room.ROOM_CODE=gallery.ROOM_CODE
+		and gallery.gallery_num=1
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
+		order by room.room_code) b
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<!-- 예약 없을 때 room 검색 결과 총 갯수 -->
+	<select id="searchRoomInfoCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from room, gallery
+		where room.ROOM_CODE=gallery.ROOM_CODE
+		and gallery.gallery_num=1
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
 	</select>
 	
 	<!-- room 검색 결과 -->
