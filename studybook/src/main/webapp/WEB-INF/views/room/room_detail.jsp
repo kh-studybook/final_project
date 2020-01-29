@@ -248,8 +248,7 @@
 							</div>
 							
 								<div class="e_color_desc">
-									<span class="e_color_disable">예약불가</span> <span
-										class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
+									 <span class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
 								</div>
 
 							
@@ -284,6 +283,9 @@
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="22" value="22">22:00</div>
 									</div>
 							
+								</div>
+								<div class="e_color_desc">
+									<span class="e_color_disable">예약불가</span>
 								</div>
 
 
