@@ -97,6 +97,7 @@ public class RoomController {
 		System.out.println("fileList:" + fileList.size());
 
 		String path = saveFolder;
+		//String path="C:\\Users\\user1\\git\\0129\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 		System.out.println("path = " + path);
 
 		// 포문으로 꺼냄
@@ -336,7 +337,7 @@ public class RoomController {
 			return null;
 		}
 		Room room = roomservice.getRoomDetail(room_code);
-		// Room_ex room_ex=roomservice.getRoomExDetail(room_code);
+		Room_ex room_ex=roomservice.getRoomExDetail(room_code);
 		 List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
 		if (room == null) {
 			System.out.println("룸 상세보기 실패");
@@ -349,7 +350,7 @@ public class RoomController {
 			mv.addObject("room", room);
 			System.out.println("룸코드="+room.getROOM_CODE());
 			mv.setViewName("room/room_detail_page");
-			// mv.addObject("room_ex",room_ex);
+			mv.addObject("room_ex",room_ex);
 			 mv.addObject("gallerylist",gallerylist);
 		}
 		return mv;

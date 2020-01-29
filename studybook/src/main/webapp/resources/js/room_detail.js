@@ -128,18 +128,25 @@ $(document).on('click','.number-spinner button',
 		
 		var time_check=0;
 			$(".swiper-slide").click(function(){
+				console.log("time_check="+time_check)
+				var date=$("#reserve_date_span").text();
+				console.log(date)
 				
+				if(date==""){
+					alert("날짜를 먼저 선택해주세요");	
+				}else{
 				if(time_check==0){
 
-					if($(".swiper-slide").hasClass("not_active")==false){
-						$(".swiper-slide").css("background","#57D7D5");
-						$(".swiper-slide").css("color","black");
-					}
+					div_color();
 					
-					$(".swiper-wrapper").find('input').removeAttr('name');
+					$(".swiper-wrapper").find('input').attr("name","time_slide");
+					/*$(".swiper-wrapper").each(function(){
+						$(this).find('input').attr("name","time_slide");
+					})*/
 					var time=$(this).find($("input")).val();
 					console.log("시작시간"+time)
-					$(this).css("background","#855FD4");
+					//$(this).css("background","#855FD4");
+					$(this).addClass("active");
 					$(this).find($("input")).attr("name","start_time");
 					time_check=1;
 					
@@ -171,14 +178,17 @@ $(document).on('click','.number-spinner button',
 								break;
 							}
 							console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
-							$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
-							$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
+							//$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
+							//$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
+							$(".swiper-slide").find($("input[id="+i+"]")).parent().addClass("active");
 						}
 					var extra_price=$("#extra_num_price").text();
 					var room_price=$("#total_time_price").text();
 					$("#total_cost_span").text(parseInt(extra_price)+parseInt(room_price));
 					$("#total_cost").val(parseInt(extra_price)+parseInt(room_price));
 					time_check=0;
+					console.log("time_check="+time_check)
+					}
 				}
 			});
 			
@@ -187,9 +197,19 @@ $(document).on('click','.number-spinner button',
 		})
 		
 	});
+	
+function div_color(){
+	console.log("여기는 div_color")
+	$(".swiper-slide").removeClass("active");
+	if(!$(".swiper-slide").hasClass("not_active")){
+		$(".swiper-slide").css("background","#57D7D5");
+		$(".swiper-slide").css("color","black");
+	}
+}
  
 	function reserve_ajax(data) {
 		   console.log(data)
+		   console.log("reserve_ajax")
 		    $.ajax({
   			      type : "POST",
   			      data : data,
@@ -200,12 +220,11 @@ $(document).on('click','.number-spinner button',
   			    	  console.log(data)
   			      
   			         if (data!=null) { // 총갯수가 0개이상인 경우
-  	
+  			        	 console.log("data 0개 이상")
   			            $(data).each(
   			               function(index, item) {
   			            	 $('.swiper-wrapper input[name=time_slide]').each(function(){
   			       					var hour=this.value;
-  			       					console.log(hour)
   			       					if (parseInt(hour) >= parseInt(item.start_time) 
   			       							&& parseInt(hour) <= parseInt(item.end_time)) { 
   			       					console.log("예약되어있는 시간:"+this.value);

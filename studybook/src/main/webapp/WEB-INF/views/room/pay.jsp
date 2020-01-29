@@ -50,7 +50,7 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'STUDYBOOK',
-            amount : ${room_food_total_price} ,
+            amount : '${room_food_total_price}' ,
             buyer_email : '${reserve.reserver_email }',
             buyer_name : '${reserve.reserver_name }' ,
             buyer_tel : '${reserve.reserver_phone }' ,
@@ -96,8 +96,8 @@
         
     });
     
-    </script>
- 	 -->
+    </script> -->
+ 	
 </body>
 </html>
 

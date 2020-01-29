@@ -40,7 +40,7 @@
 				<div class="e_room_info">
 					
 					<div class="e_room_pic">
-					<img src='${room.FILE_NAME }'>
+					<img src='resources/image/room/${room.FILE_NAME }'>
 					</div>
 					
 					<div class="e_room_detail">
