@@ -182,62 +182,26 @@
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
-	<!-- room reserve table roomnumber 비교 -->
-	<select id="searchRoomCode" parameterType="java.util.Map" resultType="int">
-		select count(*)
-		from room, reserve
-		where room.ROOM_CODE=reserve.room_code
-		and reserve.reserve_date=TO_DATE(#{date})
-		and reserve.start_time between #{starttime} and #{endtime}-1
-		and reserve.end_time-1 between #{starttime} and #{endtime}
-		and #{starttime} between reserve.start_time and reserve.end_time-1
-		and #{endtime}-1 between reserve.start_time-1 and reserve.end_time
-	</select>
-	
-	<!-- 예약 없을 때 room 검색 결과 -->
-	<select id="searchRoomInfo" parameterType="java.util.Map" resultType="room">
-		select *
-		from (select rownum rnum, b.*
-		from (select room.ROOM_CODE, room.ROOM_NAME, room.MIN_MEMBER, room.MAX_MEMBER,
-		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
-		from room, gallery
-		where room.ROOM_CODE=gallery.ROOM_CODE
-		and gallery.gallery_num=1
-		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
-		order by room.room_code) b
-		)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
-	</select>
-	
-	<!-- 예약 없을 때 room 검색 결과 총 갯수 -->
-	<select id="searchRoomInfoCount" parameterType="java.util.Map" resultType="int">
-		select count(*)
-		from room, gallery
-		where room.ROOM_CODE=gallery.ROOM_CODE
-		and gallery.gallery_num=1
-		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
-	</select>
-	
 	<!-- room 검색 결과 -->
 	<select id="searchRoom" parameterType="java.util.Map" resultType="room">
 		select *
 		from (select rownum rnum, b.*
 		from (select room.ROOM_CODE, room.ROOM_NAME, room.MIN_MEMBER, room.MAX_MEMBER,
-		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME,
-		reserve.reserve_date, reserve.start_time, reserve.end_time
-		from room, gallery, reserve
-		where room.ROOM_CODE=gallery.ROOM_CODE
-		and room.ROOM_CODE=reserve.room_code
+		room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
+		from (room inner join gallery 
+		on room.ROOM_CODE=gallery.ROOM_CODE
 		and gallery.gallery_num=1
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER})
+		
+		left outer join reserve
+		on room.ROOM_CODE=reserve.room_code
 		and reserve.reserve_date!=TO_DATE(#{date})
 		and reserve.start_time not between #{starttime} and #{endtime}-1
 		and reserve.end_time-1 not between #{starttime} and #{endtime}
 		and #{starttime} not between reserve.start_time and reserve.end_time-1
 		and #{endtime}-1 not between reserve.start_time and reserve.end_time
-		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
+		
 		order by room.room_code) b
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
@@ -246,17 +210,18 @@
 	<!-- room 검색 결과 총 갯수 -->
 	<select id="searchRoomCount" parameterType="java.util.Map" resultType="int">
 		select count(*)
-		from room, gallery, reserve
-		where room.ROOM_CODE=gallery.ROOM_CODE
-		and room.ROOM_CODE=reserve.room_code
+		from (room inner join gallery 
+		on room.ROOM_CODE=gallery.ROOM_CODE
 		and gallery.gallery_num=1
+		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
+		and room.MAX_MEMBER &gt;= #{MAX_MEMBER})
+		left outer join reserve
+		on room.ROOM_CODE=reserve.room_code
 		and reserve.reserve_date!=TO_DATE(#{date})
 		and reserve.start_time not between #{starttime} and #{endtime}-1
 		and reserve.end_time-1 not between #{starttime} and #{endtime}
 		and #{starttime} not between reserve.start_time and reserve.end_time-1
-		and #{endtime}-1 not between reserve.start_time-1 and reserve.end_time
-		and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-		and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
+		and #{endtime}-1 not between reserve.start_time and reserve.end_time
 	</select>
 	<!-- 민지 끝 -->
 

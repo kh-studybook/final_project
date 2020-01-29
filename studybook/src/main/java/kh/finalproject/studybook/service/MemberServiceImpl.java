@@ -105,6 +105,12 @@ public class MemberServiceImpl implements MemberService{
 	public int updateMember(Member member) {
 		return dao.updateMember(member);
 	}
+
+	@Override
+	public int delete(int key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

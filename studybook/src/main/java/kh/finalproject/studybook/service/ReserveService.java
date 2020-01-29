@@ -43,10 +43,7 @@ public interface ReserveService {
 	//나의 리뷰 등록하기
 	public int RegisterReview(Map<Object, Object> obj);
 
-
-	public List<Reserve> getReserveList(int page, int limit);
-	//방 사진 가져오기
-	public List<Gallery> getRoomPicture(int mem_key);
+	
 	//어드민-예약 리스트 가져오기
 	public List<Reserve> getSearchList(int index, String search_word, int page, int limit);
 	//어드민-예약 리스트 카운트 가져오기

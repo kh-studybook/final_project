@@ -31,7 +31,7 @@ public class Reserve {
 	}
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
-
+	}
 	
 	
 	

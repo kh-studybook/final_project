@@ -221,26 +221,6 @@ select *
 		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
 	</insert>
 
-
-
-		(select rownum rnum, reserve.r_code,
-		reserve.mem_key, reserve.room_code,
-		reserve.reserve_date,
-		reserve.start_time, reserve.end_time,
-		reserve.total_cost,
-		reserve.require,
-		reserve.status, reserve.extra_num,
-		reserve.reserver_name, reserve.reserver_phone,
-		reserve.reserver_email,
-		reserve.pay_date
-		from reserve, member
-		where reserve.mem_key =
-		member.key)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
-		order by
-		reserve_date
-	</select>
-
 	<select id="reserveRoomPicture" parameterType="int"
 		resultType="String">
 		select * from (

@@ -130,10 +130,9 @@
 
 	<select id="getSearchList2" parameterType="map"
 		resultType="reserve">
-		select * from
-		(select rownum rnum, c.* from (select *
-		from (select ro.room_name, rv.count(*) from reserve rv, room ro where
-		rv.room_code=ro.room_code
+select *
+		from (select rownum rnum, b.*
+		from (select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
 		<if test="search_field!=null">
 			and
 			<choose>
@@ -145,16 +144,13 @@
 			</choose>
 			like #{search_word}
 		</if>
-		order by rv.r_code desc)b left outer join food_reserve fd on
-		fd.r_code=b.r_code)c)
+		order by rv.r_code desc) b)
 		where rnum &gt;=#{start} and rnum &lt;=#{end}
 	</select>
 
 	<select id="searchcount2" parameterType="map" resultType="int">
 		select count(*) from
-		(select rownum rnum, c.* from (select *
-		from (select ro.room_name, rv.* from reserve rv, room ro where
-		rv.room_code=ro.room_code
+		(select rownum rnum, b.* from (select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
 		<if test="search_field!=null">
 			and
 			<choose>
@@ -166,10 +162,33 @@
 			</choose>
 			like #{search_word}
 		</if>
-		order by rv.r_code desc)b left outer join food_reserve fd on
-		fd.r_code=b.r_code)c)
+		order by rv.r_code desc) b)
 	</select>
 
+	<!-- 푸드 예약 정보 -->
+	<select id="getFoodReserveDetail" parameterType="int" resultType="food_reserve">
+	select * from food_reserve where r_code=#{r_code}
+	</select>
+
+	<!-- 예약정보(룸네임 포함) -->
+	<select id="getDetail"  parameterType="int" resultType="reserve">
+	select * from reserve rv, room ro where ro.room_code=rv.room_code and rv.r_code=#{r_code}
+	</select>
+	
+	<!-- 예약정보 업데이트 -->
+	<update id="updateReserve" parameterType="reserve" >
+	update reserve
+	set 
+	start_time=#{start_time},
+	end_time=#{end_time},
+	total_cost=#{total_cost},
+	extra_num=#{extra_num},
+	reserver_name=#{reserver_name},
+	reserver_phone=#{reserver_phone},
+	reserver_email=#{reserver_email},
+	require=#{require}
+	where r_code=#{r_code}
+	</update>
 
 
 	<!-- 선아 : 예약 내역 개수 불러오기 -->
@@ -181,7 +200,6 @@
 	<select id="reservelist" parameterType="java.util.Map"
 		resultType="reserve">
 		select * from
-
 			(select rownum rnum, re.r_code, re.mem_key, re.room_code, re.reserve_date, re.start_time, 
 				re.end_time, re.total_cost, re.require, re.status, re.extra_num, 
 				re.reserver_name, re.reserver_phone, re.reserver_email, re.pay_date, go.file_name, ro.room_name
@@ -202,25 +220,6 @@
 		insert into review 
 		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
 	</insert>
-
-
-		(select rownum rnum, reserve.r_code,
-		reserve.mem_key, reserve.room_code,
-		reserve.reserve_date,
-		reserve.start_time, reserve.end_time,
-		reserve.total_cost,
-		reserve.require,
-		reserve.status, reserve.extra_num,
-		reserve.reserver_name, reserve.reserver_phone,
-		reserve.reserver_email,
-		reserve.pay_date
-		from reserve, member
-		where reserve.mem_key =
-		member.key)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
-		order by
-		reserve_date
-	</select>
 
 	<select id="reserveRoomPicture" parameterType="int"
 		resultType="String">
