@@ -107,16 +107,13 @@ instead of next to each other */
 				$('.s_submit').attr('disabled', true); 
 			} else {
 				$('.pwcheckmsg').text('비밀번호 일치');
-				$('.pwcheckmsg').css('color', '#56D7D6');
+				$('.pwcheckmsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', false); 
-				$('.s_submit').css('background', '#56D7D6');
+				$('.s_submit').css('background', '#7F56D2');
 			}
 
 		});	   
 
-      $(".tologin").click(function(){
-			location.href="login.mem";
-	  }); 
 });
    
 </script>
@@ -128,8 +125,7 @@ instead of next to each other */
 <p class=s_title>비밀번호 변경</p>
 <br><br><br>
 	<div class="s_container">
-		<form name="updatepwform" action="updatepw.mem" method="post">
-			
+		<form name="updatepwform" action="passwordProcess.mem" method="get">
 			
 
 			<div class="row height">

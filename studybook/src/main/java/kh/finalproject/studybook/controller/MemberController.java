@@ -114,6 +114,7 @@ public class MemberController {
 		return "member/my_password_index";
 	}
 	
+	
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
 	public ModelAndView memberUpdate(HttpSession session, ModelAndView mv) {
@@ -125,23 +126,25 @@ public class MemberController {
 	}
 
 	
-	// 수정 처리
-	@RequestMapping(value = "/updateProcess.mem", method = RequestMethod.POST)
-	public void updateProcess(Member member, HttpServletResponse response) throws Exception {
+	
+	
+	@RequestMapping(value = "/passwordProcess.mem", method = RequestMethod.GET)
+	public void passwordProcess(Member member, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		int result = memberservice.myupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		if (result == 1) {
-			out.println("alert('회원 정보 수정 완료');");
+			out.println("alert('비밀번호 변경 완료');");
 			out.println("location.href='my_update.mem';");
 		} else {
-			out.println("alert('회원 정보 수정 실패');");
+			out.println("alert('비밀번호 변경 실패');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
 		out.close();
 	}
+	
 	
 	
 	//delete? 
