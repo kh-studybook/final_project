@@ -23,21 +23,27 @@ public class MemberDAO {
 	}
 
 	public Member myinfo(int key) {
-		return sqlSession.selectOne("Members.myInfo",key);
+		return sqlSession.selectOne("Members.myInfo", key);
 	}
 
 	public Member isUser(String email) {
 		return sqlSession.selectOne("Members.usercheck", email);
 	}
 
-	public int delete(int key) {
-		return sqlSession.delete("Members.delete", key);
-	}
-
 	public int pwupdate(Member member) {
 		return sqlSession.update("Members.updatePw", member); 
 	}
 
+	public int phoneupdate(Member member) {
+		return sqlSession.update("Members.updatePhone", member); 
+	}
 
+	public int profileupdate(Member member) {
+		return sqlSession.update("Members.updateProfile", member); 
+	}
+
+	public int delete(Member member) {
+		return sqlSession.delete("Members.delete", member);
+	}
 
 }

@@ -41,14 +41,15 @@
 	</update>
 	
 	
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="member">
 		delete from member 
 		where key = #{key}
 	</delete>
 	
 	
 	<select id="myInfo" parameterType="int" resultType="member">
-		select * from member where key=#{mem_key}
+		select * from member 
+		where key = #{key}
 	</select>
 	
 	

@@ -1,29 +1,39 @@
 package kh.finalproject.studybook.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.service.MemberService;
 
 @Controller
-public class MemberController { 
+public class MemberController {
 
-	@Autowired 
+	@Value("${savefoldername}")
+	private String saveFolder;
+
+	@Autowired
 	private MemberService memberservice;
 
 	@RequestMapping(value = "/login.mem", method = RequestMethod.GET)
 	public String login() {
-		return "member/login_index"; 
+		return "member/login_index";
 	}
 
 	@RequestMapping(value = "/join.mem", method = RequestMethod.GET)
@@ -32,58 +42,57 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/joinSuccess.mem", method = RequestMethod.GET)
-	public ModelAndView joinSuccess_mem(String email, String name, ModelAndView mv) 
-	{
+	public ModelAndView joinSuccess_mem(String email, String name, ModelAndView mv) {
 		mv.addObject("email", email);
 		mv.addObject("name", name);
 		mv.setViewName("member/join_success_index");
 		return mv;
 	}
-	
-	
+
 	@RequestMapping(value = "/update.mem", method = RequestMethod.GET)
 	public String my_update() {
-		return "member/my_update_index"; 
+		return "member/my_update_index";
 	}
-	
-	
+
 	@RequestMapping(value = "/delete.mem", method = RequestMethod.GET)
 	public String my_delete() {
-		return "member/my_delete_index"; 
+		return "member/my_delete_index";
 	}
 
-	
-	
-	@RequestMapping(value = "/loginProcess.mem",  method = RequestMethod.POST)
+	@RequestMapping(value = "/loginProcess.mem", method = RequestMethod.POST)
 	public String loginProcess(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpServletResponse response, HttpSession session) throws Exception {
-		int result = memberservice.isUser(email, password);
-		System.out.println("결과?��(key�?)=" + result);
-		if (result == 0) {
-			
-			String message = "비�?번호�? ?��치하�? ?��?��?��?��.";
-			if (result == -1)
-				message = "존재?���? ?��?�� ?��메일?��?��?��.";
 
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
+		int result = memberservice.isUser(email, password);
+		System.out.println("결과는(key값)=" + result);
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		if (result > 0) {
+			session.setAttribute("email", email);
+			Member member = memberservice.myinfo(result);
+			session.setAttribute("member", member);
+			System.out.println("member.name" + member.getName());
+			return "redirect:main.net";
+
+		} else if (result == 0) {
 			out.println("<script>");
-			out.println("alert('" + message + "');");
+			out.println("alert('비밀번호가 일치하지 않습니다.');");
 			out.println("location.href='login.mem';");
 			out.println("</script>");
-			out.close();
-			return null;
-			
-		} else {
-			
-			Member member=memberservice.myinfo(result);
-			session.setAttribute("member", member);
-			System.out.println("member.name"+member.getName());
-			return "redirect:main.net";
+
+		} else if (result == -1) {
+			out.println("<script>");
+			out.println("alert('가입되지 않은 이메일입니다.');");
+			out.println("location.href='login.mem';");
+			out.println("</script>");
 		}
+		out.close();
+		return null;
 	}
 
-	// ?��?���??�� ?���?
+	// 회원가입 성공~
 	@RequestMapping(value = "/joinProcess.mem")
 	public void JoinProcess(Member member, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
@@ -91,121 +100,220 @@ public class MemberController {
 		int result = memberservice.insert(member);
 		out.println("<script>");
 		if (result == 1) {
-	//		out.println("alert('?��?���??�� 축하');");
-			out.println("location.href='joinSuccess.mem?email=" + member.getEmail() + "&name=" + member.getName() + "';" );
+			// out.println("alert('회원가입 축하');");
+			out.println(
+					"location.href='joinSuccess.mem?email=" + member.getEmail() + "&name=" + member.getName() + "';");
 		} else if (result == -1) {
-			out.println("alert('?���? �??��?��?�� ?��?�� ?��메일?��?��?��. ?��?�� ?�� ?��?�� ?��?��?��주세?��.');");
+			out.println("alert('이미 스터디북에 가입된 이메일입니다. 확인 후 다시 입력해주세요.');");
 			out.println("history.back();");
 		}
 		out.println("</script>");
 		out.close();
 	}
-	
-	
 
 	@RequestMapping(value = "/findpw.mem", method = RequestMethod.GET)
 	public String findpw() {
 		return "member/login_findpw_index";
 	}
-	
-	
+
 	@RequestMapping(value = "/updatepw.mem", method = RequestMethod.GET)
 	public String updatepw() {
 		return "member/my_password_index";
 	}
-	
-	
-	// ?��?��?��
+
+	@RequestMapping(value = "/updatephone.mem", method = RequestMethod.GET)
+	public String updatephone() {
+		return "member/my_phone_index";
+	}
+
+	// 수정폼으로 ㄱ
 	@RequestMapping(value = "/my_update.mem")
 	public ModelAndView memberUpdate(HttpSession session, ModelAndView mv) {
 		Member savemember = (Member) session.getAttribute("member");
-		
+
 		Member member = memberservice.myinfo(savemember.getKey());
 		mv.setViewName("member/my_update_index");
 		mv.addObject("member", member);
 		return mv;
 	}
 
-	
-	//비�?번호 �?�?
+	// 비밀번호 변경
 	@RequestMapping(value = "/passwordProcess.mem", method = RequestMethod.GET)
 	public void passwordProcess(String password, HttpSession session, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
-		
-		Member member = (Member) session.getAttribute("member");  //session
-		member.setPassword(password); //?��?���? �??��???�� ?���?
-		
+
+		Member member = (Member) session.getAttribute("member"); // session
+		member.setPassword(password); // 입력값 가져와서 넣기
+
 		int result = memberservice.pwupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		if (result == 1) {
-			out.println("alert('비�?번호 �?�? ?���?');");
+			out.println("alert('비밀번호 변경 완료');");
 			out.println("location.href='my_update.mem';");
 		} else {
-			out.println("alert('비�?번호 �?�? ?��?��');");
+			out.println("alert('비밀번호 변경 실패');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
 		out.close();
 	}
-	
-	
-	
-	//?��?��번호 �?�?
+
+	// 연락처 변경
 	@RequestMapping(value = "/phoneProcess.mem", method = RequestMethod.GET)
 	public void phoneProcess(String phone, HttpSession session, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
-		
+
 		Member member = (Member) session.getAttribute("member");
-		member.setPhone(phone); //?��?���? �??��???�� ?���?
-		
-		int result = memberservice.pwupdate(member);
+		member.setPhone(phone); // 입력값 가져와서 넣기
+
+		int result = memberservice.phoneupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		if (result == 1) {  
-			out.println("alert('?��?���? �?�? ?���?!');");
+		if (result == 1) {
+			out.println("alert('연락처 변경 완료!');");
 			out.println("location.href='my_update.mem';");
 		} else {
-			out.println("alert('?��?���? �?�? ?��?��');");
+			out.println("alert('연락처 변경 실패');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
 		out.close();
 	}
-	
-	
-	
-	//delete? 
-	@RequestMapping(value="deleteProcess.mem", method = RequestMethod.GET)
-	public int delete(int key, HttpServletResponse response) throws Exception {
-		int result = memberservice.delete(key);
-	
-		if (result != 1) {
-			response.setContentType("text/html;charset=utf-8");
+
+
+	//프로필사진 변경
+	@PostMapping("/profileProcess.mem")
+	public ModelAndView EventModifyAction(Member member, ModelAndView mv, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		MultipartFile uploadfile = member.getUploadfile();
+
+		/*
+		 * String saveFolder =
+		 * request.getSession().getServletContext().getRealPath("resources") +
+		 * "/upload/";
+		 */
+
+		if (uploadfile != null && !uploadfile.isEmpty()) {// 파일을 변경한 경우
+			System.out.println("파일 변경한 경우");
+			String fileName = uploadfile.getOriginalFilename();// 원래 파일명을 가져오기
+			member.setProfile_originalfile(fileName);
+
+			String fileDBName = fileDBName(fileName, saveFolder);
+
+			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+
+			// 바뀐 파일명으로 저장
+			member.setProfile(fileDBName);
+			System.out.println(fileDBName);
+		}
+
+		// DAO에서 수정 메서드를 호출하여 수정합니다.
+		int result = memberservice.profileupdate(member);
+
+		// 수정에 실패한 경우
+		if (result == 0) {
+			System.out.println("수정 실패");
+			mv.setViewName("redirect:my_update.mem");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "수정 실패");
+		} else {// 수정 성공한 경우
+			System.out.println("수정 완료");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('뭐�??');");
-			out.println("location.href='main.net';");
+			out.println("alert('수정 되었습니다.');");
 			out.println("</script>");
-			out.close();
+
+			String url = "redirect:my_update.mem";
+
+			// 이동  경로를 설정
+			mv.setViewName(url);
 		}
-		return result;
+		return mv;
 	}
+
+	public String fileDBName(String fileName, String saveFolder) {
+		// 필요한 데이터가 fileName와 saveFolder이므로 매개변수로 넘긴다.
+		// 새로운 폴더 이름 : 오늘 + 년 + 월 + 일
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH) + 1;
+		int date = c.get(Calendar.DATE);
+
+		String homedir = saveFolder + year + "-" + month + "-" + date;
+		System.out.println("homedir = " + homedir);
+		File path = new File(homedir);
+		if (!(path.exists())) {
+			path.mkdir();// 새로운 폴더를 생성
+		}
+		// 파일명이 중복되지 않게 난수를 구합니다.
+		Random r = new Random();
+		int random = r.nextInt(100000000);
+
+		/** 확장자 구하기 시작 */
+		int index = fileName.lastIndexOf(".");
+		// 문자열에서 특정 문자열의 위치 값(index)를 반환
+		// indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면,
+		// lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
+		// (파일명에 점이 여러개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
+		System.out.println("index = " + index);
+
+		String fileExtension = fileName.substring(index + 1);
+		System.out.println("fileExtension = " + fileExtension);
+		/** 확장자 구하기 끝 */
+
+		// 새로운 파일명 구하기
+		String refileName = "profile" + year + month + date + random + "." + fileExtension;
+		System.out.println("refileName = " + refileName);
+
+		// 오라클 DB에 저장될 파일명 구하기
+		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+		System.out.println("fileDBName = " + fileDBName);
+		return fileDBName;
+	}
+
 	
 	
-	
-	@RequestMapping (value = "/logout.mem", method = RequestMethod.GET)
+	// 탈퇴 제발
+	@RequestMapping(value = "deleteProcess.mem", method = RequestMethod.GET)
+	public String delete(HttpSession session, HttpServletResponse response) throws Exception {
+
+		Member savemember = (Member) session.getAttribute("member");
+		Member member = memberservice.myinfo(savemember.getKey());
+		int result = memberservice.delete(member);
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+
+		out.println("<script>");
+		if (result == 1) {
+			session.invalidate();
+			out.println("alert('계정이 정상적으로 삭제되었습니다. 감사합니다.');");
+			out.println("location.href='main.net';");
+		} else {
+			out.println("alert('계정 삭제 실패');");
+			out.println("history.back()");
+		}
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "/logout.mem", method = RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
 		session.invalidate();
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('?��?��?��?���? 로그?��?�� ?��?��?��?��?��.');");
+		// out.println("alert('정상적으로 로그아웃 하셨습니다.');");
 		out.println("location.href='main.net';");
 		out.println("</script>");
 		out.close();
 		return "redirect:main.net";
-		
+
 	}
-	
+
 }
