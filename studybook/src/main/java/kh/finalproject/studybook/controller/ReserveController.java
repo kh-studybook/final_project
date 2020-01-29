@@ -1,6 +1,7 @@
 
 package kh.finalproject.studybook.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -305,6 +307,7 @@ public class ReserveController {
 		System.out.println("ReserveController의 reserveservice.getSearchList 끝");
 		listcount = reserveservice.getSearchListCount(index, search_word);
 		System.out.println("ReserveController의 reserveservice.getSearchListCount 끝");
+		
 		// 총페이지수
 		int maxpage = (listcount + limit - 1) / limit;
 
@@ -330,6 +333,71 @@ public class ReserveController {
 
 		return mv;
 	}
+	
+	//예약 내역 확인 및 수정 ReserveModify.re// 상세내용 조회
+	@GetMapping("ReserveModify.re")
+	public ModelAndView reserveModify(int r_code, ModelAndView mv,HttpServletRequest request) throws Exception {
+		Reserve reservedata = reserveservice.getReserveFullDetail(r_code);
+		List<Food_reserve> fooddata =  reserveservice.getFood_reservelist(r_code);
+		
+		if(reservedata==null) {
+			System.out.println("(수정)상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "(수정) 상세보기 실패입니다.");
+			return mv;
+		}
+		System.out.println("(수정)상세보기 성공");
+		mv.addObject("reservedata", reservedata);
+		mv.addObject("food_reservelist", fooddata);
+		mv.setViewName("admin/reserve_modify");
+		return mv;
+	}
+	
+	//어드민 예약 수정 ReserveModifyAction.re
+	@PostMapping("ReserveModifyAction.re")
+	public ModelAndView ReserveModifyAction(Reserve reserve, ModelAndView mv, HttpServletRequest request, HttpServletResponse response ) throws Exception{
+		int result = reserveservice.updateReserve(reserve);
+		//수정 실패하는 경우
+		if (result == 0) {
+			System.out.println("Reserve 테이블 수정 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "Reserve 테이블 수정 실패");
+		} 
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정되었습니다.')");
+		out.println("location.href='ReserveAdList.re';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+	//어드민- 예약 취소 CancelAdReserve.re
+	@GetMapping("CancelAdReserve.re")
+	public String cancelReserve(int r_code, HttpServletResponse response ) throws Exception{
+		
+		int result = reserveservice.reserve_cancel(r_code);
+		if (result == 0) {
+			System.out.println("예약 취소 실패");
+		}
+		System.out.println("예약 취소 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('예약 취소 되었습니다.');");
+		out.println("location.href='ReserveAdList.re';");
+		out.println("</script>");
+		out.close();
+		return null;
+		
+	}
+	
+	
+	
+	//
 	
 	
 	// 지은 끝

@@ -44,6 +44,11 @@ public interface ReserveService {
 	public List<Reserve> getSearchList(int index, String search_word, int page, int limit);
 	//어드민-예약 리스트 카운트 가져오기
 	public int getSearchListCount(int index, String search_word);
+	//어드민 - 예약 정보 가져오기(룸네임포함)
+	public Reserve getReserveFullDetail(int r_code);
+	//어드민 - 예약 수정
+	public int updateReserve(Reserve reserve);
+	
 	
 	
 

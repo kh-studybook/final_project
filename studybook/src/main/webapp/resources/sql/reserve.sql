@@ -21,11 +21,20 @@ delete reserve
 
 select * from reserve;
 
-select ro.room_name, rv.* from reserve rv, room ro
+select * from reserve rv, room ro where ro.room_code=rv.room_code
 
-select rownum rnum, c.* from (select * 
+select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc
+
+select * from (select rownum rnum, b.* from (select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc) b)
+
+select * from food_reserve
+
+
+select rownum rnum, b.* from (select * 
 from(select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
-order by rv.room_code desc)b left outer join food_reserve fd on fd.r_code=b.r_code)c
+order by rv.room_code desc)b 
 
 select * from
 (select rownum rnum, c.* from (select * 

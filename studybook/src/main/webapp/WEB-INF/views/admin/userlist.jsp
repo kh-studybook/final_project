@@ -69,79 +69,60 @@ margin-top:50px;
 }
 </style>
 <script>
+	
 </script>
 </head>
 <body>
 	<div class="container w_wrap">
 		<div class="row">
 			<div class="col">
-				<p class="w_title">예약관리</p>
+				<p class="w_title">회원 관리</p>
 				<br>
 
-				<form action="ReserveAdList.re">
+				<form action="MemberList.mem">
 					<div class="input-group">
 						<select id="viewcount" name="search_field">
-							<option value="0" selected>예약 번호</option>
-							<option value="1">룸 이름</option>
-							<option value="2">예약자</option>
-							<option value="3">고객 전화번호</option>
-							<option value="4">고객 이메일</option>
+							<option value="0" selected>회원키</option>
+							<option value="1">회원 이름</option>
+							<option value="2">회원 전화번호</option>
+							<option value="3">회원 이메일</option>
 						</select> <input name="search_word" type="text" class="form-control"
 							placeholder="Search" value="${search_word}">
 						<button class="btn btn-primary" type="submit">검색</button>
 					</div>
 				</form>
-			
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<%--예약 데이터가 있는 경우 --%>
+				<%--멤버 리스트가 있는 경우 --%>
 				<c:if test="${listcount>0}">
-					<p class="w_span">총 예약 수: ${listcount}</p>
+					<p class="w_span">총 음식 수: ${listcount}</p>
 					<table class="table table-striped custab">
 						<thead>
 							<tr>
 								<th>No</th>
-								<th>예약 번호</th>
-								<th>룸 이름</th>
-								<th>예약자</th>
-								<th>전화번호</th>
+								<th>이름</th>
 								<th>이메일</th>
-								<th>시작</th>
-								<th>끝</th>
-								<th>추가</th>
-								<th>금액</th>
-								<th>예약 날짜</th>
-								<th>상태</th>
-								<th class="text-center">상세/수정</th>
+								<th>전화번호</th>
+								<th>멤버키</th>
+								<th class="text-center">수정/삭제</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:set var="num" value="${(page-1)*10+1}" />
-							<c:forEach var="m" items="${reservelist}">
+							<c:forEach var="m" items="${userlist}">
 								<tr>
 									<td><c:out value="${num}" /> <c:set var="num"
 											value="${num+1}" /></td>
-									<td>${m.r_code}</td>
-									<td>${m.room_name}</td>
-									<td>${m.reserver_name}</td>
-									<td>${m.reserver_phone}</td>
-									<td>${m.reserver_email}</td>
-									<td>${m.start_time}</td>
-									<td>${m.end_time}</td>
-									<td>${m.extra_num}명</td>
-									<td>${m.total_cost}</td>
-									<td>${m.reserve_date}</td>
-									<c:if test="${m.status==1}">
-									<td>정상</td>
-									</c:if>
-									<c:if test="${m.status==0}">
-									<td>취소</td>
-									</c:if>
+									<td>${m.name}</td>
+									<td>${m.email}</td>
+									<td>${m.phone}</td>
+									<td>${m.key}</td>
 									<td class="text-center"><a class='btn btn-info btn-xs'
-										href="ReserveModify.re?r_code=${m.r_code}">상세/수정 </a>
-										</td>
+										href="memberModify.re?key=${m.key}">수정 </a> <a
+										href="memberDelete.re?key=${m.key}"
+										class="btn btn-danger btn-xs">삭제</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -156,7 +137,7 @@ margin-top:50px;
 									</c:if>
 									<c:if test="${page > 1 }">
 										<li class="page-item"><a
-											href="ReserveAdList.re?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
+											href="MemberList.mem?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link">이전</a>&nbsp;</li>
 									</c:if>
 
@@ -167,7 +148,7 @@ margin-top:50px;
 										</c:if>
 										<c:if test="${a != page }">
 											<li class="page-item"><a
-												href="ReserveAdList.re?page=${a}&search_field=${search_field}&search_word=${search_word}"
+												href="MemberList.mem?page=${a}&search_field=${search_field}&search_word=${search_word}"
 												class="page-link">${a}</a></li>
 										</c:if>
 									</c:forEach>
@@ -178,7 +159,7 @@ margin-top:50px;
 									</c:if>
 									<c:if test="${page < maxpage }">
 										<li class="page-item"><a
-											href="ReserveAdList.re?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
+											href="MemberList.mem?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link ">&nbsp;다음</a></li>
 									</c:if>
 								</ul>
@@ -186,16 +167,14 @@ margin-top:50px;
 						</div>
 					</div>
 				</c:if>
-				<%--예약 리스트가 없는 경우 --%>
+				<%--멤버 리스트가 없는 경우 --%>
 				<c:if test="${listcount==0}">
 					<p class="w_p w_margin-top">검색 결과가 없습니다.</p>
 				</c:if>
+
 			</div>
 		</div>
 	</div>
-	
-	
-	
 </body>
 <script>
 	

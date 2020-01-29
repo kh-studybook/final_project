@@ -90,6 +90,14 @@ public class ReserveDAO {
 	public int getSearchListCount2(Map<String, Object> map) {
 		return sqlSession.selectOne("Reserves.searchcount2",map);
 	}
+	//예약 정보 가져오기(룸네임 포함)
+	public Reserve getReserveFullDetail(int r_code) {
+		return sqlSession.selectOne("Reserves.getDetail",r_code);
+	}
+	//예약 정보 수정
+	public int updateReserve(Reserve reserve) {
+		return sqlSession.update("Reserves.updateReserve",reserve);
+	}
 	
 	//--지은 끝
 
@@ -113,6 +121,9 @@ public class ReserveDAO {
 	public List<Gallery> getRoomPicture(int mem_key) {
 		return sqlSession.selectList("Reserves.reserveRoomPicture", mem_key);
 	}
+	
+	
+	
 	
 	
 
