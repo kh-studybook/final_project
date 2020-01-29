@@ -97,6 +97,7 @@ public class RoomController {
 		System.out.println("fileList:" + fileList.size());
 
 		String path = saveFolder;
+		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 		System.out.println("path = " + path);
 
 		// 포문으로 꺼냄

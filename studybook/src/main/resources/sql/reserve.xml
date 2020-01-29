@@ -111,20 +111,27 @@
 	
 	<select id = "reservelist" parameterType = "java.util.Map" resultType="reserve">
 		select * from
-			(select rownum rnum, reserve.r_code, reserve.mem_key, reserve.room_code, reserve.reserve_date, reserve.start_time, reserve.end_time, reserve.total_cost, reserve.require, 
-			reserve.status, reserve.extra_num, reserve.reserver_name, reserve.reserver_phone, reserve.reserver_email, reserve.pay_date
-   			from reserve, member 
-  			where reserve.mem_key = member.key)
+			(select rownum rnum, re.r_code, re.mem_key, re.room_code, re.reserve_date, re.start_time, 
+				re.end_time, re.total_cost, re.require, re.status, re.extra_num, 
+				re.reserver_name, re.reserver_phone, re.reserver_email, re.pay_date, go.file_name, ro.room_name
+   			 from reserve re, member me, gallery go, room ro
+  			 where re.mem_key = me.key 
+  			 and re.room_code = go.room_code
+  			 and ro.room_code = re.room_code
+  			 and go.gallery_num = 1
+  			 and re.mem_key = #{mem_key})
  		where rnum &gt;= #{start} and rnum &lt;= #{end}
       	order by reserve_date
 	</select>
 	
-	<select id = "reserveRoomPicture" parameterType = "int" resultType = "String">
-		select * from (	
-			select file_name from 
-			(select * from member m, reserve r, gallery g
-			where  m.key = r.mem_key and r.room_code = g.room_code)
-		where mem_key = #{mem_key})
-	</select>
+	<insert id = "registerReview" parameterType = "java.util.Map">
+		<selectKey resultType="int" order="BEFORE" keyProperty="review_code">
+			select nvl(max(review_code), 0)+1 from review
+		</selectKey>
+		insert into review 
+		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
+	</insert>
+
+
 </mapper>
 

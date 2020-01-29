@@ -8,6 +8,7 @@ import kh.finalproject.studybook.domain.Event_comment;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -70,8 +71,8 @@ public class EventDAO {
 		return sqlSession.delete("event_comment.delete", event_com_num);
 	}
 
-	public int Event_commentsUpdate(Event_comment co) {
-		return sqlSession.update("event_comment.update", co);
+	public int Event_commentsUpdate(Map<Object, Object> obj) {
+		return sqlSession.update("event_comment.update", obj);
 	}
 
 	public int Event_commentReply(Event_comment co) {

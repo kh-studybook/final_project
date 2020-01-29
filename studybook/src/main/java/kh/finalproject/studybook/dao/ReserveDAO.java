@@ -95,11 +95,11 @@ public class ReserveDAO {
 	public int getReserveListCount(int mem_key) {
 		return sqlSession.selectOne("Reserves.reserveListCount", mem_key);
 	}
-	public List<Reserve> getReserveList(HashMap<String, Integer> map) {
+	public List<Reserve> getReserveList(HashMap<Object, Object> map) {
 		return sqlSession.selectList("Reserves.reservelist", map);
 	}
-	public List<Gallery> getRoomPicture(int mem_key) {
-		return sqlSession.selectList("Reserves.reserveRoomPicture", mem_key);
+	public int registerReview(Map<Object, Object> obj) {
+		return sqlSession.insert("Reserves.registerReview", obj);
 	}
 
 }

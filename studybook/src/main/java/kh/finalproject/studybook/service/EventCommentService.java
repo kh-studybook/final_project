@@ -13,7 +13,7 @@ public interface EventCommentService {
 	//댓글 삭제
 	int Event_commentsDelete(int event_com_num);
 	//댓글 수정
-	int Event_commentsUpdate(Event_comment co);
+	int Event_commentsUpdate(Map<Object, Object> obj);
 	//대댓글 달기
 	int Event_commentReply(Event_comment co);
 

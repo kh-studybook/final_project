@@ -18,3 +18,33 @@ drop table gallery;
 select * from gallery;
 
 truncate table gallery;
+
+			   select * from 
+			   		(select rownum rnum, b.*
+			   		from (select re.r_code, re.mem_key, re.room_code, re.reserve_date, re.start_time, 
+							re.end_time, re.total_cost, re.require, re.status, re.extra_num, 
+							re.reserver_name, re.reserver_phone, re.reserver_email, re.pay_date, go.file_name
+   			 			from reserve re, member me, gallery go
+  			 			where re.mem_key = me.key 
+  			   			and go.room_code = ro.r_code
+  			   			and re.mem_key = 1001
+  			   			and go.gallery_num = 1
+  			   	    	order by ro.r_code desc) b)
+
+
+select * from 
+          (select rownum rnum, b.*
+            from (select re.*, go.file_name
+             from reserve re, member me, gallery go
+            where re.mem_key = me.key 
+              and go.room_code = re.r_code
+              and re.mem_key = 1001 
+              and go.gallery_num = 1 order by re.r_code desc) b)
+
+              
+              select rownum rnum, re.r_code, re.mem_key, re.room_code, re.reserve_date, re.start_time, 
+				re.end_time, re.total_cost, re.require, re.status, re.extra_num, 
+				re.reserver_name, re.reserver_phone, re.reserver_email, re.pay_date, go.file_name
+   			 from reserve re, member me, gallery go
+  			 where re.mem_key = me.key 
+  			 and go.gallery_num = 1

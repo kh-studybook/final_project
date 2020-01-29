@@ -3,6 +3,7 @@ package kh.finalproject.studybook.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -330,9 +331,6 @@ public class ReserveController {
 			//현재 세션에서 mem_key 가져오기
 			Member member = (Member)session.getAttribute("member");
 			int mem_key = member.getKey();
-			
-			//사진 가져오기
-			List<Gallery> room_picture = reserveservice.getRoomPicture(mem_key);
 				
 			int limit = 10;//기본으로 10개의 글을 보여줌
 			int listcount = reserveservice.getReserveListCount(mem_key);// 총 리스트를 받아옴
@@ -343,7 +341,7 @@ public class ReserveController {
 		
 			if (endpage > maxpage){endpage = maxpage;}		
 		
-			List<Reserve> reservelist = reserveservice.getReserveList(page, limit);
+			List<Reserve> reservelist = reserveservice.getReserveList(page, limit, mem_key);
 			mv.setViewName("room/reserve_list");
 			mv.addObject("page", page);
 			mv.addObject("maxpage", maxpage);
@@ -354,7 +352,6 @@ public class ReserveController {
 			mv.addObject("limit", limit);
 			//현재 mem_key 보내기
 			mv.addObject("mem_key", mem_key);
-			mv.addObject("room_picture", room_picture);
 			return mv;
 		} catch (NullPointerException e) {
 			response.setContentType("text/html;charset=utf-8");
@@ -366,6 +363,23 @@ public class ReserveController {
 		}
 		return null;
 	}
+	
+	//후기 등록하기
+	@RequestMapping("ReviewRegister.re")
+	public String ReviewRegister(int room_code, String content, Date review_date, int mem_key, ModelAndView mv,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<Object, Object> obj = new HashMap<Object, Object>();
+		obj.put("room_code", room_code);
+		obj.put("review_date", review_date);
+		obj.put("content", content);
+		obj.put("mem_key", mem_key);
+			
+		int ok = reserveservice.RegisterReview(obj);
+		response.getWriter().print(ok);		
+		return "getReviewList.re";
+	}
+
+
 
 
 }

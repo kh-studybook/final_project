@@ -334,7 +334,7 @@ public class EventController {
 				@RequestParam(value = "event_num", defaultValue = "1", required = false)int event_num, 
 				@RequestParam(value = "mem_key", defaultValue = "1", required = false)int mem_key, 
 				HttpServletRequest request, HttpSession session) throws Exception {
-			System.out.println("event_num : " + event_num);
+			System.out.println("불러올 댓글 event_num : " + event_num);
 			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num, mem_key);
 			Map<String, Object> obj  = new HashMap<String, Object>();
 			obj.put("list", list);
@@ -360,8 +360,17 @@ public class EventController {
 		
 		//댓글 업데이트하기
 		@RequestMapping("Event_commentUpdate.eve")
-		public void Event_commentsUpdate(Event_comment co, HttpServletResponse response) throws Exception {
-			int ok = eventEvent_commentservice.Event_commentsUpdate(co);
+		public void Event_commentsUpdate(
+				@RequestParam(value = "event_num", defaultValue = "1", required = false)int event_num, 
+				@RequestParam(value = "event_com_num", defaultValue = "1", required = false)int event_com_num, 
+				@RequestParam(value = "com_content", defaultValue = "1", required = false)String com_content, 
+				HttpServletResponse response) throws Exception {
+			Map<Object, Object> obj = new HashMap<Object, Object>();
+			obj.put("event_num", event_num);
+			obj.put("event_com_num", event_com_num);
+			obj.put("com_content", com_content);
+			
+			int ok = eventEvent_commentservice.Event_commentsUpdate(obj);
 			response.getWriter().print(ok);
 		} 
 		

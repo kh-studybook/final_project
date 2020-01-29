@@ -19,6 +19,15 @@ public class Reserve {
 	//룸이름만 필요
 	private String room_name;
 	
+	//DB에 없는 값 - file name
+	private String file_name;
+	
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
 	public String getRoom_name() {
 		return room_name;
 	}

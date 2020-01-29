@@ -136,19 +136,22 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<Reserve> getReserveList(int page, int limit) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	public List<Reserve> getReserveList(int page, int limit, int mem_key) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		int startrow = (page - 1)*limit + 1;
 		int endrow = startrow + limit - 1;
 		map.put("start", startrow);
 		map.put("end", endrow);
+		map.put("mem_key", mem_key);
 		return reserveDAO.getReserveList(map);
 	}
 
 	@Override
-	public List<Gallery> getRoomPicture(int mem_key) {
-		return reserveDAO.getRoomPicture(mem_key);
+	public int RegisterReview(Map<Object, Object> obj) {
+		return reserveDAO.registerReview(obj);
 	}
+	
+	
 
 }
 
