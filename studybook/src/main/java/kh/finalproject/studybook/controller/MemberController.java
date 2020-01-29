@@ -162,7 +162,7 @@ public class MemberController {
 		int result = memberservice.pwupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		if (result == 1) {
+		if (result == 1) {  
 			out.println("alert('연락처 변경 완료!');");
 			out.println("location.href='my_update.mem';");
 		} else {

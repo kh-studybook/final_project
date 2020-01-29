@@ -9,7 +9,7 @@ public class Member {
 	private String phone; 
 	private int key;
 	private String profile = "/image/profile/default.png";
-	private MultipartFile uploadfile;	
+	private MultipartFile uploadfile;	 
 	
 	
 	public String getName() {

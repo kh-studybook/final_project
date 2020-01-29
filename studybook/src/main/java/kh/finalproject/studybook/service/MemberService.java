@@ -5,7 +5,7 @@ import kh.finalproject.studybook.domain.Member;
 public interface MemberService {
 
 	public int insert(Member m);
-
+ 
 	public Member myinfo(int key);
 
 	public int myupdate(Member member);

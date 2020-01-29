@@ -320,7 +320,7 @@ instead of next to each other */
 							<div class=modal_intro>
 								<p class=modal_title>연락처 변경</p>
 								<p class=modal_text>새 연락처 입력</p>
-							</div>
+							</div> 
 
 							<div class="modal_content">
 								<input type="text" id="phone" name="phone"

@@ -19,12 +19,12 @@
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
-}
+} 
 
 .s_container {
 	display: flex;
 	justify-content: center;
-}
+} 
 
 .s_input {
 	width: 330px;

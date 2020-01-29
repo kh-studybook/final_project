@@ -247,7 +247,7 @@ instead of next to each other */
 								$('.phonemsg').text('! 연락처는 숫자만 입력해주세요.');
 								$('.phonemsg').css('color', 'LightCoral');
 							}
-						});
+						}); 
 
 						if ($("#name").val() != "" || $("#email").val() != ""
 								|| $("#password").val() != ""

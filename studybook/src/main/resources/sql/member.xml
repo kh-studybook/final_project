@@ -25,7 +25,7 @@
 		password = #{password}
 		where key = #{key}
 	</update>
-	
+	 
 	
 	<update id="updatePhone" parameterType="member">
 		update member set

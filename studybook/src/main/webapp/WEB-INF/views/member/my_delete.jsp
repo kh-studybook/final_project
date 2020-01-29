@@ -125,7 +125,7 @@ instead of next to each other */
 		<form name="updatepwform" action="passwordProcess.mem" method="get">
 
 			<div class="row height">
-				<div class="col-100">
+				<div class="col-100"> 
 					<span class=warn>${member.name}님,</span>
 					<br> 
 					<span class=warn>삭제 버튼을 누르시면</span>
