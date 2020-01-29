@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>notice modify</title>
-<script>
+<script> 
 	$(document).ready(function() {
 		var check = 0;
 
