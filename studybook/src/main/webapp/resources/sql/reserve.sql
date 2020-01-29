@@ -23,7 +23,32 @@ delete reserve
 
 select * from reserve;
 
+
 insert into reserve values (1001, 1001, 2, '2020-02-03 00:00:00.0', '15', '17', 11000, NULL, 1, 1, lala, '01022222222', 'lala@naver.com', sysdate);
+
+select * from reserve rv, room ro where ro.room_code=rv.room_code
+
+select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc
+
+select * from (select rownum rnum, b.* from (select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc) b)
+
+select * from food_reserve
+
+
+select rownum rnum, b.* from (select * 
+from(select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+order by rv.room_code desc)b 
+
+select * from
+(select rownum rnum, c.* from (select * 
+from(select ro.room_name, rv.* from reserve rv, room ro where rv.room_code=ro.room_code
+and rv.r_code like 1006
+order by rv.r_code desc)b left outer join food_reserve fd on fd.r_code=b.r_code)c)
+where rnum >=1 and rnum <=10
+
+
 
 insert into reserve values (1004,999,2,'2019/10/30','13','15',
 26000,'요구사항',

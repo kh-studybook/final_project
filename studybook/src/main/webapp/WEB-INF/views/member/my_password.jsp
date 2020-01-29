@@ -5,8 +5,7 @@
 <html>  
 <head>
 <meta charset="UTF-8">
-<title>update pw</title>
-
+<title>update password</title>
 
 <style>
 * {
@@ -14,17 +13,17 @@
 	font-family: "맑은 고딕";
 }
 
-.s_title { 
-	margin-top: 230px; 
+.s_title {
+	margin-top: 230px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
-}
+} 
 
 .s_container {
 	display: flex;
 	justify-content: center;
-}
+} 
 
 .s_input {
 	width: 330px;
@@ -39,7 +38,7 @@
 .s_submit {
 	width: 330px;
 	height: 43px;
-	line-height:43px;
+	line-height: 43px;
 	background-color: #9f9f9f;
 	color: white;
 	margin-top: 10px;
@@ -48,70 +47,43 @@
 	cursor: pointer;
 }
 
-input[type=checkbox] {
-	background:#ffffff;	
+.s_submit:hover {
+	opacity:70%;
 }
 
-.findpw {
-	text-decoration: none;
+input[type=checkbox] {
+	background: #ffffff;
+}
+
+.pwmsg, .pwcheckmsg {
+	font-size:12px;
 }
 
 .col-100 {
 	width: 100%;
-	margin-bottom: 30px;
+	margin-bottom: 0px;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+/* Responsive layout 
+- when the screen is less than 600px wide, 
+make the two columns stack on top of each other 
+instead of next to each other */
 @media screen and (max-width: 700px) {
 	.col-100 {
 		width: 100%;
-		margin-bottom: 30px;
+		margin-bottom: 0px;
 	}
 }
 
-.floatl {
-	float:left;
-	font-size: 12px;
-	color: #555555;
+.message {
+	mergin-top: 2px;
 }
 
-.floatr {
-	float:right;
-	font-size: 12px;
-	color: #555555;
+.height {
+	width: 330px;
+	height: 70px;
 }
 
-.clear {
-	clear:both;
-}
-
-
-.schonangemeldet {
-	margin-bottom: 40px;
-	font-size: 12px;
-	color: #555555;
-	display: flex;
-	justify-content: center;
-}
-
-.tologin {
-	font-size: 12px;
-	color: #7F56D2;
-	font-weight : bolder;
-	cursor: pointer;
-	margin-left: 20px;
-}
-
-.tologin:hover {
-	color:#56D7D6;
-}
-
-.joinus {
-	text-align:center;
-	font-size: 12px;
-	color: #555555;
-	margin-top:20px;
-}
 </style>
 
 
@@ -119,29 +91,28 @@ input[type=checkbox] {
 <script> 
 
    $(document).ready(function() {
-	      
-	   $('#password').on('keyup',function(){
-		      $('.pwcheckmsg').html('');
-		    });
-	   
-	   $('#pwcheck').on('keyup',function(){
-	        if($('#password').val() != $('#pwcheck').val()){
-	          $('.pwcheckmsg').html('비밀번호 일치하지 않음');
-	          $('.pwcheckmsg').attr('color', 'red');
-	        } else {
-	          $('.pwcheckmsg').html('비밀번호 일치함');
-	          $('.pwcheckmsg').attr('color', 'blue');
-	        }
+	   	var passwordtest = /^[0-9a-zA-Z]{6,20}$/;
+	   	
+	   	$('#password').blur(function() {
+			if (passwordtest.test($(this).val())) {
+				console.log(passwordtest.test($(this).val()));
+				$('.pwmsg').html('<img src=resources/image/check.png width=17px>');
+			} else {
+				$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
+				$('.pwmsg').css('color', 'LightCoral');
+			}
+		});
 
-	   });
-		    	   
-      
-      $(".tologin").click(function(){
-			location.href="login.mem";
-	  }); 
-      
-      
-});
+		$('#pwcheck').on('keyup', function() {
+			if ($('#password').val() != $('#pwcheck').val()) {
+				$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
+				$('.pwcheckmsg').css('color', 'LightCoral');
+			} else {
+				$('.pwcheckmsg').html('<img src=resources/image/check.png width=17px>');
+			}
+
+		});   
+	});
    
 </script>
 
@@ -150,29 +121,30 @@ input[type=checkbox] {
 <body>
 
 <p class=s_title>비밀번호 변경</p>
-
+<br><br><br>
 	<div class="s_container">
-		<form name="updatepwform" action="updatepw.mem" method="post">
-			
-			<div class="row"> 
+	
+		<form name="updatepwform" action="passwordProcess.mem" method="get">
+
+			<div class="row height">
 				<div class="col-100">
-					<input type="password" id="password" class="s_input" name="password" placeholder="${member.password}" readOnly>
+					<input type="password" id="password" class="s_input"
+						name="password" placeholder="새 비밀번호 입력">
 				</div>
-			</div> 
-			
-			<div class="row">
-				<div class="col-100">
-					<input type="password" id="password" class="s_input" name="password" placeholder="비밀번호">
-					<span class=pwmsg></span>	
+				<div class="col-100 message">
+					<span class="pwmsg"></span>
 				</div>
 			</div>
-			<div class="row">		
+			<div class="row height">
 				<div class="col-100">
-					<input type="password" id="pwcheck" class="s_input" name="pwcheck" placeholder="비밀번호 확인">
-					<span class=pwcheckmsg></span>	
+					<input type="password" id="pwcheck" class="s_input" name="pwcheck"
+						placeholder="새 비밀번호 확인">
+				</div>
+				<div class="col-100 message">
+					<span class="pwcheckmsg"></span>
 				</div>
 			</div>
-				
+
 			 
 			<div class="row">
 				<div class="col-100"> 

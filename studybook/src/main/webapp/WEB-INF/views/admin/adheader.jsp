@@ -83,7 +83,7 @@
 				onclick="javascript:location.href='RoomList.ro'">공간관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="FoodAdList.re">음식관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="ReserveAdList.re">예약관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="MemberList.bo">회원관리</a></li>
+			<li class="nav-item"><a class="nav-link" href="MemberList.mem">회원관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a>
 			</li>
 		</ul>

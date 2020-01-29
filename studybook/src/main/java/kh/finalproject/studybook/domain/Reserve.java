@@ -18,7 +18,11 @@ public class Reserve {
 	
 	//룸이름만 필요
 	private String room_name;
+	//어드민 필요
+	private int count;
+	private int food_code;
 	
+
 	//DB에 없는 값 - file name
 	private String file_name;
 	
@@ -27,6 +31,23 @@ public class Reserve {
 	}
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
+
+	
+	
+	
+	
+	public int getFood_code() {
+		return food_code;
+	}
+	public void setFood_code(int food_code) {
+		this.food_code = food_code;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+
 	}
 	public String getRoom_name() {
 		return room_name;

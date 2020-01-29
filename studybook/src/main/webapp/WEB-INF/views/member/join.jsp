@@ -51,8 +51,8 @@ input[type=checkbox] {
 	background: #ffffff;
 }
 
-.findpw {
-	text-decoration: none;
+.namemsg, .emailmsg, .pwmsg, .pwcheckmsg, .phonemsg {
+	font-size: 12px;
 }
 
 .col-100 {
@@ -115,7 +115,11 @@ instead of next to each other */
 }
 
 .message {
-	mergin-top: 2px;
+	mergin-bottom: 5px;
+}
+
+.msg {
+	font-size:10px;
 }
 
 .height {
@@ -125,6 +129,62 @@ instead of next to each other */
 
 .submit {
 	margin-bottom: 30px;
+}
+
+
+
+/*modal*/
+#modalforupdate {
+	display: none;
+}
+
+.modal {
+	text-align: center;
+}
+
+@
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal_dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.modal_wrap {
+	padding: 40px;
+	margin-top: 160px;
+	margin-left: auto;
+	width: 400px;
+	height: 300px;
+	background-color: white;
+}
+
+.modal_intro {
+	height: 80px;
+}
+
+.modal_body {
+	height: 80px;
+}
+
+.modal_title {
+	font-size: 20pt;
+}
+
+.modal_text {
+	font-size: 12pt;
+}
+
+#modal_phone {
+	
 }
 </style>
 
@@ -136,65 +196,78 @@ instead of next to each other */
 			.ready(
 					function() {
 
-						$('#password').on('keyup', function() {
-							$('.pwcheckmsg').html('');
+						var nametest = /^[가-힣a-zA-Z]+$/;
+						var passwordtest = /^[0-9a-zA-Z]{6,20}$/;
+						var emailtest = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+						var phonetest = /^010?([0-9]{4})?([0-9]{4})$/;
+
+						$("#name").blur(function() {
+							var value = $('#name').val().trim();
+							if (nametest.test($(this).val())) {
+								console.log(emailtest.test($(this).val()));
+								$(".namemsg").html('<img src=resources/image/check.png width=17px>');
+								
+							} else {
+								$('.namemsg').text('! 이름은 한글/영문만 입력 가능합니다.');
+								$('.namemsg').css('color', 'LightCoral');
+							}
+						});
+
+						$("#email").blur(function() {
+							var value = $('#email').val().trim();
+							if (emailtest.test($(this).val())) {
+								console.log(emailtest.test($(this).val()));
+								$(".emailmsg").html('<img src=resources/image/check.png width=17px>');
+							} else {
+								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
+								$('.emailmsg').css('color', 'LightCoral');
+							}
+						});
+
+						$('#password').blur(function() {
+							if (passwordtest.test($(this).val())) {
+								console.log(passwordtest.test($(this).val()));
+								$('.pwmsg').html('<img src=resources/image/check.png width=17px>');
+							} else {
+								$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
+								$('.pwmsg').css('color', 'LightCoral');
+							}
 						});
 
 						$('#pwcheck').on('keyup', function() {
 							if ($('#password').val() != $('#pwcheck').val()) {
-								$('.pwcheckmsg').text('! 비밀번호 일치하지 않음');
-								$('.pwcheckmsg').css('color', 'red');
+								$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
+								$('.pwcheckmsg').css('color', 'LightCoral');
 							} else {
-								$('.pwcheckmsg').text('비밀번호 일치함');
-								$('.pwcheckmsg').css('color', 'blue');
+								$('.pwcheckmsg').html('<img src=resources/image/check.png width=17px>');
 							}
 
-						});
-
-						var nametest = /^[가-힣]{2}$/;
-						var emailtest = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]*.[a-zA-Z]{2-3}$/i;
-						var phonetest = /^010?)?([0-9]{4})?([0-9]{4})$/;
-
-						
-						$("#name").blur(function() {
-							var nametest = /^[가-힣]{2}$/;
-							if (nametest.test($(this).val())) {
-									console.log(nametest.test($(this).val()));
-									$(".namemsg").text('');
-							} else {
-								$('.namemsg').text('이름에는 특수 문자가 들어갈 수 없습니다.');
-								$('.namemsg').css('color', 'red');
-							}
-						});
-
-					
-						$("#email").blur(function() {
-							if (emailtest.test($(this).val())) {
-									console.log(emailtest.test($(this).val()));
-									$(".emailmsg").text('');
-							} else {
-								$('.emailmsg').text('유효한 이메일 주소를 입력해주세요.');
-								$('.emailmsg').css('color', 'red');
-							}
 						});
 
 						$("#phone").blur(function() {
 							if (phonetest.test($(this).val())) {
-									console.log(phonetest.test($(this).val()));
-									$(".phonemsg").text('');
+								console.log(phonetest.test($(this).val()));
+								$(".phonemsg").html('<img src=resources/image/check.png width=17px>');
 							} else {
-								$('.phonemsg').text('전화번호를 -(특수기호)없이 숫자만 입력해주세요.');
-								$('.phonemsg').css('color', 'red');
+								$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
+								$('.phonemsg').css('color', 'LightCoral');
 							}
-						});
+						}); 
+
+						if ($("#name").val() != "" || $("#email").val() != ""
+								|| $("#password").val() != ""
+								|| $("#pwcheck").val() != ""
+								|| $("#phone").val() != "") {
+
+							$('.s_submit').attr('disabled', false);
+							$('.s_submit').css('background', '#56D7D6');
+						}
 
 						$(".tologin").click(function() {
 							location.href = "login.mem";
 						});
-
 					});
 </script>
-
 
 </head>
 <body>
@@ -212,7 +285,7 @@ instead of next to each other */
 						placeholder="이름">
 				</div>
 				<div class="col-100 message">
-					<span class="namemsg"></span>
+					<span class="namemsg msg"></span>
 				</div>
 			</div>
 
@@ -222,7 +295,7 @@ instead of next to each other */
 						placeholder="이메일">
 				</div>
 				<div class="col-100 message">
-					<span class="emailmsg"></span>
+					<span class="emailmsg msg"></span>
 				</div>
 			</div>
 
@@ -232,7 +305,7 @@ instead of next to each other */
 						name="password" placeholder="비밀번호">
 				</div>
 				<div class="col-100 message">
-					<span class="pwmsg"></span>
+					<span class="pwmsg msg"></span>
 				</div>
 			</div>
 			<div class="row height">
@@ -241,15 +314,14 @@ instead of next to each other */
 						placeholder="비밀번호 확인">
 				</div>
 				<div class="col-100 message">
-					<span class="pwcheckmsg"></span>
+					<span class="pwcheckmsg msg"></span>
 				</div>
 			</div>
 
 			<div class="row height">
 				<div class="col-100">
 					<input type="text" name="phone" id="phone" class="s_input"
-						name="phone" placeholder="전화번호" maxLength="11" required> <span
-						class="phonemsg message"></span>
+						name="phone" placeholder="연락처" maxLength="11" required>
 				</div>
 				<div class="col-100 message">
 					<span class="phonemsg"></span>
@@ -259,7 +331,8 @@ instead of next to each other */
 			<div class="row height">
 				<div class="col-100 joinus">
 					<span class="joinus"><input type="checkbox" name="priv">
-						서비스 약관과 개인정보 보호정책에 동의합니다.</span>
+						<a data-toggle="modal" data-target="#modalforupdate"
+						class=s_update id="v1">서비스 약관과 개인정보 보호정책에 동의합니다.</a></span>
 				</div>
 			</div>
 
@@ -272,32 +345,25 @@ instead of next to each other */
 	</div>
 
 
-<!-- modal 시작! -->
+	<!-- modal 시작! -->
 	<div class="modal" id="modalforupdate">
 		<div class="modal_dialog">
 			<div class="modal_wrap">
-			
+
 				<!-- modal body -->
 				<div class="modal_body">
-					<form >
+					<form>
 						<div class="phoneupdate">
-						
+
 							<div class=modal_intro>
 								<p class=modal_title>서비스약관개인정보보호정책</p>
 								<p class=modal_text>~~~.</p>
 							</div>
-							
-							<div class="modal_content">
-								<input type="text" id="phone" name="phone" placeholder="${member.phone}">
-								<span style="color: #141414; font-size: 10pt;" id="counter"></span>
-							</div>
-								
-							<div class=modal_submit>
-								<button type="button" class="modalclose"
-								data-dismiss="modal" aria-label="Close">취소</button>
-								<button type=submit class="submtbutton">저장</button>
-							</div>
-							
+
+
+
+							<div class=modal_submit></div>
+
 						</div>
 					</form>
 				</div>

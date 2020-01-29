@@ -224,29 +224,20 @@
 	margin: 5px !important;
 }
 
-.jsCalendar tbody td {
-	border-radius: 24px;
-	width: 48px;
-	height: 48px;
-	line-height: 48px;
-}
-
 .jsCalendar tbody td:hover {
 	cursor: pointer;
 }
 
 .jsCalendar tbody td.jsCalendar-current {
-	width: 46px;
-	height: 46px;
-	border-radius: 23px;
 	background-color: white;
 	border: 1px solid #7F56D2;
+	margin: -1px;
 	color: black;
 }
 
-.jsCalendar tbody td.j_selected {
-	border-radius: 24px;
+.jsCalendar tbody td.jsCalendar-selected {
 	background-color: #7F56D2;
+	border: 1px solid #7F56D2;
 	color: white;
 }
 
@@ -278,6 +269,12 @@
 
 .j_event {
 	position: relative;
+	cursor: pointer;
+}
+
+.j_event_img {
+	max-width: 100%;
+	height: auto;
 }
 
 .j_event_inner {
@@ -291,7 +288,7 @@
 	flex-direction: column;
 	top: 50%;
 	left: 50%;
-	transform: translate( -50%, -50% );
+	transform: translate(-50%, -50%);
 }
 
 .j_event_date {
@@ -312,8 +309,7 @@
 
 .blog .carousel-indicators {
 	left: 0;
-	top: auto;
-	bottom: 90px;
+	top: 50%;
 	margin-right: 0;
 	margin-left: 0;
 }

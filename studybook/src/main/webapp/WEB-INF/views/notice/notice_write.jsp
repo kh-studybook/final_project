@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>notice write</title>
-
+  
 <script>
 
 </script>
@@ -14,7 +14,7 @@
 <style>
 tr.center {
 	text-align: center
-}
+} S
 
 h1 {
 	font-size: 1.5rem;
@@ -38,11 +38,14 @@ h1 {
 label {
 	font-weight: bold 
 }
+
 </style>
 </head>
+
 <body>
 
-<p class=s_title></p>
+	<p class=s_title></p>
+	
 	<div class="s_container">
 		<form action="NoticeAddAction.bo" method="post"
 			enctype="multipart/form-data" name="noticeform">

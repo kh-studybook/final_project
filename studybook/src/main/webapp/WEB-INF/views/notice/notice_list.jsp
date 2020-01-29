@@ -10,6 +10,22 @@
 <title>notice list</title>
 
 <style>
+
+* {
+	box-sizing: border-box;
+	font-family: "맑은 고딕";   
+}
+
+body {
+	background-color: #f2f2f2;
+}
+
+.contentarea {
+	background-color:white;
+	width:80%;
+	height:80%
+}
+
 .s_title {
 	margin-top: 230px;
 	margin-bottom: 35px;
@@ -20,6 +36,10 @@
 .s_container {
 	display: flex;
 	justify-content: center;
+}
+
+.table {
+	width:60%;
 }
 
 .center-block {
@@ -43,6 +63,10 @@ select.form-control {
 
 .gray {
 	color: gray
+}
+
+.pagination {
+	border: 1px solid white;
 }
 </style>
 
@@ -170,18 +194,24 @@ select.form-control {
 </head>
 <body>
 
+<div class=contentarea>
 	<p class=s_title>공 지 사 항</p>
-	<div class="s_container">
+	
+	<div class="container_wrap">
+	
+	<div class=s_container>
+	
 		<%-- 게시글이 있는 경우 --%>
 		<c:if test="${listcount > 0 }">
 
-			<table class="table" style="border: 1px solid gray;">
+			<table class="table">
 				<thead></thead>
 				<tbody>
 					<c:set var="num" value="${listcount-(page-1)*10 }" />
 					<c:forEach var="b" items="${noticelist }">
 						<tr>
-							<td><c:out value="${num }" /> <c:set var="num"
+							<td><c:out value="${num }" /> 
+								<c:set var="num"
 									value="${num-1 }" /></td>
 							<td>
 								<div>
@@ -189,12 +219,14 @@ select.form-control {
 								</div>
 
 								<div>${b.NOTICE_DATE }</div>
+								
 							</td>
 						</tr>
+						
 					</c:forEach>
 				</tbody>
 			</table>
-
+			</div>
 			<div class="center-block">
 				<div class="row">
 					<div class="col">
@@ -203,6 +235,7 @@ select.form-control {
 								<li class="page-item"><a class="page-link" href="#">◀
 										&nbsp;</a></li>
 							</c:if>
+							
 							<c:if test="${page>1 }">
 								<li class="page-item"><a
 									href="NoticeList.bo?page=${page-1 }" class="page-link">◀</a>
@@ -214,6 +247,7 @@ select.form-control {
 									<li class="page-item"><a class="page-link" href="#">${a }</a>
 									</li>
 								</c:if>
+								
 								<c:if test="${a!=page }">
 									<li class="page-item"><a href="NoticeList.bo?page=${a}"
 										class="page-link">${a }</a></li>
@@ -234,15 +268,18 @@ select.form-control {
 			</div>
 
 		</c:if>
+		
 		<!--  게시글이 없는 경우 -->
 		<c:if test="${listcount== 0 }">
 			<font size=5>등록된 공지사항이 없습니다.</font>
 		</c:if>
 		<br>
-
-		<button type="button" class="btn btn-info float-right">글 쓰 기</button>
-
+		<c:if test="${member.name== '손연수' }">
+		<button type="button" class="writebtn float-right">글 쓰 기</button>
+		</c:if>
+		
 	</div>
-
+	
+</div>	
 </body>
 </html>

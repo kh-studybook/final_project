@@ -1,6 +1,7 @@
 
 package kh.finalproject.studybook.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -17,13 +18,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Gallery;
+import kh.finalproject.studybook.domain.Mail;
 import kh.finalproject.studybook.domain.Member;
 import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.domain.Review;
@@ -32,6 +37,7 @@ import kh.finalproject.studybook.domain.Room;
 import kh.finalproject.studybook.service.MemberService;
 import kh.finalproject.studybook.service.ReserveService;
 import kh.finalproject.studybook.service.RoomService;
+import kh.finalproject.studybook.task.SendMail;
 
 @Controller
 public class ReserveController {
@@ -42,7 +48,7 @@ public class ReserveController {
 	private ReserveService reserveservice;
 
 	@Autowired
-	private MemberService memberservice;
+	private SendMail sendMail;
 
 	// 리뷰 가져오기
 	@ResponseBody
@@ -158,14 +164,11 @@ public class ReserveController {
 				fr.setFood_code(food_codes.get(i));
 				fr.setCount(counts.get(i));
 				fr.setFood_total_cost(food_total_costs.get(i));
-				reserveservice.insertFood_reserve(fr);
-				
+				reserveservice.insertFood_reserve(fr);			
 				}
-			}
-		
+			}	
 		int r_code=reserveservice.getR_code();		
 		mv.setViewName("redirect:reserve_check.re?r_code="+r_code);
-		
 		return mv;
 		
 		}else {
@@ -179,6 +182,7 @@ public class ReserveController {
 	public ModelAndView reserve_ok_page(int r_code, ModelAndView mv) {
 		
 		Reserve reserve_check=reserveservice.getReserveDetail(r_code);
+		reserve_check.setReserve_date(reserve_check.getReserve_date().substring(0, 10));
 		List<Food_reserve> food_reservelist=reserveservice.getFood_reservelist(r_code);
 		int room_food_total=reserve_check.getTotal_cost();
 		int foods_total=0;
@@ -193,6 +197,19 @@ public class ReserveController {
 		mv.addObject("food_reservelist",food_reservelist);
 		mv.setViewName("room/reserve_ok_page");
 		
+		//메일 보내기
+		Mail mail=new Mail();
+		mail.setTo(reserve_check.getReserver_email());
+		mail.setContent("<예약 확인서><br>"+
+				"예약 번호 : "+reserve_check.getR_code()+"<br>"+
+				"예약자 : "+reserve_check.getReserver_name()+"<br>"+
+				"예약자 번호 : "+reserve_check.getReserver_phone()+"<br>"+
+				"예약날짜 : "+reserve_check.getReserve_date()+"<br>"+
+				"예약시간 : "+reserve_check.getStart_time()+"~"+reserve_check.getEnd_time()+"시<br>"+
+				"예약한 룸 : "+reserve_check.getRoom_name()+"<br>"+
+				"예약 총액 : "+room_food_total+"<br>"
+						);
+		sendMail.sendMail(mail);
 		return mv;
 	}
 
@@ -261,11 +278,130 @@ public class ReserveController {
 		Review review = reserveservice.getReviewDetail(review_code);
 		return review;
 	}
+	//나의 후기 수정하기
+	@PostMapping("ReviewModify.re")
+	public String modifyReviewAction(int review_code,int key, String contents, HttpServletResponse response) throws Exception{
+		System.out.println("나의 리뷰 수정 액션 modifyReviewAction");
+		int result = reserveservice.updateReview(contents, review_code);
+		if(result==0) {
+			System.out.println("후기 수정 실패");
+		}
+		System.out.println("후기 수정 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정 되었습니다.');");
+		out.println("location.href='myReviewList.re?key="+key+"';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+	//어드민- 예약 리스트ReserveAdList.re
+	@RequestMapping(value = "/ReserveAdList.re", method = RequestMethod.GET)
+	public ModelAndView reserveList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv,
+			@RequestParam(value = "search_field", defaultValue = "-1") int index,
+			@RequestParam(value = "search_word", defaultValue = "") String search_word) throws Exception {
+		List<Reserve> list = null;
+		int listcount = 0;
+		list = reserveservice.getSearchList(index, search_word, page, limit);
+		System.out.println("ReserveController의 reserveservice.getSearchList 끝");
+		listcount = reserveservice.getSearchListCount(index, search_word);
+		System.out.println("ReserveController의 reserveservice.getSearchListCount 끝");
+		
+		// 총페이지수
+		int maxpage = (listcount + limit - 1) / limit;
 
+		// 현재 페이지에 보여줄 시작 페이지수 11,21
+		int startpage = ((page - 1) / 10) * 10 + 1;
+
+		// endpage: 현재 페이지 그룹에서 보여줄 마지막 페이지수 10,20,30
+		int endpage = startpage + 10 - 1;
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		mv.setViewName("admin/reserve_list");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		System.out.println("listcount=" + listcount);
+		mv.addObject("reservelist", list);// jsp에서 roomlist로 받아야함
+		mv.addObject("limit", limit);
+		mv.addObject("search_field", index);
+		mv.addObject("search_word", search_word);
+
+		return mv;
+	}
+	
+	//예약 내역 확인 및 수정 ReserveModify.re// 상세내용 조회
+	@GetMapping("ReserveModify.re")
+	public ModelAndView reserveModify(int r_code, ModelAndView mv,HttpServletRequest request) throws Exception {
+		Reserve reservedata = reserveservice.getReserveFullDetail(r_code);
+		List<Food_reserve> fooddata =  reserveservice.getFood_reservelist(r_code);
+		
+		if(reservedata==null) {
+			System.out.println("(수정)상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "(수정) 상세보기 실패입니다.");
+			return mv;
+		}
+		System.out.println("(수정)상세보기 성공");
+		mv.addObject("reservedata", reservedata);
+		mv.addObject("food_reservelist", fooddata);
+		mv.setViewName("admin/reserve_modify");
+		return mv;
+	}
+	
+	//어드민 예약 수정 ReserveModifyAction.re
+	@PostMapping("ReserveModifyAction.re")
+	public ModelAndView ReserveModifyAction(Reserve reserve, ModelAndView mv, HttpServletRequest request, HttpServletResponse response ) throws Exception{
+		int result = reserveservice.updateReserve(reserve);
+		//수정 실패하는 경우
+		if (result == 0) {
+			System.out.println("Reserve 테이블 수정 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "Reserve 테이블 수정 실패");
+		} 
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('수정되었습니다.')");
+		out.println("location.href='ReserveAdList.re';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+	//어드민- 예약 취소 CancelAdReserve.re
+	@GetMapping("CancelAdReserve.re")
+	public String cancelReserve(int r_code, HttpServletResponse response ) throws Exception{
+		
+		int result = reserveservice.reserve_cancel(r_code);
+		if (result == 0) {
+			System.out.println("예약 취소 실패");
+		}
+		System.out.println("예약 취소 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('예약 취소 되었습니다.');");
+		out.println("location.href='ReserveAdList.re';");
+		out.println("</script>");
+		out.close();
+		return null;
+		
+	}
+	
+	
+	
+	//
 	
 	
 	// 지은 끝
-
 
 
 	//은지- 날짜별 예약된 시간체크

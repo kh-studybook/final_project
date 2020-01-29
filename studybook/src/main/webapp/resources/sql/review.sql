@@ -13,6 +13,7 @@ drop table review;
 
 select * from review;
 
+select rv.content, rv.review_code, rv.room_code, ro.room_name from review rv join room ro on ro.room_code=rv.room_code where rv.review_code=6
 
 delete review;
 insert into review values(1,2,'이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요. 이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요.이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요.이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요.이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요.이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다. 다음에 또 방문할 의사 있어요.이번에 스터디 모임있어서 이용해봤는데 시설 깔끔하고 좋았습니다.','2019/12/31',999,1004);

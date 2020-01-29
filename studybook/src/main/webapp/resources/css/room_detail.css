@@ -1,13 +1,13 @@
 @charset "UTF-8";
 body{
-background: #eeeeee;
+background: #F6F6F6;
 }
 .carousel-inner{
 	height:400px;
 }
 
 .container{
-	background:#eeeeee;
+	background:#F6F6F6;
 }
 
 .row::after {
@@ -120,6 +120,7 @@ html {
     color: #000;
     font-size: 18px;
     line-height: 30px;
+    font-weight:bolder;
 }
 
 .e_text_box .e_h_intro:after {
@@ -132,6 +133,44 @@ html {
     background-color:#57D5D5; /* #ffd014 */
 }
 
+.e_info_list li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+ol.e_info_list li {
+    padding-left: 29px;
+}
+
+.e_info_list li {
+    position: relative;
+    padding: 10px 0 8px;
+    border-top: 1px solid #ebebeb;
+    font-size: 16px;
+}
+
+.e_info_list li .e_tit {
+    position: absolute;
+    left: 0;
+    padding-top: 6px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.e_info_list li .e_data {
+    color: #656565;
+    line-height: 28px;
+}
+.e_refund+.e_info_list .e_data {
+    margin-left: 70px;
+}
+
+.e_refund{
+	color: red;
+    line-height: 24px;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
 .e_text_box .e_p_intro {
 	font-size: 16px;
     line-height: 28px;
@@ -259,6 +298,11 @@ html {
 
 .e_right_room_detail{
     display: inline-table;
+}
+
+.sp_icon img{
+	width:30px;
+	height:30px;
 }
 
 .e_list_detail .e_tit {
@@ -418,7 +462,7 @@ html {
 }
 
 .e_color_desc .e_color_disable::before {
-    content: "○";
+    content: "■";
     color: #ccc;
     margin-right: 8px;
 }
@@ -502,8 +546,13 @@ html {
 	cursor:pointer;
 }
 .swiper-container .swiper-wrapper .not_active{
- background:lightgray;
+ background:lightgray!important;
  pointer-events:none;
+}
+
+.swiper-container .active{
+	background:#855FD4!important;
+	color:white;
 }
 .jsCalendar table {
     width: 99%!important;

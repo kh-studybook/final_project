@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix ="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,74 +114,7 @@
 	</div>
 	</div>
 	<div id="j_main_room" class="container">
-		<p>스터디북의 추천공간</p>
-		<div class="row">
-		<c:if test="${listcount > 0}">
-			<c:forEach var="list" items="${list}" varStatus="status">
-				<div class="col-md-4">
-					<div class="wrapper">
-						<div class="tile job-bucket">
-						<div class="front">
-							<div class="card" onClick="javascript:location.href='room_detail.ro?room_code=${list.ROOM_CODE}'">
-	      						<img class="card-img-top img-fluid rounded mx-auto d-block" src="resources/image/room/${list.FILE_NAME }">
-	        					<div class="card-body">
-	        						<p class="card-text">
-		        						<span class="j_room_name">${list.ROOM_NAME}</span>
-									  	<span class="j_room_count">최대 ${list.MAX_MEMBER}인</span>
-								  	</p>
-								  	<p class="card-text">
-									  	<span class="j_room_pay"><span class="j_room_pay_hour">${list.HOUR_COST}</span> 원/시간</span>
-									  	<span class="j_room_tag">${list.HASHTAG}</span>
-	      							</p>
-	      						</div>
-      						</div>
-    					</div>
-					</div>
-					</div>
-				</div>
-			</c:forEach>
-		</c:if>
-		</div>
-		
-		<br><br>
-		<!--  페이지네이션 -->
-		<c:if test="${listcount > 0}">
-		<div id="center-block" class="center-block">
-			<div class="row">
-				<div class="col">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-
-						<!-- 중간에 숫자 부분 -->
-						<c:forEach var="a" begin="${startpage}" end="${endpage}">
-							<c:if test="${a == page}">
-								<li class="page-item"><a class="page-link current">${a}</a></li>
-							</c:if>
-							<c:if test="${a != page}">
-								<li class="page-item"><a class="page-link">${a}</a></li>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${page >= maxpage}">
-							<li class="page-item"><a class="page-link" href="#">&gt;</a>
-							</li>
-						</c:if>
-						<c:if test="${page < maxpage}">
-							<li class="page-item"><a
-								href="javascript:go('${page+1}')" class="page-link">&gt;</a>
-							</li>
-						</c:if>
-					</ul>
-				</div>
-			</div>
-		</div>
-		</c:if>
-		
-		<%-- 게시글이 없는 경우 --%>
-		<c:if test="${listcount == 0}">
-			<font>등록된 공간이 없습니다.</font>
-		</c:if>
-		
+				
 	</div>
 	
 	<div class="container"  id="j_main_event">
@@ -208,17 +142,29 @@
 	                            	<c:forEach var="list" items="${eventlist}" varStatus="status">
 	                                	<div class="col-md-4">
 		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?num=${list.event_num}'">
-			                                   	<img class="col-md" src="resources/upload/${list.event_pic}">
+			                                   	<img class="col-md j_event_img" src="resources/upload/${list.event_pic}">
 			                                    <div class="col-md j_event_inner">
 					                                <div class="j_event_name">${list.title}</div>
 					                                <br><br><br>
-					                                <div class="j_event_date">${list.event_date},</div>
+					                                <div class="j_event_date">
+						                                <c:set var="event_date" value="${list.event_date}"/>
+						                                ${fn:substring(event_date,0,10)},
+													</div>
 					                                <div class="j_event_date">${list.event_room}</div>
 				                                </div>
 		                                    </div>
 	                                    </div>
 	                                <c:if test="${status.last}">
-	                                </div>
+	                                	<c:if test="${status.count%3==1}">
+	                                		<div class="col-md-4"></div>
+	                                		<div class="col-md-4"></div>
+	                                	</c:if>
+	                                	<c:if test="${status.count%3==2}">
+	                                		<div class="col-md-4"></div>
+	                                	</c:if>
+	                                	<c:if test="${status.count%3==0}">
+	                                		</div>
+	                                	</c:if>
 	                                </c:if>
 	                                </c:forEach>
 	                                <!--.row-->
@@ -236,12 +182,30 @@
 	                            	<div class="row">
 	                                <c:forEach var="list" items="${eventlist2}" varStatus="status">
 	                                	<div class="col-md-4">
-	                                        <a href="EventDetailAction.eve?num=${list.event_num}">
-	                                            <img src="resources/upload/${list.event_pic}" style="max-width:100%;">
-	                                        </a>
+		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?num=${list.event_num}'">
+			                                   	<img class="col-md j_event_img" src="resources/upload/${list.event_pic}">
+			                                    <div class="col-md j_event_inner">
+					                                <div class="j_event_name">${list.title}</div>
+					                                <br><br><br>
+					                                <div class="j_event_date">
+						                                <c:set var="event_date" value="${list.event_date}"/>
+						                                ${fn:substring(event_date,0,10)},
+					                                </div>
+					                                <div class="j_event_date">${list.event_room}</div>
+				                                </div>
+		                                    </div>
 	                                    </div>
 	                                <c:if test="${status.last}">
-	                                </div>
+	                                	<c:if test="${status.count%3==1}">
+	                                		<div class="col-md-4"></div>
+	                                		<div class="col-md-4"></div>
+	                                	</c:if>
+	                                	<c:if test="${status.count%3==2}">
+	                                		<div class="col-md-4"></div>
+	                                	</c:if>
+	                                	<c:if test="${status.count%3==0}">
+	                                		</div>
+	                                	</c:if>
 	                                </c:if>
 	                                </c:forEach>
 	                                <!--.row-->

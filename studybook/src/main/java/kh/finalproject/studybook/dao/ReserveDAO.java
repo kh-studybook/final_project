@@ -78,6 +78,26 @@ public class ReserveDAO {
 	public Review reviewDetailAction(int review_code) {
 		return sqlSession.selectOne("Reserves.reviewDetail",review_code);
 	}
+	//후기 수정
+	public int updateReviewAction(Map<String, Object> map) {
+		return sqlSession.update("Reserves.updateReview",map);
+	}
+	//어드민 예약 리스트
+	public List<Reserve> getSearchList2(Map<String, Object> map) {
+		return sqlSession.selectList("Reserves.getSearchList2",map);
+	}
+	//어드민 예약 리스트 카운트
+	public int getSearchListCount2(Map<String, Object> map) {
+		return sqlSession.selectOne("Reserves.searchcount2",map);
+	}
+	//예약 정보 가져오기(룸네임 포함)
+	public Reserve getReserveFullDetail(int r_code) {
+		return sqlSession.selectOne("Reserves.getDetail",r_code);
+	}
+	//예약 정보 수정
+	public int updateReserve(Reserve reserve) {
+		return sqlSession.update("Reserves.updateReserve",reserve);
+	}
 	
 	//--지은 끝
 
@@ -101,5 +121,10 @@ public class ReserveDAO {
 	public int registerReview(Map<Object, Object> obj) {
 		return sqlSession.insert("Reserves.registerReview", obj);
 	}
+	
+	
+	
+	
+	
 
 }

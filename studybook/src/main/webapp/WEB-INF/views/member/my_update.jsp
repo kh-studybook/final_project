@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,21 +46,21 @@ input[type=text], select, textarea {
 	float: left;
 	width: 20%;
 	margin-top: 20px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-30 {
 	float: left;
 	width: 30%;
 	margin-top: 25px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-50 {
 	float: left;
 	width: 50%;
 	margin-top: 25px;
-	text-align:left;
+	text-align: left;
 }
 
 .col-100 {
@@ -72,6 +72,11 @@ input[type=text], select, textarea {
 }
 
 .avatar {
+	width: 100px;
+	border-radius: 50%;
+}
+
+#profile {
 	width: 100px;
 	border-radius: 50%;
 }
@@ -89,59 +94,58 @@ make the two columns stack on top of each other
 instead of next to each other */
 @media screen and (max-width: 600px) {
 	{
-		width: 100%;
-		margin-top: 0;
-	}
+	width:100%;
+	margin-top:0;
 }
 
+}
 .picupdate {
 	cursor: pointer;
-	background-color:#56D7D6;
-	color:white;
-	border:0px;
+	background-color: #56D7D6;
+	color: white;
+	border: 0px;
 }
 
 .picupdate:hover {
-	opacity:70%
+	opacity: 70%
 }
 
 .s_update, .s_delete {
-	background-color:#ffffff;
-	border:0px;
-	text-decoration:none;
-	font-weight:bold;
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
 	cursor: pointer;
-	color:#56D7D6;
+	color: #56D7D6;
 }
 
 .s_update:hover, .s_delete:hover {
-	text-decoration:none;
-	border:0px;
-	color:#7F56D2;
+	text-decoration: none;
+	border: 0px;
+	color: #7F56D2;
 }
 
 .s_delete {
-	margin-bottom:50px;
+	margin-bottom: 50px;
 }
 
 .hr1 {
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 30px;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
 .hr2 {
-	margin-bottom:30px;
-	margin-top:80px;
-	width:100%
+	margin-bottom: 30px;
+	margin-top: 80px;
+	width: 100%
 }
 
 
 /*modal*/
-
 #modalforupdate {
 	display: none;
-} 
+}
 
 .modal {
 	text-align: center;
@@ -161,7 +165,6 @@ instead of next to each other */
 	display: inline-block;
 	text-align: left;
 	vertical-align: middle;
-	
 }
 
 .modal_wrap {
@@ -169,8 +172,8 @@ instead of next to each other */
 	margin-top: 160px;
 	margin-left: auto;
 	width: 400px;
-    height: 300px;
-	background-color:white;
+	height: 300px;
+	background-color: white;
 }
 
 .modal_intro {
@@ -182,51 +185,88 @@ instead of next to each other */
 }
 
 .modal_title {
-	font-size:20pt;
+	font-size: 20pt;
 }
 
 .modal_text {
-	font-size:12pt;
+	font-size: 12pt;
 }
 
 #modal_phone {
-
+	
 }
-
 </style>
+
+<script>
+
+	$(function() {
+
+		$('.uploadfiles').on('change', preview);
+
+		function preview(e) {
+			var file = e.target.files[0];
+			
+			//파일 크기 
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize = file.size;
+			console.log(fileSize + " : " + maxSize);
+			
+			if (fileSize > maxSize) {
+				alert("5MB 이하의 이미지 파일만 등록 가능합니다.");
+				return false;
+			}
+
+			//파일 읽기 객체 생성
+			var reader = new FileReader();
+			
+			//DataURL형식으로 파일 읽어오기.
+			//읽어온 결과는 reader 객체의 result 속성에 저장
+			reader.readAsDataURL(file);
+			
+			//읽기 성공
+			reader.onload = function(e){
+				//result : 읽기 결과가 저장
+				//reader.result / e.target.result
+				$(".newavatar").attr("src", e.target.result).css("opacity", 1);
+			}
+		} 		
+		
+	});
+	
+</script>
 </head>
 <body>
-
 
 	<p class=s_title>프로필 관리</p>
 	<div class=outer_container>
 		<div class="s_container">
-			<form action="#">
-
+			<form method="post" action="profileProcess.mem" enctype="multipart/form-data">
 
 				<div class="row">
 					<div class="col-100">
-						<label> <input type="file" name="uploadfile"
-							accept="image/gif, image/jpeg, image/png" style="display: none">
-								<c:if test="${member.profile == null}">
-								<img src="resources/image/profile/default.png" alt="Avatar"
-							class="avatar">
-								</c:if>
-								<c:if test="${member.profile!= null}">
-								<img src="resources/${member.profile}" alt="Avatar"
-							class="avatar">
-								</c:if>
+						<label class=uploadfile> <input type="file" class=uploadfiles
+							name="uploadfile" accept="image/gif, image/jpeg, image/png"
+							style="display: none"> 
+							
+							<c:if test="${member.profile == null}">
+								<img src="resources/image/profile/default.png" alt="Avatar" class="avatar" id=profile>
+							</c:if>  
+							
+							<c:if test="${member.profile!= null}">
+								<img src="resources/upload/${member.profile}" alt="Avatar" class="newavatar" id=profile>
+ 							</c:if>
+ 							
 						</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-100">
-						<p>프로필 사진 변경</p>
+						<button type="submit">프로필 사진 변경하기</button>
 					</div>
 				</div>
-				
+
 				<hr class=hr1>
-				
+
 				<div class="row">
 					<div class="col-30"></div>
 					<div class="col-20">
@@ -242,21 +282,20 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="email">이메일</label>
 					</div>
-					<div class="col-50"> 
+					<div class="col-50">
 						<span id="email">${member.email}</span>
 					</div>
 				</div>
-				<div class="row">  
+				<div class="row">
 					<div class="col-30"></div>
 					<div class="col-20">
 						<label for="phone">연락처</label>
-					</div> 
+					</div>
 					<div class="col-20">
 						<span id="modal_phone">${member.phone}</span>
 					</div>
 					<div class="col-30">
-						<button data-toggle="modal" data-target="#modalforupdate"
-												class=s_update id="v1">변경하기</button>
+						<a href="updatephone.mem" class=s_update>변경하기</a>
 					</div>
 				</div>
 				<div class="row">
@@ -264,17 +303,17 @@ instead of next to each other */
 					<div class="col-20">
 						<label for="password">비밀번호</label>
 					</div>
-					<div class="col-30">	
+					<div class="col-30">
 						<a href="updatepw.mem" class=s_update>변경하기</a>
-						
+
 					</div>
 					<div class="col-20"></div>
 				</div>
-				
-				
+
+
 				<hr class=hr2>
-				
-				
+
+
 				<div class="row">
 					<div class="col-100">
 						<a href="delete.mem" class=s_delete>계정 삭제하기</a>
@@ -283,36 +322,35 @@ instead of next to each other */
 			</form>
 		</div>
 	</div>
-	
-	
-	
-	
+
+
 	<!-- modal 시작! -->
 	<div class="modal" id="modalforupdate">
 		<div class="modal_dialog">
 			<div class="modal_wrap">
-			
+
 				<!-- modal body -->
 				<div class="modal_body">
-					<form >
+					<form>
 						<div class="phoneupdate">
-						
+
 							<div class=modal_intro>
 								<p class=modal_title>연락처 변경</p>
-								<p class=modal_text>변경할 전화번호를 입력하세요.</p>
-							</div>
-							
+								<p class=modal_text>새 연락처 입력</p>
+							</div> 
+
 							<div class="modal_content">
-								<input type="text" id="phone" name="phone" placeholder="${member.phone}">
-								<span style="color: #141414; font-size: 10pt;" id="counter"></span>
+								<input type="text" id="phone" name="phone"
+									placeholder="${member.phone}"> <span
+									style="color: #141414; font-size: 10pt;" id="counter"></span>
 							</div>
-								
+
 							<div class=modal_submit>
-								<button type="button" class="modalclose"
-								data-dismiss="modal" aria-label="Close">취소</button>
+								<button type="button" class="modalclose" data-dismiss="modal"
+									aria-label="Close">취소</button>
 								<button type=submit class="submtbutton">저장</button>
 							</div>
-							
+
 						</div>
 					</form>
 				</div>

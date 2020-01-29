@@ -78,16 +78,73 @@
 						</div>
 						<div class="e_text_box">
 							<h4 class="e_h_intro">시설 안내</h4>
+							<p class="e_p_intro">
 								${room.FAC_INTRO }
+							</p>
 						</div>
 
 						<div class="e_text_box">
 							<h4 class="e_h_intro">예약시 주의 사항</h4>
+							<ol class="e_info_list">
+								<li>
+								<Strong class="e_tit">1</Strong>
+								<span class="e_data">빔프로젝터가 필요할 경우 반드시 사전에 요청해주시기 바랍니다.</span>
+								</li>
+								<li>
+								<Strong class="e_tit">2</Strong>
+								<span class="e_data">이용 2시간 전 이용관련 상세 안내 문자 드립니다.</span>
+								</li>
+								<li>
+								<Strong class="e_tit">3</Strong>
+								<span class="e_data">공간의 기물파손시에는 해당하는 비용이 청구될 수 있습니다.</span>
+								</li>
+								<li>
+								<Strong class="e_tit">4</Strong>
+								<span class="e_data">9:00 ~ 22:00  외 이용 필요 시 전화 문의 주세요.</span>
+								</li>
+								<li>
+								<Strong class="e_tit">5</Strong>
+								<span class="e_data">무인으로 운영되어 CCTV가 설치 되어있으며 분실, 파손, 입실, 퇴실 여부만 확인하는 용도로 사용하고 있습니다.</span>
+								</li>
 								
+							</ol>
 						</div>
 
 						<div class="e_text_box">
 							<h4 class="e_h_intro">환불 규정</h4>
+								<p class="e_txt_notice e_refund">
+								이용당일(첫 날) 이후에 환불 관련 사항은 전화로 직접 문의하셔야 합니다.<br>
+								결제 후 2시간 이내에는 100% 환불이 가능합니다.(단, 이용시간 전까지만 가능)
+								</p>
+							<ol class="e_info_list">
+								<li><strong class="e_tit">이용 8일 전</strong>
+								 <span class="e_data">총 금액의 100% 환불</span> 
+								 </li>
+								 <li><strong class="e_tit">이용 7일 전</strong> 
+								 <span class="e_data">총 금액의 90% 환불</span>
+								 </li>
+								 <li><strong class="e_tit">이용 6일 전</strong> 
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 5일 전</strong> 
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 4일 전</strong>
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 3일 전</strong>
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 2일 전</strong>
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 전날</strong>
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								 <li><strong class="e_tit">이용 당일</strong>
+								 <span class="e_data">환불 불가</span>
+								 </li>
+								</ol>
 						</div>
 
 						<div class="e_text_box">
@@ -130,18 +187,47 @@
 
 								<div class="e_facility_wrap">
 									<ul class="e_facility_list">
-										<li><i class="sp_icon ico_table"></i> <span
+										<c:if test="${room_ex.ALCOHOL==1}">
+										<li><i class="sp_icon ico_alcohol"><img src="resources/image/room_ex/alcohol.PNG"></i> 
+										<span class="e_txt_name">주류<em class="br">반입</em></span></li>
+										</c:if>
+										<c:if test="${room_ex.MIC==1}">
+										<li><i class="sp_icon ico_table"><img src="resources/image/room_ex/mic.PNG"></i> <span
+											class="e_txt_name">마이크/<em class="br">음향</em></span></li>
+										</c:if>
+										
+										<c:if test="${room_ex.CHAIR==1}">
+										<li><i class="sp_icon ico_food"><img src="resources/image/room_ex/chair.PNG"></i> <span
 											class="e_txt_name">의자/<em class="br">테이블</em></span></li>
-										<li><i class="sp_icon ico_mirror"></i> <span
-											class="e_txt_name">전신거울<!----></span></li>
-										<li><i class="sp_icon ico_food"></i> <span
-											class="e_txt_name">음식물<em class="br">반입가능</em></span></li>
-										<li><i class="sp_icon ico_nonsmocking"></i> <span
+										</c:if>
+										<c:if test="${room_ex.FOOD==1}">
+										<li><i class="sp_icon ico_nonsmocking"><img src="resources/image/room_ex/food.PNG"></i> <span
+											class="e_txt_name">음식물<em class="br">반입</em></span></li>
+										</c:if>
+										<c:if test="${room_ex.TOILET==1}">
+										<li><i class="sp_icon ico_nonsmocking"><img src="resources/image/room_ex/toilet.PNG"></i> <span
+											class="e_txt_name">내부<em class="br">화장실</em></span></li>
+										</c:if>
+										<c:if test="${room_ex.SMOKING==1}">
+										<li><i class="sp_icon ico_nonsmocking"><img src="resources/image/room_ex/smoking.PNG"></i> <span
 											class="e_txt_name">금연<!----></span></li>
-										<li><i class="sp_icon ico_tvnprojector"></i> <span
+										</c:if>
+										<c:if test="${room_ex.PARKING==1}">
+										<li><i class="sp_icon ico_nonsmocking"><img src="resources/image/room_ex/parking.PNG"></i> <span
+											class="e_txt_name">주차<!----></span></li>
+										</c:if>
+										<c:if test="${room_ex.TV==1}">
+										<li><i class="sp_icon ico_tvnprojector"><img src="resources/image/room_ex/tv.PNG"></i> <span
 											class="e_txt_name">TV/<em class="br">프로젝터</em></span></li>
-										<li><i class="sp_icon ico_wifi"></i> <span
+										</c:if>
+										<c:if test="${room_ex.BOARD==1}">
+										<li><i class="sp_icon ico_tvnprojector"><img src="resources/image/room_ex/board.PNG"></i> <span
+											class="e_txt_name">화이트보드</em></span></li>
+										</c:if>
+										<c:if test="${room_ex.WIFI==1}">
+										<li><i class="sp_icon ico_wifi"><img src="resources/image/room_ex/wifi.PNG"></i> <span
 											class="e_txt_name">인터넷/<em class="br">WIFI</em></span></li>
+										</c:if>
 									</ul>
 								</div>
 							</div>
@@ -162,8 +248,7 @@
 							</div>
 							
 								<div class="e_color_desc">
-									<span class="e_color_disable">예약불가</span> <span
-										class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
+									 <span class="e_color_today">오늘</span> <span class="e_color_select">선택</span>
 								</div>
 
 							
@@ -182,7 +267,7 @@
 								<div class="swiper-container">
 						 	
 									<div class="swiper-wrapper">
-										<div class="swiper-slide"><input type="hidden" name="time_slide" id="9" value="9">9:00</div>
+										<div class="swiper-slide"><input type="hidden" name="time_slide" id="9" value="9">09:00</div>
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="10" value="10">10:00</div>
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="11" value="11">11:00</div>
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="12" value="12">12:00</div>
@@ -198,6 +283,9 @@
 										<div class="swiper-slide"><input type="hidden" name="time_slide" id="22" value="22">22:00</div>
 									</div>
 							
+								</div>
+								<div class="e_color_desc">
+									<span class="e_color_disable">예약불가</span>
 								</div>
 
 
@@ -308,7 +396,9 @@
 		}
   
  		myCalendar.onDateClick(function(event, date){
- 			
+ 			$(".swiper-wrapper").find('input').attr("name","time_slide");
+ 			$(".swiper-slide").removeClass("not_active");
+ 			$(".swiper-slide").removeClass("active");
  	 		console.log("클릭한 날짜 :"+formatDate(date))
  	 		var today=new Date();
  	 		console.log("오늘:"+formatDate(today))
