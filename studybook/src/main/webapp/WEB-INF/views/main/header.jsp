@@ -32,10 +32,10 @@
 
 
 <!-- title -->
-<c:if test="${!empty id }">
-<title>StudyBook | ${id} </title>
+<c:if test="${!empty member.name }">
+<title>StudyBook | ${member.name} </title>
 </c:if>
-<c:if test="${empty id }">
+<c:if test="${empty member.name }">
 <title>StudyBook</title>
 </c:if>
 
@@ -70,7 +70,7 @@
 		            <img src="resources/image/profile/default.png">
 		            </c:if>
 		            <c:if test="${member.profile != ''}">
-		            <img src="resources/${member.profile}">
+		            <img src="resources/image/profile/${member.profile}">
 		            </c:if>
               	</div>
                 <div class="j_menu_login">

@@ -4,7 +4,6 @@
 
 <mapper namespace="Members"> 
 
-<!-- profile check! -->
 
 	<insert id="insert" parameterType="member">
 		<selectKey resultType="int" order="BEFORE" keyProperty="key">
@@ -19,21 +18,38 @@
 		select *
 		from member where email = #{email}
 	</select>
-
-
-	<update id="update" parameterType="member">
+	
+	
+	<update id="updatePw" parameterType="member">
 		update member set
-		name = #{name}, email = #{email}, password = #{password}, phone = #{phone}, profile = #{profile}
-		where key = #{mem_key}
+		password = #{password}
+		where key = #{key}
+	</update>
+	 
+	
+	<update id="updatePhone" parameterType="member">
+		update member set
+		phone = #{phone}
+		where key = #{key}
 	</update>
 	
 	
-	<delete id="delete" parameterType="int">
-		delete from member where key=#{mem_key}
+	<update id="updateProfile" parameterType="member">
+		update member set
+		profile = #{profile}
+		where key = #{key}
+	</update>
+	
+	
+	<delete id="delete" parameterType="member">
+		delete from member 
+		where key = #{key}
 	</delete>
 	
+	
 	<select id="myInfo" parameterType="int" resultType="member">
-		select * from member where key=#{mem_key}
+		select * from member 
+		where key = #{key}
 	</select>
 	
 	<!-- 검색관련 -->

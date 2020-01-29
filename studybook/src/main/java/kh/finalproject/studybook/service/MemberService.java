@@ -7,12 +7,13 @@ import kh.finalproject.studybook.domain.Member;
 public interface MemberService {
 
 	public int insert(Member m);
-
+ 
 	public Member myinfo(int key);
 
 	public int myupdate(Member member);
 
 	public int isUser(String email, String password);
+
 
 	public int delete(int key);
 	//어드민 - 검색 리스트
@@ -23,5 +24,14 @@ public interface MemberService {
 	public Member getDetail(int key);
 	//어드민 - 멤버 수정
 	public int updateMember(Member member);
+
+	public int pwupdate(Member member);
+
  
+	public int phoneupdate(Member member);
+	
+	public int profileupdate(Member member);
+
+	public int delete(Member member);
+	
 }

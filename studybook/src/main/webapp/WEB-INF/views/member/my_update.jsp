@@ -76,6 +76,11 @@ input[type=text], select, textarea {
 	border-radius: 50%;
 }
 
+#profile {
+	width: 100px;
+	border-radius: 50%;
+}
+
 /* Clear floats after the columns */
 .row:after {
 	content: "";
@@ -136,6 +141,7 @@ instead of next to each other */
 	width: 100%
 }
 
+
 /*modal*/
 #modalforupdate {
 	display: none;
@@ -192,58 +198,70 @@ instead of next to each other */
 </style>
 
 <script>
+
 	$(function() {
 
-		$('.uploadfile').on('change', preview);
+		$('.uploadfiles').on('change', preview);
 
 		function preview(e) {
-			var file = e.target.files[0];//File 객체 리스트에서 첫번째 File 객체를 가져옵니다.
-
-			//파일 크기 제한
+			var file = e.target.files[0];
+			
+			//파일 크기 
 			var maxSize = 5 * 1024 * 1024;
 			var fileSize = file.size;
 			console.log(fileSize + " : " + maxSize);
+			
 			if (fileSize > maxSize) {
-				alert("5MB이하 파일만 등록할 수 있습니다.\n파일 용량을 확인해주세요.");
+				alert("5MB 이하의 이미지 파일만 등록 가능합니다.");
 				return false;
 			}
 
+			//파일 읽기 객체 생성
 			var reader = new FileReader();
+			
+			//DataURL형식으로 파일 읽어오기.
+			//읽어온 결과는 reader 객체의 result 속성에 저장
 			reader.readAsDataURL(file);
-
-			reader.onload = function(e) {
-				$(".uploadfile").attr("src", e.target.result).css("opacity", 1);
+			
+			//읽기 성공
+			reader.onload = function(e){
+				//result : 읽기 결과가 저장
+				//reader.result / e.target.result
+				$(".newavatar").attr("src", e.target.result).css("opacity", 1);
 			}
-		}
+		} 		
+		
 	});
+	
 </script>
 </head>
 <body>
 
-
 	<p class=s_title>프로필 관리</p>
 	<div class=outer_container>
 		<div class="s_container">
-			<form action="#">
+			<form method="post" action="profileProcess.mem" enctype="multipart/form-data">
 
 				<div class="row">
 					<div class="col-100">
-						<label class=uploadfile> <input type="file"
+						<label class=uploadfile> <input type="file" class=uploadfiles
 							name="uploadfile" accept="image/gif, image/jpeg, image/png"
-							style="display: none"> <c:if
-								test="${member.profile == null}">
-								<img src="resources/image/profile/default.png" alt="Avatar"
-									class="avatar">
-							</c:if> <c:if test="${member.profile!= null}">
-								<img src="resources/${member.profile}" alt="Avatar"
-									class="avatar">
-							</c:if>
+							style="display: none"> 
+							
+							<c:if test="${member.profile == null}">
+								<img src="resources/image/profile/default.png" alt="Avatar" class="avatar" id=profile>
+							</c:if>  
+							
+							<c:if test="${member.profile!= null}">
+								<img src="resources/upload/${member.profile}" alt="Avatar" class="newavatar" id=profile>
+ 							</c:if>
+ 							
 						</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-100">
-						<p>프로필 사진 변경</p>
+						<button type="submit">프로필 사진 변경하기</button>
 					</div>
 				</div>
 
@@ -277,8 +295,7 @@ instead of next to each other */
 						<span id="modal_phone">${member.phone}</span>
 					</div>
 					<div class="col-30">
-						<button data-toggle="modal" data-target="#modalforupdate"
-							class=s_update id="v1">변경하기</button>
+						<a href="updatephone.mem" class=s_update>변경하기</a>
 					</div>
 				</div>
 				<div class="row">

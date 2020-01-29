@@ -81,12 +81,12 @@ th {
                   <button class="deletebtn" data-toggle="modal" 
                   				data-target="#myModal">삭제</button>
                </a>
-            </c:if>
+            </c:if> 
             <!-- 여기까지 -->
             
                <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
          </tr>
-      </table>
+      </table> 
       
       	<div class="modal" id="myModal">
 		<div class="modal-dialog">
@@ -96,10 +96,10 @@ th {
 				<div class="modal-body">
 					<form name="deleteForm" action="NoticeDeleteAction.bo" method="post">
 						<div class="form-group">
-							<label for="pwd">비밀번호</label> 
+							<span>정말 삭제하시겠습니까.</span>
 						</div>
-						<button type="submit" class="submitbtn">Submit</button>
-					    <button type="button" class="closebtn">Close</button>
+						<button type="submit" class="submitbtn">확인</button>
+					    <button type="button" class="closebtn">취소</button>
 					</form>
 				</div>
 			</div>

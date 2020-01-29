@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>notice write</title>
-
+  
 <script>
 
 </script>
@@ -14,7 +14,7 @@
 <style>
 tr.center {
 	text-align: center
-}
+} S
 
 h1 {
 	font-size: 1.5rem;

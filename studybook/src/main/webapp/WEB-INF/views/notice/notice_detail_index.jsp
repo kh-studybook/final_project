@@ -4,25 +4,14 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<jsp:include page="../main/header.jsp" flush="false" />
-<script> 
-$(document).ready(function(){ 
-	var mainheight = $('main').height();
-	var navheight = 150px;
-	if(($(window).height() - navheigt) < mainheight) {
-		$('footer').css({
-			'position' : fixed, 
-			'bottom' : 0
-		}) 
-	} 
-})	  
-</script>
-<style>
-footer{height: 150px;}
-</style>
 </head>
 <body>
-
+	<!-- Header Start -->
+	<nav>
+		<jsp:include page="../main/header.jsp" flush="false" /><br> <br>
+	</nav>
+	<!-- Header End --> 
+	
 	<!-- Body Start -->
 	<main>		
 		<jsp:include page="notice_detail.jsp" />
@@ -35,4 +24,5 @@ footer{height: 150px;}
 	</footer>
 	<!-- Footer End -->
 </body>
+
 </html>

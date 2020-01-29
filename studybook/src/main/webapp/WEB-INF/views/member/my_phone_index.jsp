@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-</head> 
+</head>
 <body>
-	<!-- Header Start --> 
+	<!-- Header Start -->
 	<nav>
 		<jsp:include page="../main/header.jsp" flush="false" /><br> <br>
 	</nav>
@@ -14,7 +14,7 @@
 	
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="notice_list.jsp" />
+		<jsp:include page="my_phone.jsp" />
 	</main>
 	<!-- Body End -->
 
