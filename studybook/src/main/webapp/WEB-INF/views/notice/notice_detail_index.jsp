@@ -10,7 +10,7 @@
 	<nav>
 		<jsp:include page="../main/header.jsp" flush="false" /><br> <br>
 	</nav>
-	<!-- Header End -->
+	<!-- Header End --> 
 	
 	<!-- Body Start -->
 	<main>		

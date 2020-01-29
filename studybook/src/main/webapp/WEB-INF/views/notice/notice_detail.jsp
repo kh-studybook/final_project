@@ -81,12 +81,12 @@ th {
                   <button class="deletebtn" data-toggle="modal" 
                   				data-target="#myModal">삭제</button>
                </a>
-            </c:if>
+            </c:if> 
             <!-- 여기까지 -->
             
                <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
          </tr>
-      </table>
+      </table> 
       
       	<div class="modal" id="myModal">
 		<div class="modal-dialog">

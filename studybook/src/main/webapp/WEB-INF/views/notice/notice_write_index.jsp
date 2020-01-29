@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<!-- Header Start -->
+	<!-- Header Start --> 
 	<nav>
 		<jsp:include page="../main/header.jsp" flush="false" /><br> <br>
 	</nav>
