@@ -44,5 +44,10 @@ public class MemberServiceImpl implements MemberService{
 	public int delete(int key) {
 		return dao.delete(key);
 	}
+
+	@Override
+	public int pwupdate(Member String) {
+		return dao.pwupdate(String);
+	}
 	
 }

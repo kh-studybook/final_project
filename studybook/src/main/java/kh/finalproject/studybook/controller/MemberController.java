@@ -118,20 +118,24 @@ public class MemberController {
 	// 수정폼
 	@RequestMapping(value = "/my_update.mem")
 	public ModelAndView memberUpdate(HttpSession session, ModelAndView mv) {
-		int key = (int) session.getAttribute("key");
-		Member member = memberservice.myinfo(key);
+		Member savemember = (Member) session.getAttribute("member");
+		
+		Member member = memberservice.myinfo(savemember.getKey());
 		mv.setViewName("member/my_update_index");
 		mv.addObject("member", member);
 		return mv;
 	}
 
 	
-	
-	
+	//비밀번호 변경
 	@RequestMapping(value = "/passwordProcess.mem", method = RequestMethod.GET)
-	public void passwordProcess(Member member, HttpServletResponse response) throws Exception {
+	public void passwordProcess(String password, HttpSession session, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=utf-8");
-		int result = memberservice.myupdate(member);
+		
+		Member member = (Member) session.getAttribute("member");  //session
+		member.setPassword(password); //입력값 가져와서 넣기
+		
+		int result = memberservice.pwupdate(member);
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		if (result == 1) {
@@ -139,6 +143,30 @@ public class MemberController {
 			out.println("location.href='my_update.mem';");
 		} else {
 			out.println("alert('비밀번호 변경 실패');");
+			out.println("history.back()");
+		}
+		out.println("</script>");
+		out.close();
+	}
+	
+	
+	
+	//전화번호 변경
+	@RequestMapping(value = "/phoneProcess.mem", method = RequestMethod.GET)
+	public void phoneProcess(String phone, HttpSession session, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=utf-8");
+		
+		Member member = (Member) session.getAttribute("member");
+		member.setPhone(phone); //입력값 가져와서 넣기
+		
+		int result = memberservice.pwupdate(member);
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		if (result == 1) {
+			out.println("alert('연락처 변경 완료!');");
+			out.println("location.href='my_update.mem';");
+		} else {
+			out.println("alert('연락처 변경 실패');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
@@ -163,6 +191,7 @@ public class MemberController {
 		}
 		return result;
 	}
+	
 	
 	
 	@RequestMapping (value = "/logout.mem", method = RequestMethod.GET)

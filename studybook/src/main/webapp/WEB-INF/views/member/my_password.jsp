@@ -125,8 +125,8 @@ instead of next to each other */
 <p class=s_title>비밀번호 변경</p>
 <br><br><br>
 	<div class="s_container">
+	
 		<form name="updatepwform" action="passwordProcess.mem" method="get">
-			
 
 			<div class="row height">
 				<div class="col-100">

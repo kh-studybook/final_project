@@ -13,5 +13,7 @@ public interface MemberService {
 	public int isUser(String email, String password);
 
 	public int delete(int key);
+
+	public int pwupdate(Member member);
  
 }
