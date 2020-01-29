@@ -484,6 +484,11 @@ public class RoomController {
 		List<Room> roomlist = roomservice.getSearchRoomList(date, starttime, endtime, MIN_MEMBER, MAX_MEMBER, page, limit);
 		
 		mv.setViewName("room/room_search");
+		mv.addObject("date", date);
+		mv.addObject("starttime", starttime);
+		mv.addObject("endtime", endtime);
+		mv.addObject("MIN_MEMBER", MIN_MEMBER);
+		mv.addObject("MAX_MEMBER", MAX_MEMBER);
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
@@ -492,5 +497,51 @@ public class RoomController {
 		mv.addObject("list", roomlist);
 		mv.addObject("limit", limit);
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="RoomSearchList.ro")
+	public Object roomSearchList(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam String date,
+			@RequestParam String starttime,
+			@RequestParam String endtime,
+			@RequestParam String MIN_MEMBER,
+			@RequestParam String MAX_MEMBER) {		
+		System.out.println("date="+date);
+		// 한 화면에 출력할 room 갯수
+		int limit = 9;
+
+		// 총 room 리스트 갯수
+		int listcount = roomservice.getRoomSearchListCount(date, starttime, endtime, MIN_MEMBER, MAX_MEMBER, page, limit);
+
+		// 총 room 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 시작 페이지(1, 6, 11, ...)
+		int startpage = ((page - 1) / 5) * 5 + 1;
+
+		// 마지막 페이지(5, 10, 15, ...)
+		int endpage = startpage + 5 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		List<Room> roomlist = roomservice.getSearchRoomList(date, starttime, endtime, MIN_MEMBER, MAX_MEMBER, page, limit);
+		
+		Map<String, Object> obj = new HashMap<String, Object>();
+		obj.put("date", date);
+		obj.put("starttime", starttime);
+		obj.put("endtime", endtime);
+		obj.put("MIN_MEMBER", MIN_MEMBER);
+		obj.put("MAX_MEMBER", MAX_MEMBER);
+		obj.put("page", page);
+		obj.put("maxpage", maxpage);
+		obj.put("startpage", startpage);
+		obj.put("endpage", endpage);
+		obj.put("listcount", listcount);
+		obj.put("roomlist", roomlist);
+		obj.put("limit", limit);
+		return obj;
 	}
 }
