@@ -34,6 +34,9 @@ public class MemberDAO {
 		return sqlSession.delete("Members.delete", key);
 	}
 
+	public int pwupdate(Member member) {
+		return sqlSession.update("Members.updatePw", member); 
+	}
 
 
 

@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member myinfo(int key) {
 		return dao.myinfo(key);
-	}
+	} 
 
 	@Override 
 	public int myupdate(Member member) {
@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int isUser(String email, String password) {
 		Member member = dao.isUser(email);
-		int result = -1; //아이디 없으면 member가 null
+		int result = -1; //?��?��?�� ?��?���? member�? null
 		if (member != null) {
 			if (member.getPassword().equals(password)) {
 				result = member.getKey();
@@ -43,6 +43,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int delete(int key) {
 		return dao.delete(key);
+	}
+
+	@Override
+	public int pwupdate(Member String) {
+		return dao.pwupdate(String);
 	}
 	
 }
