@@ -50,22 +50,20 @@ $(document).ready(function(){
     // 검색 - 달력 눌렀을 때 날짜 표시
     myCalendar.onDateClick(function(event, date){
     	var date2str = jsCalendar.tools.dateToString(date, "yyyy-MM-DD");
-    	console.log('date2str='+date2str);
     	var new_today = new Date();
     	var year = new_today.getFullYear();
     	var month = (1+new_today.getMonth());
     	var day = new_today.getDate();
     	var today = new Date(year+', '+month+', '+day);
     	
-    	console.log('date='+date);
-    	console.log('today='+today);
-    	console.log('date.getTime()='+date.getTime());
-    	console.log('today.getTime()='+today.getTime());
-    	console.log('date.getTime() < today.getTime()'+ (date.getTime() < today.getTime()));
     	if(date.getTime()< today.getTime()){
     		alert('오늘 날짜부터 선택해주세요.');
     		return false;
+    	}else{
+	 		myCalendar.clearselect();
+			myCalendar.select([date]);
     	}
+    	
     	
     	if(date.getTime() == today.getTime()){
     		var now_hour = new_today.getHours();
@@ -102,7 +100,6 @@ $(document).ready(function(){
     	$('#m_write_date').css('font-weight','bold');
     	$('#m_write_date').css('font-size','18px');
     	$('.jsCalendar').css("display", "none");
-    	$(this).addClass('j_selected');
     	$('#date').val(date2str);
     	
     });
@@ -142,7 +139,7 @@ $(document).ready(function(){
 		$('#endtime').val(endtime.substring(0, endtime.length-1));
 	})
 
-	// 검색 - 인원 눌렀을 때	
+	// 검색 - 인원 눌렀을 때
 	$('#m_main_count').children().children().click(function(){
 		$('#m_write_count').empty();
 		$('#m_write_count').append('<i class="fas fa-user"></i>');
@@ -189,26 +186,18 @@ $(document).ready(function(){
     	return Number(inputNumber).toLocalString('en').split(".")[0];
     }
     
-    $('.page-link').click(function(){
-		console.log(".page-link");
-		if(this.innerText == '>'){
-			var page = 2
-		} else {
-			var page = this.innerText;
-		}
-		getList(page);
-	})
+    // 스터디 추천공간 1페이지 불러오기
+    getList(1);
 	
-	
-	//카카오지도 api 시작
-	//카카오지도 api 키워드로 장소 검색하기
-	var mapContainer = document.getElementById('j_map'), // 지도를 표시할 div 
+	// 카카오지도 api 시작
+	// 카카오지도 api 키워드로 장소 검색하기
+	var mapContainer = document.getElementById('j_map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-	// 지도를 생성합니다    
+	// 지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
 	// 주소-좌표 변환 객체를 생성합니다
@@ -217,7 +206,7 @@ $(document).ready(function(){
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch('서울특별시 중구 남대문로 120', function(result, status) {
 	
-	    // 정상적으로 검색이 완료됐으면 
+	    // 정상적으로 검색이 완료됐으면
 	     if (status === kakao.maps.services.Status.OK) {
 	
 	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -237,22 +226,24 @@ $(document).ready(function(){
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
 	    } 
-	});//카카오지도 api 끝
-})//ready() end
+	});// 카카오지도 api 끝
+	
+	// #j_main_room min-height 주기
+	// $('#j_main_room').css("min-height", $('#j_main_room').width());
+	$('#j_main_room').children().eq(1).css("min-height", $('#j_main_room').width()+$('#j_main_room').children().eq(0).height());
+})// ready() end
 
 	function setPaging(href, digit){
 		output+="<li class='page-item'>";
 		gray = "";
 		if (href  == "#") {
-			gray=" current";//현재 페이지에 회색이 나오도록 하기 위함
+			gray=" current";// 현재 페이지에 회색이 나오도록 하기 위함
 		}
 		anchor = "<a class='page-link"+gray+"'" + href + ">" + digit + "</a></li>";
 		output += anchor;
-		console.log(output)
-	}//setPaging() end
+	}// setPaging() end
     
     function getList(page){
-		console.log('page = ' + page);
 		$.ajax({
 			type:"post",
 			url:"getRoomList.net",
@@ -260,7 +251,6 @@ $(document).ready(function(){
 			dataType:"json",
 			cache: false,
 			success:function(rdata){
-				console.log(rdata);
 				if(rdata.listcount > 0){
 					$("#j_main_room").empty();
 					output = "";
@@ -284,11 +274,19 @@ $(document).ready(function(){
 	  						output += '<span class="j_room_pay"><span class="j_room_pay_hour">' + item.hour_COST + '</span> 원/시간</span>';
 	  						output += '<span class="j_room_tag">' + item.hashtag + '</span>';
 	  						output += '</p></div></div></div></div></div></div>';
+	  						if(index == rdata.roomlist.length-1){
+	  							if((index+1)%3==1){
+	  								output += '<div class="col-md-4"></div>';
+	  		  						output += '<div class="col-md-4"></div>';
+	  							} else if((index+1)%3==2){
+	  								output += '<div class="col-md-4"></div>';
+	  							}
+	  						}
 						})
 					output += '</div>';
 					output += '<br><br>';
 					
-					//페이지네이션 시작
+					// 페이지네이션 시작
 					output += '<div id = "center-block" class="center-block">';
 					output += '<div class="row">';
 					output += '<div class="col">';
@@ -315,16 +313,16 @@ $(document).ready(function(){
 		            if (rdata.page < rdata.maxpage) {
 		               href = 'href=javascript:getList(' + (rdata.page + 1) + ')';
 		            } 
-		            setPaging( href, digit);
+		            setPaging(href, digit);
 		            
 		            output += '</ul></div></div></div>'
 		            
 		            $("#j_main_room").append(output);
 				} else {
-					$(".front").empty();
-					$(".front").append("<font size=5>등록된 이벤트가 없습니다.</font>");
+					$("#j_main_room").empty();
+					$("#j_main_room").append("<font size=5>등록된 방이 없습니다.</font>");
 				}
-			}, //success end
+			}, // success end
 			error : function() {
 		         console.log('roomlist ajax 에러')
 		    }
@@ -347,7 +345,7 @@ $(document).ready(function(){
     	}else if(endtime==''){
     		alert('끝나는 시간을 선택해 주세요');
     		return false;
-    	} else if(starttime >= endtime){
+    	} else if(parseInt(starttime) >= parseInt(endtime)){
     		alert('시간을 확인해 주세요');
     		return false;
     	} else if(MIN_MEMBER==''){
