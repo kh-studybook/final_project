@@ -203,13 +203,6 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 
-	@Override
-	public List<Reserve> reserveDateCheck(String reserve_date) {
-		return reserveDAO.reserveDatecheck(reserve_date);
-	}
-
-
-
 	
 
 }

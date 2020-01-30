@@ -11,7 +11,7 @@ create table event_comment(
 );
 
 		
-select * from event_comment, member where event_comment.mem_key = member.key and event_comment.event_num = 5 
+select * from event_comment, member where event_comment.mem_key = member.key and event_comment.event_num = 4 
 	
 		
 

@@ -46,8 +46,8 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public int eventDelete(int num) {//이벤트 삭제하기
-		return dao.eventDelete(num);
+	public int eventDelete(int event_num) {//이벤트 삭제하기
+		return dao.eventDelete(event_num);
 	}
 
 	@Override

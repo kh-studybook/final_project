@@ -514,13 +514,7 @@ public class ReserveController {
 		response.getWriter().print(ok);		
 		return "getReviewList.re";
 	}
-	
-	@RequestMapping("ReserveDateCheck.re")
-	public List<Reserve> ReserveDateCheck(String reserve_date, HttpServletRequest request, HttpServletResponse response) 
-		throws Exception {
-		List<Reserve> result = reserveservice.reserveDateCheck(reserve_date);
-		return result;
-	}
+
 
 
 

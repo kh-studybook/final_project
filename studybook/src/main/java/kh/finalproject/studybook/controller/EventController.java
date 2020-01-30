@@ -306,8 +306,8 @@ public class EventController {
 		
 		//이벤트 삭제하기
 		@RequestMapping("EventDeleteAction.eve")
-		   public String EventDeleteAction(int num, HttpServletResponse response) throws Exception{
-		      int result=eventservice.eventDelete(num);
+		   public String EventDeleteAction(int event_num, HttpServletResponse response) throws Exception{
+		      int result=eventservice.eventDelete(event_num);
 		      System.out.println("DeleteAction");
 		      //삭제 처리 실패한 경우
 		      if(result ==0) {
@@ -330,16 +330,12 @@ public class EventController {
 		//댓글 가져오기
 		@ResponseBody
 		@RequestMapping("Event_commentList.eve")
-		public Object Event_commentList(
-				@RequestParam(value = "event_num", defaultValue = "1", required = false)int event_num, 
-				@RequestParam(value = "mem_key", defaultValue = "1", required = false)int mem_key, 
-				HttpServletRequest request, HttpSession session) throws Exception {
+		public Object Event_commentList(int event_num, HttpServletRequest request, HttpSession session) throws Exception {
 			System.out.println("불러올 댓글 event_num : " + event_num);
-			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num, mem_key);
+			List<Event_comment> list = eventEvent_commentservice.getEvent_commentList(event_num);
 			Map<String, Object> obj  = new HashMap<String, Object>();
 			obj.put("list", list);
 			//obj.put("commentWriter", commentWriter);
-
 			return obj;
 		}
 			

@@ -69,7 +69,6 @@ $(function(){
 	});//write end
 	
 	
-	
 	/** comment 시작*/
 	$("#comment_form").hide();
 	
@@ -82,8 +81,7 @@ $(function(){
 		$.ajax({
 			type : "post",
 			url : "Event_commentList.eve",
-			data : {"event_num" : $("#event_num").val(),
-					"mem_key" : $("#mem_key").val()},
+			data : {"event_num" : $("#event_num").val()},
 			dataType : "json",
 			success : function(rdata){
 				console.log("success event_num = " + event_num);
@@ -95,8 +93,7 @@ $(function(){
 					$("#message").text('');
 					output = '';
 					
-					 $(rdata.list).each(
-				               function(index, item) {
+					 $(rdata.list).each(function(index, item) {
 						comment_btn = '';
 						//현재 접속한 mem_key가 관리자이거나, 글쓴 men_key가 같을 때
 						if("${mem_key}" == '999' || "${mem_key}" == item.mem_key){
@@ -104,8 +101,7 @@ $(function(){
 							+ "<a id = 'eventCommentDelete' class='removeComment'>삭제</a> "
 							+ "<input type = 'hidden' class = 'event_num' value = '" + item.event_num + "'> "
 							+ "<input type = 'hidden' id = 'event_com_num' value = '" + item.event_com_num + "' ></span> ";									 
-						} 
-									
+						} 					
 						
 						output += "<div><span>" + item.name + comment_btn + "</span><br>";
 						output += "<span>" +  item.com_date + "</span><br><br>";
@@ -114,58 +110,59 @@ $(function(){
 					});
 					$("#comment_form").append(output);
 					$("#comment_content").empty();
+					
+					//댓글 수정하기
+					$(".updateComment").click(function(){
+						if (confirm("댓글을 수정합니다.")){
+							$("#event_comment_write").text("댓글 수정");
+							$("#event_comment_write").css('backgroundColor', "#20B2AA");
+							before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
+							$("#comment_content").focus().val(before);//원래 글 가져오기
+							event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
+						}
+					});//수정하기 end
+					
+					
+					//댓글 삭제하기
+					$(".removeComment").click(function(){
+						if (confirm("댓글을 삭제합니다.")){
+							var event_com_num = $(this).next().next().val();//댓글 번호
+							console.log("삭제한 event_com_num = " + event_com_num);
+							
+							$.ajax({
+								type : "post",
+								url : "Event_commentDelete.eve",
+								data : {"event_com_num" :  event_com_num},
+								success : function(result){
+										if (result == 1) {
+											alert("댓글을 삭제했습니다.");
+											getList();
+										}																		
+								}
+							})//ajax end
+							
+						}//if end
+					});//삭제하기 end
+					
+					
+					//대댓글 달기
+					$(".reply_img").click(function(){
+						var event_com_num = $(this).next().next().val();//댓글 번호
+						
+					});//대댓글 달기 end
+					
 				} else {
 					$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
 					$("#comment_content").empty();
 					$("#comment_form").hide();
 				}
-				
-				
-				
-				//댓글 수정하기
-				$(".updateComment").click(function(){
-					if (confirm("댓글을 수정합니다.")){
-						$("#event_comment_write").text("댓글 수정");
-						$("#event_comment_write").css('backgroundColor', "#20B2AA");
-						before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
-						$("#comment_content").focus().val(before);//원래 글 가져오기
-						event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
-					}
-				});//수정하기 end
-				
-				
-				//댓글 삭제하기
-				$(".removeComment").click(function(){
-					if (confirm("댓글을 삭제합니다.")){
-						var event_com_num = $(this).next().next().val();//댓글 번호
-						console.log("삭제한 event_com_num = " + event_com_num);
-						
-						$.ajax({
-							type : "post",
-							url : "Event_commentDelete.eve",
-							data : {"event_com_num" :  event_com_num},
-							success : function(result){
-									if (result == 1) {
-										alert("댓글을 삭제했습니다.");
-										getList();
-									}																		
-							}
-						})//ajax end
-						
-					}//if end
-				});//삭제하기 end
-				
-				
-				//대댓글 달기
-				$(".reply_img").click(function(){
-					var event_com_num = $(this).next().next().val();//댓글 번호
-					
-				});//대댓글 달기 end
-				
-		}
-		});		
+			}
+		});	
+		
 		
 	};//getList end	
+	
+	
 
 	autosize($("#comment_content"));
 	
@@ -232,7 +229,7 @@ $(function(){
 		</div>			
 		
 		<!-- 댓글이 없을 때 멘트 출력 부분 -->
-		<div id = "message"></div>
+		<span id = "message"></span>
 	</div>
 	
 	<!--  삭제 모달 -->

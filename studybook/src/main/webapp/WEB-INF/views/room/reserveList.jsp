@@ -5,7 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta charset="UTF-8">
-<style>	
+<style>
+body {background-color: #f2f2f2;}	
 /** 글자 관련!!!!*/
 .pp_title{font-family: "맑은 고딕"; text-align: center !important; font-size: 32px; display:inline_block}
 #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
@@ -15,90 +16,89 @@
 
 /** 카드 관련*/
 .p_room_name{font-weight:bold; font-size:16px;}
-.reserve_card{background-color:#DCEBFF; margin:20px; padding:20px; min-width:150px !important; max-height:170px; display:flex}
+.reserve_card{border:0.5px solid darkgray; background-color:white; margin:20px; padding:20px; min-width:150px !important; max-height:170px; display:flex}
 .room_picture{width:120px; height:120px; float:left; margin:10px;}
 .reserve_card_contents{float:left; margin:10px}
 .reserve_card_contents::after{clear:both;}
 
-/** 폼 관련 */
-.row{margin:0 auto;}
-
 /** 버튼 관련*/
-#p_reserve_no{background-color:white; padding:10px; border:none; outline:none; border-radius:20px}
+.p_reserve_no{background-color:"#F2F2F2"; padding:6px; border:none; outline:none; border-radius:10px}
+.p_reserve_no1{background-color:#8c8c8c; padding:6px; color:white; border:none; outline:none; border-radius:10px}
+.p_reserve_no3{background-color:#78EAFF; padding:6px; color:white; border:none; outline:none; border-radius:10px}
 .registerReview{float:right;}
 .registerReview::after{clear:both}
-.registerReviewButton{visibility:hidden; z-index:10;}
+.registerReviewButton{z-index:10; background-color:white; border:none; outline: none; color:#7F56D2; padding:5px; border-radius:10px;}
 
 /** 모달 관련 */
-.w_div {display: inline-block;}
-.w_title {margin-top: 100px; margin-bottom: 70px; font-size: 32px; text-align: center;}
-.w_card {border: 1px solid #C1C1C1; padding: 20px; background: white; margin-bottom: 25px;}
-.w_img {width: 140px;}
-.w_content {line-height: 24px;font-size: 12px;color: #555555;}
-.w_badge {font-size: 12px; margin-bottom: 13px;}
-.w_padding {padding-left: 20px;}
-.w_name {font-size: 24px; color: #333333;}
-.w_time {font-size: 24px; color: #333333; font-size: 12px;}
-.w_btn {line-height: 24px; font-size: 12px;}
-.w_center-block {display: flex; justify-content: center; /* 가운데 정렬 */
+.p_div {display: inline-block;}
+.p_title {margin-top: 100px; margin-bottom: 70px; font-size: 32px; text-align: center;}
+.p_card {border: 1px solid #C1C1C1; padding: 20px; background: white; margin-bottom: 25px;}
+.p_img {width: 140px;}
+.p_content {line-height: 24px;font-size: 12px;color: #555555;}
+.p_badge {font-size: 12px; margin-bottom: 13px;}
+.p_padding {padding-left: 20px;}
+.p_name {font-size: 24px; color: #333333;}
+.p_time {font-size: 24px; color: #333333; font-size: 12px;}
+.p_btn {line-height: 24px; font-size: 12px;}
+.p_center-block {display: flex; justify-content: center; /* 가운데 정렬 */
 	margin-bottom: 20px;}
-.w_topmargin {margin-top: 30px;}
-.w_margin-top {margin-top: 50px;}
-.w_modal {font-size: 18px; width: 140px;}
+.p_topmargin {margin-top: 30px;}
+.p_margin-top {margin-top: 50px;}
+.p_modal {font-size: 18px; width: 140px;}
 
 </style>
 <script>
-	$(function(){
-			var reserve_date2 = $(".reserve_date").val();
-			var reserve_date = reserve_date2.substring(0, 4) + '-' + reserve_date2.substring(5, 7) + '-' + reserve_date2.substring(8, 10);
-			var today = new Date();
-			console.log("reserve_date : " + reserve_date + " / today : " + today);
-			
-			$.ajax({
-				type : "post",
-				url : "ReserveDateCheck.re",
-				data : {"reserve_date" : reserve_date},
-				success : function(data){
-						
-					$(data).each(function(index, item){
-						if (reserve_date < format(today.toString(0, 10), 'YYYY-MM-DD')){
-							$(".registerReviewButton").removeAttr('visibility');
-							console.log("후기 등록 버튼 생성 완료");
-						}							
-					});//ajax end													
-				  }	
-				});//ajax end					
-			
-	
-		
-
+	$(function(data){
 		
 		//후기 등록 버튼 클릭시
 		$(".registerReviewButton").click(function(){
 			if (confirm("후기를 등록하시겠습니까?")) {
+				$("#content").val('');
 				$("#registerReviewModal").modal();
+				
 				var room_code = $(this).parent().next().val();
 				var review_date = $(this).parent().next().next().val();
-				console.log("room_code : " + room_code + " / review_date : " + review_date);
+				//var content = $(this).parent().parent().parent().parent().parent().parent().find("textarea").val();
+				var content = $("#content").val();
+				var mem_key = $("#mem_key").val();
+								
+				
 				$("#registermodalSubmit").click(function(){
+					console.log("room_code : " + room_code + " / review_date : " + review_date + " / content : " + content + " / mem_key : " + mem_key);
+					
 					$.ajax({
 						type : "post",
 						url : "ReviewRegister.re",
 						data : {"room_code" : room_code,
 								"review_date" : review_date,
-								"content" : $("#content").html(),
-								"mem_key" : $("#mem_key").val()},
+								"content" : content,
+								"mem_key" : mem_key},
 						dataType : "json",
 						success : function(){
 								alert("후기가 등록되었습니다.");
-								$("#content").text('');	
+								$("#content").val('');	
 						}					
 					});//ajax end 					
 				});
 			}
 		});//후기 등록 버튼 클릭시 end
 		
+		//상세 페이지로 이동
+		$(".p_reserve_no").click(function(){
+			if (confirm("상세 예약 내역 페이지로 이동합니다.")) {
+				var r_code = parseInt($(this).children().children().html());
+				console.log(r_code);
+				location.href = "reserve_check.re?r_code=" + r_code;				
+			}			
+		});
 		
+		$(".p_reserve_no1").click(function(){
+			alert("이미 취소가 완료된 내역입니다.");
+		});
+		
+		$(".p_reserve_no3").click(function(){
+			alert("이미 사용이 완료된 내역입니다.");
+		});
 		
 	});
 </script>
@@ -134,8 +134,26 @@
       							<img class = "room_picture" name = "room_picture" src = "resources/image/room/${b.file_name}">        			
         					
         						<div class = "reserve_card_contents">
-        						<!--  예약 번호 -->
-		        						<button id = "p_reserve_no"><span>예약 번호 : <span style = "color : #7F56D2;">${b.r_code}</span></span></button><br>
+        						<!--  예약 완료시 -->
+        						<c:if test = "${b.status  == 1}">      					
+		        						<button class = "p_reserve_no">
+		        							<span>&nbsp;예약 번호 : <span name = "r_code" style = "color : #7F56D2;">${b.r_code}&nbsp;</span></span>
+		        						</button>
+		        						 <c:if test = "${b.reserve_date < now}" >	
+        										<button class = "p_reserve_no3">&nbsp;사용 완료&nbsp;</button><br>
+        								</c:if>
+        								<c:if test = "${b.reserve_date >= now}" >
+        									<br>
+        								</c:if>	
+		        				</c:if>
+		        				
+		        				<!--  취소 완료시 -->
+		        				<c:if test = "${b.status  == 0}">		
+		        						<button class = "p_reserve_no1">
+		        							<span>&nbsp;취소 완료&nbsp;</span>
+		        						</button><br>
+		        				</c:if>		
+		        						
 		        				<!--  사용 완료 -->		
 		        						<span id = "p_reserve_status"></span><br> 								
         								<p class = "p_room_name">${b.room_name}</p>
@@ -147,11 +165,16 @@
         								<br><br>
         								<input type = "hidden" name = "reserve_date" class = "reserve_date" value = "${b.reserve_date}">
         								<span><fmt:formatNumber value = "${b.total_cost}" pattern = "￦#,###"/></span>
-        								<span class = "registerReview">
-        									<a class = "registerReviewButton"><span style = "color:#56D7D6">후기 등록</span></a>
-        								</span>
-        								<input type = "hidden" value = "${b.room_code}" class = "room_code" name  = "room_code">
-        								<input type = "hidden" value = "${b.reserve_date}" class = "reserve_date" name = "reserve_date">	
+        								
+        								<c:set var="today" value="<%=new java.util.Date()%>"/>
+        								<fmt:formatDate var="now" type="date" value="${today}" pattern="yyyy-MM-dd"/>
+        								<c:if test = "${b.reserve_date < now && b.status == 1}" >	
+        									<span class = "registerReview">
+        										<button class = "registerReviewButton">후기 등록</button>
+        									</span>
+        									<input type = "hidden" value = "${b.room_code}" class = "room_code" name  = "room_code">
+        									<input type = "hidden" value = "${b.reserve_date}" class = "reserve_date" name = "reserve_date">
+        								</c:if>	
 								</div>  
 							</div>
 						</div>
@@ -214,7 +237,7 @@
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title w_modal">후기 등록</h4>
+					<h4 class="modal-title pw_modal" style = "font-weight:bold; font-size:16px; width:100%">후기 등록</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
 				</div>
@@ -228,7 +251,7 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<form id=deletemodalForm action="ReviewModify.re" method="post">
+					<form id=deletemodalForm>
 						<input type=hidden name="mem_key" value="${mem_key}" id="mem_key">
 						<input type="submit" class="btn btn-dark" data-dismiss="modal" id=registermodalSubmit value=등록>
 					</form>

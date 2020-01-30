@@ -7,7 +7,7 @@ import kh.finalproject.studybook.domain.Event_comment;
 
 public interface EventCommentService {
 	//댓글 목록 가져가기
-	List<Event_comment> getEvent_commentList(int event_num, int mem_key);
+	List<Event_comment> getEvent_commentList(int event_num);
 	//댓글의 삽입
 	int Event_commentsInsert(Event_comment co);
 	//댓글 삭제
