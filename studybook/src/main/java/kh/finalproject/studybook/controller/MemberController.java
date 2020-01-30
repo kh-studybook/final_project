@@ -25,9 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Member;
-import kh.finalproject.studybook.domain.Reserve;
 import kh.finalproject.studybook.service.MemberService;
 
 @Controller
