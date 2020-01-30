@@ -1,9 +1,11 @@
 
 package kh.finalproject.studybook.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import kh.finalproject.studybook.domain.Event_comment;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
 import kh.finalproject.studybook.domain.Gallery;
@@ -35,18 +37,6 @@ public interface ReserveService {
 	public List<Reserve> getReserve_timelist(String search_date, int room_code);
 	public int reserve_cancel(int r_code);
 	
-	//선아 - 예약 내역 리스트 수 구하기
-	public int getReserveListCount(int mem_key);
-	//예약 내역 리스트 가져오기
-
-	public List<Reserve> getReserveList(int page, int limit, int mem_key);
-	//나의 리뷰 등록하기
-	public int RegisterReview(Map<Object, Object> obj);
-
-
-	public List<Reserve> getReserveList(int page, int limit);
-	//방 사진 가져오기
-	public List<Gallery> getRoomPicture(int mem_key);
 	//어드민-예약 리스트 가져오기
 	public List<Reserve> getSearchList(int index, String search_word, int page, int limit);
 	//어드민-예약 리스트 카운트 가져오기
@@ -56,8 +46,15 @@ public interface ReserveService {
 	//어드민 - 예약 수정
 	public int updateReserve(Reserve reserve);
 	
-	
-	
+	//선아 - 예약 내역 리스트 수 구하기
+	public int getReserveListCount(int mem_key);
+	//예약 내역 리스트 가져오기
+
+	public List<Reserve> getReserveList(int page, int limit, int mem_key);
+	//나의 리뷰 등록하기
+	public int RegisterReview(Map<Object, Object> obj);
+	//후기 버튼 출력을 위한 날짜 체크하기
+	public List<Reserve> reserveDateCheck(String reserve_date);
 
 
 }

@@ -1,6 +1,7 @@
 
 package kh.finalproject.studybook.service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,15 +201,11 @@ public class ReserveServiceImpl implements ReserveService {
 	public int RegisterReview(Map<Object, Object> obj) {
 		return reserveDAO.registerReview(obj);
 	}
-	
-	
 
-	
-
-	
-
-
-	
+	@Override
+	public List<Reserve> reserveDateCheck(String reserve_date) {
+		return reserveDAO.reserveDatecheck(reserve_date);
+	}
 
 
 

@@ -25,9 +25,9 @@
 
 /** 버튼 관련*/
 #p_reserve_no{background-color:white; padding:10px; border:none; outline:none; border-radius:20px}
-.registerReview{float:right}
+.registerReview{float:right;}
 .registerReview::after{clear:both}
-.registerReviewButton{visibility:hidden; background-color : #56D7D6; color:white; padding:6px; border:none; outline:none; border-radius:20px; z-index:10;}
+.registerReviewButton{visibility:hidden; z-index:10;}
 
 /** 모달 관련 */
 .w_div {display: inline-block;}
@@ -48,32 +48,30 @@
 
 </style>
 <script>
-	$(function(rdata){
-		function formatDate(date) {
-			  	var weekName = ["일", "월", "화", "수", "목", "금", "토"];
-					    var d = new Date(date),
-					        month = '' + (d.getMonth() + 1),
-					        day = '' + d.getDate(),
-					        year = d.getFullYear(),
-					        hour = d.getHours(),
-					        E = d.getDay();
-
-					    if (month.length < 2) 
-					        month = '0' + month;
-					    if (day.length < 2) 
-					        day = '0' + day;
-
-					    return [year, month, day].join('.')+"("+ weekName[E]+")";
-		}
+	$(function(){
+			var reserve_date2 = $(".reserve_date").val();
+			var reserve_date = reserve_date2.substring(0, 4) + '-' + reserve_date2.substring(5, 7) + '-' + reserve_date2.substring(8, 10);
+			var today = new Date();
+			console.log("reserve_date : " + reserve_date + " / today : " + today);
+			
+			$.ajax({
+				type : "post",
+				url : "ReserveDateCheck.re",
+				data : {"reserve_date" : reserve_date},
+				success : function(data){
+						
+					$(data).each(function(index, item){
+						if (reserve_date < format(today.toString(0, 10), 'YYYY-MM-DD')){
+							$(".registerReviewButton").removeAttr('visibility');
+							console.log("후기 등록 버튼 생성 완료");
+						}							
+					});//ajax end													
+				  }	
+				});//ajax end					
+			
+	
 		
-		for (var i = 0; i < rdata.length; i++) {	
-			var today = new Date();		
-			if(formatDate($(".reserve_date").eq(i).val()) < formatDate(today)){
-				console.log("오늘 : "+$(".reserve_date").eq(i).val() + " / 예약 날짜 : "+formatDate($(".reserve_date").val()));
-				console.log($(".reserve_date").val() < formatDate(today));
-				$(".registerReviewButton").eq(i).css('visibility', 'visible');
-			}//if end			
-		}//for end
+
 		
 		//후기 등록 버튼 클릭시
 		$(".registerReviewButton").click(function(){
@@ -89,7 +87,7 @@
 						data : {"room_code" : room_code,
 								"review_date" : review_date,
 								"content" : $("#content").html(),
-								"mem_key" : mem_key},
+								"mem_key" : $("#mem_key").val()},
 						dataType : "json",
 						success : function(){
 								alert("후기가 등록되었습니다.");
@@ -142,17 +140,18 @@
 		        						<span id = "p_reserve_status"></span><br> 								
         								<p class = "p_room_name">${b.room_name}</p>
         								<br>
-        								<span>${fn:substring(b.reserve_date,0,4)}. ${fn:substring(b.reserve_date,5,7)}. ${fn:substring(b.reserve_date,8,10)}
-        									<c:set var = "E" value = "<%= new java.util.Date() %>"/>
-        									(<fmt:formatDate value = "${E}" pattern = "E"/>)</span>
-        					
+        								<span>
+        									${fn:substring(b.reserve_date,0,4)}. ${fn:substring(b.reserve_date,5,7)}. ${fn:substring(b.reserve_date,8,10)}
+        								</span>
         								${b.start_time}시&nbsp;~&nbsp;${b.end_time}시,&nbsp;${b.end_time - b.start_time}시간
         								<br><br>
         								<input type = "hidden" name = "reserve_date" class = "reserve_date" value = "${b.reserve_date}">
         								<span><fmt:formatNumber value = "${b.total_cost}" pattern = "￦#,###"/></span>
-        								<span class = "registerReview"><button class = "registerReviewButton">후기 등록</button></span>
-        								<input type = "hidden" value = "${b.room_code}" name  = "room_code">
-        								<input type = "hidden" value = "${b.reserve_date}" name = "review_date">	
+        								<span class = "registerReview">
+        									<a class = "registerReviewButton"><span style = "color:#56D7D6">후기 등록</span></a>
+        								</span>
+        								<input type = "hidden" value = "${b.room_code}" class = "room_code" name  = "room_code">
+        								<input type = "hidden" value = "${b.reserve_date}" class = "reserve_date" name = "reserve_date">	
 								</div>  
 							</div>
 						</div>

@@ -1,6 +1,7 @@
 
 package kh.finalproject.studybook.dao;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +121,9 @@ public class ReserveDAO {
 	}
 	public int registerReview(Map<Object, Object> obj) {
 		return sqlSession.insert("Reserves.registerReview", obj);
+	}
+	public List<Reserve> reserveDatecheck(String reserve_date) {
+		return sqlSession.selectList("Reserves.reserveDateCheck", reserve_date);
 	}
 	
 	
