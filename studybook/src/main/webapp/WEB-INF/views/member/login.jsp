@@ -15,8 +15,8 @@
 }
 
 .s_title { 
-	margin-top: 300px; 
-	margin-bottom: 20px;
+	margin-top: 200px; 
+	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
 }
@@ -42,7 +42,7 @@
 	line-height:43px;
 	background-color: #7F56D2;
 	color: white;
-	margin-top: 18px;
+	margin-top: 20px;
 	border: none;
 	cursor: pointer;
 }
@@ -116,12 +116,12 @@ instead of next to each other */
 
 		$(".join").click(function() {
 			location.href = "join.mem";
-		});
+		})
 
 		$(".findpw").click(function() {
 			location.href = "findpw.mem";
-		}); 
-
+		}) 
+	});
 		
 </script>
 
