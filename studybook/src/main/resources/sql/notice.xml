@@ -33,7 +33,7 @@
 
 	<select id="getDetail" parameterType="int" resultType="notice">
 		select * from notice
-		where NOTICE_NUM = #{num}
+		where NOTICE_NUM = #{NOTICE_NUM}
 	</select>
 
 
@@ -47,7 +47,7 @@
 	
 	<delete id="delete" parameterType="notice">
 		delete from notice
-		where NOTICE_NUM= #{NOTICE_NUM}
+		where NOTICE_NUM= #{num}
 	</delete>
 
 

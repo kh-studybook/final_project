@@ -26,12 +26,12 @@ body {
 
 .contentarea {
 	background-color:white;
-	width:50%;
-	height:100%
+	width:55%;
+	height:800px;
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 30px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -42,23 +42,38 @@ body {
 	justify-content: center;
 }
    
+.title {
+	font-size:24px
+}
+
+.date {
+	font-size:14px;
+}
+   
+.content {
+	border:0px;
+	font-size:14px;
+}
    
 th {
 	text-align:center
 }
 
-#myModal {
-   display:none;
+.listbtn {
+	width: 330px;
+	height: 43px;
+	line-height:43px;
+	background-color: #7F56D2;
+	color: white;
+	margin-top: 20px;
+	border: none;
+	cursor: pointer;
 }
-   	
-#count {
-   	position:relative;
-   	top:-10px;
-   	left:-10px;
-   	background:orange;
-   	color:white;
-   	border-radius:30%;
+
+.listbtn:hover {
+	opacity: 70%;
 }
+
 </style>
 
 <script>
@@ -77,21 +92,22 @@ th {
 <p class=s_title></p>
 
    <div class="s_container">
-      <table class="table table-striped">
+      <table class="table">
 
          <tr>
-            <td>${noticedata.NOTICE_TITLE }</td>
+            <td class=title>${noticedata.NOTICE_TITLE }</td>
+         </tr>
+         <tr>
+            <td class=date>${noticedata.NOTICE_DATE }</td>
+         </tr>
+         <tr>
+            <td><textarea class="content" rows="20" readOnly style="width:100%">${noticedata.NOTICE_CONTENT }</textarea></td>
          </tr>
          
          <tr>
-            <td><textarea class="form-control" rows="5" readOnly style="width:102%">${noticedata.NOTICE_CONTENT }</textarea></td>
-         </tr>
-         
-         <tr>
-            <td></td>
-            <td colspan="2" class="center">
+            <td>
                
-           <!-- 관리자만 수정/삭제 가능 -->    
+           <!-- 관리자만 수정/삭제 가능    
            <c:if test="${member.name== '관리자' }">
            
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
@@ -103,29 +119,14 @@ th {
                   				data-target="#myModal">삭제</button>
                </a>
             </c:if> 
-            <!-- 여기까지 -->
+           	 여기까지 -->
             
                <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
+               </td>
          </tr>
       </table> 
       
-      	<div class="modal" id="myModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form name="deleteForm" action="NoticeDeleteAction.bo" method="post">
-						<div class="form-group">
-							<span>정말 삭제하시겠습니까.</span>
-						</div>
-						<button type="submit" class="submitbtn">확인</button>
-					    <button type="button" class="closebtn">취소</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 	
    </div>
 </div>

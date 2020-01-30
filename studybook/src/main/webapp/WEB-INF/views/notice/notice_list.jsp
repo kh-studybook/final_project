@@ -28,14 +28,21 @@ body {
 
 .contentarea {
 	background-color:white;
-	width:50%;
-	height:100%
+	width:55%;
+	height:800px;
 }
 
 .s_title {
 	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
+	text-align: center;
+}
+
+.s_desc {
+	margin-top: 50px;
+	margin-bottom: 35px;
+	font-size: 14px;
 	text-align: center;
 }
 
@@ -48,16 +55,40 @@ body {
 	width:60%;
 }
 
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 0px;
+    border-bottom: 1px solid #dee2e6;
+}
 .center-block {
 	display: flex;
 	justify-content: center; /*가운데 정렬*/
 }
 
-select.form-control {
-	width: auto;
-	margin-bottom: 2em;
-	display: inline-block;
+/*제목*/
+.title {
+	font-size:14px;
+	text-decoration:none;
+	color:#333333;
+	margin-top:10px;
+	margin-bottom:10px;
 }
+
+.title:hover {
+	text-decoration:none;
+	color:#7F56D2;
+}
+
+/*날짜*/
+.date {
+	font-size:12px;
+	color:#7F7F7F;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+
 
 .rows {
 	text-align: right;
@@ -221,6 +252,7 @@ select.form-control {
 
 <div class=contentarea>
 	<p class=s_title>공 지 사 항</p>
+	<p class=s_desc>자주 질문해주시는~~~ ^^^^^</p>
 	
 	<div class="container_wrap">
 	
@@ -228,7 +260,6 @@ select.form-control {
 	
 		<%-- 게시글이 있는 경우 --%>
 		<c:if test="${listcount > 0 }">
-
 			<table class="table">
 				<thead></thead>
 				<tbody>
@@ -240,11 +271,9 @@ select.form-control {
 									value="${num-1 }" /></td>
 							<td>
 								<div>
-									<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUM }">${b.NOTICE_TITLE }</a>
+									<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
 								</div>
-
-								<div>${b.NOTICE_DATE }</div>
-								
+								<div><span class=date>${b.NOTICE_DATE }</span></div>
 							</td>
 						</tr>
 						
@@ -257,13 +286,13 @@ select.form-control {
 					<div class="col">
 						<ul class="pagination">
 							<c:if test="${page<=1 }">
-								<li class="page-item"><a class="page-link" href="#">◀
+								<li class="page-item"><a class="page-link" href="#"><
 										&nbsp;</a></li>
 							</c:if>
 							
 							<c:if test="${page>1 }">
 								<li class="page-item"><a
-									href="NoticeList.bo?page=${page-1 }" class="page-link">◀</a>
+									href="NoticeList.bo?page=${page-1 }" class="page-link"><</a>
 									&nbsp;</li>
 							</c:if>
 
@@ -281,11 +310,11 @@ select.form-control {
 
 							<c:if test="${page>=maxpage }">
 								<li class="page-item"><a class="page-link" href="#">&nbsp;
-										▶</a></li>
+										></a></li>
 							</c:if>
 							<c:if test="${page<maxpage }">
 								<li class="page-item"><a class="page-link"
-									href="NoticeList.bo?page={page+1}">&nbsp; ▶</a></li>
+									href="NoticeList.bo?page={page+1}">&nbsp; ></a></li>
 							</c:if>
 						</ul>
 					</div>
@@ -296,12 +325,10 @@ select.form-control {
 		
 		<!--  게시글이 없는 경우 -->
 		<c:if test="${listcount== 0 }">
-			<font size=5>등록된 공지사항이 없습니다.</font>
+			<p class=s_title>등록된 공지사항이 없습니다.</p>
 		</c:if>
 		<br>
-		<c:if test="${member.name== '관리자' }">
-		<button type="button" class="writebtn float-right">글 쓰 기</button>
-		</c:if>
+
 		
 	</div>
 	
