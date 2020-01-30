@@ -14,7 +14,7 @@
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 120px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -42,7 +42,7 @@
 	background-color: #9f9f9f;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-bottom: 50px;
 	border: none;
 	cursor: pointer;
 }
@@ -120,6 +120,7 @@ instead of next to each other */
 
 .msg {
 	font-size:10px;
+	color:crimson;
 }
 
 .height {
@@ -131,7 +132,10 @@ instead of next to each other */
 	margin-bottom: 30px;
 }
 
-
+img {
+	width:15px;
+	margin-left:10px;
+}
 
 /*modal*/
 #modalforupdate {
@@ -192,77 +196,81 @@ instead of next to each other */
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
 						var nametest = /^[가-힣a-zA-Z]+$/;
 						var passwordtest = /^[0-9a-zA-Z]{6,20}$/;
 						var emailtest = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 						var phonetest = /^010?([0-9]{4})?([0-9]{4})$/;
 
+						
 						$("#name").blur(function() {
 							var value = $('#name').val().trim();
 							if (nametest.test($(this).val())) {
+								gogo();
 								console.log(emailtest.test($(this).val()));
-								$(".namemsg").html('<img src=resources/image/check.png width=17px>');
+								$(".namemsg").html('<img src=resources/image/check.png>');
 								
 							} else {
 								$('.namemsg').text('! 이름은 한글/영문만 입력 가능합니다.');
-								$('.namemsg').css('color', 'LightCoral');
 							}
 						});
 
 						$("#email").blur(function() {
 							var value = $('#email').val().trim();
 							if (emailtest.test($(this).val())) {
+								gogo();
 								console.log(emailtest.test($(this).val()));
-								$(".emailmsg").html('<img src=resources/image/check.png width=17px>');
+								$(".emailmsg").html('<img src=resources/image/check.png>');
 							} else {
 								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
-								$('.emailmsg').css('color', 'LightCoral');
 							}
 						});
 
 						$('#password').blur(function() {
 							if (passwordtest.test($(this).val())) {
+								gogo();
 								console.log(passwordtest.test($(this).val()));
-								$('.pwmsg').html('<img src=resources/image/check.png width=17px>');
+								$('.pwmsg').html('<img src=resources/image/check.png>');
 							} else {
 								$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
-								$('.pwmsg').css('color', 'LightCoral');
 							}
 						});
 
 						$('#pwcheck').on('keyup', function() {
 							if ($('#password').val() != $('#pwcheck').val()) {
 								$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
-								$('.pwcheckmsg').css('color', 'LightCoral');
 							} else {
-								$('.pwcheckmsg').html('<img src=resources/image/check.png width=17px>');
+								gogo();
+								$('.pwcheckmsg').html('<img src=resources/image/check.png>');
 							}
 
 						});
 
 						$("#phone").blur(function() {
 							if (phonetest.test($(this).val())) {
+								gogo();
 								console.log(phonetest.test($(this).val()));
-								$(".phonemsg").html('<img src=resources/image/check.png width=17px>');
+								$(".phonemsg").html('<img src=resources/image/check.png>');
 							} else {
 								$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
-								$('.phonemsg').css('color', 'LightCoral');
 							}
 						}); 
 
-						if ($("#name").val() != "" || $("#email").val() != ""
-								|| $("#password").val() != ""
-								|| $("#pwcheck").val() != ""
-								|| $("#phone").val() != "") {
+						function gogo() {
+						if ($("#name").val() != "" 
+							&& $("#email").val() != ""
+							&& $("#password").val() != ""
+							&& $("#pwcheck").val() != ""
+							&& $("#phone").val() != "") {
 
 							$('.s_submit').attr('disabled', false);
-							$('.s_submit').css('background', '#56D7D6');
+							$('.s_submit').css('background', '#7F56D2');
+						} else {
+							$('.s_submit').attr('disabled', true);
 						}
-
+						}
+						
 						$(".tologin").click(function() {
 							location.href = "login.mem";
 						});
@@ -324,7 +332,7 @@ instead of next to each other */
 						name="phone" placeholder="연락처" maxLength="11" required>
 				</div>
 				<div class="col-100 message">
-					<span class="phonemsg"></span>
+					<span class="phonemsg msg"></span>
 				</div>
 			</div>
 
