@@ -221,16 +221,9 @@ select *
 		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
 	</insert>
 
-	<select id="reserveRoomPicture" parameterType="int"
-		resultType="String">
-		select * from (
-		select file_name from
-		(select * from member
-		m, reserve r, gallery g
-		where m.key = r.mem_key and r.room_code =
-		g.room_code)
-		where mem_key =
-		#{mem_key})
+	
+	<select id = "reserveDateCheck" resultType = "reserve" parameterType = "String">
+		select * from reserve where #{reserve_date} &lt; TO_CHAR(sysdate, 'YYYY-MM-DD')
 	</select>
 
 </mapper>

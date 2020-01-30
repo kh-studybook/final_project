@@ -14,6 +14,8 @@ create table reserve(
 	reserver_email varchar2(40) not null
 );
 
+select * from reserve where reserve_date < TO_CHAR(sysdate, 'YYYY-MM-DD');
+
 alter table reserve add pay_date date;
 
 update reserve set reserve_date = '2020-01-25' where r_code = '1002';
