@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +114,11 @@ body {
 								${m.r_code}</span>
 							<p class="w_name">${m.ROOM_NAME}</p>
 							<br>
-							<p class="w_time">${m.reserve_date}
+							<p class="w_time">
+								${fn:substring(m.reserve_date,0,4)}.
+								${fn:substring(m.reserve_date,5,7)}.
+								${fn:substring(m.reserve_date,8,10)}
+
 								${m.start_time}~${m.end_time}시,
 								<c:set var="start" value="${m.start_time}" />
 								<c:set var="end" value="${m.end_time}" />
@@ -243,7 +249,8 @@ body {
 							<span id="room_name"></span> 사용후기
 						</p>
 						<br>
-						<textarea class="form-control" name="contents" id="contents" rows="10">
+						<textarea class="form-control" name="contents" id="contents"
+							rows="10">
 				</textarea>
 					</div>
 

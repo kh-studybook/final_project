@@ -99,6 +99,10 @@
 	name=#{name},
 	phone=#{phone} where key=#{key}
 	</update>
+	<!-- 어드민 회원 정보 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+	delete from member where key = #{key}
+	</delete>
 	
 	
 </mapper>

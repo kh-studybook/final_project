@@ -399,5 +399,23 @@ public class MemberController {
 		out.close();
 		return null;
 	}
+	//어드민 - 삭제 액션 memberDelete.re
+	@GetMapping("memberDelete.re")
+	public String memberDaleteAction(int key, HttpServletResponse response) throws Exception{
+		int result = memberservice.memberDelete(key);
+		
+		if(result==0) {
+			System.out.println("멤버 삭제 실패");
+		}
+		System.out.println("멤버 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('멤버 삭제 되었습니다.');");
+		out.println("location.href='MemberList.mem';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
 	
 }
