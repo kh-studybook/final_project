@@ -14,6 +14,22 @@
 	font-family: "맑은 고딕";   
 }
 
+body {
+	background-color: #f2f2f2;
+}
+
+.contentwrap {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.contentarea {
+	background-color:white;
+	width:50%;
+	height:100%
+}
+
 .s_title {
 	margin-top: 230px;
 	margin-bottom: 35px;
@@ -52,6 +68,11 @@ th {
 
 
 <body>
+
+<div class=contentwrap>
+
+<div class=contentarea>
+
 <input type="hidden" id="memberkey" value="${key }" name="memberkey">
 <p class=s_title></p>
 
@@ -71,7 +92,7 @@ th {
             <td colspan="2" class="center">
                
            <!-- 관리자만 수정/삭제 가능 -->    
-           <c:if test="${member.name== '손연수' }">
+           <c:if test="${member.name== '관리자' }">
            
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
                   <button class="modifybtn">수정</button>
@@ -107,5 +128,7 @@ th {
 	</div>
 	
    </div>
+</div>
+</div>   
 </body>
 </html>

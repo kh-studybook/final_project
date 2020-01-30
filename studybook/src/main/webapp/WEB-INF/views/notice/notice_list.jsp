@@ -20,14 +20,20 @@ body {
 	background-color: #f2f2f2;
 }
 
+.contentwrap {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
 .contentarea {
 	background-color:white;
-	width:80%;
-	height:80%
+	width:50%;
+	height:100%
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -65,8 +71,25 @@ select.form-control {
 	color: gray
 }
 
-.pagination {
+
+
+.page-link {
 	border: 1px solid white;
+}
+
+.writebtn {
+	width: 330px;
+	height: 43px;
+	line-height:43px;
+	background-color: #7F56D2;
+	color: white;
+	margin-top: 20px;
+	border: none;
+	cursor: pointer;
+}
+
+.writebtn:hover {
+	opacity: 70%;
 }
 </style>
 
@@ -194,6 +217,8 @@ select.form-control {
 </head>
 <body>
 
+<div class=contentwrap>
+
 <div class=contentarea>
 	<p class=s_title>공 지 사 항</p>
 	
@@ -274,12 +299,13 @@ select.form-control {
 			<font size=5>등록된 공지사항이 없습니다.</font>
 		</c:if>
 		<br>
-		<c:if test="${member.name== '손연수' }">
+		<c:if test="${member.name== '관리자' }">
 		<button type="button" class="writebtn float-right">글 쓰 기</button>
 		</c:if>
 		
 	</div>
 	
 </div>	
+</div>
 </body>
 </html>

@@ -39,6 +39,22 @@
 	font-family: "맑은 고딕";   
 }
 
+body {
+	background-color: #f2f2f2;
+}
+
+.contentwrap {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.contentarea {
+	background-color:white;
+	width:50%;
+	height:100%
+}
+
 .s_title {
 	margin-top: 230px;
 	margin-bottom: 35px;
@@ -69,13 +85,14 @@ label {
 	font-weight: bold
 }
 
-#upfile {
-	display: none
-}
+
 </style>
 
 </head>
 <body>
+<div class=contentwrap>
+
+<div class=contentarea>
 
 	<p class=s_title></p>
 	<div class="s_container">
@@ -97,13 +114,15 @@ label {
 			</div>
 
 			<!-- 관리자한테만 보이게 test 넣기 -->
-			<c:if test="${member.name== '손연수' }">
+			<c:if test="${member.name== '관리자' }">
 			<div class="form-group">
 				<button type="submit" class="submitbtn">수정</button>
-				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>
+				<button type="reset" class="resetbtn" onClick="history.go(-2)">취소</button>
 			</div>
 			</c:if>
 		</form>
 	</div>
+</div>
+</div>	
 </body>
 </html>

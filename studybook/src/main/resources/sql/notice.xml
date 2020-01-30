@@ -11,8 +11,14 @@
 
 
 	<select id="list" resultType="Notice" parameterType="HashMap">
-		select * from notice
-		order by NOTICE_NUM desc
+		select *
+		from
+		(select rownum rnum, b.*
+		from (select * from notice
+		order by NOTICE_NUM desc) b )
+		where rnum &gt;= #{start}
+		and rnum &lt;=
+		#{end}
 	</select>
 
 
@@ -34,7 +40,7 @@
 	<update id="modify" parameterType="notice">
 		update notice
 		set NOTICE_TITLE = #{NOTICE_TITLE},
-		NOTICE_CONTENT = #{NOTICE_CONTENT},
+		NOTICE_CONTENT = #{NOTICE_CONTENT}
 		where NOTICE_NUM = #{NOTICE_NUM} 
 	</update>
 
