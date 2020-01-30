@@ -1,6 +1,7 @@
 package kh.finalproject.studybook.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Calendar;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Food;
@@ -31,7 +33,7 @@ import kh.finalproject.studybook.service.MemberService;
 @Controller
 public class MemberController {
 
-	@Value("${savefoldername}")
+	@Value("${savefoldermember}")
 	private String saveFolder;
 
 	@Autowired
@@ -190,54 +192,48 @@ public class MemberController {
 
 	//프로필사진 변경
 	@PostMapping("/profileProcess.mem")
-	public ModelAndView EventModifyAction(Member member, ModelAndView mv, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public void EventModifyAction(Member member, HttpServletRequest request,
+			HttpServletResponse response,MultipartHttpServletRequest mtfRequest) throws Exception {
+		MultipartFile uploadfile = mtfRequest.getFile("uploadfile");
+		System.out.println("uploadfile="+uploadfile);
+		String path=saveFolder;
+		
+		if(!uploadfile.isEmpty()) {
+			
+			String fileName = uploadfile.getOriginalFilename();//원래파일명
 
-		MultipartFile uploadfile = member.getUploadfile();
-
-		/*
-		 * String saveFolder =
-		 * request.getSession().getServletContext().getRealPath("resources") +
-		 * "/upload/";
-		 */
-
-		if (uploadfile != null && !uploadfile.isEmpty()) {// 파일을 변경한 경우
-			System.out.println("파일 변경한 경우");
-			String fileName = uploadfile.getOriginalFilename();// 원래 파일명을 가져오기
-			member.setProfile_originalfile(fileName);
-
-			String fileDBName = fileDBName(fileName, saveFolder);
-
-			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-
-			// 바뀐 파일명으로 저장
-			member.setProfile(fileDBName);
-			System.out.println(fileDBName);
-		}
-
-		// DAO에서 수정 메서드를 호출하여 수정합니다.
-		int result = memberservice.profileupdate(member);
-
-		// 수정에 실패한 경우
-		if (result == 0) {
-			System.out.println("수정 실패");
-			mv.setViewName("redirect:my_update.mem");
-			mv.addObject("url", request.getRequestURL());
-			mv.addObject("message", "수정 실패");
-		} else {// 수정 성공한 경우
-			System.out.println("수정 완료");
+			String safeFile=path+ System.currentTimeMillis() + fileName;
+			String DBname = System.currentTimeMillis() + fileName;
+			try {
+				uploadfile.transferTo(new File(safeFile));
+				member.setProfile(DBname);
+				memberservice.profileupdate(member);
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('정보가 수정되었습니다.(사진포함)')");
+				out.println("location.href='my_update.mem';");
+				out.println("</script>");
+				out.close();
+				
+			}catch(IllegalStateException e) {
+				e.printStackTrace();
+				System.out.println("Member 회원 사진 변경하다 에러");
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Member 회원 사진 변경하다 에러");
+			}
+			
+			
+		}else {
+			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('수정 되었습니다.');");
+			out.println("alert('사진을 선택해주세요');");
+			out.println("history.back();");
 			out.println("</script>");
-
-			String url = "redirect:my_update.mem";
-
-			// 이동  경로를 설정
-			mv.setViewName(url);
+			out.close();
 		}
-		return mv;
 	}
 
 	public String fileDBName(String fileName, String saveFolder) {
@@ -394,6 +390,24 @@ public class MemberController {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('수정되었습니다.')");
+		out.println("location.href='MemberList.mem';");
+		out.println("</script>");
+		out.close();
+		return null;
+	}
+	//어드민 - 삭제 액션 memberDelete.re
+	@GetMapping("memberDelete.re")
+	public String memberDaleteAction(int key, HttpServletResponse response) throws Exception{
+		int result = memberservice.memberDelete(key);
+		
+		if(result==0) {
+			System.out.println("멤버 삭제 실패");
+		}
+		System.out.println("멤버 삭제 성공");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('멤버 삭제 되었습니다.');");
 		out.println("location.href='MemberList.mem';");
 		out.println("</script>");
 		out.close();

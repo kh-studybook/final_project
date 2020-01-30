@@ -105,6 +105,24 @@ public class MemberServiceImpl implements MemberService{
 	public int updateMember(Member member) {
 		return dao.updateMember(member);
 	}
+
+	@Override
+	public int delete(int key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	//어드민 - 멤버 삭제
+	@Override
+	public int memberDelete(int key) {
+		
+		int result = 0;
+		result = dao.deleteMember(key);
+		if(result !=1) {
+			System.out.println("멤버 삭제 성공");
+			return result;
+		}
+		return result;
+	}
 	
 	
 }

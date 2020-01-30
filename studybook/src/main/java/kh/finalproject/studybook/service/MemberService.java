@@ -33,5 +33,7 @@ public interface MemberService {
 	public int profileupdate(Member member);
 
 	public int delete(Member member);
+	//어드민 - 멤버 삭제
+	public int memberDelete(int key);
 	
 }

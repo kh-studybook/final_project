@@ -41,6 +41,12 @@
 	</update>
 	
 	
+	<update id="updateProfile" parameterType="member">
+		update member set
+		profile = #{profile}
+		where key = #{key}
+	</update>
+	
 	<delete id="delete" parameterType="member">
 		delete from member 
 		where key = #{key}
@@ -99,6 +105,12 @@
 	name=#{name},
 	phone=#{phone} where key=#{key}
 	</update>
+
+	<!-- 어드민 회원 정보 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+	delete from member where key = #{key}
+	</delete>
+
 	
 	
 </mapper>

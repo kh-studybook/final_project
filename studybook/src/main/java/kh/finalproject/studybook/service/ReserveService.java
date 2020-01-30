@@ -37,6 +37,8 @@ public interface ReserveService {
 	public List<Reserve> getReserve_timelist(String search_date, int room_code);
 	public int reserve_cancel(int r_code);
 	
+
+	
 	//어드민-예약 리스트 가져오기
 	public List<Reserve> getSearchList(int index, String search_word, int page, int limit);
 	//어드민-예약 리스트 카운트 가져오기

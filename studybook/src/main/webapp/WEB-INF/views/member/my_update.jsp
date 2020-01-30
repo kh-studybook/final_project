@@ -241,7 +241,7 @@ instead of next to each other */
 	<div class=outer_container>
 		<div class="s_container">
 			<form method="post" action="profileProcess.mem" enctype="multipart/form-data">
-
+				<input type="hidden" name="key" value="${member.key }">
 				<div class="row">
 					<div class="col-100">
 						<label class=uploadfile> <input type="file" class=uploadfiles
@@ -253,7 +253,7 @@ instead of next to each other */
 							</c:if>  
 							
 							<c:if test="${member.profile!= null}">
-								<img src="resources/upload/${member.profile}" alt="Avatar" class="newavatar" id=profile>
+								<img src="resources/image/profile/${member.profile}" alt="Avatar" class="newavatar" id=profile>
  							</c:if>
  							
 						</label>
