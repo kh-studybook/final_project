@@ -92,6 +92,9 @@ body {
 #contents {
 	font-size: 14px;
 }
+.event_btn{color:black !important;}
+.event_btn:hover{cursor: pointer; color: #3EF4F3 !important; text-decoration:none;}
+.event_btn:visited{color:black !important; }
 </style>
 
 </head>
@@ -130,12 +133,15 @@ body {
 						</div>
 						<div class="col-md-2">
 							<p class="w_content">후기 등록 날짜</p>
-							<p>${m.review_date}</p>
+							<p>${fn:substring(m.review_date,0,4)}.
+								${fn:substring(m.review_date,5,7)}.
+								${fn:substring(m.review_date,8,10)}
+							</p>
 						</div>
 						<div class="col-md-2">
 							<p class="pull-right w_btn">
-								<a id="modify_${m.review_code}" class="modify">수정</a> | <a
-									id="delete_${m.review_code}" class="delete" data-toggle="modal"
+								<a id="modify_${m.review_code}" class="modify event_btn">수정</a> | <a
+									id="delete_${m.review_code}" class="delete event_btn" data-toggle="modal"
 									data-target="#deletemodal">삭제</a>
 							</p>
 						</div>
