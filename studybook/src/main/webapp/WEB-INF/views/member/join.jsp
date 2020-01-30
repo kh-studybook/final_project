@@ -14,7 +14,7 @@
 }
 
 .s_title {
-	margin-top: 120px;
+	margin-top: 120px; 
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -115,7 +115,7 @@ instead of next to each other */
 }
 
 .message {
-	mergin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .msg {

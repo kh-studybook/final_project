@@ -23,7 +23,7 @@ input[type=text], select, textarea {
 }
 
 .s_title {
-	margin-top: 220px;
+	margin-top: 120px;
 	margin-bottom: 20px;
 	font-size: 32px;
 	text-align: center;
@@ -37,7 +37,7 @@ input[type=text], select, textarea {
 .s_container {
 	background-color: #ffffff;
 	padding: 20px;
-	width: 40%;
+	width: 30%;
 	min-width: 500px;
 	margin-bottom: 150px;
 }
@@ -116,17 +116,32 @@ instead of next to each other */
 	text-decoration: none;
 	font-weight: bold;
 	cursor: pointer;
-	color: #56D7D6;
+	color: #7F56D2;
 }
 
 .s_update:hover, .s_delete:hover {
 	text-decoration: none;
 	border: 0px;
-	color: #7F56D2;
+	color: #56D7D6;
 }
 
 .s_delete {
 	margin-bottom: 50px;
+}
+
+.profbtn {
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: #56D7D6;
+}
+
+.profbtn:hover {
+	text-decoration: none;
+	border: 0px;
+	color: #7F56D2;
 }
 
 .hr1 {
@@ -261,7 +276,7 @@ instead of next to each other */
 				</div>
 				<div class="row">
 					<div class="col-100">
-						<button type="submit">프로필 사진 변경하기</button>
+						<button type="submit" class=profbtn>프로필 사진 변경하기</button>
 					</div>
 				</div>
 

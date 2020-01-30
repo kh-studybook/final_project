@@ -14,7 +14,7 @@
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 200px; 
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -76,12 +76,23 @@ instead of next to each other */
 }
 
 .message {
-	mergin-top: 2px;
+	margin-bottom: 5px;
 }
+
+.msg {
+	font-size:10px;
+	color:crimson;
+}
+
 
 .height {
 	width: 330px;
 	height: 70px;
+}
+
+img {
+	width:15px;
+	margin-left:10px;
 }
 
 </style>
@@ -96,19 +107,19 @@ instead of next to each other */
 	   	$('#password').blur(function() {
 			if (passwordtest.test($(this).val())) {
 				console.log(passwordtest.test($(this).val()));
-				$('.pwmsg').html('<img src=resources/image/check.png width=17px>');
+				$('.pwmsg').html('<img src=resources/image/check.png>');
 			} else {
 				$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
-				$('.pwmsg').css('color', 'LightCoral');
+				$('.pwmsg').css('color', 'crimson');
 			}
 		});
 
 		$('#pwcheck').on('keyup', function() {
 			if ($('#password').val() != $('#pwcheck').val()) {
 				$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
-				$('.pwcheckmsg').css('color', 'LightCoral');
+				$('.pwcheckmsg').css('color', 'crimson');
 			} else {
-				$('.pwcheckmsg').html('<img src=resources/image/check.png width=17px>');
+				$('.pwcheckmsg').html('<img src=resources/image/check.png>');
 			}
 
 		});   
@@ -132,7 +143,7 @@ instead of next to each other */
 						name="password" placeholder="새 비밀번호 입력">
 				</div>
 				<div class="col-100 message">
-					<span class="pwmsg"></span>
+					<span class="pwmsg msg"></span>
 				</div>
 			</div>
 			<div class="row height">
@@ -141,7 +152,7 @@ instead of next to each other */
 						placeholder="새 비밀번호 확인">
 				</div>
 				<div class="col-100 message">
-					<span class="pwcheckmsg"></span>
+					<span class="pwcheckmsg msg"></span>
 				</div>
 			</div>
 

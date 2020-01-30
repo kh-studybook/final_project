@@ -15,7 +15,7 @@
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 200px;  
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -57,9 +57,12 @@ input[type=checkbox] {
 	background: #ffffff;
 }
 
+.message {
+	margin-bottom: 5px;
+}
 
 .phonemsg {
-	font-size:12px;
+	font-size:10px;
 }
 
 .col-100 {
@@ -108,7 +111,7 @@ instead of next to each other */
 				$('.s_submit').css('background', '#7F56D2');
 			} else {
 				$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
-				$('.phonemsg').css('color', 'LightCoral');
+				$('.phonemsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			}
 		}); 
