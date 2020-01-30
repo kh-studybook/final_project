@@ -16,10 +16,9 @@ public class EventCommentServiceImpl implements EventCommentService {
 	private EventDAO dao;
 
 	@Override
-	public List<Event_comment> getEvent_commentList(int event_num, int mem_key) {
+	public List<Event_comment> getEvent_commentList(int event_num) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("event_num", event_num);
-		map.put("mem_key", mem_key);
 		return dao.getEvent_commentList(map);
 	}
 	

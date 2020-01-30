@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
 <meta charset="UTF-8">
-<style>	
+<style>
+body {background-color: #f2f2f2;}	
 /** 글자 관련!!!!*/
 .p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px;}
 .p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
@@ -22,7 +23,7 @@
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
-.wrapper{width:350px; height:300px; margin:20px; background-color:#F2F2F2;}
+.wrapper{width:350px; height:300px; margin:20px; background-color:white;}
 .title_z_index{padding:10px; color:white; font-size:16px; text-align:center; top:50%; margin-top:-10rem; position:relative; z-index:10}
 .title_z_index_big{font-size:24px; font-weight:bold; height: 48px;}
 .card_contents{padding:10px; padding-bottom:0px; font-family:"맑은 고딕"}
@@ -52,20 +53,22 @@
 			location.href = "EventDetailAction.eve?event_num=" + parseInt(event_num) ;
 		});
 		
-		///이벤트 삭제하기
+		///이벤트 삭제하기 - 추후 확인
 		$("#deletemodal").on("show.bs.modal", function(){
 			var event_num = $("input[name=event_num2]").val();
 			$("input[name=event_num]").val(event_num);
-			console.log(event_num);
+			console.log("삭제할 event_num" + event_num);
 			
 			$(".deletemodalSubmit").click(function(){
 				console.log("delete");
 				location.href = "EventDeleteAction.eve?event_num=" + parseInt(event_num);
 			});
-		});
-		
-		
-		
+			
+			$("#deletemodal > .btn-light").click(function(){
+				event_num.val();
+				$("input[name=event_num]").val('');
+			});
+		});		
 	});//function end
 </script>
 </head>
@@ -101,7 +104,7 @@
 							    <div class="front">
       								<div class = "card-img">
       									<div style = "filter: brightness(80%)">
-        									<img class="card-img-top" src="resources/upload/${b.event_pic}">
+        									<img class="card-img-top" src="resources/upload${b.event_pic}">
         								</div>
         								<br><br>
         								<div class = "title_z_index"><p class = "title_z_index_big">${b.title}</p><br>

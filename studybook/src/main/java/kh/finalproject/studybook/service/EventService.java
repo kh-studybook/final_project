@@ -16,7 +16,7 @@ public interface EventService {
 	//글 수정
 	public int eventModify(Event modifyevent);
 	//글 삭제
-	public int eventDelete(int num);
+	public int eventDelete(int event_num);
 	//글쓴이 가져오기
 	public String getEventWriter(int num);
 	//메인 화면 글 개수 구하기

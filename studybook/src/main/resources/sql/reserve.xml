@@ -220,11 +220,7 @@ select *
 		insert into review 
 		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
 	</insert>
-	
-	<select id = "reserveDateCheck" resultType = "reserve" parameterType = "String">
-		select * from reserve where #{reserve_date} &lt; TO_CHAR(sysdate, 'YYYY-MM-DD')
 
-	</select>
 
 </mapper>
 

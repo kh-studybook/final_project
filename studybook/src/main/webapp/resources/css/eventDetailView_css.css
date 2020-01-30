@@ -1,4 +1,6 @@
 @charset "UTF8";
+	body {background-color: #f2f2f2;}
+
 	/** a 태그 관련!!!! */
 	.p_locate{text-decoration:none; font-size:12px;}
 	

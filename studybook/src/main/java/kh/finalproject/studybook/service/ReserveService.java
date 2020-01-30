@@ -55,8 +55,7 @@ public interface ReserveService {
 	public List<Reserve> getReserveList(int page, int limit, int mem_key);
 	//나의 리뷰 등록하기
 	public int RegisterReview(Map<Object, Object> obj);
-	//후기 버튼 출력을 위한 날짜 체크하기
-	public List<Reserve> reserveDateCheck(String reserve_date);
+
 
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
 <style>
+body {background-color: #f2f2f2 !important;}
 * {font-family:"맑은 고딕"}
 
 /** 글자 관련!!!!*/
@@ -29,7 +30,7 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:200px; height:200px;}
+.p_avatar{width:200px; height:200px; border: 1px solid darkgray;}
 #eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; 
 				background-color:#56D7D6; color:white; padding:7px; margin-top:5px; padding-right:0px; text-align:center;}
 
@@ -212,7 +213,7 @@ input[type=date]{height:3rem;}
       	<label for = "eventPic_uploadfile">
         	<input type="file" name="eventPic_uploadfile" id = "eventPic_uploadfile" accept="image/gif, image/jpeg, image/png" 
         	style = "display:none"><!-- 파일 선택하는 부분 --> 
-        	<img src="resources/image/default_thumnail.png" id = "eventPic_image" class="p_avatar" style = "opacity:0.2"><!-- 이미지 -->
+        	<img src="resources/image/default_thumnail.png" id = "eventPic_image" class="p_avatar"><!-- 이미지 -->
         	<br>
         	<label for = "eventPic_uploadfile" id = "eventPic_button">이미지 등록</label>
         </label>

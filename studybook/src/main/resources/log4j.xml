@@ -17,7 +17,7 @@
 	<logger name="event">
 		<level value="trace"/>
 	</logger>
-	<logger name="Comments">
+	<logger name="event_comment">
 		<level value="trace"/>
 	</logger>
 	<logger name="Notice">

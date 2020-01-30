@@ -30,8 +30,8 @@
            event.event_start,  event.event_end,  event.event_room,  event.event_pic,  event.event_status, member.name event_writer
    			from event, member 
   			 where event.mem_key = member.key)
- where rnum &gt;= #{start} and rnum &lt;= #{end}
-      order by event_date
+		 where rnum &gt;= #{start} and rnum &lt;= #{end}
+      	order by event_date
 	</select>
 	
 	<update id = "modifyEvent" parameterType = "Event">
