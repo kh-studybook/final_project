@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,22 +35,17 @@ public class NoticeController {
 	} 
 	
 	//공지사항 리스트
-	@RequestMapping(value = "/NoticeList.bo", method = RequestMethod.GET)
-	ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+	@RequestMapping(value = "/NoticeList.bo")
+	public ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
-			throws Exception { 
-
+			throws Exception {
+		
 		//총 리스트 
 		int listcount = noticeService.getListCount();
 
 		int maxpage = (listcount + limit - 1) / limit;
-		System.out.println("총 페이지 = " + maxpage);
-
 		int startpage = ((page - 1) / limit) * limit + 1;
-		System.out.println("현재 페이지에 보여줄 시작 페이지 = " + startpage);
-
 		int endpage = startpage + limit - 1;
-		System.out.println("현재 페이지에 보여줄 마지막 페이지 = " + endpage);
 
 		if (endpage > maxpage)
 			endpage = maxpage;
@@ -64,16 +60,11 @@ public class NoticeController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("noticelist", noticelist);
 		mv.addObject("limit", limit);
+		
 		return mv;
+		
 	}
 
-	
-	@PostMapping(value = "/NoticeAddAction.bo")
-	public String notice_write_ok(Notice notice, HttpServletRequest request) throws Exception {
-
-		noticeService.insertNotice(notice);
-		return "redirect:NoticeList.bo";
-	}
 	
 	//공지 상세 보기
 	@RequestMapping(value = "/NoticeDetailAction.bo", method = RequestMethod.GET)
@@ -101,6 +92,13 @@ public class NoticeController {
 		return "notice/notice_write_index";
 	}
 	
+	
+	@PostMapping(value = "/NoticeAddAction.bo")
+	public String notice_write_ok(Notice notice, HttpServletRequest request) throws Exception {
+
+		noticeService.insertNotice(notice);
+		return "redirect:NoticeList.bo";
+	}
 	
 	
 	//공지 수정 상세페이지 보기 (관리자)
@@ -147,19 +145,6 @@ public class NoticeController {
 	@PostMapping("NoticeDeleteAction.bo")
 	public String NoticeDeleteAction(int num, HttpServletResponse response) throws Exception {
 
-		boolean usercheck = noticeService.isNoticeWriter(num);
-
-		if (usercheck == false) {  //필요 없으려나...
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('관리자만 삭제 가능합니다');");
-			out.println("history.back()");
-			out.println("</script>");
-			out.close();
-			return null;
-		}
-// 이부분 다시 찾아보기
 		System.out.println("삭제 성공");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -169,7 +154,6 @@ public class NoticeController {
 		out.println("</script>");
 		out.close();
 		return null;
-
 	}
 
 	
@@ -203,7 +187,7 @@ public class NoticeController {
 		result.put("limit", limit);
 
 		return result;
-
 	}
+	
 	
 }
