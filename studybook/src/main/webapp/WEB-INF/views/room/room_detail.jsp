@@ -43,13 +43,12 @@
 								
 								<ol class="carousel-indicators">
 								<c:forEach var="gallery" items="${gallerylist}" varStatus="status">
-									<li data-target="#carouselExampleIndicators" data-slide-to="${status.index}"
-										class="active"></li>
+									<li data-target="#carouselExampleIndicators" data-slide-to="${status.index}"></li>
 								</c:forEach>
 								</ol>
 								<div class="carousel-inner">
 									<c:forEach var="gallery" items="${gallerylist}" varStatus="status">
-									<div class="carousel-item active">
+									<div class="carousel-item"><!-- active 클래스 -->
 										<img class="d-block w-100"
 											src="resources/image/room/${gallery.FILE_NAME }" alt="First slide">
 									</div>
@@ -398,7 +397,7 @@
  		myCalendar.onDateClick(function(event, date){
  			$(".swiper-wrapper").find('input').attr("name","time_slide");
  			$(".swiper-slide").removeClass("not_active");
- 			$(".swiper-slide").removeClass("active");
+ 			$(".swiper-slide").removeClass("e_active");
  	 		console.log("클릭한 날짜 :"+formatDate(date))
  	 		var today=new Date();
  	 		console.log("오늘:"+formatDate(today))

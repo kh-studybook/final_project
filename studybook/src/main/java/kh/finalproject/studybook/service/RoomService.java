@@ -55,4 +55,5 @@ public interface RoomService {
 	//룸 검색 결과 총 리스트 가져오기
 	public List<Room> getSearchRoomList(String date, String starttime, String endtime, String MIN_MEMBER,
 			String MAX_MEMBER, int page, int limit);
+	public List<String> getRoom_nameList();
 }

@@ -30,14 +30,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.service.EventCommentService;
 import kh.finalproject.studybook.service.EventService;
+import kh.finalproject.studybook.service.RoomService;
 import kh.finalproject.studybook.domain.Event;
 import kh.finalproject.studybook.domain.Event_comment;
 import kh.finalproject.studybook.domain.Member;
+import kh.finalproject.studybook.domain.Room;
 
 @Controller
 public class EventController {
 		@Autowired
 		private EventService eventservice;
+		
+		
+		@Autowired
+		private RoomService roomserivce;
 		
 		@Autowired
 		private EventCommentService eventEvent_commentservice; 
@@ -48,7 +54,9 @@ public class EventController {
 		//이벤트 등록 화면으로 이동!!
 		@RequestMapping(value = "/registerEvent.eve")
 		public ModelAndView event_write_view(ModelAndView mv, int mem_key) throws Exception{
+			List<String> roomlist=roomserivce.getRoom_nameList();
 			mv.addObject("mem_key", mem_key);
+			mv.addObject("roomlist",roomlist);
 			mv.setViewName("event/event_main");
 			return mv;
 		}//event_write view end
@@ -75,7 +83,8 @@ public class EventController {
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
 
-		      
+			saveFolder="C:\\Users\\user1\\git\\0131\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
+
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);

@@ -56,8 +56,8 @@ $(document).on('click','.number-spinner button',
 		         $(".e_text_box").find(".e_review_count").text(data.listcount+"개");
 
 		         if (data.listcount > 0) { // 총갯수가 0개이상인 경우
-		            /*$(".e_review_list").remove();*/
-	
+		            $(".e_review_list").text("");
+		        	 
 		            output = "";
 		            
 		            $(data.reviewlist).each(
@@ -122,7 +122,10 @@ $(document).on('click','.number-spinner button',
 	
 	$(document).ready(function(){
 		
-		 go(1);
+		$(".carousel-indicators li:first-child").addClass("active");
+		$(".carousel-inner div:first-child").addClass("active");
+		
+		go(1);
 		
 		var mem_key=$("#mem_key").val();
 		
@@ -146,7 +149,7 @@ $(document).on('click','.number-spinner button',
 					var time=$(this).find($("input")).val();
 					console.log("시작시간"+time)
 					//$(this).css("background","#855FD4");
-					$(this).addClass("active");
+					$(this).addClass("e_active");
 					$(this).find($("input")).attr("name","start_time");
 					time_check=1;
 					
@@ -180,7 +183,7 @@ $(document).on('click','.number-spinner button',
 							console.log($(".swiper-slide").find($("input[id="+i+"]")).val());
 							//$(".swiper-slide").find($("input[id="+i+"]")).parent().css("background","#855FD4");
 							//$(".swiper-slide").find($("input[id="+i+"]")).parent().css("color","white");
-							$(".swiper-slide").find($("input[id="+i+"]")).parent().addClass("active");
+							$(".swiper-slide").find($("input[id="+i+"]")).parent().addClass("e_active");
 						}
 					var extra_price=$("#extra_num_price").text();
 					var room_price=$("#total_time_price").text();
@@ -200,7 +203,7 @@ $(document).on('click','.number-spinner button',
 	
 function div_color(){
 	console.log("여기는 div_color")
-	$(".swiper-slide").removeClass("active");
+	$(".swiper-slide").removeClass("e_active");
 	if(!$(".swiper-slide").hasClass("not_active")){
 		$(".swiper-slide").css("background","#57D7D5");
 		$(".swiper-slide").css("color","black");
