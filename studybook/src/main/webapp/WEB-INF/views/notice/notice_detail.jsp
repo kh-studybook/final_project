@@ -26,8 +26,13 @@ body {
 
 .contentarea {
 	background-color:white;
-	width:55%;
+	width:50%;
 	height:800px;
+}
+
+.realcontent {
+	margin-left: 70px;
+    margin-right: 70px;
 }
 
 .s_title {
@@ -43,11 +48,13 @@ body {
 }
    
 .title {
-	font-size:24px
+	font-size: 24px;
+	text-align: center;
 }
 
 .date {
 	font-size:14px;
+	text-align: center;
 }
    
 .content {
@@ -59,6 +66,19 @@ th {
 	text-align:center
 }
 
+.float-right {
+	float:right;
+}
+
+.center {
+	text-align:center;
+}
+
+.table td, .table th {
+
+    border-top: 0px;
+}
+
 .listbtn {
 	width: 330px;
 	height: 43px;
@@ -68,10 +88,15 @@ th {
 	margin-top: 20px;
 	border: none;
 	cursor: pointer;
+	
 }
 
 .listbtn:hover {
 	opacity: 70%;
+}
+
+#myModal {
+   display:none;
 }
 
 </style>
@@ -88,6 +113,8 @@ th {
 
 <div class=contentarea>
 
+<div class=realcontent>
+
 <input type="hidden" id="memberkey" value="${key }" name="memberkey">
 <p class=s_title></p>
 
@@ -101,15 +128,14 @@ th {
             <td class=date>${noticedata.NOTICE_DATE }</td>
          </tr>
          <tr>
-            <td><textarea class="content" rows="20" readOnly style="width:100%">${noticedata.NOTICE_CONTENT }</textarea></td>
+            <td>
+            <textarea class="content" rows="20" readOnly style="width:100%">${noticedata.NOTICE_CONTENT }</textarea>
+            </td>
          </tr>
          
          <tr>
-            <td>
-               
-           <!-- 관리자만 수정/삭제 가능    
-           <c:if test="${member.name== '관리자' }">
-           
+            <td class=float-right>
+
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
                   <button class="modifybtn">수정</button>
                </a>
@@ -118,18 +144,40 @@ th {
                   <button class="deletebtn" data-toggle="modal" 
                   				data-target="#myModal">삭제</button>
                </a>
-            </c:if> 
-           	 여기까지 -->
-            
-               <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
-               </td>
+
+            </td>
+         </tr>
+         
+         <tr>
+            <td class=center>        
+            <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
+            </td>
          </tr>
       </table> 
+</div> 
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <!-- 모달모달 -->
       
+      	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form name="deleteForm" action="NoticeDeleteAction.bo" method="post">
+						<div class="form-group">
+							<span>정말 삭제하시겠습니까.</span>
+						</div>
+						<button type="submit" class="submitbtn">확인</button>
+					    <button type="button" class="closebtn">취소</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	
-   </div>
-</div>
-</div>   
 </body>
 </html>

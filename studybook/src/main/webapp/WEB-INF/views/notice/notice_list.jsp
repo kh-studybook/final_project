@@ -10,51 +10,47 @@
 <title>notice list</title>
 
 <style>
-
 * {
 	box-sizing: border-box;
 	font-family: "맑은 고딕";   
 }
-
 body {
 	background-color: #f2f2f2;
 }
-
 .contentwrap {
 	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 }
-
 .contentarea {
 	background-color:white;
-	width:55%;
+	width:50%;
 	height:800px;
 }
-
 .s_title {
 	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
 }
-
 .s_desc {
-	margin-top: 50px;
-	margin-bottom: 35px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 	font-size: 14px;
 	text-align: center;
 }
-
 .s_container {
 	display: flex;
 	justify-content: center;
 }
 
-.table {
+.tablewrap {
 	width:60%;
 }
 
+.table {
+	width: 100%;
+}
 .table td, .table th {
     padding: .75rem;
     vertical-align: top;
@@ -65,7 +61,6 @@ body {
 	display: flex;
 	justify-content: center; /*가운데 정렬*/
 }
-
 /*제목*/
 .title {
 	font-size:14px;
@@ -74,12 +69,10 @@ body {
 	margin-top:10px;
 	margin-bottom:10px;
 }
-
 .title:hover {
 	text-decoration:none;
 	color:#7F56D2;
 }
-
 /*날짜*/
 .date {
 	font-size:12px;
@@ -87,27 +80,18 @@ body {
 	margin-top:10px;
 	margin-bottom:10px;
 }
-
-
-
 .rows {
 	text-align: right;
 }
-
 .row {
 	height: 0
 }
-
 .gray {
 	color: gray
 }
-
-
-
 .page-link {
 	border: 1px solid white;
 }
-
 .writebtn {
 	width: 330px;
 	height: 43px;
@@ -118,7 +102,6 @@ body {
 	border: none;
 	cursor: pointer;
 }
-
 .writebtn:hover {
 	opacity: 70%;
 }
@@ -131,7 +114,6 @@ body {
 		var data = "limit=" + limit + "&state=ajax&page=" + page;
 		ajax(data);
 	}
-
 	function setPaging(href, digit) {
 		output += "<li class=page-item>";
 		gray = "";
@@ -143,9 +125,7 @@ body {
 				+ digit + "</a></li>";
 		output += anchor;
 	}
-
 	function ajax(data) {
-
 		console.log(data)
 		output = "";
 		$
@@ -160,21 +140,18 @@ body {
 						$("#viewcount").val(data.limit);
 						$("table").find("font")
 								.text("글 개수 : " + data.listcount);
-
 						if (data.listcount > 0) { // 총갯수가 0개이상인 경우
 							$("tbody").remove();
 							var num = data.listcount - (data.page - 1)
 									* data.limit;
 							console.log(num)
 							output = "<tbody>";
-
 							$(data.noticelist)
 									.each(
 											function(index, item) {
 												output += '<tr><td>' + (num--)
 														+ '</td>'
 												img = "";
-
 												output += "<td><div>" + blank
 														+ img
 												output += ' <a href="./NoticeDetailAction.bo?num='
@@ -190,10 +167,8 @@ body {
 											})
 							output += "</tbody>"
 							$('table').append(output)//table 완성
-
 							$(".pagination").empty(); //페이징 처리
 							output = "";
-
 							digit = '이전&nbsp;'
 							href = "";
 							if (data.page > 1) {
@@ -201,7 +176,6 @@ body {
 										+ ')';
 							}
 							setPaging(href, digit);
-
 							for (var i = data.startpage; i <= data.endpage; i++) {
 								digit = i;
 								href = "";
@@ -210,7 +184,6 @@ body {
 								}
 								setPaging(href, digit);
 							}
-
 							digit = '다음&nbsp;';
 							href = "";
 							if (data.page < data.maxpage) {
@@ -218,10 +191,8 @@ body {
 										+ ')';
 							}
 							setPaging(href, digit);
-
 							$('.pagination').append(output)
 						}//if(data.listcount) end
-
 						else {
 							$(".container table").remove();
 							$(".center-block").remove();
@@ -234,12 +205,10 @@ body {
 					}
 				})// ajax end
 	} // fucntion ajax end
-
 	$(function() {
 		$("#viewcount").change(function() {
 			go(1);//보여줄 페이지를 1페이지로 설정합니다.
 		});// change end
-
 		$("button").click(function() {
 			location.href = "NoticeWrite.bo";
 		})
@@ -252,13 +221,13 @@ body {
 
 <div class=contentarea>
 	<p class=s_title>공 지 사 항</p>
-	<p class=s_desc>자주 질문해주시는~~~ ^^^^^</p>
+	<p class=s_desc>자주 문의하시는 부분에 대한 답변입니다.</p>
 	
 	<div class="container_wrap">
 	
 	<div class=s_container>
-	
-		<%-- 게시글이 있는 경우 --%>
+	<div class=tablewrap>
+<%-- 게시글이 있는 경우 --%>
 		<c:if test="${listcount > 0 }">
 			<table class="table">
 				<thead></thead>
@@ -280,6 +249,8 @@ body {
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			</div>
 			</div>
 			<div class="center-block">
 				<div class="row">
@@ -323,7 +294,7 @@ body {
 
 		</c:if>
 		
-		<!--  게시글이 없는 경우 -->
+<!--  게시글이 없는 경우 -->
 		<c:if test="${listcount== 0 }">
 			<p class=s_title>등록된 공지사항이 없습니다.</p>
 		</c:if>

@@ -86,21 +86,6 @@ public class NoticeController {
 
 	
 	
-	//공지 쓰기 (관리자)
-	@GetMapping(value = "/NoticeWrite.bo")
-	public String notice_write() throws Exception {
-		return "notice/notice_write_index";
-	}
-	
-	
-	@PostMapping(value = "/NoticeAddAction.bo")
-	public String notice_write_ok(Notice notice, HttpServletRequest request) throws Exception {
-
-		noticeService.insertNotice(notice);
-		return "redirect:NoticeList.bo";
-	}
-	
-	
 	//공지 수정 상세페이지 보기 (관리자)
 	@GetMapping("/NoticeModifyView.bo")
 	public ModelAndView NoticeModifyView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
@@ -115,8 +100,23 @@ public class NoticeController {
 		}
 		System.out.println("공지 수정 보기 성공~");
 		mv.addObject("noticedata", noticedata);
-		mv.setViewName("notice/notice_modify_index");
+		mv.setViewName("notice/notice_modify_admin");
 		return mv;
+	}
+	
+	
+	//공지 쓰기 (관리자)
+	@GetMapping(value = "/NoticeWrite.bo")
+	public String notice_write() throws Exception {
+		return "notice/notice_write_index";
+	}
+	
+	
+	@PostMapping(value = "/NoticeAddAction.bo")
+	public String notice_write_ok(Notice notice, HttpServletRequest request) throws Exception {
+
+		noticeService.insertNotice(notice);
+		return "redirect:NoticeList.bo";
 	}
 	
 	
