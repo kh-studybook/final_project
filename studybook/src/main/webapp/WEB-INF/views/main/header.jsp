@@ -14,7 +14,7 @@
    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-   
+
 <!-- fontawesome css import -->
 <link rel="stylesheet"
    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -45,11 +45,10 @@
    
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-         <li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
          <li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
          <li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
       </ul>
-   </div>   
+   </div>
       <ul class="nav navbar-nav navbar-right j_header__column">
          <li class="nav-item" id="menu_icon"><i class="fas fa-bars"></i></li>
       </ul>
@@ -99,7 +98,7 @@
          </div>
          </c:if>
       </div>
-      <div class="j_menu_event" onClick="#">이 달의 이벤트</div>
+      <div class="j_menu_event" onClick="javascript:location.href='eventList.eve';">이 달의 이벤트</div>
       <div>
          <ul>
 

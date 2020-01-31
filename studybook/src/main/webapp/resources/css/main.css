@@ -101,7 +101,7 @@
 	bottom: -160px;
 	overflow: auto;
 	border: 2px solid transparent;
-	opacity: 0;
+	display: none;
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px, rgba(0, 0, 0, 0.024)
 		0px -6px 16px -6px;
 }
@@ -186,6 +186,7 @@
 	left: 0;
 	top: auto;
 	bottom: -40px;
+	z-index: 5;
 }
 
 /* The colour of the indicators */
@@ -230,8 +231,8 @@
 
 .jsCalendar tbody td.jsCalendar-current {
 	background-color: white;
-	border: 1px solid #7F56D2;
-	margin: -1px;
+	border: 2px solid #7F56D2;
+	margin: 0 -1px;
 	color: black;
 }
 
@@ -239,6 +240,8 @@
 	background-color: #7F56D2;
 	border: 1px solid #7F56D2;
 	color: white;
+	width: 46px;
+	height: 36px;
 }
 
 /*event*/
@@ -270,6 +273,7 @@
 .j_event {
 	position: relative;
 	cursor: pointer;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 
 .j_event_img {
@@ -289,6 +293,14 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	background: rgba(241, 242, 246, 0.8);
+	padding-right: 15px;
+    padding-left: 15px;
+    background-clip: content-box;
+}
+
+.j_event_name {
+	margin: 5px;
 }
 
 .j_event_date {
@@ -305,6 +317,7 @@
 .carousel-indicators {
 	display: flex;
 	justify-content: space-between;
+	z-index: -10;
 }
 
 .blog .carousel-indicators {

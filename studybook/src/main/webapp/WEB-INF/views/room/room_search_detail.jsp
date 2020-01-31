@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- main css 불러오기 -->
-	<link rel="stylesheet" type="text/css" href="resources/css/room_search.css" />
 	<!-- 캘린더 css 불러오기 -->
 	<link rel="stylesheet" href="resources/css/jsCalendar.css">
+	<!-- room_search css 불러오기 -->
+	<link rel="stylesheet" type="text/css" href="resources/css/room_search.css" />
 	<!-- 캘린더 js 불러오기 -->
 	<script src="resources/js/jsCalendar.js"></script>
 	<!-- room_search.js 불러오기 -->

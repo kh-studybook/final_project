@@ -27,4 +27,15 @@ $(document).ready(function(){
 		}
 	});
 	*/
+	
+	// 타겟영역을 제외하고 클릭했을 시 팝업 숨김처리.
+	$('body').on('click', function(e){
+	    var $tgPoint = $(e.target);
+	    var $popCallBtn = $tgPoint.hasClass('JS-popup-btn')
+	    var $popArea = $tgPoint.hasClass('popup-box')
+	 
+	    if ( !$popCallBtn && !$popArea ) {
+	        $('.popup-box').removeClass('view');
+	    }
+	});
 });

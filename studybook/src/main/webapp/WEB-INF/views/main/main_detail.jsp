@@ -238,9 +238,7 @@
 			<div class="col-md-center j_event_title">찾아오시는 길</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8" id="j_map">
-				카카오지도API 예정
-			</div>
+			<div class="col-md-8" id="j_map"></div>
 			<div class="col-md-4">
 				<p class="j_room_name">스터디북</p>
 				<p class="j_address">
