@@ -93,27 +93,36 @@ body {
 	border: 1px solid white;
 }
 .writebtn {
-	width: 330px;
-	height: 43px;
-	line-height:43px;
-	background-color: #7F56D2;
-	color: white;
-	margin-top: 20px;
-	border: none;
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
 	cursor: pointer;
+	color: #7F56D2;	
+	margin-top: 30px;
+	margin-bottom: 35px;
 }
 .writebtn:hover {
-	opacity: 70%;
+	text-decoration: none;
+	border: 0px;
+	color: #56D7D6;
 }
+
+.float-right {
+	float:right
+}
+
 </style>
 
 
 <script>
+
 	function go(page) {
 		var limit = $('#viewcount').val();
 		var data = "limit=" + limit + "&state=ajax&page=" + page;
 		ajax(data);
 	}
+	
 	function setPaging(href, digit) {
 		output += "<li class=page-item>";
 		gray = "";
@@ -125,6 +134,7 @@ body {
 				+ digit + "</a></li>";
 		output += anchor;
 	}
+	
 	function ajax(data) {
 		console.log(data)
 		output = "";
@@ -215,18 +225,25 @@ body {
 	})
 </script>
 </head>
+
 <body>
 
 <div class=contentwrap>
-
 <div class=contentarea>
-	<p class=s_title>공 지 사 항</p>
+
+	<button type="button" class="writebtn float-right">공지사항 쓰기</button>
+	<br>
+	<p class=s_title>공 지 사 항</p> 	
+	
 	<p class=s_desc>자주 문의하시는 부분에 대한 답변입니다.</p>
+
 	
 	<div class="container_wrap">
 	
 	<div class=s_container>
+
 	<div class=tablewrap>
+	
 <%-- 게시글이 있는 경우 --%>
 		<c:if test="${listcount > 0 }">
 			<table class="table">
@@ -239,9 +256,17 @@ body {
 								<c:set var="num"
 									value="${num-1 }" /></td>
 							<td>
+							<c:if test="${member.name!= '관리자' }">
 								<div>
 									<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
 								</div>
+							</c:if>	
+							<c:if test="${member.name== '관리자' }">
+								<div>
+									<a href="noticedetailadmin.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
+							
+								</div>
+							</c:if>	
 								<div><span class=date>${b.NOTICE_DATE }</span></div>
 							</td>
 						</tr>

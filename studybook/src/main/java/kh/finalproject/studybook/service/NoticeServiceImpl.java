@@ -2,7 +2,6 @@ package kh.finalproject.studybook.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,23 +38,13 @@ public class NoticeServiceImpl implements NoticeService{
 		return ndao.getDetail(num);
 	}
 
-	@Override
-	public boolean isNoticeWriter(int notice_num) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("num", notice_num);
-		Notice result= ndao.isNoticeWriter(map);
-		if (result == null)
-			return false;
-		else
-			return true;
-	} 
 
 	@Override
 	public int noticeDelete(int num) {
 		int result = 0;
 		Notice notice = ndao.getDetail(num);
 		if (notice != null) {
-			result = ndao.noticeDelete(notice);
+			result = ndao.noticeDelete(num);
 		}
 		return result;
 	}
@@ -67,8 +56,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public int noticeModify(Notice noticemodify) {
-		return ndao.noticeModify(noticemodify);
+	public int noticeModify(Notice notice) {
+		return ndao.noticeModify(notice);
 	}
 
 }

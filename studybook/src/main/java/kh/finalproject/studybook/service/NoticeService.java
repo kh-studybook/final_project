@@ -14,10 +14,8 @@ public interface NoticeService {
 	
 	public void insertNotice(Notice notice); 
 
-	public boolean isNoticeWriter(int notice_num);
-
-	public int noticeModify(Notice noticemodify);
+	public int noticeModify(Notice notice);
 	
 	public int noticeDelete(int num);
- 
+
 }

@@ -141,16 +141,16 @@ $(function() {
 			<div class="row height">
 				<div class="col-100"> 
 					<p class=s_content>${member.name}님,
-					<p class=s_content>아래 삭제 버튼을 누르시면
+					<p class=s_content>아래의 확인 버튼을 누르시면
 					<p class=s_content>회원 정보와 예약 정보가 모두 삭제됩니다.
-					<p class=s_content>계정 삭제를 진행하시겠습니까.
+					<p class=s_content>STUDYBOOK 계정을 삭제하시겠습니까.
 				</div>
 			</div>
 
 			<div class="row buttons">
 				<div class="col-100">
-					<input type="reset" class="s_reset clear" value="조금 더 고민해보기">
-					<input type="submit" class="s_submit clear" value="삭제ㄱㄱ">
+					<input type="reset" class="s_reset clear" value="취소">
+					<input type="submit" class="s_submit clear" value="확인">
 				</div>
 			</div>
 			

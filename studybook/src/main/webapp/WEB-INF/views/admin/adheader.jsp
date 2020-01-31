@@ -84,7 +84,7 @@
 			<li class="nav-item"><a class="nav-link" href="FoodAdList.re">음식관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="ReserveAdList.re">예약관리</a></li>
 			<li class="nav-item"><a class="nav-link" href="MemberList.mem">회원관리</a></li>
-			<li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a>
+			<li class="nav-item"><a class="nav-link" href="noticeadmin.bo">공지사항관리</a>
 			</li>
 		</ul>
 		<%-- <c:if test="${member.key==0}">
