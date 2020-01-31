@@ -46,7 +46,7 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
          <li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
-         <li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+         <li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a></li>
       </ul>
    </div>
       <ul class="nav navbar-nav navbar-right j_header__column">
@@ -103,7 +103,7 @@
          <ul>
 
             <li class="j_menu_list" onClick="javascript:location.href='main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
-            <li class="j_menu_list" onClick="javascript:location.href='#';">공지사항<i class="fas fa-chevron-right"></i></li>
+            <li class="j_menu_list" onClick="javascript:location.href='NoticeList.bo';">공지사항<i class="fas fa-chevron-right"></i></li>
             <li class="j_menu_list" onClick="javascript:location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 
          </ul>
