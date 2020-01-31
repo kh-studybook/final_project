@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <head>
@@ -18,8 +17,8 @@ body {background-color: #f2f2f2;}
 #delete_modify_btn:after{clear:both}
 #event_modify_btn, #event_modify_btn{color:black}
 #event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-#event_delete_btn:visited{color:black}
+.event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
+.event_delete_btn:visited{color:black}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
@@ -53,16 +52,24 @@ body {background-color: #f2f2f2;}
 			location.href = "EventDetailAction.eve?event_num=" + parseInt(event_num) ;
 		});
 		
+		
+		$(".event_delete_btn").click(function(){
+			var deletecode = $(this).attr("id");
+			var event_num = deletecode.split("_")[1];
+			console.log(event_num);
+			$("input[name=event_num]").val(event_num);	
+		});
+		
 		///이벤트 삭제하기 - 추후 확인
 		$("#deletemodal").on("show.bs.modal", function(){
-			var event_num = $("input[name=event_num2]").val();
-			$("input[name=event_num]").val(event_num);
+			
+			event_num = $("input[name=event_num]").val();
 			console.log("삭제할 event_num" + event_num);
 			
-			$(".deletemodalSubmit").click(function(){
-				console.log("delete");
-				location.href = "EventDeleteAction.eve?event_num=" + parseInt(event_num);
-			});
+				$(".deletemodalSubmit").click(function(){
+					console.log("delete");
+					location.href = "EventDeleteAction.eve?event_num=" + parseInt(event_num);
+				});
 			
 			$("#deletemodal > .btn-light").click(function(){
 				event_num.val();
@@ -126,7 +133,7 @@ body {background-color: #f2f2f2;}
 								<c:if test = "${mem_key == '999'||b.mem_key == mem_key}">
 							  	<div id = "delete_modify_btn">
 									<a id="event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
-									<a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
+									<a id="eventdelete_${b.event_num}" class = "event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 								</div>
 								</c:if>
 							</div>  

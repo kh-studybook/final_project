@@ -214,12 +214,13 @@ select *
 	</select>
 	
 	<insert id = "registerReview" parameterType = "java.util.Map">
-		<selectKey resultType="int" order="BEFORE" keyProperty="review_code">
-			select nvl(max(review_code), 0)+1 from review
-		</selectKey>
 		insert into review 
-		values (#{review_code}, #{room_code}, #{content}, #{review}, #{mem_key})
+		values ((select nvl(max(review_code), 0)+1 from review), #{room_code}, #{content}, TO_DATE(#{review_date}, 'YYYY-MM-DD hh24:mi:ss'), #{mem_key}, #{r_code})
 	</insert>
+	
+	<update id = "rCodeChange" parameterType = "int">
+		update reserve set status = 2 where r_code = #{r_code}
+	</update>
 
 
 </mapper>

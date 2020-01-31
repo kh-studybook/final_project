@@ -502,17 +502,32 @@ public class ReserveController {
 	
 	//후기 등록하기
 	@RequestMapping("ReviewRegister.re")
-	public String ReviewRegister(int room_code, String content, Date review_date, int mem_key, ModelAndView mv,
+	public void ReviewRegister(@RequestParam(value = "room_code", defaultValue = "1", required = false)int room_code, 
+			@RequestParam(value = "content", required = false)String content, 
+			@RequestParam(value = "review_date", required = false)String review_date, 
+			@RequestParam(value = "mem_key", defaultValue = "1", required = false)int mem_key,
+			@RequestParam(value = "r_code", defaultValue = "1", required = false)int r_code, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<Object, Object> obj = new HashMap<Object, Object>();
+		Map<String, Object> obj = new HashMap<String, Object>();
 		obj.put("room_code", room_code);
 		obj.put("review_date", review_date);
 		obj.put("content", content);
 		obj.put("mem_key", mem_key);
+		obj.put("r_code", r_code);
 			
 		int ok = reserveservice.RegisterReview(obj);
-		response.getWriter().print(ok);		
-		return "getReviewList.re";
+		if (ok == 1) {												
+			int result = reserveservice.rCodeChance(r_code);
+			response.getWriter().print(result);	
+		}	
+	}
+	
+	//후기 중복 방지
+	@RequestMapping("R_codeChange.re")
+	public String RCodeChange(@RequestParam(value = "r_code", defaultValue = "1", required = false)int r_code,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int result = reserveservice.rCodeChance(r_code);
+		return "redirect:reservePage.re?result=" + result;
 	}
 
 

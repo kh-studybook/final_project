@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -8,7 +7,8 @@
 <style>
 body {background-color: #f2f2f2;}	
 /** 글자 관련!!!!*/
-.pp_title{font-family: "맑은 고딕"; text-align: center !important; font-size: 32px; display:inline_block}
+.pp_title{font-family: "맑은 고딕"; text-align: center !important; font-size: 32px; display:inline_block;
+		margin-top:100px; margin-bottom:70px;}
 #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
 
 /** 페이지 네이션*/
@@ -28,23 +28,12 @@ body {background-color: #f2f2f2;}
 .registerReview{float:right;}
 .registerReview::after{clear:both}
 .registerReviewButton{z-index:10; background-color:white; border:none; outline: none; color:#7F56D2; padding:5px; border-radius:10px;}
+.registerReviewButton2{z-index:10; background-color:white; border:none; outline: none; color:#56D7D6; padding:5px; border-radius:10px;}
 
 /** 모달 관련 */
-.p_div {display: inline-block;}
-.p_title {margin-top: 100px; margin-bottom: 70px; font-size: 32px; text-align: center;}
-.p_card {border: 1px solid #C1C1C1; padding: 20px; background: white; margin-bottom: 25px;}
-.p_img {width: 140px;}
-.p_content {line-height: 24px;font-size: 12px;color: #555555;}
-.p_badge {font-size: 12px; margin-bottom: 13px;}
-.p_padding {padding-left: 20px;}
-.p_name {font-size: 24px; color: #333333;}
-.p_time {font-size: 24px; color: #333333; font-size: 12px;}
-.p_btn {line-height: 24px; font-size: 12px;}
-.p_center-block {display: flex; justify-content: center; /* 가운데 정렬 */
-	margin-bottom: 20px;}
-.p_topmargin {margin-top: 30px;}
-.p_margin-top {margin-top: 50px;}
-.p_modal {font-size: 18px; width: 140px;}
+#registerReviewModal content {line-height: 24px;font-size: 12px;color: #555555;}
+.#registerReviewModal {font-size: 12px; width: 140px;}
+
 
 </style>
 <script>
@@ -56,32 +45,53 @@ body {background-color: #f2f2f2;}
 				$("#content").val('');
 				$("#registerReviewModal").modal();
 				
-				var room_code = $(this).parent().next().val();
-				var review_date = $(this).parent().next().next().val();
-				//var content = $(this).parent().parent().parent().parent().parent().parent().find("textarea").val();
-				var content = $("#content").val();
-				var mem_key = $("#mem_key").val();
-								
+				//룸 이름 모달에 불러오기
+				var roomName = $(this).parent().prev().prev().prev().prev().prev().prev().prev().text();
+				console.log(roomName);	
+				$("#registerReviewModal  span[name=roomName]").text(roomName);
 				
-				$("#registermodalSubmit").click(function(){
-					console.log("room_code : " + room_code + " / review_date : " + review_date + " / content : " + content + " / mem_key : " + mem_key);
-					
-					$.ajax({
-						type : "post",
-						url : "ReviewRegister.re",
-						data : {"room_code" : room_code,
-								"review_date" : review_date,
-								"content" : content,
-								"mem_key" : mem_key},
-						dataType : "json",
-						success : function(){
-								alert("후기가 등록되었습니다.");
-								$("#content").val('');	
-						}					
-					});//ajax end 					
-				});
+				//ajax 보낼 값 가져오기
+				room_code = $(this).parent().next().val();
+				review_date = $(this).parent().next().next().val();				
+				mem_key = $("#mem_key").val();
+				r_code = $(this).parent().next().next().next().val();
 			}
-		});//후기 등록 버튼 클릭시 end
+		});//후기 등록 버튼 클릭시 end		
+		
+		
+		//모달의 후기 등록 submit 할 때
+		$("#registermodalSubmit").click(function(){
+			console.log(" content : " +  $("#content").val());
+			var content = $("#content").val();
+			
+			if (content.length == 0) {
+				alert("내용을 입력해주세요.");
+				return false;
+			} else {
+			console.log("room_code : " + room_code + " / review_date : " + review_date + " / content : " + content + " / mem_key : " + mem_key + " / r_code : " + r_code);
+			
+			$.ajax({
+				type : "post",
+				url : "ReviewRegister.re",
+				data : {"room_code" : room_code,
+						"review_date" : review_date,
+						"content" : content,
+						"mem_key" : mem_key,
+						"r_code" : r_code},
+				success : function(ok){
+					if (ok == 1){
+						alert("후기가 등록되었습니다.");
+						$("#content").val('');
+						//status 변경
+						location.reload();
+												
+							
+					} 						
+				}					
+			});//ajax end 
+			}
+		});
+				
 		
 		//상세 페이지로 이동
 		$(".p_reserve_no").click(function(){
@@ -100,26 +110,20 @@ body {background-color: #f2f2f2;}
 			alert("이미 사용이 완료된 내역입니다.");
 		});
 		
+		$(".registerReviewButton2").click(function(){
+			alert("이미 후기를 등록하셨습니다.");
+		})
+		
 	});
 </script>
 </head>
 <body>
 	<div class = "container">
-		<div class = "row">
-	      <a href = "main.net" style = "text-decoration:none">메인 페이지로 돌아가기</a>
-    	  <div class="col-md-4"></div>
-   		</div>
-      	<br>
-		<div class = "row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<p class = "pp_title">예약 내역 리스트<p>
-			</div>
-			<div class="col-md-4">
-				<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
-			</div>
-	    </div>
-					<br>
+	<c:set var="today" value="<%=new java.util.Date()%>"/>
+    <fmt:formatDate var="now" type="date" value="${today}" pattern="yyyy-MM-dd"/>
+        	<p class = "pp_title">예약 내역 리스트<p>
+			<input type="hidden" name="mem_key" id="mem_key" value="${mem_key}">
+	    
 		   <%-- 예약 내역이 있는 경우 --%>
 		   <c:if test="${listcount > 0}">
 				<div class = "row">
@@ -130,21 +134,22 @@ body {background-color: #f2f2f2;}
 						
 						<div class="col-md-6">
 							<div class = "reserve_card">
+							<div class = "wrapper">
 							    <!-- 사진 출력 부분 -->
       							<img class = "room_picture" name = "room_picture" src = "resources/image/room/${b.file_name}">        			
         					
         						<div class = "reserve_card_contents">
         						<!--  예약 완료시 -->
-        						<c:if test = "${b.status  == 1}">      					
+        						<c:if test = "${b.status  != 0}">      					
 		        						<button class = "p_reserve_no">
 		        							<span>&nbsp;예약 번호 : <span name = "r_code" style = "color : #7F56D2;">${b.r_code}&nbsp;</span></span>
 		        						</button>
-		        						 <c:if test = "${b.reserve_date < now}" >	
-        										<button class = "p_reserve_no3">&nbsp;사용 완료&nbsp;</button><br>
+		        						<c:if test = "${b.reserve_date < now}" >	
+        										<button class = "p_reserve_no3">&nbsp;사용 완료&nbsp;</button>
         								</c:if>
-        								<c:if test = "${b.reserve_date >= now}" >
-        									<br>
-        								</c:if>	
+        								<c:if test = "${b.reserve_date >= now || b.status == 2}" >
+        								</c:if>
+        								<br>	
 		        				</c:if>
 		        				
 		        				<!--  취소 완료시 -->
@@ -160,23 +165,29 @@ body {background-color: #f2f2f2;}
         								<br>
         								<span>
         									${fn:substring(b.reserve_date,0,4)}. ${fn:substring(b.reserve_date,5,7)}. ${fn:substring(b.reserve_date,8,10)}
+        									${b.start_time}시&nbsp;~&nbsp;${b.end_time}시,&nbsp;${b.end_time - b.start_time}시간
         								</span>
-        								${b.start_time}시&nbsp;~&nbsp;${b.end_time}시,&nbsp;${b.end_time - b.start_time}시간
         								<br><br>
         								<input type = "hidden" name = "reserve_date" class = "reserve_date" value = "${b.reserve_date}">
         								<span><fmt:formatNumber value = "${b.total_cost}" pattern = "￦#,###"/></span>
         								
-        								<c:set var="today" value="<%=new java.util.Date()%>"/>
-        								<fmt:formatDate var="now" type="date" value="${today}" pattern="yyyy-MM-dd"/>
+        								
         								<c:if test = "${b.reserve_date < now && b.status == 1}" >	
         									<span class = "registerReview">
-        										<button class = "registerReviewButton">후기 등록</button>
+        										<button class = "registerReviewButton">후기 등록 하기</button>
         									</span>
+        								</c:if>	
+										<c:if test = "${b.status == 2}">
+											<span class = "registerReview">
+        										<button class = "registerReviewButton2">후기 등록 완료</button>
+        									</span>
+										</c:if>      							
         									<input type = "hidden" value = "${b.room_code}" class = "room_code" name  = "room_code">
         									<input type = "hidden" value = "${b.reserve_date}" class = "reserve_date" name = "reserve_date">
-        								</c:if>	
+        									<input type = "hidden" value = "${b.r_code}" class = "r_code" name = "r_code">        									
 								</div>  
 							</div>
+						</div>
 						</div>
 						<br><br>
 					</c:forEach>
@@ -237,24 +248,22 @@ body {background-color: #f2f2f2;}
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title pw_modal" style = "font-weight:bold; font-size:16px; width:100%">후기 등록</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style = "font-weight:bold; font-size:16px; width:100%">후기 등록</h4>
+					<button type="button" class="close" style = "width:50%"; data-dismiss="modal">&times;</button>
 					<!--x부분 data-dismiss는 모달 종료할때 쓰는것 modal을 종료시키겠다. -->
 				</div>
 
 				<!-- Modal body -->
 				<div class="modal-body">
-					<p>사용후기</p>
+					<p><span name = "roomName"></span> 사용후기</p>
 					<br>
-					<textarea class="form-control" id="content" name = "content" rows="10"></textarea>
+						<textarea class="form-control" id="content" name = "content" rows="10"></textarea>
 				</div>
 
 				<!-- Modal footer -->
-				<div class="modal-footer">
-					<form id=deletemodalForm>
+				<div class="modal-footer">					
 						<input type=hidden name="mem_key" value="${mem_key}" id="mem_key">
-						<input type="submit" class="btn btn-dark" data-dismiss="modal" id=registermodalSubmit value=등록>
-					</form>
+						<input type="submit" class="btn btn-dark" data-dismiss="modal" id=registermodalSubmit value=등록>					
 					<input type="button" class="btn btn-light" data-dismiss="modal" value=취소>
 					<!-- 닫기버튼 -->
 				</div>

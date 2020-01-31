@@ -33,7 +33,7 @@ input[type=date]{height:3rem;}
 .p_avatar{width:200px; height:200px; }
 #eventPic_button{border:none; border-radius: 5px; display:inline-block; padding:7px; width:200px; background-color:#56D7D6; color:white; margin-top:5px; text-align:center;}
 
-.navbar-brand{display:flex !important; font-size:24px !important; width:150px;     width: 150px;
+.navbar-brand{display:flex !important; font-size:24px !important; width:150px;
     background-color: #F2F2F2;
     font-size: 24px;
     height: 50px;

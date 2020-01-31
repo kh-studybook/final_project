@@ -191,12 +191,7 @@ input[type=date]{height:3rem;}
 </head>
 <body>
 <div class="container pp">
-	<!-- 상단 메뉴 -->
-   	<div class="row pp_locate"">
-     <a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 등록 페이지</span>
-   	</div>
-   	<br>
-   	
+<br>
 <h2 class = "p_title">이벤트 등록</h2>
 	<br>
 

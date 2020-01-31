@@ -10,23 +10,26 @@
 <script>
 $(function(){
 
-	//이벤트 삭제하기
+	///이벤트 삭제하기 - 추후 확인
 	$("#deletemodal").on("show.bs.modal", function(){
-		var event_num = $("input[name=event_num]").val();
-		$("input[name=event_num]").val(event_num);
-		console.log(event_num);
-	
-		$(".deletemodalSubmit").click(function(){
-			console.log("delete");
-			location.href = "EventDeleteAction.eve?num="+parseInt(event_num);
+		
+		event_num = $("input[name=event_num]").val();
+		console.log("삭제할 event_num" + event_num);
+		
+			$(".deletemodalSubmit").click(function(){
+				console.log("delete");
+				location.href = "EventDeleteAction.eve?event_num=" + parseInt(event_num);
+			});
+		
+		$("#deletemodal > .btn-light").click(function(){
+			event_num.val();
+			$("input[name=event_num]").val('');
 		});
 	});	
 	
-	//등록 또는 수정완료 버튼을 클릭한 경우
-	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
-	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
+	//등록 또는 수정완료 버튼을 클릭한 경우	
 	$("#event_comment_write").click(function(){
-		//댓글 등록
+		//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
 		if ($("#event_comment_write").text() == "댓글 등록"){
 			url = "Event_commentAdd.eve";
 			data = {"com_content" : $("#comment_content").val(),
@@ -45,7 +48,7 @@ $(function(){
 				}
 			});//ajax end						
 		} 
-		//댓글 수정
+		//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
 		else if ($("#event_comment_write").text() == "댓글 수정") {
 			url = "Event_commentUpdate.eve";
 			data = {"event_num" : $("#event_num").val(),
@@ -111,46 +114,7 @@ $(function(){
 					$("#comment_form").append(output);
 					$("#comment_content").empty();
 					
-					//댓글 수정하기
-					$(".updateComment").click(function(){
-						if (confirm("댓글을 수정합니다.")){
-							$("#event_comment_write").text("댓글 수정");
-							$("#event_comment_write").css('backgroundColor', "#20B2AA");
-							before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
-							$("#comment_content").focus().val(before);//원래 글 가져오기
-							event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
-						}
-					});//수정하기 end
-					
-					
-					//댓글 삭제하기
-					$(".removeComment").click(function(){
-						if (confirm("댓글을 삭제합니다.")){
-							var event_com_num = $(this).next().next().val();//댓글 번호
-							console.log("삭제한 event_com_num = " + event_com_num);
-							
-							$.ajax({
-								type : "post",
-								url : "Event_commentDelete.eve",
-								data : {"event_com_num" :  event_com_num},
-								success : function(result){
-										if (result == 1) {
-											alert("댓글을 삭제했습니다.");
-											getList();
-										}																		
-								}
-							})//ajax end
-							
-						}//if end
-					});//삭제하기 end
-					
-					
-					//대댓글 달기
-					$(".reply_img").click(function(){
-						var event_com_num = $(this).next().next().val();//댓글 번호
-						
-					});//대댓글 달기 end
-					
+									
 				} else {
 					$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
 					$("#comment_content").empty();
@@ -161,6 +125,46 @@ $(function(){
 		
 		
 	};//getList end	
+	
+	//댓글 수정하기
+	$(".updateComment").click(function(){
+		if (confirm("댓글을 수정합니다.")){
+			$("#event_comment_write").text("댓글 수정");
+			$("#event_comment_write").css('backgroundColor', "#20B2AA");
+			before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
+			$("#comment_content").focus().val(before);//원래 글 가져오기
+			event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
+		}
+	});//수정하기 end
+	
+	
+	//댓글 삭제하기
+	$(".removeComment").click(function(){
+		if (confirm("댓글을 삭제합니다.")){
+			var event_com_num = $(this).next().next().val();//댓글 번호
+			console.log("삭제한 event_com_num = " + event_com_num);
+			
+			$.ajax({
+				type : "post",
+				url : "Event_commentDelete.eve",
+				data : {"event_com_num" :  event_com_num},
+				success : function(result){
+						if (result == 1) {
+							alert("댓글을 삭제했습니다.");
+							getList();
+						}																		
+				}
+			})//ajax end
+			
+		}//if end
+	});//삭제하기 end
+	
+	
+	//대댓글 달기
+	$(".reply_img").click(function(){
+		var event_com_num = $(this).next().next().val();//댓글 번호
+		
+	});//대댓글 달기 end
 	
 	
 
@@ -180,19 +184,12 @@ $(function(){
 </script>
 </head>
 <body>
-	<br><br>
 	<div class = "container">
 		<input type = "hidden" id = "mem_key" name = "mem_key" value = "${mem_key}">
 		<input type = "hidden" id = "key" name = "key" value = "${key}">
 		<input type = "hidden" id = "event_num" class = "event_num" name = "event_num" value = "${eventdata.event_num}">
 	
-	<!-- 상단 메뉴 -->
-   	<div class="row p_locate">
-      <div class="col-md-8"><a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 상세 페이지</span></div>
-      <div class="col-md-4"></div>
-   	</div>
-   	<br><br><br>
-	
+	<br><br>
 	<div class = "event_title_view">
 		<p class= "p_title">[이벤트제목] ${eventdata.title}<p><br>
 		<p>${fn:substring(eventdata.event_date,0,11)}&nbsp;&nbsp;${eventdata.event_start}에서 ${eventdata.event_end}까지

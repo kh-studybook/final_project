@@ -20,7 +20,7 @@
 	<logger name="event_comment">
 		<level value="trace"/>
 	</logger>
-	<logger name="Notices">
+	<logger name="Notice">
 		<level value="trace"/>
 	</logger>
 	<logger name="Foods">
