@@ -71,4 +71,9 @@ public class MemberDAO {
 		return sqlSession.delete("Members.deleteMember", key);
 	}
 
+	public Member emailCheck(String email) {
+		return sqlSession.selectOne("Members.emailcheck", email);
+	}
+	
+
 }

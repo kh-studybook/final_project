@@ -47,6 +47,16 @@ public class MemberController {
 		return "member/join_index";
 	}
 
+	
+	@RequestMapping(value = "/emailCheck.mem")
+	public void emailCheck(String email, HttpServletResponse response) throws Exception {
+		int result = memberservice.isEmail(email);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
+	
 	@RequestMapping(value = "/joinSuccess.mem", method = RequestMethod.GET)
 	public ModelAndView joinSuccess_mem(String email, String name, ModelAndView mv) {
 		mv.addObject("email", email);

@@ -123,6 +123,16 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return result;
 	}
+
+	@Override
+	public int isEmail(String email) {
+		Member member = dao.emailCheck(email);
+		int result = -1; //이메일 없으면 member가 null
+		if (member != null) {
+			result = member.getKey();
+		}
+		return result;
+	}
 	
 	
 }

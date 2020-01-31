@@ -216,16 +216,16 @@ img {
 							}
 						});
 
-						$("#email").blur(function() {
-							var value = $('#email').val().trim();
-							if (emailtest.test($(this).val())) {
-								gogo();
-								console.log(emailtest.test($(this).val()));
-								$(".emailmsg").html('<img src=resources/image/check.png>');
-							} else {
-								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
-							}
-						});
+//						$("#email").blur(function() {
+//							var value = $('#email').val().trim();
+//							if (emailtest.test($(this).val())) {
+//								gogo();
+//								console.log(emailtest.test($(this).val()));
+//								$(".emailmsg").html('<img src=resources/image/check.png>');
+//							} else {
+//								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
+//							}
+//						});
 
 						$('#password').blur(function() {
 							if (passwordtest.test($(this).val())) {
@@ -274,7 +274,38 @@ img {
 						$(".tologin").click(function() {
 							location.href = "login.mem";
 						});
+						
+						
+						//이메일  중복검사
+						var checkemail = false;
+						$("#email").blur(function() {
+							 $(".emailmsg").empty();
+							
+								var id = $("#email").val();
+								if (emailtest.test($(this).val())) {
+									gogo();
+									$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
+									checkemail = false;
+									return;
+								}
+								$.ajax({
+									url : "emailCheck.mem",
+									data : {"email" : id
+											},
+									success : function(resp) {
+										if (resp == -1) {
+											$(".emailmsg").html('<img src=resources/image/check.png>');
+											checkid = true;
+										} else {
+														$('.emailmsg').text('! 이미 가입된 이메일입니다.');
+														checkid = false;
+													}
+												}
+											})
+						})
+
 					});
+	
 </script>
 
 </head>

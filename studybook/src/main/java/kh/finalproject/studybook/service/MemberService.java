@@ -35,5 +35,7 @@ public interface MemberService {
 	public int delete(Member member);
 	//어드민 - 멤버 삭제
 	public int memberDelete(int key);
+
+	public int isEmail(String email);
 	
 }
