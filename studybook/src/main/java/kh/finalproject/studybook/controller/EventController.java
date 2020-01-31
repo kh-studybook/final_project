@@ -1,9 +1,6 @@
 package kh.finalproject.studybook.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -85,7 +82,7 @@ public class EventController {
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
 
-			saveFolder="C:\\Users\\user1\\git\\0131\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
+			saveFolder="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
 
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);

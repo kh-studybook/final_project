@@ -203,6 +203,7 @@ $(function() {
          </tr>
          
          <tr>
+         	<c:if test="${member.key==999 }">
             <td class=float-right>
 
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
@@ -214,6 +215,7 @@ $(function() {
                </a>
 
             </td>
+            </c:if>
          </tr>
          
          <tr>

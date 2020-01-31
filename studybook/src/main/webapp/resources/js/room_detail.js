@@ -11,7 +11,7 @@ $(document).on('click','.number-spinner button',
 						newVal = parseInt(oldValue) - 1;
 
 					} else {
-						newVal = 1;
+						newVal = 0;
 					}
 				}
 				btn.closest('.number-spinner').find('input').val(newVal);

@@ -64,6 +64,7 @@ public class RoomController {
 	public String board_write() throws Exception {
 		return "admin/room_register";
 	}
+	
 
 	// 어드민 룸등록 액션- 다중업로드 시작
 
@@ -84,7 +85,7 @@ public class RoomController {
 		// 룸 넘버를 알아내기 (갤러리 등록할 수 있게)
 		Room room1 = roomservice.selectRoomNum(room.getROOM_NAME());
 		int room_code = room1.getROOM_CODE();
-		System.out.println("해당 룸코드는?=" + room_code);
+		System.out.println("해당 룸코드는?===" + room_code);
 
 		// 룸특징 테이블에 입력//이게 빈칸이 아닌경우에만 들어가야함
 		roomservice.insertRoom_ex(room_code, room_ex);
@@ -100,7 +101,7 @@ public class RoomController {
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		String path="C:\\Users\\user1\\git\\0131\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 
