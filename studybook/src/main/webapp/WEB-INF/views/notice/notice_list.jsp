@@ -230,18 +230,16 @@ body {
 
 <div class=contentwrap>
 <div class=contentarea>
-
+<c:if test="${member.key== '999' }">
 	<button type="button" class="writebtn float-right">공지사항 쓰기</button>
+</c:if>	
 	<br>
 	<p class=s_title>공 지 사 항</p> 	
-	
 	<p class=s_desc>자주 문의하시는 부분에 대한 답변입니다.</p>
-
 	
 	<div class="container_wrap">
-	
 	<div class=s_container>
-
+	
 	<div class=tablewrap>
 	
 <%-- 게시글이 있는 경우 --%>
@@ -256,15 +254,14 @@ body {
 								<c:set var="num"
 									value="${num-1 }" /></td>
 							<td>
-							<c:if test="${member.name!= '관리자' }">
+							<c:if test="${member.key!= '999' }">
 								<div>
 									<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
 								</div>
 							</c:if>	
-							<c:if test="${member.name== '관리자' }">
+							<c:if test="${member.key== '999' }">
 								<div>
 									<a href="noticedetailadmin.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
-							
 								</div>
 							</c:if>	
 								<div><span class=date>${b.NOTICE_DATE }</span></div>

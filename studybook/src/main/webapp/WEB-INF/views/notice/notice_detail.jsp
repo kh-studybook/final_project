@@ -218,13 +218,13 @@ $(function() {
          
          <tr>
 
-			<c:if test="${member.name!= '관리자' }">
+			<c:if test="${member.key!= '999' }">
             <td class=center>        
             <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
             </td>
             </c:if>	
             
-           	<c:if test="${member.name== '관리자' }">
+           	<c:if test="${member.key== '999' }">
             <td class=center>        
             <a href="noticeadmin.bo"><button class="listbtn">리스트</button></a>
             </td>
