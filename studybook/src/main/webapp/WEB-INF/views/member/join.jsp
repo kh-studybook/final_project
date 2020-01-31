@@ -253,7 +253,7 @@ img {
 								console.log(phonetest.test($(this).val()));
 								$(".phonemsg").html('<img src=resources/image/check.png>');
 							} else {
-								$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
+								$('.phonemsg').text('! 010으로 시작하는 11자리 숫자만 입력 가능합니다.');
 							}
 						}); 
 

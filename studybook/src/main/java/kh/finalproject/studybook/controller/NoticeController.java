@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +33,8 @@ public class NoticeController {
 		return "notice/notice_detail_index"; 
 	} 
 	
-	//공지사항 리스트
+
+	//공지사항 리스트 (일반회원)
 	@RequestMapping(value = "/NoticeList.bo")
 	public ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
@@ -66,7 +66,7 @@ public class NoticeController {
 	}
 
 	
-	//공지 상세 보기
+	//공지 상세 보기  (일반회원)
 	@RequestMapping(value = "/NoticeDetailAction.bo", method = RequestMethod.GET)
 	public ModelAndView notice_detail(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
 
@@ -83,7 +83,59 @@ public class NoticeController {
 		}
 		return mv;  
 	}
+	
+	
+	
+	//공지사항 리스트 (관리자)
+	@RequestMapping(value = "/noticeadmin.bo")
+	public ModelAndView NoticeAdmin(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
+			throws Exception {
+		
+		//총 리스트 
+		int listcount = noticeService.getListCount();
 
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / limit) * limit + 1;
+		int endpage = startpage + limit - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		List<Notice> noticelist = noticeService.getNoticeList(page, limit);
+
+		mv.setViewName("notice/notice_list_admin");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("noticelist", noticelist);
+		mv.addObject("limit", limit);
+		
+		return mv;
+		
+	}
+
+	
+	//공지 상세 보기 (관리자)
+	@RequestMapping(value = "/noticedetailadmin.bo", method = RequestMethod.GET)
+	public ModelAndView noticeDetailAdmin(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
+
+		Notice notice = noticeService.getDetail(num);
+		if (notice == null) {
+			System.out.println("공지 상세 보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "공지 상세 보기 실패!");
+		} else {
+			System.out.println("공지 상세 보기 성공");
+			mv.setViewName("notice/notice_detail_admin");
+			mv.addObject("noticedata", notice);
+		}
+		return mv;  
+	}
+	
 	
 	
 	//공지 수정 상세페이지 보기 (관리자)
@@ -93,7 +145,7 @@ public class NoticeController {
 		Notice noticedata = noticeService.getDetail(num);
 		if (noticedata == null) {
 			System.out.println("공지 수정 상세보기 실패");
-	//		mv.setViewName("error/error");
+			mv.setViewName("error/error");
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "공지 수정 상세보기 실패");
 			return mv;
@@ -108,7 +160,7 @@ public class NoticeController {
 	//공지 쓰기 (관리자)
 	@GetMapping(value = "/NoticeWrite.bo")
 	public String notice_write() throws Exception {
-		return "notice/notice_write_index";
+		return "notice/notice_write_admin";
 	}
 	
 	
@@ -124,17 +176,18 @@ public class NoticeController {
 	@PostMapping("/NoticeModifyAction.bo")
 	public ModelAndView NoticeModifyAction(Notice notice, ModelAndView mv, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		boolean usercheck = noticeService.isNoticeWriter(notice.getNOTICE_NUM());
+		
+		int result = noticeService.noticeModify(notice);
 
-		if (usercheck == false) {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('관리자만 수정 가능합니다.');");
-			out.println("history.back()");
-			out.println("</script>");
-			out.close();
-			return null;
+		if (result == 0) {
+			System.out.println("수정 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "수정 실패");
+		} else {
+			System.out.println("수정 성공");
+			String url = "redirect:noticedetailadmin.bo?num=" + notice.getNOTICE_NUM();
+			mv.setViewName(url);
 		}
 		return mv;
 	}
@@ -143,8 +196,9 @@ public class NoticeController {
 	
 	//공지 삭제 (관리자)
 	@PostMapping("NoticeDeleteAction.bo")
-	public String NoticeDeleteAction(int num, HttpServletResponse response) throws Exception {
-
+	public void NoticeDeleteAction(int num, HttpServletResponse response) throws Exception {
+		int check = noticeService.noticeDelete(num);
+		if (check == 1) {
 		System.out.println("삭제 성공");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -153,9 +207,8 @@ public class NoticeController {
 		out.println("location.href='NoticeList.bo';");
 		out.println("</script>");
 		out.close();
-		return null;
+		}
 	}
-
 	
 	
 	//paging

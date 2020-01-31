@@ -44,11 +44,14 @@
 		where NOTICE_NUM = #{NOTICE_NUM} 
 	</update>
 
-	
-	<delete id="delete" parameterType="notice">
+	<delete id="delete" parameterType="int">
 		delete from notice
-		where NOTICE_NUM= #{num}
+		where NOTICE_NUM= #{NOTICE_NUM} 
 	</delete>
 
+	<select id="NoticeWriter" parameterType="map">
+		select * from notice
+		where NOTICE_NUM = 1
+	</select>
 
 </mapper>

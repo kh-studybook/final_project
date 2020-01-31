@@ -32,16 +32,19 @@ public class NoticeDAO {
 		return sqlSession.selectOne("Notice.getDetail", num);
 	}
 
-	public int noticeDelete(Notice notice) {
-		return sqlSession.delete("Notice.delete", notice);
+	public int noticeDelete(int num) {
+		return sqlSession.delete("Notice.delete", num);
 	}
 
-	public int noticeModify(Notice modifynotice) {
-		return sqlSession.update("Notice.modify", modifynotice);
+	public int noticeModify(Notice notice) {
+		return sqlSession.update("Notice.modify", notice);
 	}
 	
 	public Notice isNoticeWriter(Map<String, Object> map) {
 		return sqlSession.selectOne("Notice.NoticeWriter", map);
 	}
+
+
+	
 
 }

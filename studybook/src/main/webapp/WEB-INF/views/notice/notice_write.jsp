@@ -12,37 +12,121 @@
 </script>
 
 <style>
-tr.center {
-	text-align: center
-} S
 
-h1 {
-	font-size: 1.5rem;
-	text-align: center;
-	color: #1a92b9
+* {
+	box-sizing: border-box;
+	font-family: "맑은 고딕";   
+}
+
+body {
+	background-color: #f2f2f2;
+}
+
+.contentwrap {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.contentarea {
+	background-color: white;
+    width: 50%;
+    min-width: 420px;
+    height: auto;
+}
+
+.realcontent {
+	margin-left: 200px;
+    margin-right: 200px;
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 30px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
 }
 
 .s_container {
-	width:60%;
 	display: flex;
 	justify-content: center;
 }
-
-label {
-	font-weight: bold 
+   
+.notice_title {
+	font-size: 14px;
+	text-align: center;
 }
 
+.notice_date {
+	font-size:14px;
+	text-align: center;
+}
+   
+.notice_content {
+
+	font-size: 14px;
+}
+   
+th {
+	text-align:center
+}
+
+.float-right {
+	float:right;
+}
+
+.center {
+	text-align:center;
+}
+
+.table td, .table th {
+    border-top: 0px;
+}
+
+.submitbtn, .resetbtn {
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: #7F56D2;	
+	margin-top: 30px;
+	margin-bottom: 35px;
+}
+
+.submitbtn:hover, .resetbtn:hover {
+	text-decoration: none;
+	border: 0px;
+	color: #56D7D6;
+}
+
+.listbtn {
+	width: 330px;
+	height: 43px;
+	line-height:43px;
+	background-color: #7F56D2;
+	color: white;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border: none;
+	cursor: pointer;
+	
+}
+
+.listbtn:hover {
+	opacity: 70%;
+}
 </style>
 </head>
 
 <body>
+<div class=contentwrap>
+
+<div class=contentarea>
+
+<div class=realcontent>
+
+<input type="hidden" id="memberkey" value="${key }" name="memberkey">
 
 	<p class=s_title></p>
 	
@@ -50,15 +134,16 @@ label {
 		<form action="NoticeAddAction.bo" method="post"
 			enctype="multipart/form-data" name="noticeform">
 
+
 			<div class="form-group">
-				<label for="notice_title">제목</label> <input name="NOTICE_TITLE"
-					id="notice_title" type="text" size="50" maxlength="100"
+				<input type="text" name="NOTICE_TITLE"
+					id="notice_title" size="50" maxlength="100"
 					class="form-control" placeholder="제목" value="">
 			</div>
+			
 			<div class="form-group">
-				<label for="notice_content">내용</label>
-				<textarea name="NOTICE_CONTENT" id="notice_content" cols="67"
-					rows="10" class="form-control"></textarea>
+				<textarea name="NOTICE_CONTENT" id="notice_content" cols="70"
+					rows="20" class="notice_content" placeholder="내용"></textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="submitbtn">등록</button>
@@ -67,6 +152,8 @@ label {
 			
 		</form>
 	</div>
-
+</div>
+</div>	
+</div>
 </body>
 </html>
