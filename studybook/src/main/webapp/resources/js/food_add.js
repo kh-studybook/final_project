@@ -55,7 +55,7 @@ $(document).on('click', '.number-spinner button', function () {
 		
 	}else if(newVal==0){
 		$(".food_list").find("li[name=food_code_"+food_code+"]").remove();
-	
+		
 	}
 	
 	var total_price=0;	
@@ -68,6 +68,8 @@ $(document).on('click', '.number-spinner button', function () {
 	
 	return false;
 });
+
+
 
 
 	

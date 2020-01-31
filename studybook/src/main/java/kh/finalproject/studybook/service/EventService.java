@@ -25,4 +25,8 @@ public interface EventService {
 	public List<Event> getMainEventList(int page, int limit);
 	//작성자 키 값 가져오기
 	public int getEventWriterNum(int num);
+	//이번달 이벤트 글 개수 구하기
+	public int getMonthEventListCount(String today);
+	//이번달 이벤트 리스트 구하기
+	public List<Event> getMonthEventList(int page, int limit, String today);
 }

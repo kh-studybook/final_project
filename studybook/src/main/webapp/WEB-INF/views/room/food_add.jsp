@@ -42,7 +42,7 @@
 								</div>
 								<div class="e_product-price-btn">
 									<p>
-										<span name="product_price">${food.food_cost }</span>\
+										\<span name="product_price">${food.food_cost }</span>
 									</p>
 									
 									<div class="input-group number-spinner">

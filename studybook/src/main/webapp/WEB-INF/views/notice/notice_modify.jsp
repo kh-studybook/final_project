@@ -7,29 +7,11 @@
 <meta charset="UTF-8">
 <title>notice modify</title>
 <script> 
+
 	$(document).ready(function() {
-		var check = 0;
-
-		$('form').submit(function() {
-			/* if($.trim($("input").eq(1).val())==""){
-				alert("비밀번호를 입력하세요");
-				$("input:eq(1)").focus();
-				return false;
-			}
-			if($.trim($("input").eq(2).val())==""){
-				alert("제목을 입력하세요");
-				$("input:eq(2)").focus();
-				return false;
-			}
-			
-			if($.trim($("input").eq(3).val())==""){
-				alert("내용을 입력하세요");
-				$("input:eq(3)").focus();
-				return false;
-			}  */
-
-		});
-
+		$(".submitbtn").click(function() {
+			location.href = "NoticeModifyAction.bo";
+		})
 	});
 </script>
 <style>
@@ -50,15 +32,21 @@ body {
 }
 
 .contentarea {
-	background-color:white;
-	width:50%;
-	height:100%
+	background-color: white;
+    width: 50%;
+    min-width: 420px;
+    height: auto;
+}
+
+.realcontent {
+	margin-left: 200px;
+    margin-right: 200px;
 }
 
 .s_title {
-	margin-top: 230px;
+	margin-top: 30px;
 	margin-bottom: 35px;
-	font-size: 32px; 
+	font-size: 32px;
 	text-align: center;
 }
 
@@ -66,26 +54,73 @@ body {
 	display: flex;
 	justify-content: center;
 }
-
-tr.center-block {
-	text-align: center
+   
+.notice_title {
+	border: 1px solid #dce6e6;
+	font-size: 14px;
+	background-color:;
 }
 
-h1 {
-	font-size: 1.5rem;
+.notice_date {
+	font-size:14px;
 	text-align: center;
-	color: #1a92b9
+}
+   
+.notice_content {
+	border: 1px solid #dce6e6;
+	font-size: 14px;
+	background-color:;
+}
+   
+th {
+	text-align:center
 }
 
-.container {
-	width: 60%
+.float-right {
+	float:right;
 }
 
-label {
-	font-weight: bold
+.center {
+	text-align:center;
 }
 
+.table td, .table th {
+    border-top: 0px;
+}
 
+.submitbtn, .resetbtn {
+	background-color: #ffffff;
+	border: 0px;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: #7F56D2;	
+	margin-top: 30px;
+	margin-bottom: 35px;
+}
+
+.submitbtn:hover, .resetbtn:hover {
+	text-decoration: none;
+	border: 0px;
+	color: #56D7D6;
+}
+
+.listbtn {
+	width: 330px;
+	height: 43px;
+	line-height:43px;
+	background-color: #7F56D2;
+	color: white;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border: none;
+	cursor: pointer;
+	
+}
+
+.listbtn:hover {
+	opacity: 70%;
+}
 </style>
 
 </head>
@@ -94,7 +129,11 @@ label {
 
 <div class=contentarea>
 
-	<p class=s_title></p>
+<div class=realcontent>
+
+<input type="hidden" id="memberkey" value="${key }" name="memberkey">
+
+	<p class=s_title>공지사항 수정하기</p>
 	<div class="s_container">
 		<form action="./NoticeModifyAction.bo" enctype="multipart/form-data"
 			method="post" name="modifyform">
@@ -102,27 +141,27 @@ label {
 				value="${noticedata.NOTICE_NUM }">
 
 			<div class="form-group">
-				<label for="notice_title">제목</label> <input type="text"
-					id="notice_title" name="NOTICE_TITLE" class="form-control"
+				<input type="text" id="notice_title" name="NOTICE_TITLE" class="notice_title"
 					value="${noticedata.NOTICE_TITLE }" maxlength="100">
 			</div>
 
 			<div class="form-group">
-				<label for="notice_content">내용</label>
-				<textarea name="NOTICE_CONTENT" id="notice_content" cols="67"
-					rows="10" class="form-control">${noticedata.NOTICE_CONTENT }</textarea>
+				<textarea name="NOTICE_CONTENT" id="notice_content" cols="70"
+					rows="20" class="notice_content">${noticedata.NOTICE_CONTENT }</textarea>
 			</div>
 
 			<!-- 관리자한테만 보이게 test 넣기 -->
-			<c:if test="${member.name== '관리자' }">
-			<div class="form-group">
+			
+			<div class="float-right">
 				<button type="submit" class="submitbtn">수정</button>
 				<button type="reset" class="resetbtn" onClick="history.go(-2)">취소</button>
 			</div>
-			</c:if>
+			
 		</form>
 	</div>
 </div>
 </div>	
+</div>
+
 </body>
 </html>

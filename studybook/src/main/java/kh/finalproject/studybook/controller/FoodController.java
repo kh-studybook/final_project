@@ -88,8 +88,9 @@ public class FoodController {
 		MultipartFile uploadfile = mtfRequest.getFile("filename");
 		System.out.println("filename="+uploadfile);
 		
-		String path=saveFolder;
-		//String path="C:\\Users\\user1\\git\\0129\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+		//String path=saveFolder;
+		//은지
+		String path="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
 
 		
 		if(!uploadfile.isEmpty()) {

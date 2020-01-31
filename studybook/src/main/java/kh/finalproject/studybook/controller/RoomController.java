@@ -64,6 +64,7 @@ public class RoomController {
 	public String board_write() throws Exception {
 		return "admin/room_register";
 	}
+	
 
 	// 어드민 룸등록 액션- 다중업로드 시작
 
@@ -84,7 +85,7 @@ public class RoomController {
 		// 룸 넘버를 알아내기 (갤러리 등록할 수 있게)
 		Room room1 = roomservice.selectRoomNum(room.getROOM_NAME());
 		int room_code = room1.getROOM_CODE();
-		System.out.println("해당 룸코드는?=" + room_code);
+		System.out.println("해당 룸코드는?===" + room_code);
 
 		// 룸특징 테이블에 입력//이게 빈칸이 아닌경우에만 들어가야함
 		roomservice.insertRoom_ex(room_code, room_ex);
@@ -96,11 +97,11 @@ public class RoomController {
 		MultipartFile first = fileList.get(0);
 		System.out.println("fileList:" + fileList.size());
 
-		String path = saveFolder;
+		//String path = saveFolder;
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		//String path="C:\\Users\\user1\\git\\0129\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 
@@ -342,7 +343,7 @@ public class RoomController {
 		}
 		Room room = roomservice.getRoomDetail(room_code);
 		Room_ex room_ex=roomservice.getRoomExDetail(room_code);
-		 List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
 		if (room == null) {
 			System.out.println("룸 상세보기 실패");
 			mv.setViewName("error/error");
@@ -454,10 +455,11 @@ public class RoomController {
 		obj.put("endpage", endpage);
 		obj.put("listcount", listcount);
 		obj.put("roomlist", roomlist);
-		
+		obj.put("limit", limit);
 		return obj;
 	}
 
+	//룸 검색
 	@RequestMapping(value="RoomSearch.ro")
 	public ModelAndView roomSearch(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -504,6 +506,7 @@ public class RoomController {
 		return mv;
 	}
 	
+	//룸 검색 ajax
 	@ResponseBody
 	@RequestMapping(value="RoomSearchList.ro")
 	public Object roomSearchList(

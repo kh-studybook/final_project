@@ -3,7 +3,7 @@ package kh.finalproject.studybook.domain;
 public class Mail {
 	private String from="eunji3058@naver.com";
 	private String to;
-	private String subject="예약 완료 메일 입니다.";
+	private String subject="[STUDYBOOK] 예약 완료 메일 입니다.";
 	private String content;
 	public String getFrom() {
 		return from;

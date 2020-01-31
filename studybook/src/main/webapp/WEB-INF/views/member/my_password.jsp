@@ -108,9 +108,11 @@ img {
 			if (passwordtest.test($(this).val())) {
 				console.log(passwordtest.test($(this).val()));
 				$('.pwmsg').html('<img src=resources/image/check.png>');
+				$('.s_submit').attr('disabled', true);
 			} else {
 				$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
 				$('.pwmsg').css('color', 'crimson');
+				$('.s_submit').attr('disabled', true);
 			}
 		});
 
@@ -118,11 +120,16 @@ img {
 			if ($('#password').val() != $('#pwcheck').val()) {
 				$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
 				$('.pwcheckmsg').css('color', 'crimson');
+				$('.s_submit').attr('disabled', true);
 			} else {
 				$('.pwcheckmsg').html('<img src=resources/image/check.png>');
+				$('.s_submit').attr('disabled', false);
+				$('.s_submit').css('background', '#7F56D2');
 			}
 
 		});   
+		
+		   
 	});
    
 </script>

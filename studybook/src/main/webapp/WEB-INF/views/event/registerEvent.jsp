@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <head>
 <style>
 body {background-color: #f2f2f2 !important;}
@@ -391,6 +393,7 @@ input[type=date]{height:3rem;}
          <option value = "${room_name}" >${room_name}</option>
          </c:forEach>            
       </select>
+
       </div>
     </div>
 

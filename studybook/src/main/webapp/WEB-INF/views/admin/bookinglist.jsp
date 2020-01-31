@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 * {
 	font-family: "맑은 고딕";
@@ -107,10 +108,6 @@ margin-top:50px;
 								<th>룸 이름</th>
 								<th>예약자</th>
 								<th>전화번호</th>
-								<th>이메일</th>
-								<th>시작</th>
-								<th>끝</th>
-								<th>추가</th>
 								<th>금액</th>
 								<th>예약 날짜</th>
 								<th>상태</th>
@@ -127,12 +124,8 @@ margin-top:50px;
 									<td>${m.room_name}</td>
 									<td>${m.reserver_name}</td>
 									<td>${m.reserver_phone}</td>
-									<td>${m.reserver_email}</td>
-									<td>${m.start_time}</td>
-									<td>${m.end_time}</td>
-									<td>${m.extra_num}명</td>
 									<td>${m.total_cost}</td>
-									<td>${m.reserve_date}</td>
+									<td>${fn:substring(m.reserve_date,0,10)}</td>
 									<c:if test="${m.status==1}">
 									<td>정상</td>
 									</c:if>

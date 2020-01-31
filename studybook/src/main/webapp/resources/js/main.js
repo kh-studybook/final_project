@@ -1,4 +1,4 @@
-$(document).ready(function(){	
+$(document).ready(function(){
 	$('#m_write_date').click(function(){
 		if($('.jsCalendar').css("display") == "none"){
 			$('.jsCalendar').css("display", "inline-grid");
@@ -9,34 +9,34 @@ $(document).ready(function(){
 	})
 	
 	$('.m_main_select').eq(1).click(function(){
-		if($('#m_main_starttime').css("opacity") == '0'){
-			$('#m_main_starttime').css("opacity", "1");
+		if($('#m_main_starttime').css("display") == 'none'){
+			$('#m_main_starttime').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(1).css("position", "relative");
 		} else {
-			$('#m_main_starttime').css("opacity", "0");
+			$('#m_main_starttime').css("display", "none");
 			$('.m_main_select').eq(1).css("position", "");
 		}
 	})
 	
 	$('.m_main_select').eq(2).click(function(){
-		if($('#m_main_endtime').css("opacity") == '0'){
-			$('#m_main_endtime').css("opacity", "1");
+		if($('#m_main_endtime').css("display") == 'none'){
+			$('#m_main_endtime').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(2).css("position", "relative");
 		} else {
-			$('#m_main_endtime').css("opacity", "0");
+			$('#m_main_endtime').css("display", "none");
 			$('.m_main_select').eq(2).css("position", "");
 		}
 	})
 	
 	$('.m_main_select').eq(3).click(function(){
-		if($('#m_main_count').css("opacity") == '0'){
-			$('#m_main_count').css("opacity", "1");
+		if($('#m_main_count').css("display") == 'none'){
+			$('#m_main_count').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(3).css("position", "relative");
 		} else {
-			$('#m_main_count').css("opacity", "0");
+			$('#m_main_count').css("display", "none");
 			$('.m_main_select').eq(3).css("position", "");
 		}
 	})
@@ -59,11 +59,10 @@ $(document).ready(function(){
     	if(date.getTime()< today.getTime()){
     		alert('오늘 날짜부터 선택해주세요.');
     		return false;
-    	}else{
+    	} else {
 	 		myCalendar.clearselect();
 			myCalendar.select([date]);
     	}
-    	
     	
     	if(date.getTime() == today.getTime()){
     		var now_hour = new_today.getHours();
@@ -101,7 +100,6 @@ $(document).ready(function(){
     	$('#m_write_date').css('font-size','18px');
     	$('.jsCalendar').css("display", "none");
     	$('#date').val(date2str);
-    	
     });
 	
     // 검색 - 시간 눌렀을 때
@@ -195,17 +193,16 @@ $(document).ready(function(){
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
-    };  
+    };
 
 	// 지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch('서울특별시 중구 남대문로 120', function(result, status) {
-	
 	    // 정상적으로 검색이 완료됐으면
 	     if (status === kakao.maps.services.Status.OK) {
 	
@@ -228,9 +225,8 @@ $(document).ready(function(){
 	    } 
 	});// 카카오지도 api 끝
 	
-	// #j_main_room min-height 주기
-	// $('#j_main_room').css("min-height", $('#j_main_room').width());
-	$('#j_main_room').children().eq(1).css("min-height", $('#j_main_room').width()+$('#j_main_room').children().eq(0).height());
+	// 이벤트 이미지 min-height 설정
+	$('.j_event_img').css("min-height", $('.j_event_img').width());
 })// ready() end
 
 	function setPaging(href, digit){
