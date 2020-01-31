@@ -26,8 +26,8 @@
 	#delete_modify_btn:after{clear:both}
 	#event_modify_btn, #event_modify_btn{color:black}
 	#event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-	#event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-	#event_delete_btn:visited{color:black}
+	.event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
+	.event_delete_btn:visited{color:black}
 	
 	/** comment 관련 */
 	#event_comment_write{background-color:#7F56D2; border:0px; opacity:0.8; color:white; width:20%;}

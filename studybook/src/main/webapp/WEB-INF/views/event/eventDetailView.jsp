@@ -87,6 +87,7 @@ $(function(){
 			data : {"event_num" : $("#event_num").val()},
 			dataType : "json",
 			success : function(rdata){
+				console.log(rdata);
 				console.log("success event_num = " + event_num);
 				if (rdata.list) {
 					console.log("댓글을 달을 event_num = " + event_num);
@@ -111,60 +112,59 @@ $(function(){
 						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + item.com_content + "</span>"
 						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
 					});
-					$("#comment_form").append(output);
-					$("#comment_content").empty();
+						$("#comment_form").append(output);
+						$("#comment_content").empty();
+					} else {
+						$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
+						$("#comment_content").empty();
+						$("#comment_form").hide();
+					}
+					//댓글 수정하기
+					$(".updateComment").click(function(){
+						if (confirm("댓글을 수정합니다.")){
+							$("#event_comment_write").text("댓글 수정");
+							$("#event_comment_write").css('backgroundColor', "#20B2AA");
+							before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
+							$("#comment_content").focus().val(before);//원래 글 가져오기
+							event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
+						}
+					});//수정하기 end
 					
-									
-				} else {
-					$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
-					$("#comment_content").empty();
-					$("#comment_form").hide();
-				}
+					
+					//댓글 삭제하기
+					$(".removeComment").click(function(){
+						if (confirm("댓글을 삭제합니다.")){
+							var event_com_num = $(this).next().next().val();//댓글 번호
+							console.log("삭제한 event_com_num = " + event_com_num);
+							
+							$.ajax({
+								type : "post",
+								url : "Event_commentDelete.eve",
+								data : {"event_com_num" :  event_com_num},
+								success : function(result){
+										if (result == 1) {
+											alert("댓글을 삭제했습니다.");
+											getList();
+										}																		
+								}
+							})//ajax end
+							
+						}//if end
+					});//삭제하기 end
+					
+					
+					//대댓글 달기
+					$(".reply_img").click(function(){
+						var event_com_num = $(this).next().next().val();//댓글 번호
+						
+					});//대댓글 달기 end
+					
+				
 			}
 		});	
 		
 		
 	};//getList end	
-	
-	//댓글 수정하기
-	$(".updateComment").click(function(){
-		if (confirm("댓글을 수정합니다.")){
-			$("#event_comment_write").text("댓글 수정");
-			$("#event_comment_write").css('backgroundColor', "#20B2AA");
-			before = $(this).next().next().next().parent().parent().next().next().next().next().next().text();
-			$("#comment_content").focus().val(before);//원래 글 가져오기
-			event_com_num = $("#event_com_num").val();//수정할 댓글번호를 저장
-		}
-	});//수정하기 end
-	
-	
-	//댓글 삭제하기
-	$(".removeComment").click(function(){
-		if (confirm("댓글을 삭제합니다.")){
-			var event_com_num = $(this).next().next().val();//댓글 번호
-			console.log("삭제한 event_com_num = " + event_com_num);
-			
-			$.ajax({
-				type : "post",
-				url : "Event_commentDelete.eve",
-				data : {"event_com_num" :  event_com_num},
-				success : function(result){
-						if (result == 1) {
-							alert("댓글을 삭제했습니다.");
-							getList();
-						}																		
-				}
-			})//ajax end
-			
-		}//if end
-	});//삭제하기 end
-	
-	
-	//대댓글 달기
-	$(".reply_img").click(function(){
-		var event_com_num = $(this).next().next().val();//댓글 번호
-		
-	});//대댓글 달기 end
 	
 	
 

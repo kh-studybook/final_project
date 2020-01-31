@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <style>
 body {background-color: #f2f2f2 !important;}
@@ -8,12 +9,12 @@ body {background-color: #f2f2f2 !important;}
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
 #event_title{maxLength:200}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
-textarea::placeholder, input[type=text]::placeholder{color:black;}
+textarea::placeholder, select, input[type=text]::placeholder{color:black; font-size:14px;}
 .col-25 > label {font-weight:bold;}
 .pp_locate{text-decoration:none; font-size:12px;}
 
 /** 입력 폼 관련*/
-input[type=text], select, textarea {width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;}
+input[type=text], select, textarea {width: 100%; padding: 12px; border-radius: 4px; resize: vertical; border:2px solid #56D7D6}
 .pp > label {display: inline-block;}
 input[type=date]{height:3rem;}
 
@@ -46,8 +47,161 @@ input[type=date]{height:3rem;}
 <script src = "https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<!-- 캘린더 css 불러오기 -->
+	<link rel="stylesheet" href="resources/css/jsCalendar.css">
+	<!-- main css 불러오기 -->
+	<link rel="stylesheet" type="text/css" href="resources/css/main2.css" />
+	<!-- 캘린더 js 불러오기 -->
+	<script src="resources/js/jsCalendar.js"></script>
+
 <script>
 	$(function(){
+		$('#m_write_date').click(function(){
+			if($('.jsCalendar').css("display") == "none"){
+				$('.jsCalendar').css("display", "inline-grid");
+			} else {
+				$('.jsCalendar').css("display", "none");
+				$('.m_main_select').eq(0).css("position", "");
+			}
+		})
+		
+		$('.m_main_select').eq(1).click(function(){
+			if($('#m_main_starttime').css("opacity") == '0'){
+				$('#m_main_starttime').css("opacity", "1");
+				$('.m_main_select').eq(0).css("position", "");
+				$('.m_main_select').eq(1).css("position", "relative");
+			} else {
+				$('#m_main_starttime').css("opacity", "0");
+				$('.m_main_select').eq(1).css("position", "");
+			}
+		})
+		
+		$('.m_main_select').eq(2).click(function(){
+			if($('#m_main_endtime').css("opacity") == '0'){
+				$('#m_main_endtime').css("opacity", "1");
+				$('.m_main_select').eq(0).css("position", "");
+				$('.m_main_select').eq(2).css("position", "relative");
+			} else {
+				$('#m_main_endtime').css("opacity", "0");
+				$('.m_main_select').eq(2).css("position", "");
+			}
+		})
+		
+		$('.m_main_select').eq(3).click(function(){
+			if($('#m_main_count').css("opacity") == '0'){
+				$('#m_main_count').css("opacity", "1");
+				$('.m_main_select').eq(0).css("position", "");
+				$('.m_main_select').eq(3).css("position", "relative");
+			} else {
+				$('#m_main_count').css("opacity", "0");
+				$('.m_main_select').eq(3).css("position", "");
+			}
+		})
+		
+		// calendar 만들기
+		// Get the element
+	    var element = document.getElementById("my-calendar");
+	    // Create the calendar
+		var myCalendar = jsCalendar.new(element);
+		
+	    // 검색 - 달력 눌렀을 때 날짜 표시
+	    myCalendar.onDateClick(function(event, date){
+	    	var date2str = jsCalendar.tools.dateToString(date, "yyyy-MM-DD");
+	    	var new_today = new Date();
+	    	var year = new_today.getFullYear();
+	    	var month = (1+new_today.getMonth());
+	    	var day = new_today.getDate();
+	    	var today = new Date(year+', '+month+', '+day);
+	    	
+	    	if(date.getTime()< today.getTime()){
+	    		alert('오늘 날짜부터 선택해주세요.');
+	    		return false;
+	    	}else{
+		 		myCalendar.clearselect();
+				myCalendar.select([date]);
+	    	}
+	    	
+	    	
+	    	if(date.getTime() == today.getTime()){
+	    		var now_hour = new_today.getHours();
+	    		
+	    		$('#m_main_starttime ul li').each(function(){
+	    			var starttime = $(this).text();
+	    			var hour=starttime.substring(0, starttime.length-1);
+	    			if(parseInt(hour)-1 < parseInt(now_hour)){
+	    				$(this).addClass("m_black");
+	    			}
+	    		})
+	    		
+	    		$('#m_main_endtime ul li').each(function(){
+	    			var endtime = $(this).text();
+	    			var hour=endtime.substring(0, endtime.length-1);
+	    			if(parseInt(hour)-2 < parseInt(now_hour)){
+	    				$(this).addClass("m_black");
+	    			}
+	    		})
+	    	} else {
+	    		$('#m_main_starttime ul li').each(function(){
+	    			$(this).removeClass("m_black");
+	    		})
+	    		$('#m_main_endtime ul li').each(function(){
+	    			$(this).removeClass("m_black");
+	    		})
+	    	}
+	    	
+	    	$('#m_write_date').empty();
+	    	$('#m_write_date').append('<i class="far fa-calendar-alt"></i>');
+	    	$('#m_write_date').append(date2str);
+	    	$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
+	    	$('#m_write_date').css('font-weight','bold');
+	    	$('#m_write_date').css('font-size','18px');
+	    	$('.jsCalendar').css("display", "none");
+	    	$('#date').val(date2str);
+	    	
+	    });
+		
+	    // 검색 - 시간 눌렀을 때
+		$('#m_main_starttime').children().children().click(function(){
+			if($(this).hasClass('m_black')){
+				alert('가능한 시간을 선택하세요.');
+				return false;
+			}
+			var starttime = $(this).text();
+			$('#m_write_starttime').empty();
+			$('#m_write_starttime').append('<i class="far fa-clock"></i>');
+			$('#m_write_starttime').append(starttime);
+			$('#m_write_starttime').append('<i class="fas fa-chevron-down"></i>');
+			$('#m_write_starttime').css('font-weight','bold');
+			$('.m_write>i:nth-child(1)').css('margin-right', '0');
+			$('.m_write>i:nth-child(2)').css('margin-left', '0');
+			$(this).css('font-size', '14px');
+			$('#starttime').val(starttime.substring(0, starttime.length-1));
+		})
+		
+		$('#m_main_endtime').children().children().click(function(){
+			if($(this).hasClass('m_black')){
+				alert('가능한 시간을 선택하세요.');
+				return false;
+			}
+			var endtime = $(this).text();
+			$('#m_write_endtime').empty();
+			$('#m_write_endtime').append('<i class="far fa-clock"></i>');
+			$('#m_write_endtime').append(endtime);
+			$('#m_write_endtime').append('<i class="fas fa-chevron-down"></i>');
+			$('#m_write_endtime').css('font-weight','bold');
+			$('.m_write>i:nth-child(1)').css('margin-right', '0');
+			$('.m_write>i:nth-child(2)').css('margin-left', '0');
+			$(this).css('font-size', '14px');
+			$('#endtime').val(endtime.substring(0, endtime.length-1));
+		})
+		
+		$('.jsCalendar').css("width", $('.m_main_header_column').children().eq(0));
+		$('#m_main_time').css("width", $('.m_main_header_column').children().eq(1));
+		$('#m_main_count').css("width", $('.m_main_header_column').children().eq(2));
+		
+		
+		
 		//textarea 자동 크기조절
 		autosize($("textarea"));
 		
@@ -224,66 +378,7 @@ input[type=date]{height:3rem;}
         <input type="text" id="event_title" name="title" placeholder="이벤트명을 20자까지 입력해주세요.">
       </div>
     </div>
-    
-    <!--  이벤트 날짜 등록 -->
-    <div class="row">
-      <div class="col-25">
-        <label for="event_date">이벤트 날짜</label>
-      </div>
-      <div class="col-75">
-        <input type="date" id="event_date" name="event_date" class = "form-control">
-      </div>
-    </div>
-
-    <!--  이벤트 시작 시간 등록 -->    
-    <div class="row">
-      <div class="col-25">
-        <label for="country">이벤트 시작시간</label>
-      </div>
-      <div class="col-75">
-		<select id = "event_start" name = "event_start">
-			<option value = "none" selected>이벤트 시작시간</option>
-			<option value = "09:00">09:00</option>
-			<option value = "10:00">10:00</option>
-			<option value = "11:00">11:00</option>
-			<option value = "12:00">12:00</option>
-			<option value = "13:00">13:00</option>
-			<option value = "14:00">14:00</option>
-			<option value = "15:00">15:00</option>	
-			<option value = "16:00">16:00</option>	
-			<option value = "17:00">17:00</option>	
-			<option value = "18:00">18:00</option>
-			<option value = "19:00">19:00</option>	
-			<option value = "20:00">20:00</option>					
-		</select>
-      </div>
-    </div>
- 
-    <!--  이벤트 종료 시간 등록 -->     
-    <div class="row">
-      <div class="col-25">
-        <label for="country">이벤트 종료시간</label>
-      </div>
-      <div class="col-75">
-		<select id = "event_end" name = "event_end">
-			<option value = "none" selected>이벤트 종료 시간</option>
-			<option value = "10:00">10:00</option>
-			<option value = "11:00">11:00</option>
-			<option value = "12:00">12:00</option>
-			<option value = "13:00">13:00</option>
-			<option value = "14:00">14:00</option>
-			<option value = "15:00">15:00</option>	
-			<option value = "16:00">16:00</option>	
-			<option value = "17:00">17:00</option>	
-			<option value = "18:00">18:00</option>
-			<option value = "19:00">19:00</option>	
-			<option value = "20:00">20:00</option>			
-			<option value = "21:00">21:00</option>
-			<option value = "22:00">22:00</option>					
-		</select>
-      </div>
-    </div>
-    
+        
    	<!--  이벤트 장소 -->     
     <div class="row">
       <div class="col-25">
@@ -291,16 +386,83 @@ input[type=date]{height:3rem;}
       </div>
       <div class="col-75">
 		<select id = "event_room" name = "event_room">
-			<option value = "none" selected>이벤트 장소</option>
-			<option value = "스터디룸A">스터디룸A</option>
-			<option value = "스터디룸B">스터디룸B</option>
-			<option value = "스터디룸C">스터디룸C</option>	
-			<option value = "스터디룸D">스터디룸D</option>	
-			<option value = "스터디룸E">스터디룸E</option>	
-			<option value = "스터디룸F">스터디룸F</option>					
-		</select>
+         <option value = "none" selected style = "font-size:12px">이벤트 장소</option>
+         <c:forEach var="room_name" items="${roomlist}">
+         <option value = "${room_name}" >${room_name}</option>
+         </c:forEach>            
+      </select>
       </div>
     </div>
+
+	<div class = "row">
+		<div class="col-25">
+      	  <label for="country">이벤트 일시</label>
+      	</div>
+      	<div class="col-75">
+      	<div class="m_main_header_column col-md">
+		<div class="m_main_select col-md-6 form-control">
+							<div class="m_write col-md" id="m_write_date">
+								<div>
+									<i class="far fa-calendar-alt"></i>
+									모임 날짜
+								</div>
+								<i class="fas fa-chevron-down"></i>
+							</div>
+							<div id="my-calendar" class="e_calendar col-md"></div>
+	            		</div>
+		<div class="m_main_select col-md-3 form-control">
+							<div class="m_write col-md" id="m_write_starttime">
+								<i class="far fa-clock"></i>
+								START
+								<i class="fas fa-chevron-down"></i>
+							</div>
+							<div id="m_main_starttime" class="col-md">
+								<ul>
+									<li>9시</li>
+									<li>10시</li>
+									<li>11시</li>
+									<li>12시</li>
+									<li>13시</li>
+									<li>14시</li>
+									<li>15시</li>
+									<li>16시</li>
+									<li>17시</li>
+									<li>18시</li>
+									<li>19시</li>
+									<li>20시</li>
+									<li>21시</li>
+								</ul>
+				        	</div>
+						</div>
+			<div class="m_main_select col-md-3 form-control">
+							<div class="m_write col-md" id="m_write_endtime">
+								<i class="far fa-clock"></i>
+								END
+								<i class="fas fa-chevron-down"></i>
+							</div>
+							<div id="m_main_endtime" class="col-md">
+								<ul>
+									<li>10시</li>
+									<li>11시</li>
+									<li>12시</li>
+									<li>13시</li>
+									<li>14시</li>
+									<li>15시</li>
+									<li>16시</li>
+									<li>17시</li>
+									<li>18시</li>
+									<li>19시</li>
+									<li>20시</li>
+									<li>21시</li>
+									<li>22시</li>
+								</ul>
+				        	</div>
+						</div>
+	</div>
+	</div>
+      	
+      	</div>
+
 
     <!--  이벤트 세부 내용 등록 -->     
     <div class="row">
