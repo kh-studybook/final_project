@@ -454,10 +454,11 @@ public class RoomController {
 		obj.put("endpage", endpage);
 		obj.put("listcount", listcount);
 		obj.put("roomlist", roomlist);
-		
+		obj.put("limit", limit);
 		return obj;
 	}
 
+	//룸 검색
 	@RequestMapping(value="RoomSearch.ro")
 	public ModelAndView roomSearch(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -504,6 +505,7 @@ public class RoomController {
 		return mv;
 	}
 	
+	//룸 검색 ajax
 	@ResponseBody
 	@RequestMapping(value="RoomSearchList.ro")
 	public Object roomSearchList(

@@ -9,34 +9,34 @@ $(document).ready(function(){
 	})
 	
 	$('.m_main_select').eq(1).click(function(){
-		if($('#m_main_starttime').css("opacity") == '0'){
-			$('#m_main_starttime').css("opacity", "1");
+		if($('#m_main_starttime').css("display") == 'none'){
+			$('#m_main_starttime').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(1).css("position", "relative");
 		} else {
-			$('#m_main_starttime').css("opacity", "0");
+			$('#m_main_starttime').css("display", "none");
 			$('.m_main_select').eq(1).css("position", "");
 		}
 	})
 	
 	$('.m_main_select').eq(2).click(function(){
-		if($('#m_main_endtime').css("opacity") == '0'){
-			$('#m_main_endtime').css("opacity", "1");
+		if($('#m_main_endtime').css("display") == 'none'){
+			$('#m_main_endtime').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(2).css("position", "relative");
 		} else {
-			$('#m_main_endtime').css("opacity", "0");
+			$('#m_main_endtime').css("display", "none");
 			$('.m_main_select').eq(2).css("position", "");
 		}
 	})
 	
 	$('.m_main_select').eq(3).click(function(){
-		if($('#m_main_count').css("opacity") == '0'){
-			$('#m_main_count').css("opacity", "1");
+		if($('#m_main_count').css("display") == 'none'){
+			$('#m_main_count').css("display", "inline-grid");
 			$('.m_main_select').eq(0).css("position", "");
 			$('.m_main_select').eq(3).css("position", "relative");
 		} else {
-			$('#m_main_count').css("opacity", "0");
+			$('#m_main_count').css("display", "none");
 			$('.m_main_select').eq(3).css("position", "");
 		}
 	})
@@ -59,6 +59,9 @@ $(document).ready(function(){
 	    	if(date.getTime()< today.getTime()){
 	    		alert('오늘 날짜부터 선택해주세요.');
 	    		return false;
+	    	} else {
+		 		myCalendar.clearselect();
+				myCalendar.select([date]);
 	    	}
 	    	
 	    	if(date.getTime() == today.getTime()){

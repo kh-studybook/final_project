@@ -5,7 +5,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -387,4 +389,83 @@ public class EventController {
 			
 		}
 		
+		//이 달의 이벤트
+		@RequestMapping(value="eventList.eve")
+		public ModelAndView MonthEventList(
+				@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+				ModelAndView mv) {
+			// 한 화면에 출력할 room 갯수
+			int limit = 9;
+
+			SimpleDateFormat format1 = new SimpleDateFormat ( "MM");
+			Date date = new Date();
+			String today = format1.format(date);
+			
+			// 총 room 리스트 갯수
+			int listcount = eventservice.getMonthEventListCount(today);
+
+			// 총 room 페이지 수
+			int maxpage = (listcount + limit - 1) / limit;
+
+			// 시작 페이지(1, 6, 11, ...)
+			int startpage = ((page - 1) / 5) * 5 + 1;
+
+			// 마지막 페이지(5, 10, 15, ...)
+			int endpage = startpage + 5 - 1;
+
+			if (endpage > maxpage)
+				endpage = maxpage;
+			
+			List<Event> eventlist = eventservice.getMonthEventList(page, limit, today);
+			
+			mv.setViewName("event/eventMonthList");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("list", eventlist);
+			mv.addObject("limit", limit);
+			return mv;
+		}
+		
+		//ajax 이 달의 이벤트
+		@ResponseBody
+		@RequestMapping(value="getEventList.eve")
+		public Object AjaxMonthEventList(
+				@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
+			// 한 화면에 출력할 room 갯수
+			int limit = 9;
+			
+			SimpleDateFormat format1 = new SimpleDateFormat ( "MM");
+			Date date = new Date();
+			String today = format1.format(date);
+			
+			// 총 room 리스트 갯수
+			int listcount = eventservice.getMonthEventListCount(today);
+
+			// 총 room 페이지 수
+			int maxpage = (listcount + limit - 1) / limit;
+
+			// 시작 페이지(1, 6, 11, ...)
+			int startpage = ((page - 1) / 5) * 5 + 1;
+
+			// 마지막 페이지(5, 10, 15, ...)
+			int endpage = startpage + 5 - 1;
+
+			if (endpage > maxpage)
+				endpage = maxpage;
+			
+			List<Event> eventlist = eventservice.getMonthEventList(page, limit, today);
+			
+			Map<String, Object> obj = new HashMap<String, Object>();
+			obj.put("page", page);
+			obj.put("maxpage", maxpage);
+			obj.put("startpage", startpage);
+			obj.put("endpage", endpage);
+			obj.put("listcount", listcount);
+			obj.put("list", eventlist);
+			obj.put("limit", limit);
+			return obj;
+		}
 }

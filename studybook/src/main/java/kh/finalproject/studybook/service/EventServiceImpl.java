@@ -75,5 +75,21 @@ public class EventServiceImpl implements EventService {
 		return dao.getEventWriterNum(num);
 	}
 
+	@Override
+	public int getMonthEventListCount(String today) {
+		return dao.getMonthEventListCount(today);
+	}
+
+	@Override
+	public List<Event> getMonthEventList(int page, int limit, String today) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startrow = (page - 1)*limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("month", today);
+		return dao.getMonthEventList(map);
+	}
+
 	
 }

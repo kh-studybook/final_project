@@ -79,5 +79,11 @@ public class EventDAO {
 		return sqlSession.insert("event_comment.replyreply", co);
 	}
 
-	
+	public int getMonthEventListCount(String today) {
+		return sqlSession.selectOne("event.month_count", today);
+	}
+
+	public List<Event> getMonthEventList(HashMap<String, Object> map) {
+		return sqlSession.selectList("event.month_list", map);
+	}
 }
