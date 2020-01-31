@@ -1,0 +1,341 @@
+@charset "UTF-8";
+
+/* main header 부분 */
+#m_main_header {
+	width: 100%;
+	height: 400px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-image:
+		url("https://images.unsplash.com/photo-1561489413-985b06da5bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+	background-size: cover;
+	background-position: center;
+	
+}
+
+.m_header_text {
+	color: white;
+	font-size: 40px;
+	text-align: center;
+}
+
+.m_main_header_column {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding:0 10px;
+}
+
+.m_main_select {
+	height: 50px;
+	background: white;
+	border: 2px solid #56D7D6;
+	font-size: 14px;
+	margin-right: 10px;
+}
+
+.m_main_select:last-child{
+	margin-right: 0;
+}
+
+.card-img-top {
+	width: 300px;
+	height: 300px;
+}
+
+.m_write {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.m_black {
+	background: lightgray;
+	/* pointer-events:none; */
+}
+
+.m_main_select:first-child {
+	position: relative;
+}
+
+.m_write>i {
+	color: #56D7D6;
+	font-size: 18px;
+	margin: 10px;
+}
+
+#m_write_date {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#m_write_date>div>i {
+	color: #56D7D6;
+	font-size: 18px;
+	margin: 10px;
+}
+
+#m_main_search {
+	background: #56D7D6;
+	color: white;
+	border: 1px solid #56D7D6;
+	padding: 10px;
+	width: 100px;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 시간 및 인원수 selected 박스 모양 */
+#m_main_starttime, #m_main_endtime, #m_main_count {
+	height: 150px;
+	background: white;
+	position: absolute;
+	left: 0px;
+	bottom: -160px;
+	overflow: auto;
+	border: 2px solid transparent;
+	opacity: 0;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 16px -8px, rgba(0, 0, 0, 0.024)
+		0px -6px 16px -6px;
+	z-index:10;
+}
+
+#m_main_starttime>ul, #m_main_endtime>ul, #m_main_count>ul {
+	width: 100%;
+	height: 100%;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#m_main_starttime>ul>li, #m_main_endtime>ul>li, #m_main_count>ul>li {
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	margin: 0;
+	padding: 5px;
+}
+
+#m_main_starttime>ul>li:hover, #m_main_endtime>ul>li:hover,
+	#m_main_count>ul>li:hover {
+	background-color: #F2F2F2;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+/* 공간 list */
+#j_main_room>p {
+	font-size: 32px;
+	margin: 40px auto;
+	text-align: center;
+}
+
+.card-text {
+	font-size: 14px;
+	margin: 10px auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card {
+	cursor: pointer;
+	border: none;
+	margin-bottom: 30px;
+}
+
+.card-img-top {
+	align: center;
+}
+
+.card-body {
+	color: #7F7F7F;
+	padding: 0;
+}
+
+.j_room_pay_hour {
+	font-size: 18px;
+	font-weight: bold;
+	color: #7F56D2;
+	margin-right: 10px;
+}
+
+.j_room_name {
+	font-size: 24px;
+	font-weight: bold;
+	color: black;
+}
+
+#center-block {
+	display: flex;
+	justify-content: center;
+}
+
+/*carousel*/
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+	bottom: -40px;
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+	background: #a3a3a3;
+	border-radius: 50%;
+	width: 8px;
+	height: 8px;
+}
+
+.blog .carousel-indicators .active {
+	background: #707070;
+}
+
+/* Calendar */
+.jsCalendar {
+	display: none;
+}
+
+#my-calendar {padding:0px;}
+#my-calendar table {
+	z-index: 10;
+}
+
+.jsCalendar table td {
+	padding: 0 auto !important;
+}
+
+.jsCalendar thead .jsCalender-title {
+	display: grid;
+	grid-template-columns: 100px 160px 100px;
+}
+
+.jsCalendar table {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
+	font-family: Tahoma, Geneva, sans-serif;
+	margin: 5px !important;
+}
+
+.jsCalendar tbody td:hover {
+	cursor: pointer;
+}
+
+.jsCalendar tbody td.jsCalendar-current {
+	background-color: white;
+	border: 1px solid #7F56D2;
+	margin: -1px;
+	color: black;
+}
+
+.jsCalendar tbody td.jsCalendar-selected {
+	background-color: #7F56D2;
+	border: 1px solid #7F56D2;
+	color: white;
+}
+
+/*event*/
+#j_main_event {
+	min-height: 250px;
+}
+
+.row {
+	justify-content: center;
+}
+
+.j_event_title {
+	font-size: 32px;
+	margin: 40px auto;
+}
+
+.j_event_more_div {
+	justify-content: flex-end;
+	color: #7F7F7F;
+	margin-bottom: 20px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.j_event_more:hover {
+	font-weight: bold;
+}
+
+.j_event {
+	position: relative;
+	cursor: pointer;
+}
+
+.j_event_img {
+	max-width: 100%;
+	height: auto;
+}
+
+.j_event_inner {
+	font-size: 24px;
+	font-weight: bold;
+	position: absolute;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.j_event_date {
+	font-size: 14px;
+	margin: 5px;
+}
+
+/*페이지네이션*/
+.page-item {
+	cursor: pointer;
+}
+
+/*event 좌우 버튼*/
+.carousel-indicators {
+	display: flex;
+	justify-content: space-between;
+}
+
+.blog .carousel-indicators {
+	left: 0;
+	top: 50%;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.blog .carousel-indicators li {
+	background: #a3a3a3;
+	border-radius: 4px;
+	width: 8px;
+	height: 8px;
+	color: white;
+}
+
+/* map */
+#j_main_root {
+	min-height: 600px;
+}
+
+#j_map {
+	height: 400px;
+}
+
+.j_address {
+	font-size: 14px;
+	color: #7F7F7F;
+}
