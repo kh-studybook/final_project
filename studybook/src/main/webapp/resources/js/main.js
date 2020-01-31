@@ -226,7 +226,7 @@ $(document).ready(function(){
 	});// 카카오지도 api 끝
 	
 	// 이벤트 이미지 min-height 설정
-	$('.j_event_img').css("min-height", this.width());
+	$('.j_event_img').css("min-height", $('.j_event_img').width());
 })// ready() end
 
 	function setPaging(href, digit){
