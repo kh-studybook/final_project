@@ -18,13 +18,16 @@ select * from reserve where reserve_date < TO_CHAR(sysdate, 'YYYY-MM-DD');
 
 alter table reserve add pay_date date;
 
-update reserve set reserve_date = '2020-01-25' where r_code = '1002';
+update reserve set status = 1 where r_code = '1011';
 
 drop table reserve;
 delete reserve
 
 select * from reserve;
 
+update reserve set status = 1 where r_code = 1001;
+
+update reserve set reserve_date = '2020-01-31' where r_code = 1011;
 
 insert into reserve values (1001, 1001, 2, '2020-02-03 00:00:00.0', '15', '17', 11000, NULL, 1, 1, lala, '01022222222', 'lala@naver.com', sysdate);
 

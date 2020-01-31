@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.dao.ReserveDAO;
 import kh.finalproject.studybook.domain.Food;
@@ -198,8 +199,13 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public int RegisterReview(Map<Object, Object> obj) {
+	public int RegisterReview(Map<String, Object> obj) {
 		return reserveDAO.registerReview(obj);
+	}
+
+	@Override
+	public int rCodeChance(int r_code) {
+		return reserveDAO.rCodeChange(r_code);
 	}
 
 

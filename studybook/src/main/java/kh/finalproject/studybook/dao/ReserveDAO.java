@@ -9,6 +9,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
@@ -119,8 +120,11 @@ public class ReserveDAO {
 	public List<Reserve> getReserveList(HashMap<Object, Object> map) {
 		return sqlSession.selectList("Reserves.reservelist", map);
 	}
-	public int registerReview(Map<Object, Object> obj) {
+	public int registerReview(Map<String, Object> obj) {
 		return sqlSession.insert("Reserves.registerReview", obj);
+	}
+	public int rCodeChange(int r_code) {
+		return sqlSession.update("Reserves.rCodeChange", r_code);
 	}
 
 	

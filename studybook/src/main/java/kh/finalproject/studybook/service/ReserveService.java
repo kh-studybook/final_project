@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import kh.finalproject.studybook.domain.Event_comment;
 import kh.finalproject.studybook.domain.Food;
 import kh.finalproject.studybook.domain.Food_reserve;
@@ -51,10 +53,11 @@ public interface ReserveService {
 	//선아 - 예약 내역 리스트 수 구하기
 	public int getReserveListCount(int mem_key);
 	//예약 내역 리스트 가져오기
-
 	public List<Reserve> getReserveList(int page, int limit, int mem_key);
 	//나의 리뷰 등록하기
-	public int RegisterReview(Map<Object, Object> obj);
+	public int RegisterReview(Map<String, Object> obj);
+	//리뷰 중복 검사
+	public int rCodeChance(int r_code);
 
 
 
