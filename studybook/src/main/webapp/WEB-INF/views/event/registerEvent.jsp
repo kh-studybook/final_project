@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <style>
 body {background-color: #f2f2f2 !important;}
@@ -297,12 +298,9 @@ input[type=date]{height:3rem;}
       <div class="col-75">
 		<select id = "event_room" name = "event_room">
 			<option value = "none" selected>이벤트 장소</option>
-			<option value = "스터디룸A">스터디룸A</option>
-			<option value = "스터디룸B">스터디룸B</option>
-			<option value = "스터디룸C">스터디룸C</option>	
-			<option value = "스터디룸D">스터디룸D</option>	
-			<option value = "스터디룸E">스터디룸E</option>	
-			<option value = "스터디룸F">스터디룸F</option>					
+			<c:forEach var="room_name" items="${roomlist }">
+			<option value = "${room_name }">${room_name }</option>
+			</c:forEach>				
 		</select>
       </div>
     </div>

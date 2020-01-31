@@ -96,11 +96,11 @@ public class RoomController {
 		MultipartFile first = fileList.get(0);
 		System.out.println("fileList:" + fileList.size());
 
-		String path = saveFolder;
+		//String path = saveFolder;
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		//String path="C:\\Users\\user1\\git\\0129\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0131\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 
@@ -342,7 +342,7 @@ public class RoomController {
 		}
 		Room room = roomservice.getRoomDetail(room_code);
 		Room_ex room_ex=roomservice.getRoomExDetail(room_code);
-		 List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
+		List<Gallery> gallerylist=roomservice.getGallerylist(room_code);
 		if (room == null) {
 			System.out.println("룸 상세보기 실패");
 			mv.setViewName("error/error");

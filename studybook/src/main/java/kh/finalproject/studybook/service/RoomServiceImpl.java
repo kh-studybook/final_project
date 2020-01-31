@@ -245,5 +245,12 @@ public class RoomServiceImpl implements RoomService {
 		return dao.getRoomSearchList(map);
 	}
 
+	//룸이름들 가져오기
+	@Override
+	public List<String> getRoom_nameList() {
+		// TODO Auto-generated method stub
+		return dao.getRoom_nameList();
+	}
+
 	
 }

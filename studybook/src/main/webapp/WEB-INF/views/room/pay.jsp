@@ -36,10 +36,10 @@
  		<input type=hidden name='food_total_cost' value="${food_total_costlist}">	
  		</c:forEach>
  	</c:if>
- 	<button>전송</button>
+ 	<!-- <button>전송</button> -->
 </form>
- <!-- 	
-    <script>
+ 	
+   <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
         IMP.init('imp77984390'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -54,8 +54,8 @@
             buyer_email : '${reserve.reserver_email }',
             buyer_name : '${reserve.reserver_name }' ,
             buyer_tel : '${reserve.reserver_phone }' ,
-            buyer_addr : 'kh 정보 교육원',
-            buyer_postcode : '123-456',
+            buyer_addr : 'STUDYBOOK',
+            buyer_postcode : '123105',
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
@@ -96,7 +96,7 @@
         
     });
     
-    </script> -->
+    </script>
  	
 </body>
 </html>

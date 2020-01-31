@@ -233,4 +233,8 @@
 		and r.room_code=#{room_code} 
 		and g.gallery_num=1 
 	</select>
+	
+	<select id="getRoom_nameList" resultType="String">
+		select room_name from room
+	</select>
 </mapper>

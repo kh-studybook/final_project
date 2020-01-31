@@ -83,6 +83,11 @@ public class RoomDAO {
 	public Room getRoomInfo(int room_code) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Rooms.getRoomInfo",room_code);
+	}
+
+	public List<String> getRoom_nameList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Rooms.getRoom_nameList");
 	}	
 
 }

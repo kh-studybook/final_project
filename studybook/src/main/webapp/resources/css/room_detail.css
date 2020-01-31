@@ -2,9 +2,6 @@
 body{
 background: #F6F6F6;
 }
-.carousel-inner{
-	height:400px;
-}
 
 .container{
 	background:#F6F6F6;
@@ -101,6 +98,14 @@ html {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     color: #656565;
+}
+
+.carousel-inner{
+	height:410px;
+}
+
+.carousel-inner img{
+	height:410px;
 }
 
 .e_text_box .e_h_copy {
@@ -297,7 +302,7 @@ ol.e_info_list li {
 }
 
 .e_right_room_detail{
-    display: inline-table;
+ 
 }
 
 .sp_icon img{
@@ -550,7 +555,7 @@ ol.e_info_list li {
  pointer-events:none;
 }
 
-.swiper-container .active{
+.swiper-container .e_active{
 	background:#855FD4!important;
 	color:white;
 }
