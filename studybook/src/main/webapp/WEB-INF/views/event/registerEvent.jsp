@@ -11,17 +11,17 @@ body {background-color: #f2f2f2 !important;}
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
 #event_title{maxLength:200}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
-textarea::placeholder, select, input[type=text]::placeholder{color:black; font-size:14px;}
+textarea::placeholder, select, input[type=text]::placeholder{color:black; font-size:14px !important;}
 .col-25 > label {font-weight:bold;}
-.pp_locate{text-decoration:none; font-size:12px;}
+#event_room option:eq(0){font-size:12px}
 
 /** 입력 폼 관련*/
-input[type=text], select, textarea {width: 100%; padding: 12px; border-radius: 4px; resize: vertical; border:2px solid #56D7D6}
+input[type=text], select, textarea {width: 100%; padding: 12px; border-radius: 4px; resize: vertical; border:1px solid darkgray}
 .pp > label {display: inline-block;}
 input[type=date]{height:3rem;}
 
 /** 버튼 관련*/
-.p_submit, .p_reset{width:43%; padding: 12px; border: none; border-radius: 4px; cursor: pointer; opacity:0.7}
+.p_submit, .p_reset{width:20%; padding: 7px; border: none; border-radius: 4px; cursor: pointer; opacity:0.7}
 .p_submit{background-color: #7F56D2; color:white;}
 .p_reset{background-color: #d2d2d2;} 
 .p_submit:hover, .p_reset:hover{opacity:1}
@@ -34,7 +34,7 @@ input[type=date]{height:3rem;}
 
 /** 썸네일 관련*/
 .p_avatar{width:200px; height:200px; border: 1px solid darkgray;}
-#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; 
+#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; cursor:pointer;
 				background-color:#56D7D6; color:white; padding:7px; margin-top:5px; padding-right:0px; text-align:center;}
 
 .navbar-brand{display: flex !important; font-size: 24px !important; width: 150px; padding:0px}
@@ -283,36 +283,43 @@ input[type=date]{height:3rem;}
 				return false;
 			}
 			
-			if ($("#event_date").val() == "") {
-				alert("이벤트의 날짜를 입력해주세요.");
-				$("#event_date").focus();
-				return false;
-			}
-			//추후 확인
-	 		if ($("#event_date").val() != "") {
-				var today = new Date();
-				if (formatDate($("#event_date").val()) <  formatDate(today)) {
-					console.log(formatDate($("#event_date").val()));
-					alert("날짜는 오늘 이후여야 합니다.");
-					$("#event_date").focus();
-					return false;
-				}
-			}
-			
-						
-			if ($("#event_start option:selected").val() == "none") {
-				alert("이벤트의 시작 시간을 선택해주세요.");
-				$("#event_start").focus();
-				return false;
-			}
-		
-			if ($("#event_end option:selected").val() == "none") {
-				alert("이벤트의 종료 시간을 선택해주세요.");
-				$("#event_end").focus();
+			if ($("#event_room option:selected").val() == "none") {
+				alert("이벤트의 장소를 입력해주세요.");
+				$("#event_room").focus();
 				return false;
 			}
 			
-			if ($("#event_start option:selected").val() == $("#event_end option:selected").val()) {
+			if ($("#event_content").val() == "") {
+				alert("이벤트의 세부 내용을 4000자 이하로 입력해주세요.");
+				$("#event_content").focus();
+				return false;
+			}	
+			
+		/* 	if ($("#m_write_date").val() == "") {
+				alert("이벤트의 날짜를 선택해주세요.");
+				$("#m_write_date").focus();
+				return false;
+			} */						
+					
+			var date = $('#date').val();
+			var starttime = $('#starttime').val();
+			var endtime = $('#endtime').val();
+			
+			if(date==''){
+				alert('이벤트 날짜를 선택해 주세요');
+				return false;
+			}else if(starttime==''){
+				alert('이벤트 시작 시간을 선택해 주세요');
+				return false;
+			}else if(endtime==''){
+				alert('이벤트 종료 시간을 선택해 주세요');
+				return false;
+			} else if(parseInt(starttime) >= parseInt(endtime)){
+				alert('이벤트 시작 시간은 종료 시간보다 일러야 합니다. 시간을 확인해 주세요');
+				return false;
+			} 
+			
+			/* if ($("#event_start option:selected").val() == $("#event_end option:selected").val()) {
 				alert("이벤트의 시간 시간과 종료 시간은 같을 수 없습니다.\n종료 시간을 다시 선택해주세요.");
 				$("#event_end option:eq(0)").prop("selected", true);
 				$("#event_end").focus();
@@ -325,19 +332,9 @@ input[type=date]{height:3rem;}
 				$("#event_end option:eq(0)").prop("selected", true);
 				$("#event_start").focus();
 				return false;
-			}
+			} */
 					
-			if ($("#event_room option:selected").val() == "none") {
-				alert("이벤트의 장소를 입력해주세요.");
-				$("#event_room").focus();
-				return false;
-			}
-			
-			if ($("#event_content").val() == "") {
-				alert("이벤트의 세부 내용을 4000자 이하로 입력해주세요.");
-				$("#event_content").focus();
-				return false;
-			}					
+				
 		});
 		
 	});
@@ -388,7 +385,7 @@ input[type=date]{height:3rem;}
       </div>
       <div class="col-75">
 		<select id = "event_room" name = "event_room">
-         <option value = "none" selected style = "font-size:12px">이벤트 장소</option>
+         <option value = "none" selected>이벤트 장소</option>
          <c:forEach var="room_name" items="${roomlist}">
          <option value = "${room_name}" >${room_name}</option>
          </c:forEach>            
@@ -413,6 +410,7 @@ input[type=date]{height:3rem;}
 							</div>
 							<div id="my-calendar" class="e_calendar col-md"></div>
 	            		</div>
+	            		
 		<div class="m_main_select col-md-3 form-control">
 							<div class="m_write col-md" id="m_write_starttime">
 								<i class="far fa-clock"></i>
@@ -437,6 +435,7 @@ input[type=date]{height:3rem;}
 								</ul>
 				        	</div>
 						</div>
+						
 			<div class="m_main_select col-md-3 form-control">
 							<div class="m_write col-md" id="m_write_endtime">
 								<i class="far fa-clock"></i>

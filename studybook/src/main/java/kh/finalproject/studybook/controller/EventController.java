@@ -82,8 +82,6 @@ public class EventController {
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
 
-			saveFolder="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
-
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -204,6 +202,7 @@ public class EventController {
 			Member member = (Member)session.getAttribute("member");	
 			String event_writer = eventservice.getEventWriter(num);
 			int mem_key = member.getKey();
+			List<String> roomlist=roomserivce.getRoom_nameList();
 			if(eventdata == null) {
 				System.out.println("(수정)상세보기 실패");
 				mv.setViewName("redirect:eventList.eve");
@@ -214,7 +213,8 @@ public class EventController {
 				mv.addObject("eventdata", eventdata);
 				mv.addObject("event_writer", event_writer);
 				mv.addObject("mem_key", mem_key);
-				System.out.println(mem_key);
+				mv.addObject("mem_key", mem_key);
+				mv.addObject("roomlist",roomlist);				
 				mv.setViewName("event/event_modify");
 			}
 			return mv;

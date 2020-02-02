@@ -19,6 +19,9 @@
 		from member where email = #{email}
 	</select>
 	
+	<select id="emailcheck" resultType="member" parameterType="String">
+		select * from member where email = #{email}
+	</select>
 	
 	<update id="updatePw" parameterType="member">
 		update member set

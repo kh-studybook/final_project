@@ -64,6 +64,7 @@ $(function(){
 					$("#event_comment_write").text("댓글 등록").css("background-color", "#7F56D2");
 					$("#comment_content").val('');
 					getList();
+					alert("댓글을 수정했습니다.");
 				}
 			}
 		});//ajax end	
@@ -143,8 +144,8 @@ $(function(){
 								data : {"event_com_num" :  event_com_num},
 								success : function(result){
 										if (result == 1) {
-											alert("댓글을 삭제했습니다.");
 											getList();
+											alert("댓글을 삭제했습니다.");
 										}																		
 								}
 							})//ajax end
@@ -196,9 +197,9 @@ $(function(){
 		&nbsp;<span style = "color:#7F56D2">${eventdata.event_room}</span><br><br>
 		${event_writer}
 		<c:if test = "${mem_key == '999'||mem_key == key}">
-			<div id = "delete_modify_btn">
-					<a id="event_modify_btn" href = "EventModifyView.eve?num=${eventdata.event_num}">수정</a> | 
-					<a id="event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
+			<div id = "delete_modify_btn" class = "delete_modify_btn">
+					<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?num=${eventdata.event_num}">수정</a> | 
+					<a id="event_delete_btn" class = "event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 		</div>
 		</c:if>
 		<br><br>
