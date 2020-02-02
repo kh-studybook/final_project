@@ -13,12 +13,12 @@ body {background-color: #f2f2f2;}
 /** 버튼 관련*/
 #p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
 	color: white;width: 20%; padding: 12px;position: relative;top: 10%;left: 70%;}
-#delete_modify_btn{padding:10px; z-index:10; float:right;}
-#delete_modify_btn:after{clear:both}
-#event_modify_btn, #event_modify_btn{color:black}
-#event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
-.event_delete_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
+.delete_modify_btn{padding:10px; z-index:10; float:right;}
+.delete_modify_btn:after{clear:both}
+.event_modify_btn{color:black}
+.event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 .event_delete_btn:visited{color:black}
+.event_delete_btn:hover{cursor: pointer; color: #3EF4F3 !important; text-decoration:none;}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
@@ -131,11 +131,12 @@ body {background-color: #f2f2f2;}
 								</div>
 								
 								<c:if test = "${mem_key == '999'||b.mem_key == mem_key}">
-							  	<div id = "delete_modify_btn">
-									<a id="event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
+							  	<div id = "delete_modify_btn" class = "delete_modify_btn">
+									<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
 									<a id="eventdelete_${b.event_num}" class = "event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 								</div>
 								</c:if>
+								
 							</div>  
 						</div>
 					</c:forEach>
@@ -189,7 +190,7 @@ body {background-color: #f2f2f2;}
 			<br><br><br><br><br><br>
 		</c:if>
 
-		<button id="p_register_event">이벤트등록</button>
+		<button id="p_register_event">이벤트 등록</button>
 		<br><br>
 	</div>
 

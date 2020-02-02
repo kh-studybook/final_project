@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <head>
 <style>
 * {box-sizing: border-box; font-family:"맑은 고딕"}
 
 /** 글자 관련!!!!*/
-.p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px;}
+.p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
 #event_title{maxLength:200;}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; min-height:200px;}
 textarea::placeholder, input[type=text]::placeholder{color:black;}
@@ -18,7 +20,7 @@ input[type=text], select, #event_content {width: 100%; padding: 12px; border: 1p
 input[type=date]{height:3rem;}
 
 /** 버튼 관련*/
-.p_submit, .p_reset{width:43%; padding: 12px; border: none; border-radius: 4px; cursor: pointer; opacity:0.7}
+.p_submit, .p_reset{width:20%; padding: 12px; border: none; border-radius: 4px; cursor: pointer; opacity:0.7}
 .p_submit{background-color: #7F56D2; color:white;}
 .p_reset{background-color: #d2d2d2;} 
 .p_submit:hover, .p_reset:hover{opacity:1}
@@ -83,7 +85,7 @@ input[type=date]{height:3rem;}
 		
 		//이벤트 장소 가져오기
 		$("#event_room option").each(function(){
-			if (this.value == "${eventdata.event_room}") {
+			if (this.value == "${room_name}") {
 				$(this).prop("selected", "selected");
 			}
 		});
@@ -202,13 +204,7 @@ input[type=date]{height:3rem;}
 </head>
 <body>
 <div class="p container">
-	<!-- 상단 메뉴 -->
-   	<div class="row pp_locate"">
-     <a href = "event_list.eve">이벤트 홍보 게시판</a><span>>이벤트 수정 페이지</span>
-   	</div>
-   	<br>
-   	
-<h2 class = "p_title">이벤트 수정</h2>
+	<h2 class = "p_title">이벤트 수정</h2>
 
   <form method="post" action="EventModifyAction.eve" enctype="multipart/form-data" id = "p_event_modify_form">
  	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
@@ -218,7 +214,7 @@ input[type=date]{height:3rem;}
 	<!--  썸네일 등록 -->
    <div class="row">
       <div class="col-25">
-        <label for="event_title">썸네일등록</label>
+        <label for="event_title">썸네일</label>
       </div>
       
       <div class="col-75">
@@ -307,13 +303,9 @@ input[type=date]{height:3rem;}
       </div>
       <div class="col-75">
 		<select id = "event_room" name = "event_room">
-			<option value = "none">이벤트 장소</option>
-			<option value = "스터디룸A">스터디룸A</option>
-			<option value = "스터디룸B">스터디룸B</option>
-			<option value = "스터디룸C">스터디룸C</option>	
-			<option value = "스터디룸D">스터디룸D</option>	
-			<option value = "스터디룸E">스터디룸E</option>	
-			<option value = "스터디룸F">스터디룸F</option>					
+			<c:forEach var="room_name" items="${roomlist}">
+         	<option value = "${room_name}" >${room_name}</option>
+         	</c:forEach> 	
 		</select>
       </div>
     </div>

@@ -31,7 +31,7 @@
 .m_main_select {
 	height: 50px;
 	background: white;
-	border: 2px solid #56D7D6;
+	border: 1px solid darkgray;
 	font-size: 14px;
 	margin-right: 10px;
 }
