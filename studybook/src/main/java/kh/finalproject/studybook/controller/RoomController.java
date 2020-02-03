@@ -141,7 +141,7 @@ public class RoomController {
 		out.close();
 		return null;
 	}
-
+  
 	// 룸리스트보기//mv로 수정
 	@RequestMapping(value = "/RoomList.ro", method = RequestMethod.GET)
 	public ModelAndView roomList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,

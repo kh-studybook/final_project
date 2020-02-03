@@ -75,7 +75,7 @@ $(document).on('click','.number-spinner button',
 		                  output += item.review_date.substring(0,10)+"</span></div></div></div></li>";
 		               
 		               })
-		        
+		         
 		          
 		            $('.e_review_list').append(output);//table 완성
 		            

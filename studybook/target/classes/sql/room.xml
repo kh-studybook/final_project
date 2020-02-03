@@ -167,7 +167,7 @@
 	<select id="count" resultType="int">
 		select count(*) from room
 	</select>
-
+ 
 	<!-- room 총 list -->
    <select id="allList" parameterType="java.util.Map"
       resultType="room">

@@ -69,7 +69,7 @@ public class EventController {
 		      if(!uploadfile.isEmpty()) {
 		         String fileName=uploadfile.getOriginalFilename();
 		         event.setEventPic_originalfile(fileName);  //원래 파일명 저장
-		      
+		       
 		      //새로운 폴더 이름 : 오늘 년+월+일
 		      Calendar c=Calendar.getInstance();
 		      int year=c.get(Calendar.YEAR);

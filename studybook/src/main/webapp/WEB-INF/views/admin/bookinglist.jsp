@@ -155,7 +155,7 @@ margin-top:50px;
 											href="ReserveAdList.re?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link">이전</a>&nbsp;</li>
 									</c:if>
-
+ 
 									<c:forEach var="a" begin="${startpage}" end="${endpage}">
 										<c:if test="${a == page }">
 											<li class="page-item"><a class="page-link current"

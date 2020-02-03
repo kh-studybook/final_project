@@ -207,7 +207,7 @@ public class MemberController {
 		String path=saveFolder;
 		
 		if(!uploadfile.isEmpty()) {
-			
+			 
 			String fileName = uploadfile.getOriginalFilename();//원래파일명
 
 			String safeFile=path+ System.currentTimeMillis() + fileName;
