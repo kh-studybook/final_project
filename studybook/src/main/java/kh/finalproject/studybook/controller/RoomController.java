@@ -101,7 +101,7 @@ public class RoomController {
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		String path="C:\\Users\\user1\\git\\0131_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0203\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 
@@ -141,7 +141,7 @@ public class RoomController {
 		out.close();
 		return null;
 	}
-
+  
 	// 룸리스트보기//mv로 수정
 	@RequestMapping(value = "/RoomList.ro", method = RequestMethod.GET)
 	public ModelAndView roomList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,

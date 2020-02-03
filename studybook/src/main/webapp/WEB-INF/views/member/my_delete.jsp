@@ -143,7 +143,7 @@ $(function() {
 					<p class=s_content>${member.name}님,
 					<p class=s_content>아래의 확인 버튼을 누르시면
 					<p class=s_content>회원 정보와 예약 정보가 모두 삭제됩니다.
-					<p class=s_content>STUDYBOOK 계정을 삭제하시겠습니까.
+					<p class=s_content>StudyBook 계정을 삭제하시겠습니까.
 				</div>
 			</div>
 

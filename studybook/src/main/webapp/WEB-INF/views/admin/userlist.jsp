@@ -97,7 +97,7 @@ margin-top:50px;
 			<div class="col">
 				<%--멤버 리스트가 있는 경우 --%>
 				<c:if test="${listcount>0}">
-					<p class="w_span">총 음식 수: ${listcount}</p>
+					<p class="w_span">총 회원 수: ${listcount}</p>
 					<table class="table table-striped custab">
 						<thead>
 							<tr>

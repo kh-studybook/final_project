@@ -49,7 +49,7 @@ public class ReserveController {
 
 	@Autowired
 	private SendMail sendMail;
-
+ 
 	// 리뷰 가져오기
 	@ResponseBody
 	@RequestMapping(value = "getReviewList.re")
