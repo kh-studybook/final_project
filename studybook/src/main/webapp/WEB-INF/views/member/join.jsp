@@ -196,14 +196,14 @@ img {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function() {
+	$(document).ready(function(){
 
 						var nametest = /^[가-힣a-zA-Z]+$/;
 						var passwordtest = /^[0-9a-zA-Z]{6,20}$/;
 						var emailtest = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 						var phonetest = /^010?([0-9]{4})?([0-9]{4})$/;
 
-						
+						//이름
 						$("#name").blur(function() {
 							var value = $('#name').val().trim();
 							if (nametest.test($(this).val())) {
@@ -216,17 +216,8 @@ img {
 							}
 						});
 
-//						$("#email").blur(function() {
-//							var value = $('#email').val().trim();
-//							if (emailtest.test($(this).val())) {
-//								gogo();
-//								console.log(emailtest.test($(this).val()));
-//								$(".emailmsg").html('<img src=resources/image/check.png>');
-//							} else {
-//								$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
-//							}
-//						});
-
+						
+						//비밀번호
 						$('#password').blur(function() {
 							if (passwordtest.test($(this).val())) {
 								gogo();
@@ -237,6 +228,7 @@ img {
 							}
 						});
 
+						//비밀번호체크
 						$('#pwcheck').on('keyup', function() {
 							if ($('#password').val() != $('#pwcheck').val()) {
 								$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
@@ -257,33 +249,17 @@ img {
 							}
 						}); 
 
-						function gogo() {
-						if ($("#name").val() != "" 
-							&& $("#email").val() != ""
-							&& $("#password").val() != ""
-							&& $("#pwcheck").val() != ""
-							&& $("#phone").val() != "") {
-
-							$('.s_submit').attr('disabled', false);
-							$('.s_submit').css('background', '#7F56D2');
-						} else {
-							$('.s_submit').attr('disabled', true);
-						}
-						}
-						
-						$(".tologin").click(function() {
-							location.href = "login.mem";
-						});
-						
-						
-						//이메일  중복검사
+						//이메일
 						var checkemail = false;
 						$("#email").blur(function() {
 							 $(".emailmsg").empty();
 							
-								var id = $("#email").val();
+							 var id = $("#email").val();
 								if (emailtest.test($(this).val())) {
 									gogo();
+									console.log(emailtest.test($(this).val()));
+									$(".emailmsg").html('<img src=resources/image/check.png>');
+								} else {
 									$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
 									checkemail = false;
 									return;
@@ -297,13 +273,36 @@ img {
 											$(".emailmsg").html('<img src=resources/image/check.png>');
 											checkid = true;
 										} else {
-														$('.emailmsg').text('! 이미 가입된 이메일입니다.');
-														checkid = false;
-													}
-												}
-											})
+											$('.emailmsg').text('! 이미 가입된 이메일입니다.');
+											checkid = false;
+										}
+									}
+								})
 						})
 
+						
+						//공백검사
+						function gogo() {
+							if ($("#name").val() != "" 
+								&& $("#email").val() != ""
+								&& $("#password").val() != ""
+								&& $("#pwcheck").val() != ""
+								&& $("#phone").val() != "") {
+
+								$('.s_submit').attr('disabled', false);
+								$('.s_submit').css('background', '#7F56D2');
+							} else {
+								$('.s_submit').attr('disabled', true);
+							}
+							}
+							
+						
+						//로그인 클릭
+						$(".tologin").click(function() {
+							location.href = "login.mem";
+						});
+	
+						
 					});
 	
 </script>
