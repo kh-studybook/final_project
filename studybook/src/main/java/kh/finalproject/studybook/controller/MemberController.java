@@ -201,13 +201,13 @@ public class MemberController {
 	//프로필사진 변경
 	@PostMapping("/profileProcess.mem")
 	public void EventModifyAction(Member member, HttpServletRequest request,
-			HttpServletResponse response,MultipartHttpServletRequest mtfRequest) throws Exception {
+			HttpServletResponse response,MultipartHttpServletRequest mtfRequest,HttpSession session) throws Exception {
 		MultipartFile uploadfile = mtfRequest.getFile("uploadfile");
 		System.out.println("uploadfile="+uploadfile);
 		String path=saveFolder;
 		
 		if(!uploadfile.isEmpty()) {
-			
+			 
 			String fileName = uploadfile.getOriginalFilename();//원래파일명
 
 			String safeFile=path+ System.currentTimeMillis() + fileName;
@@ -216,6 +216,9 @@ public class MemberController {
 				uploadfile.transferTo(new File(safeFile));
 				member.setProfile(DBname);
 				memberservice.profileupdate(member);
+				
+				Member session_member=(Member)session.getAttribute("member");
+				session_member.setProfile(DBname);
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");

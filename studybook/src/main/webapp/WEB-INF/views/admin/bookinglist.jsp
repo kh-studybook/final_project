@@ -132,6 +132,9 @@ margin-top:50px;
 									<c:if test="${m.status==0}">
 									<td>취소</td>
 									</c:if>
+									<c:if test="${m.status==2}">
+									<td>후기 등록됨</td>
+									</c:if>
 									<td class="text-center"><a class='btn btn-info btn-xs'
 										href="ReserveModify.re?r_code=${m.r_code}">상세/수정 </a>
 										</td>
@@ -152,7 +155,7 @@ margin-top:50px;
 											href="ReserveAdList.re?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
 											class="page-link">이전</a>&nbsp;</li>
 									</c:if>
-
+ 
 									<c:forEach var="a" begin="${startpage}" end="${endpage}">
 										<c:if test="${a == page }">
 											<li class="page-item"><a class="page-link current"
