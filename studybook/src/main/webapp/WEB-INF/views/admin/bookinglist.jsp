@@ -132,6 +132,9 @@ margin-top:50px;
 									<c:if test="${m.status==0}">
 									<td>취소</td>
 									</c:if>
+									<c:if test="${m.status==2}">
+									<td>후기 등록됨</td>
+									</c:if>
 									<td class="text-center"><a class='btn btn-info btn-xs'
 										href="ReserveModify.re?r_code=${m.r_code}">상세/수정 </a>
 										</td>

@@ -63,7 +63,7 @@ $(document).on('click','.number-spinner button',
 		            $(data.reviewlist).each(
 		               function(index, item) {
 		            	  output += "<li class='e_rlist'><div class='e_rbox_mine'><div class='e_pf_info'><div class='e_pf_pic'>";
-		                  output += "<img src='"+item.profile+"'></div>";
+		                  output += "<img src='resources/image/profile/"+item.profile+"'></div>";
 		                  output += "<h2 class='e_guest_name'>"+item.name+"</h2></div>";
 		                  output += "<div class='e_review_info'>"
 		                	 if(mem_key==item.mem_key){
@@ -71,8 +71,8 @@ $(document).on('click','.number-spinner button',
 		                		 output+="<a href='#'>삭제</a></span>";
 		                	 }
 		                  output += "<p class='e_p_reivew'>"+item.content+"</p>";
-		                  output += "<div class='e_rbox_info_base'><span class='e_time_info'>";
-		                  output += item.review_date+"</span></div></div></div></li>";
+		                  output += "<div class='e_rbox_info_base'><span class='e_time_info'>이용 날짜 : ";
+		                  output += item.review_date.substring(0,10)+"</span></div></div></div></li>";
 		               
 		               })
 		        
