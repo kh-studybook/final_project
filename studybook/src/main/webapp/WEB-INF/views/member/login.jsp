@@ -156,9 +156,7 @@ instead of next to each other */
 
 			<div class="row">
 				<div class="col-100">
-					<label for=remember id=remember class="remember floatl"><input type="checkbox">로그인 기억하기</label> 
-					
-					<a href=# class="findpw floatr">비밀번호 찾기</a>
+					<label for=remember id=remember class="remember floatl"><input type="checkbox">아이디 저장하기</label> 					
 				</div>
 			</div>
 			

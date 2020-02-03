@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>
-</script>
 <style>
-
+main {
+	 min-height:1000px;
+}
 </style>
 </head>
 <body>
