@@ -29,4 +29,11 @@ public interface EventService {
 	public int getMonthEventListCount(String today);
 	//이번달 이벤트 리스트 구하기
 	public List<Event> getMonthEventList(int page, int limit, String today);
+	//반려
+	public int AdminEvent(int event_num);
+	//관리자 전용 리스트 뽑아 오기
+	public List<Event> getSearchList(int index, String search_word, int page, int limit);
+	public int getEventListCount(int index, String search_word);
+	//승인
+	public int AdminEvent2(int event_num);
 }

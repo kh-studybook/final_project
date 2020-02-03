@@ -6,7 +6,7 @@
 <style>
 body {background-color: #f2f2f2;}	
 /** 글자 관련!!!!*/
-.p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px;}
+.p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px; maxLength:20}
 .p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
 #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
 
@@ -19,6 +19,8 @@ body {background-color: #f2f2f2;}
 .event_modify_btn:hover{cursor: pointer; color: #3EF4F3; text-decoration:none;}
 .event_delete_btn:visited{color:black}
 .event_delete_btn:hover{cursor: pointer; color: #3EF4F3 !important; text-decoration:none;}
+.adminButton{cursor:pointer; text-decoration:none;}
+.adminButton:hover{text-decoration:none; color:red !important;}
 
 /** 카드 관련 */
 .card-img-top{height:200px; border-radius:0px;}
@@ -36,6 +38,17 @@ body {background-color: #f2f2f2;}
 </style>
 <script>
 	$(function() {
+		//관리자 반려
+		$(".adminButton").click(function(){
+			var event_num2 = $(this).next().next().attr("id");
+			var event_num = event_num2.split("_")[1];
+			console.log("event_num = " + event_num);
+			if (confirm("이벤트를 반려하시겠습니까?")) {
+				 location.href = "AdminEvent.eve?event_num="+parseInt(event_num);
+			}
+			
+		});
+		
 		//글쓰기 이동 & 미로그인시에 로그인 화면으로 이동
 		$("#p_register_event").click(function() {
 			if ("${mem_key}" != null) {
@@ -60,7 +73,7 @@ body {background-color: #f2f2f2;}
 			$("input[name=event_num]").val(event_num);	
 		});
 		
-		///이벤트 삭제하기 - 추후 확인
+		///이벤트 삭제하기
 		$("#deletemodal").on("show.bs.modal", function(){
 			
 			event_num = $("input[name=event_num]").val();
@@ -115,14 +128,14 @@ body {background-color: #f2f2f2;}
         								</div>
         								<br><br>
         								<div class = "title_z_index"><p class = "title_z_index_big">${b.title}</p><br>
-        									<p>${fn:substring(b.event_date,0,11)}<br>${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;<br>
+        									<p>${fn:substring(b.event_date,0,11)}<br>${b.event_start}시 ~ &nbsp;${b.event_end}시&nbsp;<br>
         									<span>${b.event_room}</span></p>
         								</div>
         							</div>
         							<div class="card_contents">
     								
         								<p>${b.title}</p>
-        								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}&nbsp;~&nbsp;${b.event_end}&nbsp;
+        								<p style = "padding-top:5px">${fn:substring(b.event_date,0,11)}&nbsp;${b.event_start}시 ~ &nbsp;${b.event_end}시
         								<span style = "color : #7F56D2">${b.event_room}</span></p>
         								<p style = "padding-top:5px">${b.event_writer}</p>
 									</div>
@@ -132,7 +145,7 @@ body {background-color: #f2f2f2;}
 								
 								<c:if test = "${mem_key == '999'||b.mem_key == mem_key}">
 							  	<div id = "delete_modify_btn" class = "delete_modify_btn">
-									<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?num=${b.event_num}">수정</a> | 
+								  	<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?event_num=${b.event_num}">수정</a> | 
 									<a id="eventdelete_${b.event_num}" class = "event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 								</div>
 								</c:if>

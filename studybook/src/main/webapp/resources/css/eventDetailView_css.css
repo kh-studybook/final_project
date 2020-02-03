@@ -6,8 +6,10 @@
 	
 	/** 글자 관련 */
 	.event_title_view{font-family:"맑은 고딕"; font_size:32px; text-align:center}
+	#event_title{maxLength:200; font-size:14px !important}
 	#event_comment_text{font-weight:bold;font-family:"맑은 고딕"; font-size:18px;}
 	.p_title{font-family:"맑은 고딕"; text-align:center; font-size:32px; maxLength:20}
+	
 	
 	/** 위치 관련 */
 	.motifyEvent{text-align:right;}
@@ -37,4 +39,4 @@
 	#message{padding-top:10px;}
 	.comment_btn{float:right; display:flex}
 	.pt{padding-left:5px; padding-right:5px}
-	.reply_img{float:right}
+	.reply_img{float:right;}
