@@ -9,7 +9,7 @@ body {background-color: #f2f2f2 !important;}
 
 /** 글자 관련!!!!*/
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
-#event_title{maxLength:200}
+#event_title{maxLength:200; font-size:14px !important}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
 textarea::placeholder, select, input[type=text]::placeholder{color:black; font-size:14px !important;}
 .col-25 > label {font-weight:bold;}
@@ -129,7 +129,7 @@ input[type=date]{height:3rem;}
 	    		var now_hour = new_today.getHours();
 	    		
 	    		$('#m_main_starttime ul li').each(function(){
-	    			var starttime = $(this).text();
+	    			starttime = $(this).text();
 	    			var hour=starttime.substring(0, starttime.length-1);
 	    			if(parseInt(hour)-1 < parseInt(now_hour)){
 	    				$(this).addClass("m_black");
@@ -137,7 +137,7 @@ input[type=date]{height:3rem;}
 	    		})
 	    		
 	    		$('#m_main_endtime ul li').each(function(){
-	    			var endtime = $(this).text();
+	    			endtime = $(this).text();
 	    			var hour=endtime.substring(0, endtime.length-1);
 	    			if(parseInt(hour)-2 < parseInt(now_hour)){
 	    				$(this).addClass("m_black");
@@ -294,16 +294,12 @@ input[type=date]{height:3rem;}
 				$("#event_content").focus();
 				return false;
 			}	
-			
-		/* 	if ($("#m_write_date").val() == "") {
-				alert("이벤트의 날짜를 선택해주세요.");
-				$("#m_write_date").focus();
-				return false;
-			} */						
-					
+
 			var date = $('#date').val();
-			var starttime = $('#starttime').val();
-			var endtime = $('#endtime').val();
+	    	var starttime = $('#starttime').val();
+	    	var endtime = $('#endtime').val();
+	    	
+			console.log("event_date : " + date + " / event_start : "  + starttime + " / event_end : " + endtime);
 			
 			if(date==''){
 				alert('이벤트 날짜를 선택해 주세요');
@@ -315,26 +311,10 @@ input[type=date]{height:3rem;}
 				alert('이벤트 종료 시간을 선택해 주세요');
 				return false;
 			} else if(parseInt(starttime) >= parseInt(endtime)){
-				alert('이벤트 시작 시간은 종료 시간보다 일러야 합니다. 시간을 확인해 주세요');
+				alert('이벤트 시작 시간은 종료 시간보다 빨라야 합니다. \n시간을 확인해 주세요');
 				return false;
 			} 
-			
-			/* if ($("#event_start option:selected").val() == $("#event_end option:selected").val()) {
-				alert("이벤트의 시간 시간과 종료 시간은 같을 수 없습니다.\n종료 시간을 다시 선택해주세요.");
-				$("#event_end option:eq(0)").prop("selected", true);
-				$("#event_end").focus();
-				return false;
-			}
-			
-			if ($("#event_start option:selected").val() > $("#event_end option:selected").val()) {
-				alert("이벤트의 시간 시간은 종료 시간보다 늦을 수 없습니다.\n시간을 다시 선택해주세요.");
-				$("#event_start option:eq(0)").prop("selected", true);
-				$("#event_end option:eq(0)").prop("selected", true);
-				$("#event_start").focus();
-				return false;
-			} */
-					
-				
+
 		});
 		
 	});
@@ -395,6 +375,10 @@ input[type=date]{height:3rem;}
     </div>
 
 	<div class = "row">
+	<input type="hidden" name="event_date" id="date" value="">
+	<input type="hidden" name="event_start" id="starttime" value="">	
+	<input type="hidden" name="event_end" id="endtime" value="">
+
 		<div class="col-25">
       	  <label for="country">이벤트 일시</label>
       	</div>
@@ -408,8 +392,8 @@ input[type=date]{height:3rem;}
 								</div>
 								<i class="fas fa-chevron-down"></i>
 							</div>
-							<div id="my-calendar" class="e_calendar col-md"></div>
-	            		</div>
+							<div id="my-calendar" class="e_calendar col-md" name = "event_date"></div>
+	    </div>
 	            		
 		<div class="m_main_select col-md-3 form-control">
 							<div class="m_write col-md" id="m_write_starttime">
@@ -417,7 +401,7 @@ input[type=date]{height:3rem;}
 								START
 								<i class="fas fa-chevron-down"></i>
 							</div>
-							<div id="m_main_starttime" class="col-md">
+							<div id="m_main_starttime" class="col-md" name = "event_start">
 								<ul>
 									<li>9시</li>
 									<li>10시</li>
@@ -434,7 +418,7 @@ input[type=date]{height:3rem;}
 									<li>21시</li>
 								</ul>
 				        	</div>
-						</div>
+			</div>
 						
 			<div class="m_main_select col-md-3 form-control">
 							<div class="m_write col-md" id="m_write_endtime">
@@ -442,7 +426,7 @@ input[type=date]{height:3rem;}
 								END
 								<i class="fas fa-chevron-down"></i>
 							</div>
-							<div id="m_main_endtime" class="col-md">
+							<div id="m_main_endtime" class="col-md" name = "event_end">
 								<ul>
 									<li>10시</li>
 									<li>11시</li>
@@ -458,12 +442,12 @@ input[type=date]{height:3rem;}
 									<li>21시</li>
 									<li>22시</li>
 								</ul>
+								</ul>
 				        	</div>
-						</div>
+			</div>
 	</div>
-	</div>
-      	
-      	</div>
+	</div>      	
+    </div>
 
 
     <!--  이벤트 세부 내용 등록 -->     

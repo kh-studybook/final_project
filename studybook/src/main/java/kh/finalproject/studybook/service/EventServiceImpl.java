@@ -91,5 +91,45 @@ public class EventServiceImpl implements EventService {
 		return dao.getMonthEventList(map);
 	}
 
+	@Override
+	public int AdminEvent(int event_num) {
+		return dao.AdminButton(event_num);
+	}
+	
+	@Override
+	public int AdminEvent2(int event_num) {
+		return dao.AdminButton2(event_num);
+	}
+
+	@Override
+	public List<Event> getSearchList(int index, String search_word, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 검색한다면
+		if (index != -1) {
+			//String[] search_field = new String[] { "MEM_KEY", "EVENT_NUM", "TITLE", "CONTENT" };
+			map.put("search_field", index);
+			map.put("search_word", "%" + search_word + "%");
+		}
+		// 검색 안한다면
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getSearchList(map);
+	}
+
+	@Override
+	public int getEventListCount(int index, String search_word) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 검색한 경우
+		if (index != -1) {
+			//String[] search_field = new String[] { "MEM_KEY", "EVENT_NUM", "TITLE", "CONTENT" };
+			map.put("search_field", index);
+			map.put("search_word", "%" + search_word + "%");
+		}
+		System.out.println("RoomServiceImpl의 getSearchListCount");
+		return dao.getSearchListCount(map);
+	}
+
 	
 }

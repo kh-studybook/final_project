@@ -264,7 +264,7 @@ public class EventController {
 			    out.println("alert('수정 되었습니다.');");
 			    out.println("</script>");
 				
-				String url = "redirect:EventDetailAction.eve?num=" + event.getEvent_num();
+				String url = "redirect:EventDetailAction.eve?event_num=" + event.getEvent_num();
 				
 				//수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정
 				mv.setViewName(url);
@@ -332,6 +332,76 @@ public class EventController {
 		      out.close();
 		      return null;
 		   }
+		
+		//반려
+		@RequestMapping(value = "AdminEvent.eve")
+		public String AdminEvent(int event_num, HttpServletResponse response) throws Exception{
+			int result = eventservice.AdminEvent(event_num);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			if(result ==0) {
+				out.println("<script>");
+			    out.println("alert('이벤트 반려를 실패했습니다.');");
+			    out.println("location.href='AdminEventList.eve';");
+			    out.println("</script>"); 
+		      }
+		    out.println("<script>");
+		    out.println("alert('이벤트가 반려되었습니다.');");
+		    out.println("location.href='AdminEventList.eve';");
+		    out.println("</script>"); 
+			return null;
+		}
+		
+		//승인
+		@RequestMapping(value = "AdminEvent2.eve")
+		public String AdminEvent2(int event_num, HttpServletResponse response) throws Exception{
+			int result = eventservice.AdminEvent2(event_num);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			if(result ==0) {
+				out.println("<script>");
+			    out.println("alert('이벤트 승인이 실패했습니다.');");
+			    out.println("location.href='AdminEventList.eve';");
+			    out.println("</script>"); 
+		      }
+		    out.println("<script>");
+		    out.println("alert('이벤트가 승인되었습니다.');");
+		    out.println("location.href='AdminEventList.eve';");
+		    out.println("</script>"); 
+			return null;
+		}
+		
+		@RequestMapping(value = "AdminEventList.eve")
+		public ModelAndView AdminEventList(HttpServletResponse response, ModelAndView mv,
+				@RequestParam(value = "page", defaultValue = "1", required = false)int page, 
+				@RequestParam(value = "limit", defaultValue = "10", required = false)int limit,
+				@RequestParam(value = "search_field", defaultValue = "-1") int index,
+				@RequestParam(value = "search_word", defaultValue = "")String search_word) throws Exception{
+			List<Event> list = null;
+			limit = 10;
+				
+			list = eventservice.getSearchList(index, search_word, page, limit);
+			int listcount = eventservice.getEventListCount(index, search_word);// 총 리스트를 받아옴
+			
+			int maxpage = (listcount + limit - 1)/limit;
+			int startpage = ((page - 1)/10) * 10 + 1;
+			int endpage = startpage + 10 - 1;
+		
+			if (endpage > maxpage){endpage = maxpage;}		
+		
+			//List<Event> eventlist = eventservice.getEventList2(page, limit);
+			mv.setViewName("admin/event_modify");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("eventlist", list);
+			mv.addObject("limit", limit);
+			mv.addObject("search_field", index);
+			mv.addObject("search_word", search_word);
+			return mv;			
+		}
 		
 		
 		/**Event_comment 관련 시작*/
@@ -465,4 +535,5 @@ public class EventController {
 			obj.put("limit", limit);
 			return obj;
 		}
+
 }

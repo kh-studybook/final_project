@@ -86,4 +86,24 @@ public class EventDAO {
 	public List<Event> getMonthEventList(HashMap<String, Object> map) {
 		return sqlSession.selectList("event.month_list", map);
 	}
+
+	public int AdminButton(int event_num) {
+		return sqlSession.update("event.admin_button", event_num);
+	}
+
+	public List<Event> getEventList2(HashMap<String, Integer> map) {
+		return sqlSession.selectList("event.list2", map);
+	}
+
+	public List<Event> getSearchList(Map<String, Object> map) {
+		return sqlSession.selectList("event.getSearchList", map);
+	}
+
+	public int getSearchListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("event.searchcount", map);
+	}
+
+	public int AdminButton2(int event_num) {
+		return sqlSession.update("event.admin_button2", event_num);
+	}
 }

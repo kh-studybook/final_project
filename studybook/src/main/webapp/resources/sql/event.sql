@@ -18,6 +18,8 @@ select * from event;
 delete from event;
 delete from event where event_num = 1
 
+update event set event_status = 0 where event_num between 6 and 8
+
 select name from member where key = (select mem_key from event) and num
 
 select me.name 

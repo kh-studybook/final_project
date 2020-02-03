@@ -10,7 +10,7 @@
 <script>
 $(function(){
 
-	///이벤트 삭제하기 - 추후 확인
+	///이벤트 삭제하기
 	$("#deletemodal").on("show.bs.modal", function(){
 		
 		event_num = $("input[name=event_num]").val();
@@ -111,15 +111,17 @@ $(function(){
 						output += "<div><span>" + item.name + comment_btn + "</span><br>";
 						output += "<span>" +  item.com_date + "</span><br><br>";
 						output += "<span style = 'max-width:960px; word-break:break-all;' id = 'comment_content'>" + item.com_content + "</span>"
-						+ "<span><img class = 'reply_img' src = 'resources/image/reply.png' width = 30px><span></div><br><hr>";
+						+ "<span>"
+						//+ "<img class = 'reply_img' src = 'resources/image/reply.png' width = 30px>"
+						+ "</span></div><br><hr>";
 					});
 						$("#comment_form").append(output);
 						$("#comment_content").empty();
-					} else {
+				} else {
 						$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
 						$("#comment_content").empty();
 						$("#comment_form").hide();
-					}
+				}
 					//댓글 수정하기
 					$(".updateComment").click(function(){
 						if (confirm("댓글을 수정합니다.")){
@@ -154,12 +156,11 @@ $(function(){
 					});//삭제하기 end
 					
 					
-					//대댓글 달기
+/* 					//대댓글 달기
 					$(".reply_img").click(function(){
 						var event_com_num = $(this).next().next().val();//댓글 번호
 						
-					});//대댓글 달기 end
-					
+					});//대댓글 달기 end */					
 				
 			}
 		});	
@@ -193,7 +194,7 @@ $(function(){
 	<br><br>
 	<div class = "event_title_view">
 		<p class= "p_title">[이벤트제목] ${eventdata.title}<p><br>
-		<p>${fn:substring(eventdata.event_date,0,11)}&nbsp;&nbsp;${eventdata.event_start}에서 ${eventdata.event_end}까지
+		<p>${fn:substring(eventdata.event_date,0,11)}&nbsp;${eventdata.event_start}시부터 ${eventdata.event_end}시까지
 		&nbsp;<span style = "color:#7F56D2">${eventdata.event_room}</span><br><br>
 		${event_writer}
 		<c:if test = "${mem_key == '999'||mem_key == key}">
