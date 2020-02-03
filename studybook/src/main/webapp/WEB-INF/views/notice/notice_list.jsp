@@ -14,6 +14,7 @@
 	box-sizing: border-box;
 	font-family: "맑은 고딕";   
 }
+
 body {
 	background-color: #f2f2f2;
 }
@@ -27,6 +28,12 @@ body {
 	width:50%;
 	height:800px;
 }
+
+.titlewrap {
+	clear:both;
+}
+
+
 .s_title {
 	margin-top: 50px;
 	margin-bottom: 35px;
@@ -73,6 +80,7 @@ body {
 	text-decoration:none;
 	color:#7F56D2;
 }
+
 /*날짜*/
 .date {
 	font-size:12px;
@@ -89,23 +97,28 @@ body {
 .gray {
 	color: gray
 }
+
 .page-link {
 	border: 1px solid white;
 }
+
 .writebtn {
-	background-color: #ffffff;
+	width:150px;
+	height:60px;
+	line-height:60px;
+	background-color: #7F56D2;
 	border: 0px;
+	border-radius:5px;
 	text-decoration: none;
 	font-weight: bold;
 	cursor: pointer;
-	color: #7F56D2;	
+	color: #ffffff;	
 	margin-top: 30px;
 	margin-bottom: 35px;
 }
+
 .writebtn:hover {
-	text-decoration: none;
-	border: 0px;
-	color: #56D7D6;
+	opacity:70%;
 }
 
 .float-right {
@@ -228,15 +241,22 @@ body {
 
 <body>
 
+
+	<div class=writebutton>
+	<c:if test="${member.key== '999' }">
+		<button type="button" class="writebtn ">공지사항 쓰기</button>
+	</c:if>
+	</div>
+
+
 <div class=contentwrap>
 <div class=contentarea>
-<c:if test="${member.key== '999' }">
-	<button type="button" class="writebtn float-right">공지사항 쓰기</button>
-</c:if>	
-	<br>
+	
+<div class=lineforbutton>	
+	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
 	<p class=s_desc>자주 문의하시는 부분에 대한 답변입니다.</p>
-	
+	</div>
 	<div class="container_wrap">
 	<div class=s_container>
 	
@@ -324,6 +344,8 @@ body {
 
 		
 	</div>
+</div>
+
 	
 </div>	
 </div>
