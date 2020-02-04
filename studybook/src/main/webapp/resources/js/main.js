@@ -150,39 +150,39 @@ $(document).ready(function(){
 	})
 	
 	$('#m_main_count').children().children().eq(0).click(function(){
-		$('#MIN_MEMBER').val('1');
+		$('#MIN_MEMBER').val('');
 		$('#MAX_MEMBER').val('4');
 	})
 	
 	$('#m_main_count').children().children().eq(1).click(function(){
 		$('#MIN_MEMBER').val('4');
-		$('#MAX_MEMBER').val('8');
+		$('#MAX_MEMBER').val('');
 	})
 	
 	$('#m_main_count').children().children().eq(2).click(function(){
 		$('#MIN_MEMBER').val('8');
-		$('#MAX_MEMBER').val('12');
+		$('#MAX_MEMBER').val('');
 	})
 	
 	$('#m_main_count').children().children().eq(3).click(function(){
 		$('#MIN_MEMBER').val('12');
-		$('#MAX_MEMBER').val('1000');
+		$('#MAX_MEMBER').val('');
 	})
 	
 	$('.jsCalendar').css("width", $('#m_write_date'));
 	$('#m_main_time').css("width", $('#m_write_time'));
 	$('#m_main_count').css("width", $('#m_write_count'));
+	
+	$(document).resize(function(){
+		$('.jsCalendar').css("width", $('#m_write_date'));
+		$('#m_main_time').css("width", $('#m_write_time'));
+		$('#m_main_count').css("width", $('#m_write_count'));
+	})
     
     // carousel - optional
     $('#blogCarousel').carousel({
           interval: 5000
     });
-    
-    // 숫자 3자리마다 , 붙이는 함수
-    function numberFormat(inputNumber) {
-	    // return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    	return Number(inputNumber).toLocalString('en').split(".")[0];
-    }
     
     // 스터디 추천공간 1페이지 불러오기
     getList(1);
@@ -344,7 +344,7 @@ $(document).ready(function(){
     	} else if(parseInt(starttime) >= parseInt(endtime)){
     		alert('시간을 확인해 주세요');
     		return false;
-    	} else if(MIN_MEMBER==''){
+    	} else if(MIN_MEMBER=='' && MAX_MEMBER==''){
     		alert('인원수를 선택해 주세요');
     		return false;
     	}    	

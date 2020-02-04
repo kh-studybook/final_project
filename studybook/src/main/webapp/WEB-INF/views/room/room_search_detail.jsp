@@ -30,7 +30,7 @@
 					<div class="m_write" id="m_write_date">
 						<div>
 							<i class="far fa-calendar-alt"></i>
-							모임 날짜
+							${date}
 						</div>
 						<i class="fas fa-chevron-down"></i>
 					</div>
@@ -39,7 +39,7 @@
 				<div class="m_main_select">
 					<div class="m_write" id="m_write_starttime">
 						<i class="far fa-clock"></i>
-							START
+							${starttime}시
 							<i class="fas fa-chevron-down"></i>
 						</div>
 						<div id="m_main_starttime">
@@ -63,7 +63,7 @@
 					<div class="m_main_select">
 						<div class="m_write" id="m_write_endtime">
 							<i class="far fa-clock"></i>
-							END
+							${endtime}시
 							<i class="fas fa-chevron-down"></i>
 						</div>
 						<div id="m_main_endtime">
@@ -87,14 +87,25 @@
 					<div class="m_main_select">
 						<div class="m_write" id="m_write_count">
 							<i class="fas fa-user"></i>
-							인원
+							<c:if test="${MAX_MEMBER=='4'}">
+							4명 이하
+							</c:if>
+							<c:if test="${MIN_MEMBER=='4'}">
+							4명 이상
+							</c:if>
+							<c:if test="${MIN_MEMBER=='8'}">
+							8명 이상
+							</c:if>
+							<c:if test="${MIN_MEMBER=='12'}">
+							12명 이상
+							</c:if>
 							<i class="fas fa-chevron-down"></i>
 						</div>
 						<div id="m_main_count">
 							<ul>
 								<li>4명 이하</li>
-								<li>4 ~ 8명</li>
-								<li>8 ~ 12명</li>
+								<li>4명 이상</li>
+								<li>8명 이상</li>
 								<li>12명 이상</li>
 							</ul>
 				        </div>

@@ -37,10 +37,10 @@ function getList(page){
   						output += '<div class="card-body">';
   						output += '<p class="card-text">';
   						output += '<span class="j_room_name">' + item.title + '</span>';
-  						output += '<span class="j_room_count">' + item.event_date.substr(0,10) + "</span>";
   						output += '</P>';
   						output += '<p class="card-text">';
-  						output += '<span class="j_room_pay">' + item.event_start + ' ~ ' + item.event_end + '</span>';
+  						output += '<span class="j_room_count">' + item.event_date.substr(0,10) + "</span>"
+  						output += '<span class="j_room_pay">' + item.event_start + '시 ~ ' + item.event_end + '시</span>';
   						output += '<span class="j_room_tag">' + item.event_room + '</span>';
   						output += '</p></div></div></div></div></div></div>';
   						if(index == rdata.list.length-1){

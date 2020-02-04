@@ -188,22 +188,13 @@
       select *
       from (select rownum rnum, b.*
       from (select room.ROOM_CODE, room.ROOM_NAME
-      <if test="#{MIN_MEMBER}!=null">
-      ,room.MIN_MEMBER
-      </if>
-      <if test="#{MAX_MEMBER}!=null">
-      ,room.MAX_MEMBER
-      </if>
+      ,room.MIN_MEMBER, room.MAX_MEMBER
       ,room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
       from (room inner join gallery 
       on room.ROOM_CODE=gallery.ROOM_CODE
       and gallery.gallery_num=1
-      <if test="#{MIN_MEMBER}!=null">
-      and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-      </if>
-      <if test="#{MAX_MEMBER}!=null">
-      and room.MAX_MEMBER &gt;= #{MAX_MEMBER}
-      </if>)
+      and room.MIN_MEMBER &gt;= to_number(#{MIN_MEMBER})
+      and room.MAX_MEMBER &lt;= to_number(#{MAX_MEMBER}))
       
       left outer join reserve
       on room.ROOM_CODE=reserve.room_code
@@ -221,22 +212,18 @@
    <!-- room 검색 결과 총 갯수 -->
    <select id="searchRoomCount" parameterType="java.util.Map" resultType="int">
       select count(*)
-      from (room inner join gallery 
+      from ((room inner join gallery 
       on room.ROOM_CODE=gallery.ROOM_CODE
       and gallery.gallery_num=1
-      <if test="#{MIN_MEMBER}!=null">
-      and room.MIN_MEMBER &lt;= #{MIN_MEMBER}
-      </if>
-      <if test="#{MAX_MEMBER}!=null">
-      and room.MAX_MEMBER &gt;= #{MAX_MEMBER})
-      </if>
+      and room.MIN_MEMBER &gt;= to_number(#{MIN_MEMBER})
+      and room.MAX_MEMBER &lt;= to_number(#{MAX_MEMBER}))
       left outer join reserve
       on room.ROOM_CODE=reserve.room_code
       and reserve.reserve_date!=TO_DATE(#{date})
       and reserve.start_time not between #{starttime} and #{endtime}-1
       and reserve.end_time-1 not between #{starttime} and #{endtime}
       and #{starttime} not between reserve.start_time and reserve.end_time-1
-      and #{endtime}-1 not between reserve.start_time and reserve.end_time
+      and #{endtime}-1 not between reserve.start_time and reserve.end_time)
    </select>
    <!-- 민지끝 -->
 
