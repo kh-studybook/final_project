@@ -23,7 +23,7 @@ body {
 }
 
 .contentwrap {
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 }
@@ -41,7 +41,7 @@ body {
 }
 
 .s_title {
-	margin-top: 30px;
+	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -54,17 +54,16 @@ body {
    
 .notice_title {
 	font-size: 14px;
-	text-align: center;
+	padding:5px;
+	width:500px;
+	height:35px;
 }
 
-.notice_date {
-	font-size:14px;
-	text-align: center;
-}
-   
 .notice_content {
-
 	font-size: 14px;
+	padding:5px;
+	width:500px;
+	height:450px;
 }
    
 th {
@@ -83,23 +82,6 @@ th {
     border-top: 0px;
 }
 
-.submitbtn, .resetbtn {
-	background-color: #ffffff;
-	border: 0px;
-	text-decoration: none;
-	font-weight: bold;
-	cursor: pointer;
-	color: #7F56D2;	
-	margin-top: 30px;
-	margin-bottom: 35px;
-}
-
-.submitbtn:hover, .resetbtn:hover {
-	text-decoration: none;
-	border: 0px;
-	color: #56D7D6;
-}
-
 .listbtn {
 	width: 330px;
 	height: 43px;
@@ -116,14 +98,57 @@ th {
 .listbtn:hover {
 	opacity: 70%;
 }
+
+.submitbtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #7F56D2;;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 80px;
+	margin-left: 10px;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
+}
+
+.resetbtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #56D7D6;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 80px;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
+}
+
+.submitbtn:hover, .resetbtn:hover {
+	opacity: 70%;
+}
+
+.buttons {
+	text-align:center
+}
+
 </style>
 </head>
 
 <body>
-<div class=contentwrap>
 
+<div class=contentwrap>
 <div class=contentarea>
 
+<div class=title_wrap>
+	<p class=s_title>공지사항 쓰기</p> 	
+</div>
 <div class=realcontent>
 
 <input type="hidden" id="memberkey" value="${key }" name="memberkey">
@@ -134,20 +159,19 @@ th {
 		<form action="NoticeAddAction.bo" method="post"
 			enctype="multipart/form-data" name="noticeform">
 
-
 			<div class="form-group">
 				<input type="text" name="NOTICE_TITLE"
-					id="notice_title" size="50" maxlength="100"
-					class="form-control" placeholder="제목" value="">
+					id="notice_title" size="70" maxlength="100"
+					class="notice_title" placeholder="제목" value="">
 			</div>
 			
 			<div class="form-group">
 				<textarea name="NOTICE_CONTENT" id="notice_content" cols="70"
 					rows="20" class="notice_content" placeholder="내용"></textarea>
 			</div>
-			<div class="form-group">
-				<button type="submit" class="submitbtn">등록</button>
+			<div class="form-group buttons float-right">
 				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>
+				<button type="submit" class="submitbtn">등록</button>
 			</div>
 			
 		</form>

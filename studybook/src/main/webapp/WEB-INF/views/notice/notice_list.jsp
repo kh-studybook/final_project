@@ -87,6 +87,7 @@ body {
 	display: flex;
 	justify-content: center; /*가운데 정렬*/
 }
+
 /*제목*/
 .title {
 	font-size:14px;
@@ -119,10 +120,6 @@ body {
 	color: gray
 }
 
-.page-link {
-	border: 1px solid white;
-}
-
 .writebutton {
 	margin:0px;
 	padding:0px;
@@ -130,7 +127,7 @@ body {
 
 .writebtn {
 	position:absolute;
-	top: 150px;
+	top: 140px;
 	left: 69%;
 	width:80px;
 	height:30px;
@@ -159,7 +156,21 @@ body {
 	margin-top: 50px;
 }
 
+.page-link {
+    z-index: 2;
+    color: #7F56D2;
+    text-decoration: none;
+    background-color: #ffffff; 
+    border-color: #ffffff; 
+}
 
+.page-link:hover {
+    z-index: 2;
+    color: #56D7D6;
+    text-decoration: none;
+    background-color: #ffffff; 
+    border-color: #ffffff; 
+}
 </style>
 
 
@@ -279,7 +290,7 @@ body {
 
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
-		<button type="button" class="writebtn ">공지사항 쓰기</button>
+		<button type="button" class="writebtn ">공지 쓰기</button>
 	</c:if>
 	</div>
 

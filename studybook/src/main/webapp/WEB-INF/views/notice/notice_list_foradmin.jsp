@@ -131,11 +131,11 @@ body {
 
 .writebtn {
 	position:absolute;
-	top: 130px;
+	top: 120px;
 	left: 69%;
-	width:80px;
-	height:30px;
-	line-height:30px;
+	width:85px;
+	height:35px;
+	line-height:35px;
 	background-color: #7F56D2;
 	border: 0px;
 	border-radius:5px;
@@ -279,7 +279,7 @@ body {
 
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
-		<button type="button" class="writebtn ">글쓰기</button>
+		<button type="button" class="writebtn ">공지 쓰기</button>
 	</c:if>
 	</div>
 
