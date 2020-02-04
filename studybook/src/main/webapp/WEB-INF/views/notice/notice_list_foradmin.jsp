@@ -28,7 +28,7 @@ body {
 	background-color:white;
 	width:50%;
 	min-width: 420px;
-	height:850px;
+	height:800px;
 }
 
 .titlewrap {
@@ -79,7 +79,7 @@ body {
 
 .numtd {
     width: 50px;
-    line-height: 30px;
+    line-height: 23px;
     font-size: 12px;
 }
 
@@ -101,13 +101,11 @@ body {
 }
 
 /*날짜*/
-.datediv {
-	margin-top:8px;
-}
-
 .date {
 	font-size:12px;
 	color:#7F7F7F;
+	margin-top:10px;
+	margin-bottom:10px;
 }
 .rows {
 	text-align: right;
@@ -154,9 +152,6 @@ body {
 	float:right
 }
 
-.col {
-	margin-top: 50px;
-}
 
 
 </style>
@@ -317,7 +312,7 @@ body {
 									<a href="noticedetailadmin.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
 								</div>
 							</c:if>	
-								<div class=datediv><span class=date>${b.NOTICE_DATE }</span></div>
+								<div><span class=date>${b.NOTICE_DATE }</span></div>
 							</td>
 						</tr>
 						
@@ -338,7 +333,7 @@ body {
 							
 							<c:if test="${page>1 }">
 								<li class="page-item"><a
-									href="NoticeList.bo?page=${page-1 }" class="page-link"><</a>
+									href="noticeadmin.bo?page=${page-1 }" class="page-link"><</a>
 									&nbsp;</li>
 							</c:if>
 
@@ -349,7 +344,7 @@ body {
 								</c:if>
 								
 								<c:if test="${a!=page }">
-									<li class="page-item"><a href="NoticeList.bo?page=${a}"
+									<li class="page-item"><a href="noticeadmin.bo?page=${a}"
 										class="page-link">${a }</a></li>
 								</c:if>
 							</c:forEach>
@@ -360,7 +355,7 @@ body {
 							</c:if>
 							<c:if test="${page<maxpage }">
 								<li class="page-item"><a class="page-link"
-									href="NoticeList.bo?page={page+1}">&nbsp; ></a></li>
+									href="noticeadmin.bo?page={page+1}">&nbsp; ></a></li>
 							</c:if>
 						</ul>
 					</div>
