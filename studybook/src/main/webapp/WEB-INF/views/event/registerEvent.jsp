@@ -34,8 +34,8 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:200px; height:200px; border: 1px solid darkgray;}
-#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:200px; cursor:pointer;
+.p_avatar{width:350px; height:200px; border: 1px solid darkgray;}
+#eventPic_button{border:none; border-radius: 5px; display:inline-block; width:350px; cursor:pointer;
 				background-color:#56D7D6; color:white; padding:7px; margin-top:5px; padding-right:0px; text-align:center;}
 
 .navbar-brand{display: flex !important; font-size: 24px !important; width: 150px; padding:0px}
