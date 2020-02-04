@@ -10,7 +10,7 @@
 			select nvl(max(key),1)+1 from member
 		</selectKey>
         insert into member (name, email, password, phone, key, profile)
-        values (#{name}, #{email}, #{password}, #{phone}, #{key}, default)
+        values (#{name}, #{email}, #{password}, #{phone}, #{key}, #{profile})
     </insert>
     
      

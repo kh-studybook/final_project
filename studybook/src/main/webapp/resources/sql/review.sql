@@ -7,6 +7,10 @@ create table review(
 );
 
 alter table review add r_code number(10) not null constraint review_r_code_fk references reserve(r_code);
+ALTER TABLE review add CONSTRAINT review_room_code_fk ON DELETE CASCADE;
+ALTER TABLE review add CONSTRAINT review_room_code_fk foreign key(room_code) references room(room_code) ON DELETE CASCADE;
+	
+alter table review drop constraint review_room_code_fk;
 
 delete review;
 drop table review;

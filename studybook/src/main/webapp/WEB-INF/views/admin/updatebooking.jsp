@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <style>
 * {
 	font-family: "맑은 고딕";
@@ -136,7 +137,7 @@
 							<label class="control-label">예약 날짜 *</label> <input type="text"
 								name="reserve_date" id="reserve_date" maxlength="20"
 								class="form-control" placeholder="예약 날짜 입력"
-								value="${reservedata.reserve_date}" required readOnly />
+								value="${fn:substring(reservedata.reserve_date,0,10)}" required readOnly />
 						</div>
 					</div>
 				</div>

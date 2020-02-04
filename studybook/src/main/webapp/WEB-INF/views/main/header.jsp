@@ -78,7 +78,7 @@
 		            </c:if>
               	</div>
                 <div class="j_menu_login">
-                	<div class="j_menu_name">[${member.name}]</div>
+                	<div class="j_menu_name">${member.name}</div>
                 	<div id="menu_update" class="j_menu_reg"><a href="update.mem">프로필 관리</a></div>
                 </div>
 

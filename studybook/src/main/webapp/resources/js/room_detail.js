@@ -46,7 +46,6 @@ $(document).on('click','.number-spinner button',
 		mem_key=$("input[name=mem_key]").val();
 		console.log("로그인한 멤버키="+mem_key)
 		   console.log(data)
-		   output = "";
 		   $.ajax({
 		      type : "POST",
 		      data : data,
@@ -60,14 +59,14 @@ $(document).on('click','.number-spinner button',
 		         if (data.listcount > 0) { // 총갯수가 0개이상인 경우
 		            $(".e_review_list").text("");
 		        	 
-		            output = "";
-		            
+		            output = ""; 
 		            $(data.reviewlist).each(
 		               function(index, item) {
 		            	  output += "<li class='e_rlist'>";
 		            	  console.log("작성한 회원="+item.mem_key)
 		                	 if(mem_key==item.mem_key){
-		                		 output+="<div class='e_review_manage_div'><span class='e_review_manage'><a href='myReviewList.re?key="+item.mem_key+"'>관리하기</a></span></div>";
+		                		 output+="<div class='e_review_manage_div'><span class='e_review_manage'>";
+		                		 output+="<a href='myReviewList.re?key="+item.mem_key+"'>관리하기</a></span></div>";
 		                	 }
 		            	  output +="<div class='e_rbox_mine'><div class='e_pf_info'><div class='e_pf_pic'>";
 		                  output += "<img src='resources/image/profile/"+item.profile+"'></div>";
@@ -81,8 +80,7 @@ $(document).on('click','.number-spinner button',
 		               
 		               })
 		         
-		          
-		            $('.e_review_list').append(output);//table 완성
+		            $('.e_review_list').append(output);
 		            
 		          $(".pagination").empty(); //페이징 처리
 		            output = "";
@@ -110,13 +108,11 @@ $(document).on('click','.number-spinner button',
 		            } 
 		            setPaging( href, digit);
 		            
-		            $('.pagination').append(output)
+		            $('.pagination').append(output);
 		         }//if(data.listcount) end
-		         
 		         else {
-		            $(".e_review_list").remove();
-		            $(".e_review_box").remove();
-		            $('.e_review_box').append("<font size=5>등록된 글이 없습니다.</font>");
+		        	console.log("후기 없음")
+		            $('.e_review_list').append("<li>등록된 후기가 없습니다.</li>");
 		         }
 		      }, //success end
 		      error : function() {
@@ -126,15 +122,6 @@ $(document).on('click','.number-spinner button',
 		 } //function end
 	
 	$(document).ready(function(){
-		$('button').click(function(){
-			var end_time=$('input[name=end_time]').val();
-			if(!end_time){
-				alert("예약 시간을 다 고르지 않으셨습니다.");
-				return false;
-			}
-			
-		})
-		
 		
 		$(".carousel-indicators li:first-child").addClass("active");
 		$(".carousel-inner div:first-child").addClass("active");
@@ -211,7 +198,15 @@ $(document).on('click','.number-spinner button',
 			});
 			
 		$(".e_to_reserve_page").click(function(){
-			location.href="room_reserve.re";
+			
+			var end_time=$('input[name=end_time]').val();
+			if(!end_time){
+				alert("예약 시간을 다 고르지 않으셨습니다.");
+				return false;
+			}else{
+			
+				location.href="room_reserve.re";
+			}
 		})
 		
 	});
@@ -236,9 +231,9 @@ function div_color(){
   			      cache : false,
   			      success : function(data) {
   			    	  console.log(data)
-  			      
+  			    	  
   			         if (data!=null) { // 총갯수가 0개이상인 경우
-  			        	 console.log("data 0개 이상")
+  			        	 console.log("예약 0개 이상")
   			            $(data).each(
   			               function(index, item) {
   			            	 $('.swiper-wrapper input[name=time_slide]').each(function(){
@@ -247,12 +242,12 @@ function div_color(){
   			       							&& parseInt(hour) <= parseInt(item.end_time)) { 
   			       					console.log("예약되어있는 시간:"+this.value);
   			       					$(this).parent().addClass("not_active");
-  			       								}
+  			       					}
   			       				}) ;
   			               }
   			              )
   			       }else {
-  			            	console.log("예약되어있는 시간이 없다. == 모든 시간 예약 가능");
+  			            console.log("예약되어있는 시간이 없다. 모든 시간 예약 가능");
   			         }
   			      }, //success end
   			      error : function() {
@@ -261,3 +256,4 @@ function div_color(){
   			   });// ajax end
 		  
 		   }
+	

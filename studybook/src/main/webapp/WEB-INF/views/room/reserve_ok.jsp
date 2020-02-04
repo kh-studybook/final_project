@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,8 @@
 		          		 location.href="reserve_cancel_action.re?r_code="+r_code;
 		              }
 				});
+			
+			
 		});
 	</script>
 </head>
@@ -104,10 +107,14 @@
 					</div>			
 				</div>
 				
+				  <c:set var="today" value="<%=new java.util.Date()%>"/>
+   				 <fmt:formatDate var="now" type="date" value="${today}" pattern="yyyy-MM-dd"/>
+   				 <c:if test = "${reserve_check.reserve_date > now}" >   
+                                           
 				<div class="e_reserve_cancel_div">
 					<input type="button" id="reserve_cancel_btn" value="예약  취소 하기">
 				</div>
-				
+				</c:if>
 			</div>
 			<!-- col-md-5 끝 -->
 		</div>

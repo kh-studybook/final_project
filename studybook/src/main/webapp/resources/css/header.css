@@ -116,6 +116,10 @@ main {
 .j_menu_login {
 	margin-top: 15px;
 }
+
+.j_menu_name{
+	margin-bottom: 5px;
+}
 .j_menu_login a{
 	color:black;
 }

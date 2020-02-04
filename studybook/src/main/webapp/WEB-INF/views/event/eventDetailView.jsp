@@ -193,7 +193,7 @@ $(function(){
 	
 	<br><br>
 	<div class = "event_title_view">
-		<p class= "p_title">[이벤트제목] ${eventdata.title}<p><br>
+		<p class= "p_title">${eventdata.title}<p><br>
 		<p>${fn:substring(eventdata.event_date,0,11)}&nbsp;${eventdata.event_start}시부터 ${eventdata.event_end}시까지
 		&nbsp;<span style = "color:#7F56D2">${eventdata.event_room}</span><br><br>
 		${event_writer}
