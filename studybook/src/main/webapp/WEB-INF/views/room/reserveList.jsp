@@ -9,7 +9,7 @@ body {background-color: #f2f2f2;}
 /** 글자 관련!!!!*/
 .pp_title{font-family: "맑은 고딕"; text-align: center !important; font-size: 32px; display:inline_block;
 		margin-top:100px; margin-bottom:70px;}
-#nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
+/* #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center} */
 
 /** 페이지 네이션*/
 .center-block {display: flex;justify-content: center}
@@ -235,9 +235,7 @@ body {background-color: #f2f2f2;}
 	
 	<%-- 게시글이 없는 경우 --%>
 	<c:if test="${listcount == 0}">
-		<br><br><br><br>
-		<p id = "nocontent">예약 내역이 없습니다.</p><br>
-		<br><br><br><br><br><br>
+		<p id = "nocontent">예약 내역이 없습니다.</p>
 	</c:if>	
 	</div><!--  container end -->
 	

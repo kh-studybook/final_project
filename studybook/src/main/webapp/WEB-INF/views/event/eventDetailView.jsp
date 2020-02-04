@@ -117,11 +117,11 @@ $(function(){
 					});
 						$("#comment_form").append(output);
 						$("#comment_content").empty();
-				} else {
+				} /* else {
 						$("#message").text("등록된 댓글이 없습니다. 댓글을 달아주세요.");
 						$("#comment_content").empty();
 						$("#comment_form").hide();
-				}
+				} */
 					//댓글 수정하기
 					$(".updateComment").click(function(){
 						if (confirm("댓글을 수정합니다.")){
@@ -199,7 +199,7 @@ $(function(){
 		${event_writer}
 		<c:if test = "${mem_key == '999'||mem_key == key}">
 			<div id = "delete_modify_btn" class = "delete_modify_btn">
-					<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?num=${eventdata.event_num}">수정</a> | 
+					<a id="event_modify_btn" class = "event_modify_btn" href = "EventModifyView.eve?event_num=${eventdata.event_num}">수정</a> | 
 					<a id="event_delete_btn" class = "event_delete_btn" data-toggle="modal" data-target="#deletemodal">삭제</a>
 		</div>
 		</c:if>

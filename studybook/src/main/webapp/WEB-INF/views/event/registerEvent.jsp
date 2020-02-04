@@ -9,6 +9,7 @@ body {background-color: #f2f2f2 !important;}
 
 /** 글자 관련!!!!*/
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
+.p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 14px;}
 #event_title{maxLength:200; font-size:14px !important}
 #p_event_content{font-size : 12px; font-color : #7F7F7F;  maxLength : 4000; height:200px;}
 textarea::placeholder, select, input[type=text]::placeholder{color:black; font-size:14px !important;}
@@ -294,7 +295,8 @@ input[type=date]{height:3rem;}
 				$("#event_content").focus();
 				return false;
 			}	
-
+			
+			//날짜 유효성 검사
 			var date = $('#date').val();
 	    	var starttime = $('#starttime').val();
 	    	var endtime = $('#endtime').val();
@@ -316,7 +318,7 @@ input[type=date]{height:3rem;}
 			} 
 
 		});
-		
+				
 	});
 	
 
@@ -326,8 +328,8 @@ input[type=date]{height:3rem;}
 <div class="container pp">
 <br>
 <h2 class = "p_title">이벤트 등록</h2>
-	<br>
-
+<br>
+	<p style = "text-align:center; font-size:14px;">이벤트를 등록하시면 관리자의 승인을 거쳐 이벤트 홍보 게시판에 게시됩니다.</p>
   <form method="post" action="EventAddAction.eve" enctype="multipart/form-data" id = "p_event_write_form">
  	<input name = "mem_key" id = "mem_key" value = "${mem_key}" type = "hidden">
   	

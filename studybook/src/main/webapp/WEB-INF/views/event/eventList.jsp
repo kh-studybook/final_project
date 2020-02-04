@@ -7,8 +7,8 @@
 body {background-color: #f2f2f2;}	
 /** 글자 관련!!!!*/
 .p_title {font-family: "맑은 고딕"; text-align: center; font-size: 32px; maxLength:20}
-.p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 16px;}
-#nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center}
+.p_p_title {font-family: "맑은 고딕";text-align: center;font-size: 14px;}
+/* #nocontent{font-size:24px; font-weight:bold; margin:10; color:#56D7D6; text-align:center} */
 
 /** 버튼 관련*/
 #p_register_event {border-radius: 5px;border: none;background-color: #7F56D2;
@@ -98,9 +98,9 @@ body {background-color: #f2f2f2;}
 		<div class="row">
 			<div class="col-md-12">
 
-				<br> <br>
+				<br>
 				<p class="p_title">이벤트 홍보 게시판</p>
-				<br> <br>
+				<br> <br><br>
 				<p class="p_p_title">여러분의 이벤트를 등록해주시면 메인에 홍보해드립니다.</p>
 				<br><br>
 
