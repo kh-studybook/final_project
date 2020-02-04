@@ -132,7 +132,7 @@ body {
 
 						</div>
 						<div class="col-md-2">
-							<p class="w_content">후기 등록 날짜</p>
+							<p class="w_content">공간 이용 날짜</p>
 							<p>${fn:substring(m.review_date,0,4)}.
 								${fn:substring(m.review_date,5,7)}.
 								${fn:substring(m.review_date,8,10)}
