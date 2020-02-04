@@ -8,7 +8,19 @@
 <title>notice write</title>
   
 <script>
+$(document).ready(function() {
+	
+	$('.notice_content').keyup(function (e){
+	    var content = $(this).val();
+	    $('.counter').html("("+content.length+" / 최대 1500자)"); //글자수 실시간 카운팅
 
+	    if (content.length > 1500){
+	        alert("최대 1500자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 1500));
+	        $('.counter').html("(1500 / 최대 1500자)");
+	    }
+	});
+});
 </script>
 
 <style>
@@ -63,7 +75,8 @@ body {
 	font-size: 14px;
 	padding:5px;
 	width:500px;
-	height:450px;
+	height:400px;
+	resize:none;
 }
    
 th {
@@ -107,7 +120,7 @@ th {
 	color: white;
 	margin-top: 10px;
 	margin-bottom: 80px;
-	margin-left: 10px;
+	margin-left: 5px;
 	border: none;
 	cursor: pointer;
 	font-size: 12px;
@@ -168,6 +181,8 @@ th {
 			<div class="form-group">
 				<textarea name="NOTICE_CONTENT" id="notice_content" cols="70"
 					rows="20" class="notice_content" placeholder="내용"></textarea>
+					<br>
+				<span class=counter style="color:#7F56D2; font-size:12px;" id="counter">(0 / 최대 1500자)</span>
 			</div>
 			<div class="form-group buttons float-right">
 				<button type="reset" class="resetbtn" onClick="history.go(-1)">취소</button>

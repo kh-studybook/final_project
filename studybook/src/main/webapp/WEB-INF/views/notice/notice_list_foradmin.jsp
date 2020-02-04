@@ -53,13 +53,15 @@ body {
 
 .s_desc {
 	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	font-size: 14px;
 	text-align: center;
 }
 .s_container {
 	display: flex;
 	justify-content: center;
+	width: 949px;
+    height: 520px;
 }
 
 .tablewrap {
@@ -71,7 +73,7 @@ body {
 }
 
 .table td, .table th {
-    padding: 20px;
+    padding: 7px;
     vertical-align: top;
     border-top: 0px;
     border-bottom: 1px solid #dee2e6;
@@ -103,7 +105,8 @@ body {
 
 /*날짜*/
 .datediv {
-	margin-top:8px;
+	margin-top:0px;
+	margin-bottom:10px;
 }
 
 .date {
@@ -160,6 +163,22 @@ body {
 	margin-top: 50px;
 }
 
+.page-link {
+    z-index: 2;
+    color: #7F56D2;
+    text-decoration: none;
+    background-color: #ffffff; 
+    border-color: #ffffff; 
+    font-size:12px;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #56D7D6;
+    text-decoration: none;
+    background-color: #ffffff; 
+    border-color: #ffffff; 
+}
 </style>
 
 
@@ -200,8 +219,7 @@ body {
 								.text("글 개수 : " + data.listcount);
 						if (data.listcount > 0) { // 총갯수가 0개이상인 경우
 							$("tbody").remove();
-							var num = data.listcount - (data.page - 1)
-									* data.limit;
+							var num = data.listcount - (data.page - 1) * data.limit;
 							console.log(num)
 							output = "<tbody>";
 							$(data.noticelist)
@@ -290,7 +308,7 @@ body {
 <div class=lineforbutton>	
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
-	<p class=s_desc>자주 문의하시는 부분에 대한 답변입니다.</p>
+	<p class=s_desc>StudyBook 이용 중 자주 문의하시는 부분에 대한 답변입니다.</p>
 	</div>
 	<div class="container_wrap">
 	<div class=s_container>
@@ -302,7 +320,7 @@ body {
 			<table class="table">
 				<thead></thead>
 				<tbody>
-					<c:set var="num" value="${listcount-(page-1)*10 }" />
+					<c:set var="num" value="${listcount-(page-1)*7 }" />
 					<c:forEach var="b" items="${noticelist }">
 						<tr class=tr>
 							<td class=numtd><c:out value="${num }" /> 
@@ -333,8 +351,7 @@ body {
 					<div class="col">
 						<ul class="pagination">
 							<c:if test="${page<=1 }">
-								<li class="page-item"><a class="page-link" href="#"><
-										&nbsp;</a></li>
+								<li class="page-item"><a class="page-link" href="#"><</a></li>
 							</c:if>
 							
 							<c:if test="${page>1 }">
@@ -356,12 +373,11 @@ body {
 							</c:forEach>
 
 							<c:if test="${page>=maxpage }">
-								<li class="page-item"><a class="page-link" href="#">&nbsp;
-										></a></li>
+								<li class="page-item"><a class="page-link" href="#">></a></li>
 							</c:if>
 							<c:if test="${page<maxpage }">
 								<li class="page-item"><a class="page-link"
-									href="noticeadmin.bo?page={page+1}">&nbsp; ></a></li>
+									href="noticeadmin.bo?page=${page+1}">></a></li>
 							</c:if>
 						</ul>
 					</div>

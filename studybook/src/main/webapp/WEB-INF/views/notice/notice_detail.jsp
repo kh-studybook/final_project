@@ -19,7 +19,7 @@ body {
 }
 
 .contentwrap {
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 }
@@ -37,7 +37,7 @@ body {
 }
 
 .s_title {
-	margin-top: 30px;
+	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -49,22 +49,49 @@ body {
 }
    
 .title {
-	font-size: 24px;
+	font-size: 18px;
+	font-weight: bold;
 	text-align: center;
+	margin-top:20px;
 }
 
 .date {
 	font-size:14px;
 	text-align: center;
+	
 }
    
-.content {
+.content {  
 	border:0px;
 	font-size:14px;
+	width:100%;
+	height: auto;	
+	margin-top:25px;
+	min-height: 50px;
+    
+    margin-top: 20px;
+    margin-bottom: 0px;
+    
+    letter-spacing :0.3px;
+    line-height:25px;
 }
+   
+pre {
+	width: 450px;
+	white-space: pre-wrap;
+}   
+
+.table {
+    width: 450px;
+    margin-bottom: 5rem;
+}   
    
 th {
 	text-align:center
+}
+
+.float-left {
+	float:left;
 }
 
 .float-right {
@@ -79,32 +106,67 @@ th {
     border-top: 0px;
 }
 
-.modifybtn, .deletebtn {
-	background-color: #ffffff;
-	border: 0px;
-	text-decoration: none;
-	font-weight: bold;
+
+.modifybtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #7F56D2;;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	border: none;
 	cursor: pointer;
-	color: #7F56D2;	
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
+}
+
+.deletebtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #56D7D6;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
 }
 
 .modifybtn:hover, .deletebtn:hover {
-	text-decoration: none;
-	border: 0px;
-	color: #56D7D6;
+	opacity: 70%;
+}
+
+.buttons {
+	height: 80px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    height: 80px;
+}
+
+.listbutton {
+	text-align:center
 }
 
 .listbtn {
-	width: 330px;
-	height: 43px;
-	line-height:43px;
+	width: 200px;
+	height:35px;
+	line-height: 35px;
 	background-color: #7F56D2;
 	color: white;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 10px;
+	margin-bottom: 30px;
 	border: none;
 	cursor: pointer;
-	
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
 }
 
 .listbtn:hover {
@@ -167,11 +229,7 @@ th {
 </style>
 
 <script>
-  
-$(function() {
 
-
-})
 </script>
 </head>
 
@@ -191,47 +249,45 @@ $(function() {
       <table class="table">
 
          <tr>
-            <td class=title>${noticedata.NOTICE_TITLE }</td>
+            <td colspan=2 class=title>${noticedata.NOTICE_TITLE }</td>
          </tr>
          <tr>
-            <td class=date>${noticedata.NOTICE_DATE }</td>
+            <td colspan=2 class=date>${noticedata.NOTICE_DATE }</td>
          </tr>
          <tr>
-            <td>
-            <textarea class="content" rows="20" readOnly style="width:100%">${noticedata.NOTICE_CONTENT }</textarea>
+            <td colspan=2 class="content"><pre>${noticedata.NOTICE_CONTENT }</pre>
             </td>
          </tr>
-         
-         <tr>
-         	<c:if test="${member.key==999 }">
-            <td class=float-right>
-
+        
+<!-- 관리자만 수정/삭제 버튼 -->         
+<c:if test="${member.key== '999' }">
+		<tr><td class=buttons>     
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
-                  <button class="modifybtn">수정</button>
+                  <button class="modifybtn float-right">수정</button>
                </a>
-               
                <a href=#>
-                  <button class="deletebtn" data-toggle="modal" data-target="#myModal">삭제</button>
+                  <button class="deletebtn float-right" data-toggle="modal" data-target="#myModal">삭제</button>
                </a>
 
-            </td>
-            </c:if>
-         </tr>
-         
-         <tr>
+        </td></tr>
+</c:if>	
 
-			<c:if test="${member.key!= '999' }">
-            <td class=center>        
-            <a href="NoticeList.bo"><button class="listbtn">리스트</button></a>
-            </td>
-            </c:if>	
+
+<!-- 리스트 버튼 (관리자/일반회원) -->         
+<tr>
+<c:if test="${member.key!= '999' }">
+	<td class=listbutton>        
+		<a href="NoticeList.bo"><button class="listbtn center">리스트</button></a>
+	</td>
+</c:if>	
             
-           	<c:if test="${member.key== '999' }">
-            <td class=center>        
-            <a href="noticeadmin.bo"><button class="listbtn">리스트</button></a>
-            </td>
-            </c:if>	
-         </tr>
+<c:if test="${member.key== '999' }">
+	<td class=listbutton>        
+		<a href="noticeadmin.bo"><button class="listbtn center">리스트</button></a>
+	</td>
+</c:if>	 
+</tr>    
+         
       </table> 
 </div> 
  

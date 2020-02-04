@@ -8,11 +8,22 @@
 <title>notice modify</title>
 <script> 
 
-	$(document).ready(function() {
-		$(".submitbtn").click(function() {
-			location.href = "NoticeModifyAction.bo";
-		})
+$(document).ready(function() {
+	$(".submitbtn").click(function() {
+		location.href = "NoticeModifyAction.bo";
+	})
+	
+	$('.notice_content').keyup(function (e){
+	    var content = $(this).val();
+	    $('.counter').html("("+content.length+" / 최대 1500자)"); //글자수 실시간 카운팅
+
+	    if (content.length > 1500){
+	        alert("최대 1500자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 1500));
+	        $('.counter').html("(1500 / 최대 1500자)");
+	    }
 	});
+});
 </script>
 <style>
 
@@ -26,7 +37,7 @@ body {
 }
 
 .contentwrap {
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 }
@@ -44,7 +55,7 @@ body {
 }
 
 .s_title {
-	margin-top: 30px;
+	margin-top: 50px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
@@ -56,20 +67,17 @@ body {
 }
    
 .notice_title {
-	border: 1px solid #dce6e6;
 	font-size: 14px;
-	background-color:;
+	padding:5px;
+	width:500px;
+	height:35px;
 }
 
-.notice_date {
-	font-size:14px;
-	text-align: center;
-}
-   
 .notice_content {
-	border: 1px solid #dce6e6;
 	font-size: 14px;
-	background-color:;
+	padding:5px;
+	width:500px;
+	height:450px;
 }
    
 th {
@@ -88,21 +96,43 @@ th {
     border-top: 0px;
 }
 
-.submitbtn, .resetbtn {
-	background-color: #ffffff;
-	border: 0px;
-	text-decoration: none;
-	font-weight: bold;
+.submitbtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #7F56D2;;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 80px;
+	margin-left: 10px;
+	border: none;
 	cursor: pointer;
-	color: #7F56D2;	
-	margin-top: 30px;
-	margin-bottom: 35px;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
+}
+
+.resetbtn {
+	width:85px;
+	height:35px;
+	line-height: 35px;
+	background-color: #56D7D6;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 80px;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius:5px;
 }
 
 .submitbtn:hover, .resetbtn:hover {
-	text-decoration: none;
-	border: 0px;
-	color: #56D7D6;
+	opacity: 70%;
+}
+
+.buttons {
+	text-align:center
 }
 
 .listbtn {
@@ -126,14 +156,15 @@ th {
 </head>
 <body>
 <div class=contentwrap>
-
 <div class=contentarea>
 
+<div class=title_wrap>
+	<p class=s_title>공지 수정하기</p> 	
+</div>
 <div class=realcontent>
 
 <input type="hidden" id="memberkey" value="${key }" name="memberkey">
 
-	<p class=s_title>공지사항 수정하기</p>
 	<div class="s_container">
 		<form action="./NoticeModifyAction.bo" enctype="multipart/form-data"
 			method="post" name="modifyform">
@@ -148,11 +179,13 @@ th {
 			<div class="form-group">
 				<textarea name="NOTICE_CONTENT" id="notice_content" cols="70"
 					rows="20" class="notice_content">${noticedata.NOTICE_CONTENT }</textarea>
+					<br>
+				<span class=counter style="color:#7F56D2; font-size:12px;" id="counter">(0 / 최대 1500자)</span>
 			</div>
 
 			<!-- 관리자한테만 보이게 test 넣기 -->
 			
-			<div class="float-right">
+			<div class="buttons">
 				<button type="submit" class="submitbtn">수정</button>
 				<button type="reset" class="resetbtn" onClick="history.go(-2)">취소</button>
 			</div>

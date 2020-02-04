@@ -204,7 +204,7 @@ public class NoticeController {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('삭제 완료');");
-		out.println("location.href='NoticeList.bo';");
+		out.println("location.href='noticeadmin.bo';");
 		out.println("</script>");
 		out.close();
 		}

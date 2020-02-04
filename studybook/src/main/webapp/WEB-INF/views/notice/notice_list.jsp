@@ -57,9 +57,12 @@ body {
 	font-size: 14px;
 	text-align: center;
 }
+
 .s_container {
 	display: flex;
 	justify-content: center;
+	width: 949px;
+    height: 520px;
 }
 
 .tablewrap {
@@ -127,11 +130,11 @@ body {
 
 .writebtn {
 	position:absolute;
-	top: 140px;
+	top: 120px;
 	left: 69%;
-	width:80px;
-	height:30px;
-	line-height:30px;
+	width:85px;
+	height:35px;
+	line-height:35px;
 	background-color: #7F56D2;
 	border: 0px;
 	border-radius:5px;
@@ -162,6 +165,7 @@ body {
     text-decoration: none;
     background-color: #ffffff; 
     border-color: #ffffff; 
+    font-size:12px;
 }
 
 .page-link:hover {
@@ -313,7 +317,7 @@ body {
 			<table class="table">
 				<thead></thead>
 				<tbody>
-					<c:set var="num" value="${listcount-(page-1)*10 }" />
+					<c:set var="num" value="${listcount-(page-1)*7 }" />
 					<c:forEach var="b" items="${noticelist }">
 						<tr class=tr>
 							<td class=numtd><c:out value="${num }" /> 
@@ -344,8 +348,7 @@ body {
 					<div class="col">
 						<ul class="pagination">
 							<c:if test="${page<=1 }">
-								<li class="page-item"><a class="page-link" href="#"><
-										&nbsp;</a></li>
+								<li class="page-item"><a class="page-link" href="#"><</a></li>
 							</c:if>
 							
 							<c:if test="${page>1 }">
@@ -367,12 +370,11 @@ body {
 							</c:forEach>
 
 							<c:if test="${page>=maxpage }">
-								<li class="page-item"><a class="page-link" href="#">&nbsp;
-										></a></li>
+								<li class="page-item"><a class="page-link" href="#">></a></li>
 							</c:if>
 							<c:if test="${page<maxpage }">
 								<li class="page-item"><a class="page-link"
-									href="NoticeList.bo?page={page+1}">&nbsp; ></a></li>
+									href="NoticeList.bo?page=${page+1}">></a></li>
 							</c:if>
 						</ul>
 					</div>
