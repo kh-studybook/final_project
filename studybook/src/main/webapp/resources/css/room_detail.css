@@ -217,8 +217,15 @@ ol.e_info_list li {
 	margin-top:5px;
 }
 
-.e_review_info .e_review_manage{
-	float:right;
+.e_review_manage_div{
+	display:grid;
+}
+
+.e_review_manage a{
+	color: #56D7D6;
+    font-weight:900;
+    font-size: 13px;
+    float: right;
 }
 
 .e_review_box .e_rlist .e_p_review {

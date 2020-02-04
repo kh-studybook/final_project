@@ -81,7 +81,7 @@ public class EventController {
 			 * String saveFolder=
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
-		      saveFolder="C:\\Users\\user1\\git\\0203\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
+		      saveFolder="C:\\Users\\user1\\git\\0204\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -115,6 +115,9 @@ public class EventController {
 		      //바뀐파일명으로 저장
 		      event.setEvent_pic(fileDBName);
 		      }	      
+		    String content=event.getContent();
+		    content = content.replace("\r\n", "<br>");
+		    event.setContent(content);
 			eventservice.insertEvent(event);
 			return "redirect:event_list.eve";
 		}//event_write_ok end
@@ -247,7 +250,9 @@ public class EventController {
 					event.setEvent_pic(fileDBName);
 					System.out.println(fileDBName);
 			}
-			
+			String content=event.getContent();
+		    content = content.replace("\r\n", "<br>");
+		    event.setContent(content);
 			//DAO에서 수정 메서드를 호출하여 수정합니다.
 			int result = eventservice.eventModify(event);
 			
