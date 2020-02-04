@@ -105,7 +105,9 @@
 	
 	<!-- 민지 시작  -->
 	<select id = "main_count" resultType = "int">
-		select count(*) from event where event_date >= sysdate
+		select count(*) from event 
+		where event_date >= sysdate
+		and event_status = 1
 	</select>
 	
 	<select id = "main_list" parameterType = "java.util.Map" resultType = "Event">
@@ -113,11 +115,14 @@
 		event_start, event_end, event_room, event_pic, event_status from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 		and event_date >= sysdate
+		and event_status = 1
 		order by event_date
 	</select>
 	
 	<select id = "month_count" parameterType = "String" resultType = "int">
-		select count(*) from event where substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		select count(*) from event 
+		where substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		and event_status = 1
 	</select>
 	
 	<select id = "month_list" parameterType = "java.util.Map" resultType = "Event">
@@ -125,6 +130,7 @@
 		event_start, event_end, event_room, event_pic, event_status from event) 
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 		and substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		and event_status = 1
 		order by event_date
 	</select>
 	<!-- 민지 끝 -->

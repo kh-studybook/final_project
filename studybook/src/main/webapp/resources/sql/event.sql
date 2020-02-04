@@ -27,3 +27,5 @@ from member me, event ev
 where me.key=ev.mem_key and ev.event_num=5
 
 select name from member, event where member.key = event.mem_key and event.event_num = event.event_num
+
+update event set event_status = 1;

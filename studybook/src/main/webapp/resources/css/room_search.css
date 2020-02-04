@@ -68,12 +68,28 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 18px;
 }
 
 #m_write_date>div>i {
 	color: #56D7D6;
 	font-size: 18px;
 	margin: 10px;
+}
+
+#m_write_starttime, #m_write_endtime, #m_write_count {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.m_write>i:nth-child(1) {
+	margin-right: 0;
+}
+
+.m_write>i:nth-child(2) {
+	margin-left: 0;
 }
 
 #m_main_search {
@@ -133,7 +149,7 @@
 
 /* 공간 list */
 #j_main_room {
-	margin: 40px auto;	
+	margin: 40px auto;
 }
 
 #j_main_room>p {
@@ -184,31 +200,31 @@
 }
 
 /* Calendar */
-.jsCalendar{
-	display:none;
+.jsCalendar {
+	display: none;
 }
 
 #my-calendar table {
 	z-index: 10;
 }
 
-.jsCalendar table td{
-	padding: 0 auto!important;
+.jsCalendar table td {
+	padding: 0 auto !important;
 }
 
-.jsCalendar thead .jsCalender-title{
-	display:grid;
-	grid-template-columns:100px 160px 100px;
+.jsCalendar thead .jsCalender-title {
+	display: grid;
+	grid-template-columns: 100px 160px 100px;
 }
 
-.jsCalendar table{
-	box-shadow:0 0 2px rgba(0,0,0,0.4)!important;
-	font-family:Tahoma,Geneva,sans-serif;
-	margin:5px!important;
+.jsCalendar table {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.4) !important;
+	font-family: Tahoma, Geneva, sans-serif;
+	margin: 5px !important;
 }
 
-.jsCalendar tbody td:hover{
-	cursor:pointer;
+.jsCalendar tbody td:hover {
+	cursor: pointer;
 }
 
 .jsCalendar tbody td.jsCalendar-current {

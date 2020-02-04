@@ -361,7 +361,7 @@ public class RoomController {
 		return mv;
 	}
 
-	// 메인 화면 보기(테스트) - 민지
+	// 메인 화면 보기 - 민지
 	@RequestMapping(value = "/main.net")
 	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
@@ -466,8 +466,8 @@ public class RoomController {
 			@RequestParam String date,
 			@RequestParam String starttime,
 			@RequestParam String endtime,
-			@RequestParam String MIN_MEMBER,
-			@RequestParam String MAX_MEMBER,
+			@RequestParam(value = "MIN_MEMBER", defaultValue = "1", required = false) String MIN_MEMBER,
+			@RequestParam(value = "MAX_MEMBER", defaultValue = "1000", required = false) String MAX_MEMBER,
 			ModelAndView mv) {		
 		System.out.println("date="+date);
 		// 한 화면에 출력할 room 갯수
@@ -514,8 +514,8 @@ public class RoomController {
 			@RequestParam String date,
 			@RequestParam String starttime,
 			@RequestParam String endtime,
-			@RequestParam String MIN_MEMBER,
-			@RequestParam String MAX_MEMBER) {		
+			@RequestParam(value = "MIN_MEMBER", defaultValue = "1", required = false) String MIN_MEMBER,
+			@RequestParam(value = "MAX_MEMBER", defaultValue = "1000", required = false) String MAX_MEMBER) {		
 		System.out.println("date="+date);
 		// 한 화면에 출력할 room 갯수
 		int limit = 9;

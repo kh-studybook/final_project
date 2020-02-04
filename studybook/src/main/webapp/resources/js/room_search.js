@@ -95,9 +95,6 @@ $(document).ready(function(){
 	    	$('#m_write_date').append('<i class="far fa-calendar-alt"></i>');
 	    	$('#m_write_date').append(date2str);
 	    	$('#m_write_date').append('<i class="fas fa-chevron-down"></i>');
-	    	$('#m_write_date').css('padding','10px');
-	    	$('#m_write_date').css('font-weight','bold');
-	    	$('#m_write_date').css('font-size','18px');
 	    	$('.jsCalendar').css("display", "none");
 	    	$(this).addClass('j_selected');
 	    	$('#date').val(date2str);
@@ -114,10 +111,6 @@ $(document).ready(function(){
 			$('#m_write_starttime').append('<i class="far fa-clock"></i>');
 			$('#m_write_starttime').append(starttime);
 			$('#m_write_starttime').append('<i class="fas fa-chevron-down"></i>');
-			$('#m_write_starttime').css('font-weight','bold');
-			$('.m_write>i:nth-child(1)').css('margin-right', '0');
-			$('.m_write>i:nth-child(2)').css('margin-left', '0');
-			$(this).css('font-size', '14px');
 			$('#starttime').val(starttime.substring(0, starttime.length-1));
 		})
 		
@@ -131,10 +124,6 @@ $(document).ready(function(){
 			$('#m_write_endtime').append('<i class="far fa-clock"></i>');
 			$('#m_write_endtime').append(endtime);
 			$('#m_write_endtime').append('<i class="fas fa-chevron-down"></i>');
-			$('#m_write_endtime').css('font-weight','bold');
-			$('.m_write>i:nth-child(1)').css('margin-right', '0');
-			$('.m_write>i:nth-child(2)').css('margin-left', '0');
-			$(this).css('font-size', '14px');
 			$('#endtime').val(endtime.substring(0, endtime.length-1));
 		})
 
@@ -144,49 +133,45 @@ $(document).ready(function(){
 			$('#m_write_count').append('<i class="fas fa-user"></i>');
 			$('#m_write_count').append($(this).text());
 			$('#m_write_count').append('<i class="fas fa-chevron-down"></i>');
-			$('#m_write_count').css('font-weight','bold');
-			$('.m_write>i:nth-child(1)').css('margin-right', '0');
-			$('.m_write>i:nth-child(2)').css('margin-left', '0');
-			$(this).css('font-size', '14px');
 		})
 		
 		$('#m_main_count').children().children().eq(0).click(function(){
-			$('#MIN_MEMBER').val('1');
+			$('#MIN_MEMBER').val('');
 			$('#MAX_MEMBER').val('4');
 		})
 		
 		$('#m_main_count').children().children().eq(1).click(function(){
 			$('#MIN_MEMBER').val('4');
-			$('#MAX_MEMBER').val('8');
+			$('#MAX_MEMBER').val('');
 		})
 		
 		$('#m_main_count').children().children().eq(2).click(function(){
 			$('#MIN_MEMBER').val('8');
-			$('#MAX_MEMBER').val('12');
+			$('#MAX_MEMBER').val('');
 		})
 		
 		$('#m_main_count').children().children().eq(3).click(function(){
 			$('#MIN_MEMBER').val('12');
-			$('#MAX_MEMBER').val('1000');
+			$('#MAX_MEMBER').val('');
 		})
 		
 		$('.jsCalendar').css("width", $('#m_write_date'));
 		$('#m_main_time').css("width", $('#m_write_time'));
 		$('#m_main_count').css("width", $('#m_write_count'));
+		
+		$(document).resize(function(){
+			$('.jsCalendar').css("width", $('#m_write_date'));
+			$('#m_main_time').css("width", $('#m_write_time'));
+			$('#m_main_count').css("width", $('#m_write_count'));
+		})
 	    
 	    // carousel - optional
 	    $('#blogCarousel').carousel({
 	          interval: 5000
 	    });
-
-    // 숫자 3자리마다 , 붙이는 함수
-    function numberFormat(inputNumber) {
-	    // return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    	return Number(inputNumber).toLocalString('en').split(".")[0];
-    }
-    
-    // 스터디룸 검색 결과 1페이지 불러오기
-    getList(1);
+		
+		//getList 1페이지 불러오기
+		getList(1)
 })// ready() end
 
 	function setPaging(href, digit){
@@ -318,10 +303,10 @@ function search(){
 	} else if(parseInt(starttime) >= parseInt(endtime)){
 		alert('시간을 확인해 주세요');
 		return false;
-	} else if(MIN_MEMBER==''){
+	} else if(MIN_MEMBER=='' && MAX_MEMBER==''){
 		alert('인원수를 선택해 주세요');
 		return false;
-	}    	
+	}
 	
 	window.location.href='RoomSearch.ro?date='+date+'&starttime='+starttime+'&endtime='+endtime
 	+'&MIN_MEMBER='+MIN_MEMBER+'&MAX_MEMBER='+MAX_MEMBER;
