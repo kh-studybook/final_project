@@ -32,7 +32,7 @@
   			 where event.mem_key = member.key)
 		 where rnum &gt;= #{start} and rnum &lt;= #{end}
 		 and event_status = 1
-      	order by event_date
+      	order by event_date asc
 	</select>
 
 	<update id = "modifyEvent" parameterType = "Event">
@@ -104,6 +104,7 @@
 	
 	
 	<!-- 민지 시작  -->
+
 	<select id = "main_count" resultType = "int">
 		select count(*) from event 
 		where event_date >= sysdate
@@ -134,4 +135,5 @@
 		order by event_date
 	</select>
 	<!-- 민지 끝 -->
+
 </mapper>

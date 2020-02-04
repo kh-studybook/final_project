@@ -8,9 +8,11 @@ public class Member {
 	private String password;
 	private String phone; 
 	private int key;
-	private String profile;
-	private String profile_savefile = "/image/profile/default.png";
-	private String profile_originalfile = "/image/profile/default.png";
+
+	private String profile= "default.png";
+
+	private String profile_savefile = "default.png";
+	private String profile_originalfile = "default.png";
 	private MultipartFile uploadfile;
 	
 	

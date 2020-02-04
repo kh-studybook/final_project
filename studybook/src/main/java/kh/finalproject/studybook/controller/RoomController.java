@@ -101,7 +101,7 @@ public class RoomController {
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		String path="C:\\Users\\user1\\git\\0203\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0204\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 

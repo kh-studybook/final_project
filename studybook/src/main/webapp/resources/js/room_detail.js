@@ -43,6 +43,8 @@ $(document).on('click','.number-spinner button',
 	}
 	
 	function ajax(data) {
+		mem_key=$("input[name=mem_key]").val();
+		console.log("로그인한 멤버키="+mem_key)
 		   console.log(data)
 		   output = "";
 		   $.ajax({
@@ -62,14 +64,17 @@ $(document).on('click','.number-spinner button',
 		            
 		            $(data.reviewlist).each(
 		               function(index, item) {
-		            	  output += "<li class='e_rlist'><div class='e_rbox_mine'><div class='e_pf_info'><div class='e_pf_pic'>";
+		            	  output += "<li class='e_rlist'>";
+		            	  console.log("작성한 회원="+item.mem_key)
+		                	 if(mem_key==item.mem_key){
+		                		 output+="<div class='e_review_manage_div'><span class='e_review_manage'><a href='myReviewList.re?key="+item.mem_key+"'>관리하기</a></span></div>";
+		                	 }
+		            	  output +="<div class='e_rbox_mine'><div class='e_pf_info'><div class='e_pf_pic'>";
 		                  output += "<img src='resources/image/profile/"+item.profile+"'></div>";
 		                  output += "<h2 class='e_guest_name'>"+item.name+"</h2></div>";
+		                  
 		                  output += "<div class='e_review_info'>"
-		                	 if(mem_key==item.mem_key){
-		                		 output+="<span class='e_review_manage'><a href='#'>수정</a>/";
-		                		 output+="<a href='#'>삭제</a></span>";
-		                	 }
+		                	  
 		                  output += "<p class='e_p_reivew'>"+item.content+"</p>";
 		                  output += "<div class='e_rbox_info_base'><span class='e_time_info'>이용 날짜 : ";
 		                  output += item.review_date.substring(0,10)+"</span></div></div></div></li>";
@@ -121,6 +126,15 @@ $(document).on('click','.number-spinner button',
 		 } //function end
 	
 	$(document).ready(function(){
+		$('button').click(function(){
+			var end_time=$('input[name=end_time]').val();
+			if(!end_time){
+				alert("예약 시간을 다 고르지 않으셨습니다.");
+				return false;
+			}
+			
+		})
+		
 		
 		$(".carousel-indicators li:first-child").addClass("active");
 		$(".carousel-inner div:first-child").addClass("active");
@@ -128,6 +142,7 @@ $(document).on('click','.number-spinner button',
 		go(1);
 		
 		var mem_key=$("#mem_key").val();
+		
 		
 		var time_check=0;
 			$(".swiper-slide").click(function(){
