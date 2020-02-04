@@ -101,8 +101,8 @@
 							<div id="m_main_count">
 								<ul>
 									<li>4명 이하</li>
-									<li>4 ~ 8명</li>
-									<li>8 ~ 12명</li>
+									<li>4명 이상</li>
+									<li>8명 이상</li>
 									<li>12명 이상</li>
 								</ul>
 				        	</div>
@@ -141,7 +141,7 @@
 	                            	<div class="row">
 	                            	<c:forEach var="list" items="${eventlist}" varStatus="status">
 	                                	<div class="col-md-4">
-		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?num=${list.event_num}'">
+		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?event_num=${list.event_num}'">
 			                                   	<img class="col-md j_event_img" src="resources/upload/${list.event_pic}">
 			                                    <div class="col-md j_event_inner">
 					                                <div class="j_event_name">${list.title}</div>
@@ -182,7 +182,7 @@
 	                            	<div class="row">
 	                                <c:forEach var="list" items="${eventlist2}" varStatus="status">
 	                                	<div class="col-md-4">
-		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?num=${list.event_num}'">
+		                               		<div class="j_event" onclick="javascript:location.href='EventDetailAction.eve?event_num=${list.event_num}'">
 			                                   	<img class="col-md j_event_img" src="resources/upload/${list.event_pic}">
 			                                    <div class="col-md j_event_inner">
 					                                <div class="j_event_name">${list.title}</div>

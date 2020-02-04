@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+main {
+	margin-top: 0;
+}
+
 /* main header 부분 */
 #m_main_header {
 	width: 100%;
@@ -182,26 +186,6 @@
 	justify-content: center;
 }
 
-/*carousel*/
-.blog .carousel-indicators {
-	left: 0;
-	top: auto;
-	bottom: -40px;
-	z-index: 5;
-}
-
-/* The colour of the indicators */
-.blog .carousel-indicators li {
-	background: #a3a3a3;
-	border-radius: 50%;
-	width: 8px;
-	height: 8px;
-}
-
-.blog .carousel-indicators .active {
-	background: #707070;
-}
-
 /* Calendar */
 .jsCalendar {
 	display: none;
@@ -245,6 +229,25 @@
 	height: 36px;
 }
 
+/*carousel*/
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+	bottom: -40px;
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+	background: #a3a3a3;
+	border-radius: 50%;
+	width: 8px;
+	height: 8px;
+}
+
+.blog .carousel-indicators .active {
+	background: #707070;
+}
+
 /*event*/
 #j_main_event {
 	min-height: 250px;
@@ -278,8 +281,7 @@
 }
 
 .j_event_img {
-	max-width: 100%;
-	height: auto;
+	height: 200px;
 	filter: brightness(80%);
 }
  

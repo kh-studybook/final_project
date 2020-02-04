@@ -40,3 +40,26 @@ select *
 		order by room.room_code) b
 		)
 		where rnum >= 1 and rnum <= 9;
+		
+select *
+      from (select rownum rnum, b.*
+      from (select room.ROOM_CODE, room.ROOM_NAME
+      ,room.MIN_MEMBER, room.MAX_MEMBER
+      ,room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
+      from room inner join gallery 
+      on room.ROOM_CODE=gallery.ROOM_CODE
+      and gallery.gallery_num=1
+      and room.MIN_MEMBER >= to_number(4)
+      and room.MAX_MEMBER <= to_number(8)
+      
+      left outer join reserve
+      on room.ROOM_CODE=reserve.room_code
+      and reserve.reserve_date!=TO_DATE(2020-01-01)
+      and reserve.start_time not between 13 and 15
+      and reserve.end_time-1 not between 13 and 15
+      and 13 not between reserve.start_time and reserve.end_time-1
+      and 15 not between reserve.start_time and reserve.end_time
+      
+      order by room.room_code) b
+      )
+      where rnum >= 1 and rnum <= 9;
