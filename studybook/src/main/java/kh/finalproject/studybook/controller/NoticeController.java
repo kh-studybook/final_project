@@ -37,7 +37,7 @@ public class NoticeController {
 	//공지사항 리스트 (일반회원)
 	@RequestMapping(value = "/NoticeList.bo")
 	public ModelAndView NoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
+			@RequestParam(value = "limit", defaultValue = "7", required = false) int limit, ModelAndView mv)
 			throws Exception {
 		
 		//총 리스트 
@@ -89,7 +89,7 @@ public class NoticeController {
 	//공지사항 리스트 (관리자)
 	@RequestMapping(value = "/noticeadmin.bo")
 	public ModelAndView NoticeAdmin(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit, ModelAndView mv)
+			@RequestParam(value = "limit", defaultValue = "7", required = false) int limit, ModelAndView mv)
 			throws Exception {
 		
 		//총 리스트 
@@ -221,10 +221,10 @@ public class NoticeController {
 		int maxpage = (listcount + limit - 1) / limit;
 		System.out.println("현재 페이지에 보여줄 시작 페이지 수 = " + maxpage);
 
-		int startpage = ((page - 1) / 10) * 10 + 1;
+		int startpage = ((page - 1) / 7) * 7 + 1;
 		System.out.println("현재 페이지 그룹에서 보여줄 마지막 페이지수 = " + startpage);
 
-		int endpage = startpage + 10 - 1;
+		int endpage = startpage + 7 - 1;
 		System.out.println("현재 페이지에 보여줄 마지막 페이지 수 = " + endpage);
 
 		if (endpage > maxpage)

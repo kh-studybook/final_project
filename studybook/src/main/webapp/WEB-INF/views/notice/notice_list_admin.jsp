@@ -19,7 +19,7 @@ main {
 
 	<!-- Body Start -->
 	<main>		
-		<jsp:include page="notice_list.jsp" />
+		<jsp:include page="notice_list_foradmin.jsp" />
 	</main>
 	<!-- Body End -->
 

@@ -46,7 +46,12 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
          <li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
+         <c:if test="${member.key == '999'}">
+         <li class="nav-item"><a class="nav-link" href="noticeadmin.bo">공지사항</a></li>
+         </c:if>
+         <c:if test="${member.key != '999'}">
          <li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a></li>
+         </c:if>
       </ul>
    </div>
       <ul class="nav navbar-nav navbar-right j_header__column">
