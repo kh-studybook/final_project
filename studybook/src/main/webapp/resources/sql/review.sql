@@ -12,7 +12,7 @@ ALTER TABLE review add CONSTRAINT review_room_code_fk foreign key(room_code) ref
 	
 alter table review drop constraint review_room_code_fk;
 
-delete review;
+delete review where r_code = '1005';
 drop table review;
 
 select * from review;

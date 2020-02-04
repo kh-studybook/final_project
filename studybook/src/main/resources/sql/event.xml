@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id = "count" resultType = "int">
-		select count(*) from event
+		select count(*) from event where event_status = 1
 	</select>
 	
 	<select id = "detail" parameterType = "int" resultType = "Event">
@@ -29,9 +29,9 @@
 			(select rownum rnum,  event.event_num,  event.mem_key,  event.title,  event.content,  event.event_date, 
            event.event_start,  event.event_end,  event.event_room,  event.event_pic,  event.event_status, member.name event_writer
    			from event, member 
-  			 where event.mem_key = member.key)
-		 where rnum &gt;= #{start} and rnum &lt;= #{end}
-		 and event_status = 1
+  			 where event.mem_key = member.key 
+  			 and event.event_status = 1)
+		 where rnum &gt;= #{start} and rnum &lt;= #{end}		 
       	order by event_date asc
 	</select>
 

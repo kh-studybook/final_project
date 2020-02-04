@@ -13,6 +13,8 @@ body {background-color: #f2f2f2;}
 
 /** 페이지 네이션*/
 .center-block {display: flex;justify-content: center}
+li .current {background: #faf7f7;color: gray;}
+
 
 /** 카드 관련*/
 .p_room_name{font-weight:bold; font-size:16px;}
