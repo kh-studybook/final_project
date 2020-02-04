@@ -28,7 +28,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md">
-					<p class="m_header_text">"1월 스터디<br>공간 예약 서두르세요!"</p>
+					<p class="m_header_text">"<span class="m_month"></span>월 스터디<br>공간 예약 서두르세요!"</p>
 				</div>
 			</div>
 			<div class="row">
@@ -135,6 +135,13 @@
 	                <div class="col-md-12">
 	                    <div id="blogCarousel" class="carousel slide" data-ride="carousel">
 	             
+	             			<c:if test="${!empty eventlist2}">
+								<!-- event 좌우 버튼 -->
+								<ol class="carousel-indicators">
+		                            <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+		                            <li data-target="#blogCarousel" data-slide-to="1"></li>
+		                        </ol>
+		                        
 	                        <!-- Carousel items -->
 	                        <div class="carousel-inner">
 	                            <div class="carousel-item active">
@@ -170,13 +177,6 @@
 	                                <!--.row-->
 	                            </div>
 	                            <!--.item-->
-	
-								<c:if test="${!empty eventlist2}">
-								<!-- event 좌우 버튼 -->
-								<ol class="carousel-indicators">
-		                            <li data-target="#blogCarousel" data-slide-to="0" class="active">&lt</li>
-		                            <li data-target="#blogCarousel" data-slide-to="1">&gt</li>
-		                        </ol>
 		                        
 	                            <div class="carousel-item">
 	                            	<div class="row">
@@ -212,8 +212,7 @@
 	                            </div>
 	                            </c:if>
 	                            <!--.item-->
-	
-	                        </div>
+	                            </div>
 	                        <!--.carousel-inner-->
 	                    </div>
 	                    <!--.Carousel-->
@@ -231,6 +230,9 @@
 			</div>
 		</c:if>
 	</div>
+	
+	<br>
+	<br>
 	
 	<%-- 찾아오시는 길 --%>
 	<div class="container" id="j_main_root">

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('.m_month').text(month());
 	$('#m_write_date').click(function(){
 		if($('.jsCalendar').css("display") == "none"){
 			$('.jsCalendar').css("display", "inline-grid");
@@ -181,7 +182,7 @@ $(document).ready(function(){
     
     // carousel - optional
     $('#blogCarousel').carousel({
-          interval: 5000
+          interval: 3000
     });
     
     // 스터디 추천공간 1페이지 불러오기
@@ -351,4 +352,10 @@ $(document).ready(function(){
     	
     	window.location.href='RoomSearch.ro?date='+date+'&starttime='+starttime+'&endtime='+endtime
     	+'&MIN_MEMBER='+MIN_MEMBER+'&MAX_MEMBER='+MAX_MEMBER;
+    }
+    
+    function month(){
+    	const today = new Date();
+    	const month = today.getMonth() + 1;
+    	return month;
     }
