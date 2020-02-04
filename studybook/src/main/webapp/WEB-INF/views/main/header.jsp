@@ -46,7 +46,12 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
          <li class="nav-item"><a class="nav-link" href="event_list.eve">이벤트 홍보</a></li>
+         <c:if test="${member.key == '999'}">
+         <li class="nav-item"><a class="nav-link" href="noticeadmin.bo">공지사항</a></li>
+         </c:if>
+         <c:if test="${member.key != '999'}">
          <li class="nav-item"><a class="nav-link" href="NoticeList.bo">공지사항</a></li>
+         </c:if>
       </ul>
    </div>
       <ul class="nav navbar-nav navbar-right j_header__column">
@@ -56,13 +61,13 @@
       <i class="fas fa-arrow-right close"></i>
       <div class="j_menu__header">
          <div class="j_menu_member">
-         	<c:if test="${member.email==null}">
+         	<c:if test="${member.key == null}">
                <div id="j_menu_profile"> <!-- 연수 : 프로필 사진 부분 다시 보기 -->
                   <img src="resources/image/profile/default.png">
                </div>
                <p id="menu_login" class="j_menu_login"><a href="login.mem">로그인이 필요합니다.</a></p>
             </c:if>
-            <c:if test="${member.email!=null}">
+            <c:if test="${member.key != null}">
 
 				<div id="j_menu_profile">
 		            <c:if test="${member.profile == ''}">

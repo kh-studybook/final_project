@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>notice list</title>
+<title>notice list for admin</title>
 
 <style>
 * {
@@ -20,7 +20,7 @@ body {
 }
 
 .contentwrap {
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 }
@@ -53,7 +53,7 @@ body {
 
 .s_desc {
 	margin-top: 30px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 	font-size: 14px;
 	text-align: center;
 }
@@ -87,6 +87,7 @@ body {
 	display: flex;
 	justify-content: center; /*가운데 정렬*/
 }
+
 /*제목*/
 .title {
 	font-size:14px;
@@ -130,7 +131,7 @@ body {
 
 .writebtn {
 	position:absolute;
-	top: 150px;
+	top: 130px;
 	left: 69%;
 	width:80px;
 	height:30px;
@@ -158,7 +159,6 @@ body {
 .col {
 	margin-top: 50px;
 }
-
 
 </style>
 
@@ -279,7 +279,7 @@ body {
 
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
-		<button type="button" class="writebtn ">공지사항 쓰기</button>
+		<button type="button" class="writebtn ">글쓰기</button>
 	</c:if>
 	</div>
 
@@ -339,7 +339,7 @@ body {
 							
 							<c:if test="${page>1 }">
 								<li class="page-item"><a
-									href="NoticeList.bo?page=${page-1 }" class="page-link"><</a>
+									href="noticeadmin.bo?page=${page-1 }" class="page-link"><</a>
 									&nbsp;</li>
 							</c:if>
 
@@ -350,7 +350,7 @@ body {
 								</c:if>
 								
 								<c:if test="${a!=page }">
-									<li class="page-item"><a href="NoticeList.bo?page=${a}"
+									<li class="page-item"><a href="noticeadmin.bo?page=${a}"
 										class="page-link">${a }</a></li>
 								</c:if>
 							</c:forEach>
@@ -361,7 +361,7 @@ body {
 							</c:if>
 							<c:if test="${page<maxpage }">
 								<li class="page-item"><a class="page-link"
-									href="NoticeList.bo?page={page+1}">&nbsp; ></a></li>
+									href="noticeadmin.bo?page={page+1}">&nbsp; ></a></li>
 							</c:if>
 						</ul>
 					</div>
