@@ -8,7 +8,7 @@ create table review(
 
 alter table review add r_code number(10) not null constraint review_r_code_fk references reserve(r_code);
 
-delete review;
+delete review where r_code = '1005';
 drop table review;
 
 select * from review;

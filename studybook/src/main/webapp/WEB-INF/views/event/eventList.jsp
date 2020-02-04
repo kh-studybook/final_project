@@ -35,6 +35,8 @@ body {background-color: #f2f2f2;}
 
 /** 페이지 네이션*/
 .center-block {display: flex;justify-content: center}
+li .current {background: #faf7f7;color: gray;}
+
 </style>
 <script>
 	$(function() {
