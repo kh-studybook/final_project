@@ -32,7 +32,7 @@
   			 where event.mem_key = member.key)
 		 where rnum &gt;= #{start} and rnum &lt;= #{end}
 		 and event_status = 1
-      	order by event_date
+      	order by event_date asc
 	</select>
 
 	<update id = "modifyEvent" parameterType = "Event">

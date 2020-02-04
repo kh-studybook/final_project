@@ -62,7 +62,7 @@ public class EventController {
 		
 		//이벤트 등록하기
 		@PostMapping(value = "EventAddAction.eve")
-		public String event_write_ok(Event event, HttpServletRequest request) throws Exception{
+		public String event_write_ok(Event event, HttpServletRequest request, HttpServletResponse response) throws Exception{
 			   //사진 등록하기				
 			MultipartFile uploadfile=event.getEventPic_uploadfile();
 		      
@@ -77,11 +77,8 @@ public class EventController {
 		      int date=c.get(Calendar.DATE);
 		      
 		    //String saveFolder=request.getSession().getServletContext().getRealPath("resources")+"/upload/";
-			/*
-			 * String saveFolder=
-			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
-			 */
-		      saveFolder="C:\\Users\\user1\\git\\0203\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
+			
+		     //saveFolder="C:\\Users\\user1\\git\\0204\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -196,11 +193,11 @@ public class EventController {
 		
 		//이벤트 수정 페이지 보기
 		@RequestMapping(value = "EventModifyView.eve", method = RequestMethod.GET)
-		public ModelAndView EventModify(int num, ModelAndView mv, HttpServletRequest request, HttpSession session) 
+		public ModelAndView EventModify(int event_num, ModelAndView mv, HttpServletRequest request, HttpSession session) 
 				throws Exception {
-			Event eventdata = eventservice.getEventDetail(num);
+			Event eventdata = eventservice.getEventDetail(event_num);
 			Member member = (Member)session.getAttribute("member");	
-			String event_writer = eventservice.getEventWriter(num);
+			String event_writer = eventservice.getEventWriter(event_num);
 			int mem_key = member.getKey();
 			List<String> roomlist=roomserivce.getRoom_nameList();
 			if(eventdata == null) {

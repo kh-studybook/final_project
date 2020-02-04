@@ -104,14 +104,11 @@ margin-top:50px;
 							<tr>
 								<th>No</th>
 								<th>이벤트번호</th>
-								<th>회원키</th>
-								<th style = "width:10%">제목</th>
-								<th style = "width:20%">내용</th>
+								<th>제목</th>
 								<th>날짜</th>
-								<th>시작시간</th>
-								<th>종료시간</th>
 								<th>장소</th>
-								<th class="text-center">반려/복구</th>
+								<th>상세보기</th>
+								<th class="text-center">반려/승인</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -121,24 +118,22 @@ margin-top:50px;
 									<td><c:out value="${num}" /> 
 									<c:set var="num" value="${num+1}" /></td>
 									<td>${m.event_num}</td>
-									<td>${m.mem_key}</td>
 									<td>${m.title}</td>
-									<td class = "content">${fn:substring(m.content, 0, 30)}</td>
 									<td>${fn:substring(m.event_date,0,11)}</td>
-									<td>${m.event_start}시</td>
-									<td>${m.event_end}시</td>
 									<td>${m.event_room}</td>
+									<td><a class='btn btn-secondary' href="EventDetailAction.eve?event_num=${m.event_num}">상세보기</a></td>
 									<td class="text-center">
+										<!-- 아무것도 선택 안 했을 때 -->
 										<c:if test = "${m.event_status == 0}">
 											<a class='btn btn-danger btn-xs' href="AdminEvent.eve?event_num=${m.event_num}">반려</a> 
 											<a class="btn btn-info btn-xs" href="AdminEvent2.eve?event_num=${m.event_num}">승인</a>
 										</c:if>
+										<!--  승인 했을 때 -->
 										<c:if test = "${m.event_status == 1}">
 											<a class='btn btn-danger btn-xs' href="AdminEvent.eve?event_num=${m.event_num}">반려</a> 
-											<a class="btn btn-info btn-xs" href="AdminEvent2.eve?event_num=${m.event_num}">승인</a>
 										</c:if>
-										<c:if test = "${m.event_status == 2}">
-											<a class='btn btn-danger btn-xs' href="AdminEvent.eve?event_num=${m.event_num}">반려</a> 
+										<!--  반려 했을 때 -->
+										<c:if test = "${m.event_status == 2}"> 
 											<a class="btn btn-info btn-xs" href="AdminEvent2.eve?event_num=${m.event_num}">승인</a>
 										</c:if>
 									</td>
@@ -151,7 +146,7 @@ margin-top:50px;
 							<div class="col">
 								<ul class="pagination">
 									<c:if test="${page <= 1 }">
-										<li class="page-item"><a class="page-link current"
+										<li class="page-item"><a class="page-link"
 											href="#">이전&nbsp;</a></li>
 									</c:if>
 									<c:if test="${page > 1 }">
@@ -173,7 +168,7 @@ margin-top:50px;
 									</c:forEach>
 
 									<c:if test="${page >= maxpage }">
-										<li class="page-item"><a class="page-link current"
+										<li class="page-item"><a class="page-link"
 											href="#">&nbsp;다음</a></li>
 									</c:if>
 									<c:if test="${page < maxpage }">
