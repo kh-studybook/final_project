@@ -11,9 +11,9 @@
 <link rel="stylesheet" type="text/css" href="resources/css/room_detail.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/swiper.min.css" />
 <link rel="stylesheet" href="resources/css/jsCalendar.css">
+<script src="resources/js/room_detail.js"></script>
 <script src="resources/js/jsCalendar.js"></script>
 <script src="resources/js/swiper.min.js"></script>
-<script src="resources/js/room_detail.js"></script>
 
 </head>
 <body>
@@ -415,11 +415,7 @@
   				$(".swiper-slide").removeClass("not_active");
   				var search="room_code="+${room.ROOM_CODE}+"&search_date="+formatDate(date).substring(0,10);
   				reserve_ajax(search);
-  	 		
-  				
-  				
-  				
-  				
+
  			}
   				
   				

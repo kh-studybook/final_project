@@ -18,6 +18,7 @@ $(document).on('click', '.number-spinner button', function () {
 			newVal = 0;
 		}
 	}
+	
 	btn.closest('.number-spinner').find('input').val(newVal);
 	var food_code=$(this).closest('.e_product-info').find("input[name=food_code_info]").val();
 	var product_price=$(this).closest('.e_product-info').find("span[name=product_price]").text();

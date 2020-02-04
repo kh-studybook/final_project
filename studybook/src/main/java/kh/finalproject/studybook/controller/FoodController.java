@@ -90,7 +90,7 @@ public class FoodController {
 		
 		//String path=saveFolder;
 		//은지
-		String path="C:\\Users\\user1\\git\\0203\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+		String path="C:\\Users\\user1\\git\\0204_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
 
 		
 		if(!uploadfile.isEmpty()) {
@@ -157,60 +157,63 @@ public class FoodController {
 			return mv;
 	 }
 	 //수정 FoodModifyAction.re
-	 @PostMapping("FoodModifyAction.re")
-	 public ModelAndView foodModifyAction(Food food, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws Exception{
-		 String food_name=food.getFood_name();
-			int food_cost=food.getFood_cost();
-			
-			MultipartFile uploadfile = mtfRequest.getFile("filename");
-			System.out.println("filename="+uploadfile);
-			
-			String path=saveFolder;
-			
-			
-			if(!uploadfile.isEmpty()) {
-				
-				String fileName = uploadfile.getOriginalFilename();//원래파일명
+	    @PostMapping("FoodModifyAction.re")
+	    public ModelAndView foodModifyAction(Food food, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws Exception{
+	       String food_name=food.getFood_name();
+	         int food_cost=food.getFood_cost();
+	         int food_code=food.getFood_code();
+	         
+	         MultipartFile uploadfile = mtfRequest.getFile("filename");
+	         System.out.println("filename="+uploadfile);
+	         
+	         String path=saveFolder;
+	         path="C:\\Users\\user1\\git\\0204_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+	         
+	         if(!uploadfile.isEmpty()) {
+	            
+	            String fileName = uploadfile.getOriginalFilename();//원래파일명
 
-				String safeFile=path+ System.currentTimeMillis() + fileName;
-				String DBname = System.currentTimeMillis() + fileName;
-				try {
-					uploadfile.transferTo(new File(safeFile));
-					foodservice.updateFoodIncPic(food_name,food_cost,DBname);
-					response.setContentType("text/html;charset=utf-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>");
-					out.println("alert('음식 정보가 수정되었습니다.(사진포함)')");
-					out.println("location.href='FoodAdList.re';");
-					out.println("</script>");
-					out.close();
-					return null;
-				}catch(IllegalStateException e) {
-					e.printStackTrace();
-					System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
-				} catch (IOException e) {
-					e.printStackTrace();
-					System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
-				}
-				
-				
-			}else {
-				foodservice.updateFood(food_name,food_cost);
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('음식 정보가 수정되었습니다.')");
-				out.println("location.href='FoodAdList.re';");
-				out.println("</script>");
-				out.close();
-				
-				return null;
-				
-			}
-			
-			return null;
-		 
-	 }
+	            String safeFile=path+ System.currentTimeMillis() + fileName;
+	            String DBname = System.currentTimeMillis() + fileName;
+	            try {
+	               uploadfile.transferTo(new File(safeFile));
+	               foodservice.updateFoodIncPic(food_code,food_name,food_cost,DBname);
+	               response.setContentType("text/html;charset=utf-8");
+	               PrintWriter out = response.getWriter();
+	               out.println("<script>");
+	               out.println("alert('음식 정보가 수정되었습니다.(사진포함)')");
+	               out.println("location.href='FoodAdList.re';");
+	               out.println("</script>");
+	               out.close();
+	               return null;
+	            }catch(IllegalStateException e) {
+	               e.printStackTrace();
+	               System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
+	            } catch (IOException e) {
+	               e.printStackTrace();
+	               System.out.println("Food테이블 insert하다 에러남 Foodcontroller");
+	            }
+	            
+	            
+	         }else {
+	            foodservice.updateFood(food_code,food_name,food_cost);
+	            response.setContentType("text/html;charset=utf-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>");
+	            out.println("alert('음식 정보가 수정되었습니다.')");
+	            out.println("location.href='FoodAdList.re';");
+	            out.println("</script>");
+	            out.close();
+	            
+	            return null;
+	            
+	         }
+	         
+	         return null;
+	       
+	    }
+
+
 	 //푸드 정보 삭제 FoodDelete.re
 	@GetMapping("FoodDelete.re")
 	public String FoodDeleteAction(int food_code, HttpServletResponse response)throws Exception{

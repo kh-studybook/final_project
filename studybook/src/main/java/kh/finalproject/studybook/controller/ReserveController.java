@@ -108,7 +108,7 @@ public class ReserveController {
 		return mv;
 	}
 
-	@RequestMapping(value = "GoPayment.re")
+	@PostMapping(value = "GoPayment.re")
 	public ModelAndView goPayment(Reserve reserve,
 			@RequestParam(value = "food_code", required = false) List<Integer> food_code,
 			@RequestParam(value = "count", required = false) List<Integer> count,

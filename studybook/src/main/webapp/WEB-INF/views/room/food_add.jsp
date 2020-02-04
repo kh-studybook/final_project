@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<form action="GoPayment.re" action="post">
+<form action="GoPayment.re" method="post">
 	<input type="hidden" name="mem_key" value="${reserve.mem_key }">
 	<input type="hidden" name="room_code" value="${reserve.room_code }">
 	<input type="hidden" name="reserver_name" value="${reserve.reserver_name }">

@@ -74,23 +74,25 @@ public class FoodServiceImpl implements FoodService {
 		return fdao.getFoodDetail(food_code);
 	}
 	//푸드 정보 업데이트(사진포함)
-	@Override
-	public void updateFoodIncPic(String food_name, int food_cost, String DBname) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("food_name", food_name);
-		map.put("food_cost", food_cost);
-		map.put("food_pic", DBname);
-		fdao.updateFoodIncPic(map);
-		
-	}
-	//푸드 정보 업데이트(사진 없이)
-	@Override
-	public void updateFood(String food_name, int food_cost) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("food_name", food_name);
-		map.put("food_cost", food_cost);
-		fdao.updateFood(map);
-	}
+	   @Override
+	   public void updateFoodIncPic(int food_code,String food_name, int food_cost, String DBname) {
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("food_code", food_code);
+	      map.put("food_name", food_name);
+	      map.put("food_cost", food_cost);
+	      map.put("food_pic", DBname);
+	      fdao.updateFoodIncPic(map);
+	      
+	   }
+	   //푸드 정보 업데이트(사진 없이)
+	   @Override
+	   public void updateFood(int food_code,String food_name, int food_cost) {
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("food_code", food_code);
+	      map.put("food_name", food_name);
+	      map.put("food_cost", food_cost);
+	      fdao.updateFood(map);
+	   }
 
 	//음식 정보 삭제
 	@Override
