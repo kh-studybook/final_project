@@ -130,15 +130,16 @@ body {
 
 .writebtn {
 	position:absolute;
-	left:65%;
-	width:120px;
-	height:50px;
-	line-height:50px;
+	top: 150px;
+	left: 69%;
+	width:80px;
+	height:30px;
+	line-height:30px;
 	background-color: #7F56D2;
 	border: 0px;
 	border-radius:5px;
 	text-decoration: none;
-	text-size: 10px;
+	font-size: 12px;
 	font-weight: bold;
 	cursor: pointer;
 	color: #ffffff;	

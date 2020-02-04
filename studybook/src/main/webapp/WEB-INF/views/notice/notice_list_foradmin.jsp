@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>notice list</title>
+<title>notice list for admin</title>
 
 <style>
 * {
@@ -20,7 +20,7 @@ body {
 }
 
 .contentwrap {
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 }
@@ -28,7 +28,7 @@ body {
 	background-color:white;
 	width:50%;
 	min-width: 420px;
-	height:800px;
+	height:850px;
 }
 
 .titlewrap {
@@ -53,7 +53,7 @@ body {
 
 .s_desc {
 	margin-top: 30px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 	font-size: 14px;
 	text-align: center;
 }
@@ -79,7 +79,7 @@ body {
 
 .numtd {
     width: 50px;
-    line-height: 23px;
+    line-height: 30px;
     font-size: 12px;
 }
 
@@ -87,6 +87,7 @@ body {
 	display: flex;
 	justify-content: center; /*가운데 정렬*/
 }
+
 /*제목*/
 .title {
 	font-size:14px;
@@ -101,11 +102,13 @@ body {
 }
 
 /*날짜*/
+.datediv {
+	margin-top:8px;
+}
+
 .date {
 	font-size:12px;
 	color:#7F7F7F;
-	margin-top:10px;
-	margin-bottom:10px;
 }
 .rows {
 	text-align: right;
@@ -128,15 +131,16 @@ body {
 
 .writebtn {
 	position:absolute;
-	left:65%;
-	width:120px;
-	height:50px;
-	line-height:50px;
+	top: 130px;
+	left: 69%;
+	width:80px;
+	height:30px;
+	line-height:30px;
 	background-color: #7F56D2;
 	border: 0px;
 	border-radius:5px;
 	text-decoration: none;
-	text-size: 10px;
+	font-size: 12px;
 	font-weight: bold;
 	cursor: pointer;
 	color: #ffffff;	
@@ -152,7 +156,9 @@ body {
 	float:right
 }
 
-
+.col {
+	margin-top: 50px;
+}
 
 </style>
 
@@ -273,7 +279,7 @@ body {
 
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
-		<button type="button" class="writebtn ">공지사항 쓰기</button>
+		<button type="button" class="writebtn ">글쓰기</button>
 	</c:if>
 	</div>
 
@@ -312,7 +318,7 @@ body {
 									<a href="noticedetailadmin.bo?num=${b.NOTICE_NUM }" class=title>${b.NOTICE_TITLE }</a>
 								</div>
 							</c:if>	
-								<div><span class=date>${b.NOTICE_DATE }</span></div>
+								<div class=datediv><span class=date>${b.NOTICE_DATE }</span></div>
 							</td>
 						</tr>
 						
