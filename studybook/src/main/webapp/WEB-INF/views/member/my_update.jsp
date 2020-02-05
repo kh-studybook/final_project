@@ -23,14 +23,14 @@ input[type=text], select, textarea {
 }
 
 .s_title {
-	margin-top: 120px;
-	margin-bottom: 20px;
+	margin-top: 80px;
+	margin-bottom: 30px;
 	font-size: 32px;
 	text-align: center;
 }
 
 .outer_container {
-	display: flex;
+	display: flex;6
 	justify-content: center;
 }
 
@@ -39,13 +39,13 @@ input[type=text], select, textarea {
 	padding: 20px;
 	width: 30%;
 	min-width: 500px;
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 
 .col-20 {
 	float: left;
 	width: 20%;
-	margin-top: 20px;
+	margin-top: 25px;
 	text-align: left;
 }
 
@@ -145,15 +145,15 @@ instead of next to each other */
 }
 
 .hr1 {
-	width: 100%;
+	width: 90%;
 	margin-top: 50px;
-	margin-bottom: 30px;
+	margin-bottom: 35px;
 }
 
 .hr2 {
 	margin-bottom: 30px;
-	margin-top: 80px;
-	width: 100%
+	margin-top: 75px;
+	width: 90%
 }
 
 
