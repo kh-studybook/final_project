@@ -77,9 +77,8 @@ body {
 	font-size: 14px;
 	padding:5px;
 	width:500px;
-	height:450px;
-    letter-spacing :0.3px;
-    line-height:25px;
+	height:400px;
+	resize:none;
 }
    
 th {
