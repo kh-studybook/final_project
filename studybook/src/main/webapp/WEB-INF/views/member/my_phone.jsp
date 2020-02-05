@@ -90,7 +90,7 @@ input[type=checkbox] {
 .message {
 	margin-top: 2px;
 	height:15px;
-}
+} 
 
 .phonemsg {
 	font-size:12px;

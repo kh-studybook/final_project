@@ -155,7 +155,6 @@ img {
 				$('.s_submit').attr('disabled', false);
 				$('.s_submit').css('background', '#7F56D2');
 			}
-
 		});   
 		
 		   

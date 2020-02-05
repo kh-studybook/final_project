@@ -298,7 +298,6 @@ body {
 
 <body>
 
-
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
 		<button type="button" class="writebtn ">공지 쓰기</button>

@@ -300,7 +300,7 @@ img {
 						});
 						$("#phone").blur(function() {
 							if (phonetest.test($(this).val())) {
-								gogo();
+								gogo(); 
 								console.log(phonetest.test($(this).val()));
 								$(".phonemsg").html('<img src=resources/image/check.png>');
 							} else {

@@ -128,7 +128,7 @@ body {
 	height: 0
 }
 .gray {
-	color: gray
+	color: gray 
 }
 
 .page-link {

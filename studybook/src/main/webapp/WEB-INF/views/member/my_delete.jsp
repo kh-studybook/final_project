@@ -50,7 +50,7 @@ body {
 }
 
 .formdiv {
-	display: flex;
+	display: flex; 
     justify-content: center;
 }
 

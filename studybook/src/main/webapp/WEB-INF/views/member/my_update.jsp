@@ -22,7 +22,7 @@ input[type=text], select, textarea {
 	resize: vertical;
 }
 
-.s_title {
+.s_title { 
 	margin-top: 70px;
 	margin-bottom: 38px;
 	font-size: 32px;
