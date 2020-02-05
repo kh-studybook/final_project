@@ -6,23 +6,47 @@
 <meta charset="UTF-8">
 <title>join</title>
 
-
 <style>
 * {
 	box-sizing: border-box;
 	font-family: "맑은 고딕";
 }
 
+body {
+	background-color: #f2f2f2;
+	text-align: center;
+}
+
 .s_title {
-	margin-top: 120px;
+	margin-top: 40px;
 	margin-bottom: 35px;
 	font-size: 32px;
 	text-align: center;
 }
 
-.s_container {
+.s_content {
+	font-size: 14px;
+	margin: 12px;
+	text-align: center;
+}
+
+.outer_container {
 	display: flex;
 	justify-content: center;
+}
+
+.s_container {
+	margin-top: 45px;
+	background-color: #ffffff;
+	padding: 20px;
+	width: 33%;
+	min-width: 500px;
+	margin-bottom: 10px;
+}
+
+.formdiv {
+	display: flex;
+    justify-content: center;
 }
 
 .s_input {
@@ -42,7 +66,7 @@
 	background-color: #9f9f9f;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 50px;
+	margin-bottom: 40px;
 	border: none;
 	cursor: pointer;
 }
@@ -88,7 +112,7 @@ instead of next to each other */
 }
 
 .schonangemeldet {
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 	font-size: 12px;
 	color: #555555;
 	display: flex;
@@ -121,10 +145,11 @@ instead of next to each other */
 
 .message {
 	margin-bottom: 5px;
+	text-align:left; 
 }
 
 .msg {
-	font-size: 10px;
+	font-size: 12px;
 	color: crimson;
 }
 
@@ -199,9 +224,11 @@ img {
 }
 
 .modal_toptitle {
-	margin-bottom: 35px;
+	margin-bottom: 37px;
 	font-size: 32px;
 	text-align: center;
+	color:#7F56D2;
+	font-weight:bold;
 }
 
 .modal_title {
@@ -380,11 +407,15 @@ img {
 </head>
 <body>
 
+<div class=outer_container>
+	<div class="s_container">
+
 	<p class=s_title>회원가입</p>
 	<p class="schonangemeldet">
 		이미 스터디북 회원이신가요? <span class="tologin">로그인</span>
 	</p>
-	<div class="s_container">
+	
+<div class=formdiv>
 		<form name="joinform" action="joinProcess.mem" method="get">
 
 			<div class="row height">
@@ -451,7 +482,9 @@ img {
 				</div>
 			</div>
 		</form>
+</div>		
 	</div>
+</div>
 
 
 	<!-- modal 시작! -->
