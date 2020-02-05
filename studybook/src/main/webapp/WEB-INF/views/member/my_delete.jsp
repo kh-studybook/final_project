@@ -16,9 +16,14 @@
 	font-family: "맑은 고딕";
 }
 
+body {
+	background-color: #f2f2f2;
+	text-align: center;
+}
+
 .s_title {
-	margin-top: 230px;
-	margin-bottom: 35px;
+	margin-top: 60px;
+	margin-bottom: 37px;
 	font-size: 32px;
 	text-align: center;
 }
@@ -29,9 +34,24 @@
 	text-align: center;
 }
 
-.s_container {
+.outer_container {
 	display: flex;
 	justify-content: center;
+}
+
+
+.s_container {
+	margin-top: 115px;
+	background-color: #ffffff;
+	padding: 20px;
+	width: 30%;
+	min-width: 500px;
+	margin-bottom: 10px;
+}
+
+.formdiv {
+	display: flex; 
+    justify-content: center;
 }
 
 .s_input {
@@ -45,28 +65,30 @@
 }
 
 .s_submit {
-	width: 150px;
-	height: 43px;
-	line-height: 43px;
+	width: 140px;
+	height: 45px;
+	line-height: 45px;
 	background-color: #7F56D2;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-bottom: 100px;
 	margin-left:10px;
 	border: none;
 	cursor: pointer;
+	border-radius:5px;
 }
 
 .s_reset {
-	width: 150px;
-	height: 43px;
-	line-height: 43px;
+	width: 140px;
+	height: 45px;
+	line-height: 45px;
 	background-color: #56D7D6;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-bottom: 100px;
 	border: none;
 	cursor: pointer;
+	border-radius:5px;
 }
 
 .s_submit:hover, .s_reset:hover {
@@ -105,7 +127,7 @@ instead of next to each other */
 
 .buttons {
 	width: 330px;
-	margin-top:100px;
+	margin-top:60px;
 }
 </style>
 
@@ -129,13 +151,11 @@ $(function() {
 
 </head>
 <body>
-
-	<p class=s_title>계정 삭제하기</p>
-	<br>
-	<br>
-	<br>
+<div class=outer_container>
 	<div class="s_container">
+	<p class=s_title>계정 삭제하기</p>
 
+<div class=formdiv>
 		<form name="updatepwform" action="deleteProcess.mem" method="get">
 
 			<div class="row height">
@@ -149,14 +169,15 @@ $(function() {
 
 			<div class="row buttons">
 				<div class="col-100">
-					<input type="reset" class="s_reset clear" value="취소">
+					<input type="reset" class="s_reset clear" value="더 고민해보기">
 					<input type="submit" class="s_submit clear" value="확인">
 				</div>
 			</div>
 			
 		</form>
+</div>		
 	</div>
-
+</div>
 
 
 </body>
