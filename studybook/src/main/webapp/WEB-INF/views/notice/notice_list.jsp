@@ -59,7 +59,7 @@ body {
 }
 
 .s_desc2 {
-	margin-top: 0px;
+	margin-top: 5px;
 	margin-bottom: 50px;
 	font-size: 12px;
 	text-align: center;

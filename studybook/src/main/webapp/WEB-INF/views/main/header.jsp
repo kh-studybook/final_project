@@ -108,7 +108,12 @@
          <ul>
 
             <li class="j_menu_list" onClick="javascript:location.href='main.net';">스터디북 홈<i class="fas fa-chevron-right"></i></li>
-            <li class="j_menu_list" onClick="javascript:location.href='NoticeList.bo';">공지사항<i class="fas fa-chevron-right"></i></li>
+            <c:if test="${member.key != '999'}">
+            	<li class="j_menu_list" onClick="javascript:location.href='NoticeList.bo';">공지사항<i class="fas fa-chevron-right"></i></li>
+            </c:if>
+            <c:if test="${member.key == '999'}">
+            	<li class="j_menu_list" onClick="javascript:location.href='noticeadmin.bo';">공지사항<i class="fas fa-chevron-right"></i></li>
+            </c:if>
             <li class="j_menu_list" onClick="javascript:location.href='event_list.eve';">이벤트 홍보<i class="fas fa-chevron-right"></i></li>
 
          </ul>

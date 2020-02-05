@@ -53,7 +53,7 @@ body {
 
 .s_desc {
 	margin-top: 30px;
-	margin-bottom: 2px;
+	margin-bottom: 0px;
 	font-size: 12px;
 	text-align: center;
 }
