@@ -28,7 +28,7 @@ body {
 	background-color:white;
 	width:50%;
 	min-width: 420px;
-	height:850px;
+	height:870px;
 }
 
 .titlewrap {
@@ -103,7 +103,7 @@ body {
 	font-size:14px;
 	text-decoration:none;
 	color:#333333;
-	margin-top:10px;
+	margin-top:17px;
 	margin-bottom:10px;
 }
 .title:hover {
@@ -114,7 +114,7 @@ body {
 /*날짜*/
 .datediv {
 	margin-top:0px;
-	margin-bottom:10px;
+	margin-bottom:7px;
 }
 
 .date {
