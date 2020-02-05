@@ -26,13 +26,15 @@
 	
 	<select id = "list" parameterType = "java.util.Map" resultType = "Event">
 		select * from
-			(select rownum rnum,  event.event_num,  event.mem_key,  event.title,  event.content,  event.event_date, 
+		(select rownum rnum, eventlist.* from
+			(select event.event_num,  event.mem_key,  event.title,  event.content,  event.event_date, 
            event.event_start,  event.event_end,  event.event_room,  event.event_pic,  event.event_status, member.name event_writer
    			from event, member 
   			 where event.mem_key = member.key 
-  			 and event.event_status = 1)
+  			 and event.event_status = 1
+  			 order by event_date asc) eventlist )
 		 where rnum &gt;= #{start} and rnum &lt;= #{end}		 
-      	order by event_date asc
+      	
 	</select>
 
 	<update id = "modifyEvent" parameterType = "Event">

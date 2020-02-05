@@ -26,13 +26,15 @@
 	
 	<select id = "list" parameterType = "java.util.Map" resultType = "Event">
 		select * from
-			(select rownum rnum,  event.event_num,  event.mem_key,  event.title,  event.content,  event.event_date, 
+		(select rownum rnum, eventlist.* from
+			(select event.event_num,  event.mem_key,  event.title,  event.content,  event.event_date, 
            event.event_start,  event.event_end,  event.event_room,  event.event_pic,  event.event_status, member.name event_writer
    			from event, member 
   			 where event.mem_key = member.key 
-  			 and event.event_status = 1)
+  			 and event.event_status = 1
+  			 order by event_date asc) eventlist )
 		 where rnum &gt;= #{start} and rnum &lt;= #{end}		 
-      	order by event_date asc
+      	
 	</select>
 
 	<update id = "modifyEvent" parameterType = "Event">
@@ -104,34 +106,36 @@
 	
 	
 	<!-- 민지 시작  -->
-   <select id = "main_count" resultType = "int">
-      select count(*) from event 
-      where event_date >= sysdate
-      and event_status = 1
-   </select>
-   
-   <select id = "main_list" parameterType = "java.util.Map" resultType = "Event">
-      select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
-      event_start, event_end, event_room, event_pic, event_status from event) 
-      where rnum &gt;= #{start} and rnum &lt;= #{end}
-      and event_date >= sysdate
-      and event_status = 1
-      order by event_date
-   </select>
-   
-   <select id = "month_count" parameterType = "String" resultType = "int">
-      select count(*) from event 
-      where substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
-      and event_status = 1
-   </select>
-   
-   <select id = "month_list" parameterType = "java.util.Map" resultType = "Event">
-      select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
-      event_start, event_end, event_room, event_pic, event_status from event) 
-      where rnum &gt;= #{start} and rnum &lt;= #{end}
-      and substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
-      and event_status = 1
-      order by event_date
-   </select>
-   <!-- 민지 끝 -->
+
+	<select id = "main_count" resultType = "int">
+		select count(*) from event 
+		where event_date >= sysdate
+		and event_status = 1
+	</select>
+	
+	<select id = "main_list" parameterType = "java.util.Map" resultType = "Event">
+		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic, event_status from event) 
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		and event_date >= sysdate
+		and event_status = 1
+		order by event_date
+	</select>
+	
+	<select id = "month_count" parameterType = "String" resultType = "int">
+		select count(*) from event 
+		where substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		and event_status = 1
+	</select>
+	
+	<select id = "month_list" parameterType = "java.util.Map" resultType = "Event">
+		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic, event_status from event) 
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		and substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		and event_status = 1
+		order by event_date
+	</select>
+	<!-- 민지 끝 -->
+
 </mapper>

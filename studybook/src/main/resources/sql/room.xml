@@ -99,6 +99,7 @@
 			like #{search_word}
 		</if>
 	</select>
+	
 	<!-- 룸상세정보 조회 -->
 	<select id="roomDetail" parameterType="int" resultType="room">
 		select r.* , g.file_name
@@ -239,4 +240,9 @@
 	<select id="getRoom_nameList" resultType="String">
 		select room_name from room
 	</select>
+	
+	<!-- 지은-룸상세정보 조회 -->
+   <select id="roomDetail2" parameterType="int" resultType="room">
+      select * from room where ROOM_CODE=#{ROOM_CODE}
+   </select>
 </mapper>

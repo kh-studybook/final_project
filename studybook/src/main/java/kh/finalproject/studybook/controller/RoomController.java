@@ -97,11 +97,12 @@ public class RoomController {
 		MultipartFile first = fileList.get(0);
 		System.out.println("fileList:" + fileList.size());
 
+		if(!fileList.isEmpty()&&first.getSize()!=0) {
 		//String path = saveFolder;
     //선아 경로
 		//String path = "C:\\Users\\user1\\git\\final_project[0128]\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
     //은지 
-		String path="C:\\Users\\user1\\git\\0204_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
+		String path="C:\\Users\\user1\\git\\0205\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\room\\";
 
 		System.out.println("path = " + path);
 
@@ -130,8 +131,8 @@ public class RoomController {
 				e.printStackTrace();
 			}
 
+			}
 		}
-
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -192,7 +193,7 @@ public class RoomController {
 	// 룸수정RoomModify.ro
 	@GetMapping("RoomModify.ro") // 파라미터로 넘어올때는 대소문자를 맞춰줘야함, 반드시 들어오는 파라미터라서 int room_code)로 작성
 	public ModelAndView roomModifyView(int room_code, ModelAndView mv, HttpServletRequest request) throws Exception {
-		Room roomdata = roomservice.getRoomDetail(room_code);
+		Room roomdata = roomservice.getRoomDetail2(room_code);
 		List<Gallery> gallerydata = roomservice.getGallerylist(room_code);
 		Room_ex roomexdata = roomservice.getRoomExDetail(room_code);
 
