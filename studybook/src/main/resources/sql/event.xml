@@ -112,12 +112,17 @@
 	</select>
 	
 	<select id = "main_list" parameterType = "java.util.Map" resultType = "Event">
-		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
-		event_start, event_end, event_room, event_pic, event_status from event) 
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
-		and event_date >= sysdate
+		select * 
+		from (select rownum rnum, b.*
+		from (select event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic, event_status 
+		from event
+		where event_date >= sysdate
 		and event_status = 1
-		order by event_date
+		order by event_date) b
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		
 	</select>
 	
 	<select id = "month_count" parameterType = "String" resultType = "int">
@@ -127,12 +132,16 @@
 	</select>
 	
 	<select id = "month_list" parameterType = "java.util.Map" resultType = "Event">
-		select * from (select rownum rnum, event_num, mem_key, title, content, event_date, 
-		event_start, event_end, event_room, event_pic, event_status from event) 
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
-		and substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
+		select * 
+		from (select rownum rnum, b.*
+		from (select event_num, mem_key, title, content, event_date, 
+		event_start, event_end, event_room, event_pic, event_status 
+		from event
+		where substr(TO_CHAR(event_date, 'YYYY-MM-DD'), 6, 2) = #{month}
 		and event_status = 1
-		order by event_date
+		order by event_date) b
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	<!-- 민지 끝 -->
 
