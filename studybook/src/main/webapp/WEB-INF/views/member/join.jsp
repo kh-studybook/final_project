@@ -395,10 +395,6 @@ img {
 						});
 	
 						
-						$(".modal_submit").click(function() {
-							location.href = "history.back()";
-						});
-						
 					});
 	
 	

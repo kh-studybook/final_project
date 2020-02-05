@@ -287,7 +287,7 @@ th {
             </td>
          </tr>
         
-<!-- 관리자만 수정/삭제 버튼 -->         
+<!-- 관리자만 수정/삭제 버튼 보이게 -->         
 <c:if test="${member.key== '999' }">
 		<tr><td class=buttons>     
                <a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM }">
@@ -296,10 +296,8 @@ th {
                <a href=#>
                   <button class="deletebtn float-right" data-toggle="modal" data-target="#myModal">삭제</button>
                </a>
-
         </td></tr>
 </c:if>	
-
 
 <!-- 리스트 버튼 (관리자/일반회원) -->         
 <tr>

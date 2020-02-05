@@ -156,60 +156,6 @@ instead of next to each other */
 	width: 90%
 }
 
-
-/*modal*/
-#modalforupdate {
-	display: none;
-}
-
-.modal {
-	text-align: center;
-}
-
-@
-@media screen and (min-width: 768px) {
-	.modal:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-	}
-}
-
-.modal_dialog {
-	display: inline-block;
-	text-align: left;
-	vertical-align: middle;
-}
-
-.modal_wrap {
-	padding: 40px;
-	margin-top: 160px;
-	margin-left: auto;
-	width: 400px;
-	height: 300px;
-	background-color: white;
-}
-
-.modal_intro {
-	height: 80px;
-}
-
-.modal_body {
-	height: 80px;
-}
-
-.modal_title {
-	font-size: 20pt;
-}
-
-.modal_text {
-	font-size: 12pt;
-}
-
-#modal_phone {
-	
-}
 </style>
 
 <script>
@@ -259,18 +205,16 @@ instead of next to each other */
 				<input type="hidden" name="key" value="${member.key }">
 				<div class="row">
 					<div class="col-100">
-						<label class=uploadfile> <input type="file" class=uploadfiles
-							name="uploadfile" accept="image/gif, image/jpeg, image/png"
-							style="display: none"> 
-							
+					
+						<label class=uploadfile> 
+							<input type="file" class=uploadfiles name="uploadfile" accept="image/gif, image/jpeg, image/png" 
+									style="display: none"> 
 							<c:if test="${member.profile == null}">
 								<img src="resources/image/profile/default.png" alt="Avatar" class="avatar" id=profile>
 							</c:if>  
-							
 							<c:if test="${member.profile!= null}">
 								<img src="resources/image/profile/${member.profile}" alt="Avatar" class="newavatar" id=profile>
  							</c:if>
- 							
 						</label>
 					</div>
 				</div>
@@ -339,40 +283,5 @@ instead of next to each other */
 	</div>
 
 
-	<!-- modal 시작! -->
-	<div class="modal" id="modalforupdate">
-		<div class="modal_dialog">
-			<div class="modal_wrap">
-
-				<!-- modal body -->
-				<div class="modal_body">
-					<form>
-						<div class="phoneupdate">
-
-							<div class=modal_intro>
-								<p class=modal_title>연락처 변경</p>
-								<p class=modal_text>새 연락처 입력</p>
-							</div> 
-
-							<div class="modal_content">
-								<input type="text" id="phone" name="phone"
-									placeholder="${member.phone}"> <span
-									style="color: #141414; font-size: 10pt;" id="counter"></span>
-							</div>
-
-							<div class=modal_submit>
-								<button type="button" class="modalclose" data-dismiss="modal"
-									aria-label="Close">취소</button>
-								<button type=submit class="submtbutton">저장</button>
-							</div>
-
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 연수모달여기까지 -->
 </body>
 </html>

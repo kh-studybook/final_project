@@ -116,9 +116,8 @@ public class MemberController {
 		int result = memberservice.insert(member);
 		out.println("<script>");
 		if (result == 1) {
-			// out.println("alert('회원가입 축하');");
-			out.println(
-					"location.href='joinSuccess.mem?email=" + member.getEmail() + "&name=" + member.getName() + "';");
+			out.println("location.href='joinSuccess.mem?email=" 
+						+ member.getEmail() + "&name=" + member.getName() + "';");
 		} else if (result == -1) {
 			out.println("alert('이미 스터디북에 가입된 이메일입니다. 확인 후 다시 입력해주세요.');");
 			out.println("history.back();");
@@ -222,7 +221,7 @@ public class MemberController {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('정보가 수정되었습니다.(사진포함)')");
+				out.println("alert('프로필 사진이 변경되었습니다.')");
 				out.println("location.href='my_update.mem';");
 				out.println("</script>");
 				out.close();
@@ -235,8 +234,7 @@ public class MemberController {
 				System.out.println("Member 회원 사진 변경하다 에러");
 			}
 			
-			
-		}else {
+		} else {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

@@ -157,6 +157,7 @@ public class NoticeController {
 	}
 	
 	
+	
 	//공지 쓰기 (관리자)
 	@GetMapping(value = "/NoticeWrite.bo")
 	public String notice_write() throws Exception {
