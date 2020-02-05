@@ -196,29 +196,40 @@ th {
 	margin-bottom : 70px;
 }    
 
+.deleteq {
+	font-family: "맑은 고딕"; 
+	font-size:14px;
+}
+
 .deletecheckbtn {
-	width: 150px;
-	height: 43px;
-	line-height: 43px;
-	background-color: #7F56D2;
+	width:100px;
+	height:40px;
+	line-height: 40px;
+	background-color: #7F56D2;;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
-	margin-left:10px;
+	margin-bottom: 10px;
 	border: none;
 	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius:5px;
 }
 
 .mdclosebtn {
-	width: 150px;
-	height: 43px;
-	line-height: 43px;
+	width:100px;
+	height:40px;
+	line-height: 40px;
 	background-color: #56D7D6;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-bottom: 10px;
+	margin-left: 7px;
 	border: none;
 	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius:5px;
 }
 
 .deletecheckbtn:hover, .mdclosebtn:hover {
@@ -305,10 +316,12 @@ th {
 					<form name="deleteForm" action="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUM }" method="post"
 					class=deleteForm>
 						<div class="form-group">
-							<span class=q>정말 삭제하시겠습니까.</span>
+							<span class=deleteq>정말 삭제하시겠습니까.</span>
 						</div>
-						<button type="submit" class="deletecheckbtn">확인</button>
-					    <button type="button" class="mdclosebtn">취소</button>
+						<div class="form-group">
+							<button type="submit" class="deletecheckbtn">확인</button>
+					    	<button type="button" class="mdclosebtn">취소</button>
+					    </div>
 					</form>
 				</div>
 			</div>
