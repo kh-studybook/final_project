@@ -40,7 +40,6 @@ input[type=text], select, textarea {
 	width: 30%;
 	min-width: 500px;
 	margin-bottom: 50px;
-	border-radius: 20px;
 }
 
 .col-20 {
@@ -95,7 +94,7 @@ make the two columns stack on top of each other
 instead of next to each other */
 @media screen and (max-width: 600px) {
 	{
-	width:100%;
+	width:100%; 
 	margin-top:0;
 }
 
