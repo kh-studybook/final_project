@@ -38,7 +38,7 @@ body {
 
 .s_title {
 	margin-top: 50px;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 	font-size: 32px;
 	text-align: center;
 }
@@ -316,8 +316,8 @@ body {
 <div class=lineforbutton>	
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
-	<p class=s_desc>스터디북 서비스 가이드</p>
-	<p class=s_desc2>문의는 admin@studybook.com 으로 부탁드립니다.</p>
+	<p class=s_desc>StudyBook 이용에 대한 안내입니다.</p>
+	<p class=s_desc2>문의는 admin@studybook.com 으로 부탁드려요.</p>
 	</div>
 	<div class="container_wrap">
 	<div class=s_container>
