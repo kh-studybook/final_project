@@ -208,6 +208,17 @@ public class ReserveServiceImpl implements ReserveService {
 		return reserveDAO.rCodeChange(r_code);
 	}
 
+	//후기 삭제하면 예약 상태바꾸기
+	   @Override
+	   public int updateStatus(int r_code) {
+	      return reserveDAO.updateStatus(r_code);
+	   }
+	   //예약번호 알아내기
+	   @Override
+	   public Review selectR_code(int review_code) {
+	      return reserveDAO.selectR_code(review_code);
+	   }
+
 
 	
 
