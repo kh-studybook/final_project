@@ -67,8 +67,8 @@ body {
 	line-height: 43px;
 	background-color: #9f9f9f;
 	color: white;
-	margin-top: 15px;
-	margin-bottom: 120px;
+	margin-top: 18px;
+	margin-bottom: 110px;
 	border: none;
 	cursor: pointer;
 }
@@ -85,6 +85,7 @@ input[type=checkbox] {
 	margin-bottom: 5px;	
 	background-color: #e6e6e6;
 	border-color:#e6e6e6;
+	cursor: pointer;
 }
 
 .message {

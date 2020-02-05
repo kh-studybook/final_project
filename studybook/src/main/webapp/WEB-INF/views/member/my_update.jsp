@@ -40,7 +40,6 @@ input[type=text], select, textarea {
 	width: 30%;
 	min-width: 500px;
 	margin-bottom: 50px;
-	border-radius: 20px;
 }
 
 .col-20 {
