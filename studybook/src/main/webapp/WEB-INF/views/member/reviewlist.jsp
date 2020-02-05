@@ -16,7 +16,10 @@
 body {
 	background-color: #f2f2f2;
 }
-
+li .current {
+   background: #faf7f7;
+   color: gray;
+}
 .w_div {
 	display: inline-block;
 }
@@ -119,8 +122,8 @@ body {
 							<br>
 							<p class="w_time">
 								${fn:substring(m.reserve_date,0,4)}.
-								${fn:substring(m.reserve_date,5,7)}.
-								${fn:substring(m.reserve_date,8,10)}
+                       			 ${fn:substring(m.reserve_date,5,7)}.
+                        		${fn:substring(m.reserve_date,8,10)}
 
 								${m.start_time}~${m.end_time}시,
 								<c:set var="start" value="${m.start_time}" />

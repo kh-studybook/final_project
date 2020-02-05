@@ -124,6 +124,11 @@ public class RoomServiceImpl implements RoomService {
 	public Room getRoomDetail(int room_code) {
 		return dao.getRoomDetail(room_code);
 	}
+	// 룸 상세정보 조회
+		@Override
+		public Room getRoomDetail2(int room_code) {
+			return dao.getRoomDetail2(room_code);
+		}
 
 	// 갤러리 리스트 가져오기
 	@Override

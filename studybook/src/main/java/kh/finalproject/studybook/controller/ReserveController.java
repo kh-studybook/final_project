@@ -251,26 +251,48 @@ public class ReserveController {
 	}
 	
 	//나의 후기 삭제
-	@PostMapping("ReviewDelete.re")
-	public String ReviewDeleteAction(int review_code, int key, HttpServletResponse response)throws Exception{
-		System.out.println("멤버키"+key);
-		
-		int result = reserveservice.reviewDelete(review_code);
-		
-		if(result==0) {
-			System.out.println("후기 삭제 실패");
-		}
-		System.out.println("후기 삭제 성공");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('삭제 되었습니다.');");
-		out.println("location.href='myReviewList.re?key="+key+"';");
-		out.println("</script>");
-		out.close();
-		return null;
-		
-	}
+	   @PostMapping("ReviewDelete.re")
+	   public String ReviewDeleteAction(int review_code, int key, HttpServletResponse response)throws Exception{
+	      System.out.println("멤버키"+key);
+	      
+	      //예약번호 알아내기
+	      Review review = reserveservice.selectR_code(review_code);
+	      int r_code=review.getR_code();
+
+	      try{
+	         //후기 삭제하기
+	         int result = reserveservice.reviewDelete(review_code);
+	         
+	         if(result==0) {
+	            System.out.println("후기 삭제 실패");
+	         }else {
+	            //예약 상태변경 추가 2->1
+	            int result2=reserveservice.updateStatus(r_code);
+	            
+	            if(result2==0) {
+	               System.out.println("후기관련 예약 상태 변경 실패");
+	            }else {
+	               System.out.println("후기 삭제 성공");
+	               response.setContentType("text/html;charset=utf-8");
+	               PrintWriter out = response.getWriter();
+	               out.println("<script>");
+	               out.println("alert('삭제 되었습니다.');");
+	               out.println("location.href='myReviewList.re?key="+key+"';");
+	               out.println("</script>");
+	               out.close();
+	               return null;
+	            }
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         System.out.println("나의 후기 삭제-reserveController 에러");
+	      }
+	            
+	      return null;
+	      
+	   }
+
+
 	//나의 후기 상세불러오기
 	@ResponseBody
 	@PostMapping("reviewDetail.re")

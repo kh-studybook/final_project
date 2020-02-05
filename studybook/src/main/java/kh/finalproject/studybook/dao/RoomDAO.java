@@ -49,6 +49,11 @@ public class RoomDAO {
 	public Room getRoomDetail(int room_code) {
 		return sqlSession.selectOne("Rooms.roomDetail",room_code);
 	}
+	
+	//룸 상세 보기-지은
+		public Room getRoomDetail2(int room_code) {
+			return sqlSession.selectOne("Rooms.roomDetail2",room_code);
+		}
 	//룸정보 업데이트
 	public int updateRoom(Room room) {
 		return sqlSession.update("Rooms.updateRoom",room);

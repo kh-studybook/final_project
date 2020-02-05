@@ -90,7 +90,7 @@ public class FoodController {
 		
 		//String path=saveFolder;
 		//은지
-		String path="C:\\Users\\user1\\git\\0204_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+		String path="C:\\Users\\user1\\git\\0205\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
 
 		
 		if(!uploadfile.isEmpty()) {
@@ -167,7 +167,7 @@ public class FoodController {
 	         System.out.println("filename="+uploadfile);
 	         
 	         String path=saveFolder;
-	         path="C:\\Users\\user1\\git\\0204_2\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
+	         path="C:\\Users\\user1\\git\\0205\\final_project\\studybook\\src\\main\\webapp\\resources\\image\\food\\";
 	         
 	         if(!uploadfile.isEmpty()) {
 	            
