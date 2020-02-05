@@ -159,9 +159,6 @@ body {
 	margin-bottom: 0px;
 }
 
-.writebtn:hover {
-	opacity:70%;
-}
 
 .float-right {
 	float:right
@@ -186,6 +183,23 @@ body {
     text-decoration: none;
     background-color: #ffffff; 
     border-color: #ffffff; 
+}
+
+.gradiant {
+	background: #7F56D2;
+	background: -webkit-linear-gradient(legacy-direction(to right), #7F56D2 0%, #56D7D6 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#7F56D2), to(#56D7D6));
+	background: -webkit-linear-gradient(left, #7F56D2 0%, #56D7D6 100%);
+	background: -o-linear-gradient(left, #7F56D2 0%, #56D7D6 100%);
+	background: linear-gradient(to right, #7F56D2 0%, #56D7D6 100%);
+}
+
+.gradiant:hover {
+	background: #56D7D6;
+	background: -webkit-linear-gradient(legacy-direction(to right), #56D7D6 0%, #7F56D2 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#56D7D6), to(#7F56D2));
+	background: -webkit-linear-gradient(left, #56D7D6 0%, #7F56D2 100%);
+	background: -o-linear-gradient(left, #56D7D6 0%, #7F56D2 100%);
 }
 </style>
 
@@ -305,7 +319,7 @@ body {
 
 	<div class=writebutton>
 	<c:if test="${member.key== '999' }">
-		<button type="button" class="writebtn ">공지 쓰기</button>
+		<button type="button" class="writebtn gradiant">공지 쓰기</button>
 	</c:if>
 	</div>
 
@@ -316,7 +330,7 @@ body {
 <div class=lineforbutton>	
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
-	<p class=s_desc>StudyBook 이용에 대한 안내입니다.</p>
+	<p class=s_desc>스터디북 이용에 대한 안내입니다.</p>
 	<p class=s_desc2>문의는 admin@studybook.com 으로 부탁드려요.</p>
 	</div>
 	<div class="container_wrap">

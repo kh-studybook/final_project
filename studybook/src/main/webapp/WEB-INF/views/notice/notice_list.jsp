@@ -311,7 +311,7 @@ body {
 <div class=lineforbutton>	
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
-	<p class=s_desc>StudyBook 이용에 대한 안내입니다.</p>
+	<p class=s_desc>스터디북 이용에 대한 안내입니다.</p>
 	<p class=s_desc2>문의는 admin@studybook.com 으로 부탁드려요.</p>
 	</div>
 	<div class="container_wrap">

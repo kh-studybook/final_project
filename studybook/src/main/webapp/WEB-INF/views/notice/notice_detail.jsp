@@ -236,6 +236,23 @@ th {
 	opacity: 70%;
 }
 
+.gradiant {
+	background: #7F56D2;
+	background: -webkit-linear-gradient(legacy-direction(to right), #7F56D2 0%, #56D7D6 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#7F56D2), to(#56D7D6));
+	background: -webkit-linear-gradient(left, #7F56D2 0%, #56D7D6 100%);
+	background: -o-linear-gradient(left, #7F56D2 0%, #56D7D6 100%);
+	background: linear-gradient(to right, #7F56D2 0%, #56D7D6 100%);
+}
+
+.gradiant:hover {
+	background: #56D7D6;
+	background: -webkit-linear-gradient(legacy-direction(to right), #56D7D6 0%, #7F56D2 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#56D7D6), to(#7F56D2));
+	background: -webkit-linear-gradient(left, #56D7D6 0%, #7F56D2 100%);
+	background: -o-linear-gradient(left, #56D7D6 0%, #7F56D2 100%);
+}
+
 
 </style>
 
@@ -288,13 +305,13 @@ th {
 <tr>
 <c:if test="${member.key!= '999' }">
 	<td class=listbutton>        
-		<a href="NoticeList.bo"><button class="listbtn center" style="margin-top:50px;">리스트</button></a>
+		<a href="NoticeList.bo"><button class="listbtn center gradiant" style="margin-top:50px;">리스트</button></a>
 	</td>
 </c:if>	
             
 <c:if test="${member.key== '999' }">
 	<td class=listbutton>        
-		<a href="noticeadmin.bo"><button class="listbtn center">리스트</button></a>
+		<a href="noticeadmin.bo"><button class="listbtn center gradiant">리스트</button></a>
 	</td>
 </c:if>	 
 </tr>    

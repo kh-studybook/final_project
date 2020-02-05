@@ -118,9 +118,6 @@ instead of next to each other */
 	}
 }
 
-
-
-
 </style>
 
 
@@ -140,7 +137,7 @@ instead of next to each other */
 				$('.s_submit').attr('disabled', false);
 				$('.s_submit').css('background', '#7F56D2');
 			} else {
-				$('.phonemsg').text('! 010으로 시작하는 11자리 숫자를 입력해주세요.');
+				$('.phonemsg').text('010으로 시작하는 11자리 숫자를 입력해주세요.');
 				$('.phonemsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			}

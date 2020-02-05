@@ -138,7 +138,7 @@ img {
 				$('.pwmsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', true);
 			} else {
-				$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
+				$('.pwmsg').text('숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
 				$('.pwmsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			}
@@ -146,7 +146,7 @@ img {
 
 		$('#pwcheck').on('keyup', function() {
 			if ($('#password').val() != $('#pwcheck').val()) {
-				$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
+				$('.pwcheckmsg').text('비밀번호가 일치하지 않습니다.');
 				$('.pwcheckmsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			} else {

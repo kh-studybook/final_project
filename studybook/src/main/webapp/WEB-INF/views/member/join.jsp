@@ -302,7 +302,7 @@ img {
 								console.log(emailtest.test($(this).val()));
 								$(".namemsg").html('<img src=resources/image/check.png>');
 							} else {
-								$('.namemsg').text('! 이름은 한글/영문만 입력 가능합니다.');
+								$('.namemsg').text('이름은 한글과 알파벳으로만 입력해주세요.');
 							}
 						});
 						
@@ -313,13 +313,13 @@ img {
 								console.log(passwordtest.test($(this).val()));
 								$('.pwmsg').html('<img src=resources/image/check.png>');
 							} else {
-								$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
+								$('.pwmsg').text('숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
 							}
 						});
 						//비밀번호체크
 						$('#pwcheck').on('keyup', function() {
 							if ($('#password').val() != $('#pwcheck').val()) {
-								$('.pwcheckmsg').text('! 비밀번호가 일치하지 않습니다.');
+								$('.pwcheckmsg').text('비밀번호가 일치하지 않습니다.');
 							} else {
 								gogo();
 								$('.pwcheckmsg').html('<img src=resources/image/check.png>');
@@ -331,7 +331,7 @@ img {
 								console.log(phonetest.test($(this).val()));
 								$(".phonemsg").html('<img src=resources/image/check.png>');
 							} else {
-								$('.phonemsg').text('! 010으로 시작하는 11자리 숫자를 입력해주세요.');
+								$('.phonemsg').text('010으로 시작하는 11자리 숫자를 입력해주세요.');
 							}
 						}); 
 						//이메일
@@ -345,7 +345,7 @@ img {
 									console.log(emailtest.test($(this).val()));
 									$(".emailmsg").html('<img src=resources/image/check.png>');
 								} else {
-									$('.emailmsg').text('! 유효한 이메일 주소를 입력해주세요.');
+									$('.emailmsg').text('유효한 이메일 주소를 입력해주세요.');
 									checkemail = false;
 									return;
 								}
@@ -358,7 +358,7 @@ img {
 											$(".emailmsg").html('<img src=resources/image/check.png>');
 											checkid = true;
 										} else {
-											$('.emailmsg').text('! 이미 가입된 이메일입니다.');
+											$('.emailmsg').text('이미 가입된 이메일입니다.');
 											checkid = false;
 										}
 									}
