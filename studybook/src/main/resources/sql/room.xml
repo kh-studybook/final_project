@@ -188,8 +188,7 @@
    <select id="searchRoom" parameterType="java.util.Map" resultType="room">
       select *
       from (select rownum rnum, b.*
-      from (select distinct room.ROOM_CODE
-      from (select room.ROOM_CODE, room.ROOM_NAME
+      from (select distinct room.ROOM_CODE, room.ROOM_NAME
       ,room.MIN_MEMBER, room.MAX_MEMBER
       ,room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
       from (room inner join gallery 
@@ -206,7 +205,7 @@
       and #{starttime} not between reserve.start_time and reserve.end_time-1
       and #{endtime}-1 not between reserve.start_time and reserve.end_time
       
-      order by room.room_code)) b
+      order by room.ROOM_CODE) b
       )
       where rnum &gt;= #{start} and rnum &lt;= #{end}
    </select>

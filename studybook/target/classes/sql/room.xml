@@ -188,7 +188,7 @@
    <select id="searchRoom" parameterType="java.util.Map" resultType="room">
       select *
       from (select rownum rnum, b.*
-      from (select room.ROOM_CODE, room.ROOM_NAME
+      from (select distinct room.ROOM_CODE, room.ROOM_NAME
       ,room.MIN_MEMBER, room.MAX_MEMBER
       ,room.HOUR_COST, room.HASHTAG, gallery.FILE_NAME
       from (room inner join gallery 
@@ -205,7 +205,7 @@
       and #{starttime} not between reserve.start_time and reserve.end_time-1
       and #{endtime}-1 not between reserve.start_time and reserve.end_time
       
-      order by room.room_code) b
+      order by room.ROOM_CODE) b
       )
       where rnum &gt;= #{start} and rnum &lt;= #{end}
    </select>
@@ -213,6 +213,7 @@
    <!-- room 검색 결과 총 갯수 -->
    <select id="searchRoomCount" parameterType="java.util.Map" resultType="int">
       select count(*)
+      from (select distinct room.ROOM_CODE
       from ((room inner join gallery 
       on room.ROOM_CODE=gallery.ROOM_CODE
       and gallery.gallery_num=1
@@ -224,7 +225,7 @@
       and reserve.start_time not between #{starttime} and #{endtime}-1
       and reserve.end_time-1 not between #{starttime} and #{endtime}
       and #{starttime} not between reserve.start_time and reserve.end_time-1
-      and #{endtime}-1 not between reserve.start_time and reserve.end_time)
+      and #{endtime}-1 not between reserve.start_time and reserve.end_time))
    </select>
    <!-- 민지끝 -->
 
