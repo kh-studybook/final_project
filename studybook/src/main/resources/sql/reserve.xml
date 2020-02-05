@@ -221,7 +221,17 @@ select *
 	<update id = "rCodeChange" parameterType = "int">
 		update reserve set status = 2 where r_code = #{r_code}
 	</update>
-
+	
+	<!-- 후기 삭제후 상태 변경 -->
+   <update id="updateStatus" parameterType = "int">
+   update reserve
+set status =1 where r_code=#{r_code}
+   </update>
+<!-- 예약 번호 알아오기 -->
+<select id="selectR_code" parameterType = "int" resultType="review">
+select * from review where review_code=#{review_code}
+</select>
+	
 
 </mapper>
 

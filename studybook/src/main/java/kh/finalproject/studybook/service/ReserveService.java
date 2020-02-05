@@ -58,6 +58,10 @@ public interface ReserveService {
 	public int RegisterReview(Map<String, Object> obj);
 	//리뷰 중복 검사
 	public int rCodeChance(int r_code);
+	//후기 삭제하면 reserve 상태 변경
+	   public int updateStatus(int r_code);
+	   //예약 번호 알아내기
+	   public Review selectR_code(int review_code);
 
 
 

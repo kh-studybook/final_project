@@ -128,7 +128,14 @@ public class ReserveDAO {
 	}
 
 	
-	
+	   //후기 삭제후 상태변경
+	   public int updateStatus(int review_code) {
+	      return sqlSession.update("Reserves.updateStatus",review_code);
+	   }
+	   //후기 삭제후 상태 변경
+	   public Review selectR_code(int review_code) {
+	      return sqlSession.selectOne("Reserves.selectR_code",review_code);
+	   }
 	
 	
 

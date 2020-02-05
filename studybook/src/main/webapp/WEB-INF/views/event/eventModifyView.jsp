@@ -5,7 +5,7 @@
 <head>
 <style>
 * {box-sizing: border-box; font-family:"맑은 고딕"}
-
+body {background-color: #f2f2f2 !important;}
 /** 글자 관련!!!!*/
 .p_title{font-family:"맑은 고딕"; text-align:center; font_size:32px; maxLength:20}
 #event_title{maxLength:200; }
@@ -32,7 +32,7 @@ input[type=date]{height:3rem;}
 .col-75 {float: left; width: 75%; margin-top: 6px;}
 
 /** 썸네일 관련*/
-.p_avatar{width:350px; border: 1px solid darkgray;}
+.p_avatar{width:350px; height:200px; border: 1px solid darkgray;}
 #eventPic_button{border:none; border-radius: 5px; display:inline-block; width:350px; cursor:pointer;
 				background-color:#56D7D6; color:white; padding:7px; margin-top:5px; padding-right:0px; text-align:center;}
 				

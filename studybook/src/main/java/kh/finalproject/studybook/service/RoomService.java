@@ -34,6 +34,8 @@ public interface RoomService {
 	List<Room> getRoomList(int page, int limit);
 	//룸 상세 조회
 	public Room getRoomDetail(int room_code);
+	//룸 상세 조회
+		public Room getRoomDetail2(int room_code);
 	//갤러리 리스트 가져오기
 	public List<Gallery> getGallerylist(int room_code);
 	//룸ex 정보 가져오기

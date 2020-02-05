@@ -82,7 +82,7 @@ public class EventController {
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
 
-		      saveFolder="C:\\Users\\user1\\git\\0205\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
+		      saveFolder="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
@@ -169,32 +169,42 @@ public class EventController {
 		//이벤트 게시글 보기
 		@RequestMapping(value = "EventDetailAction.eve")
 		public ModelAndView eventGetDetail(int event_num, ModelAndView mv, 
-				HttpServletRequest request, HttpSession session) throws Exception {
+				HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 			Event eventdata = eventservice.getEventDetail(event_num);
 			//현재 세션에서 mem_key 가져오기
 			Member member = (Member)session.getAttribute("member");
-			int mem_key = member.getKey();
-			System.out.println("현재 세션 사용자 = " + mem_key);
-			//작성자 키 값 가져오기
-			int key = eventservice.getEventWriterNum(event_num);			
-			
-			//작성자 가져오기
-			String event_writer = eventservice.getEventWriter(event_num);
-			System.out.println("게시글 작성자  = " + event_writer);
-			
-			if (eventdata == null) {
-				System.out.println("상세보기 실패");
-				mv.setViewName("redirect:eventList.eve");
-				mv.addObject("url", request.getRequestURL());//위의 request는 어디에서 에러가 났는지 알려주기 위해서 넣는다.
-				mv.addObject("message", "상세보기 실패입니다.");
+			if(member == null) {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+			    out.println("alert('로그인이 필요합니다.');");
+			    out.println("location.href = 'login.mem';");
+			    out.println("</script>");
+			    return null;
 			} else {
-				System.out.println("상세보기 성공");				
-				mv.setViewName("event/event_view");
-				mv.addObject("eventdata", eventdata);
-				mv.addObject("event_writer", event_writer);//게시글 작성자
-				mv.addObject("mem_key", mem_key);//현재 mem_key(현재 사용자)
-				mv.addObject("key", key);//게시글 작성자 key 값
-			}				
+				int mem_key = member.getKey();
+				System.out.println("현재 세션 사용자 = " + mem_key);
+				//작성자 키 값 가져오기
+				int key = eventservice.getEventWriterNum(event_num);			
+				
+				//작성자 가져오기
+				String event_writer = eventservice.getEventWriter(event_num);
+				System.out.println("게시글 작성자  = " + event_writer);
+				
+				if (eventdata == null) {
+					System.out.println("상세보기 실패");
+					mv.setViewName("redirect:eventList.eve");
+					mv.addObject("url", request.getRequestURL());//위의 request는 어디에서 에러가 났는지 알려주기 위해서 넣는다.
+					mv.addObject("message", "상세보기 실패입니다.");
+				} else {
+					System.out.println("상세보기 성공");				
+					mv.setViewName("event/event_view");
+					mv.addObject("eventdata", eventdata);
+					mv.addObject("event_writer", event_writer);//게시글 작성자
+					mv.addObject("mem_key", mem_key);//현재 mem_key(현재 사용자)
+					mv.addObject("key", key);//게시글 작성자 key 값
+				}
+			}
 			return mv;
 		}//EventDetailAction.eve end
 		
@@ -470,7 +480,7 @@ public class EventController {
 			// 한 화면에 출력할 room 갯수
 			int limit = 9;
 
-			SimpleDateFormat format1 = new SimpleDateFormat ( "MM");
+			SimpleDateFormat format1 = new SimpleDateFormat ("MM");
 			Date date = new Date();
 			String today = format1.format(date);
 			
