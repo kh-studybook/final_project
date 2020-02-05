@@ -312,7 +312,7 @@ body {
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
 	<p class=s_desc>스터디북 서비스 가이드</p>
-	<p class=s_desc2>추가 문의는 admin@studybook.com 으로 부탁드립니다.</p>
+	<p class=s_desc2>문의는 admin@studybook.com 으로 부탁드립니다.</p>
 	</div>
 	<div class="container_wrap">
 	<div class=s_container>
@@ -323,7 +323,7 @@ body {
 		<c:if test="${listcount > 0 }">
 			<table class="table">
 				<thead></thead>
-				<tbody>
+				<tbody> 
 					<c:set var="num" value="${listcount-(page-1)*7 }" />
 					<c:forEach var="b" items="${noticelist }">
 						<tr class=tr>
