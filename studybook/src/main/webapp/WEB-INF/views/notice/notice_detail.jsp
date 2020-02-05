@@ -161,7 +161,7 @@ th {
 	background-color: #7F56D2;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	border: none;
 	cursor: pointer;
 	font-size: 12px;
@@ -182,7 +182,7 @@ th {
 
 
 .modal-dialog {
-    max-width: 500px;
+    max-width: 480px;
     margin: 1.75rem auto;
     margin-top: 200px;
 }
@@ -288,7 +288,7 @@ th {
 <tr>
 <c:if test="${member.key!= '999' }">
 	<td class=listbutton>        
-		<a href="NoticeList.bo"><button class="listbtn center">리스트</button></a>
+		<a href="NoticeList.bo"><button class="listbtn center" style="margin-top:50px;">리스트</button></a>
 	</td>
 </c:if>	
             
