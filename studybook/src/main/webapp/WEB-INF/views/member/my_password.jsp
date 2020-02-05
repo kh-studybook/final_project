@@ -154,7 +154,7 @@ img {
 				$('.pwcheckmsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', false);
 				$('.s_submit').css('background', '#7F56D2');
-			}
+			} 
 		});   
 		
 		   

@@ -54,7 +54,7 @@ body {
 .s_input {
 	width: 330px;
 	height: 35px;
-	padding-left: 20px;
+	padding-left: 20px; 
 	border: 1px solid #555555;
 	resize: vertical;
 	color: #7F7F7F;
