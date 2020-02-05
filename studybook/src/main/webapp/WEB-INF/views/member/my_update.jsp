@@ -23,14 +23,14 @@ input[type=text], select, textarea {
 }
 
 .s_title {
-	margin-top: 80px;
-	margin-bottom: 30px;
+	margin-top: 70px;
+	margin-bottom: 38px;
 	font-size: 32px;
 	text-align: center;
 }
 
 .outer_container {
-	display: flex;6
+	display: flex;
 	justify-content: center;
 }
 
@@ -39,19 +39,20 @@ input[type=text], select, textarea {
 	padding: 20px;
 	width: 30%;
 	min-width: 500px;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
+	border-radius: 20px;
 }
 
 .col-20 {
 	float: left;
-	width: 20%;
+	width: 25%;
 	margin-top: 25px;
 	text-align: left;
 }
 
 .col-30 {
 	float: left;
-	width: 30%;
+	width: 25%;
 	margin-top: 25px;
 	text-align: left;
 }
@@ -126,7 +127,7 @@ instead of next to each other */
 }
 
 .s_delete {
-	margin-bottom: 50px;
+	margin-bottom: 60px;
 }
 
 .profbtn {
@@ -151,7 +152,7 @@ instead of next to each other */
 }
 
 .hr2 {
-	margin-bottom: 30px;
+	margin-bottom: 38px;
 	margin-top: 75px;
 	width: 90%
 }

@@ -14,17 +14,42 @@
 	font-family: "맑은 고딕";
 }
 
+body {
+	background-color: #f2f2f2;
+	text-align: center;
+}
+
 .s_title {
-	margin-top: 200px;  
-	margin-bottom: 35px;
+	margin-top: 60px;
+	margin-bottom: 67px;
 	font-size: 32px;
 	text-align: center;
-} 
+}
 
-.s_container {
+.s_content {
+	font-size: 14px;
+	margin: 12px;
+	text-align: center;
+}
+
+.outer_container {
 	display: flex;
 	justify-content: center;
-} 
+}
+
+.s_container {
+	margin-top: 115px;
+	background-color: #ffffff;
+	padding: 20px;
+	width: 30%;
+	min-width: 500px;
+	margin-bottom: 10px;
+}
+
+.formdiv {
+	display: flex;
+    justify-content: center;
+}
 
 .s_input {
 	width: 330px;
@@ -36,15 +61,14 @@
 	font-size: 12px;
 }
 
-
 .s_submit {
 	width: 330px;
 	height: 43px;
 	line-height: 43px;
 	background-color: #9f9f9f;
 	color: white;
-	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-top: 15px;
+	margin-bottom: 120px;
 	border: none;
 	cursor: pointer;
 }
@@ -57,21 +81,33 @@ input[type=checkbox] {
 	background: #ffffff;
 }
 
+.phonenum {
+	margin-bottom: 5px;	
+	background-color: #e6e6e6;
+	border-color:#e6e6e6;
+}
+
 .message {
-	margin-bottom: 5px;
+	margin-top: 2px;
+	height:15px;
 }
 
 .phonemsg {
-	font-size:10px;
+	font-size:12px;
 }
 
 .col-100 {
 	width: 100%;
-	margin-bottom: 0px;
+	margin-bottom: 5px;
+}
+
+.first {
+	width: 100%;
+	margin-bottom: 15px;
 }
 
 /* Responsive layout 
-- when the screen is less than 600px wide, 
+- when the screen is less than 600px wide 
 make the two columns stack on top of each other 
 instead of next to each other */
 @media screen and (max-width: 700px) {
@@ -82,14 +118,7 @@ instead of next to each other */
 }
 
 
-.message {
-	mergin-top: 2px;
-}
 
-.height {
-	width: 330px;
-	height: 70px;
-}
 
 </style>
 
@@ -105,12 +134,12 @@ instead of next to each other */
 		   
 			if (phonetest.test($(this).val())) {
 				console.log(phonetest.test($(this).val()));
-				$(".phonemsg").text('변경 가능한 연락처입니다.');
+				$(".phonemsg").text('변경 가능한 연락처입니다!');
 				$('.phonemsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', false);
 				$('.s_submit').css('background', '#7F56D2');
 			} else {
-				$('.phonemsg').text('! 010으로 시작하는 숫자만 입력 가능합니다.');
+				$('.phonemsg').text('! 010으로 시작하는 11자리 숫자를 입력해주세요.');
 				$('.phonemsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			}
@@ -124,14 +153,20 @@ instead of next to each other */
 
 </head>
 <body>
-
-<p class=s_title>연락처 변경</p>
-<br><br><br>
+<div class=outer_container>
 	<div class="s_container">
+	
+<p class=s_title>연락처 변경</p>
+
+<div class=formdiv>
 	
 		<form name="updatephoneform" action="phoneProcess.mem" method="get">
 
 			<div class="row height">
+				<div class="col-100 first">
+					<input type="text" name="phonenum" id="phonenum" class="s_input phonenum"
+						name="phone" placeholder="${member.phone}" maxLength="11" readOnly>
+				</div>
 				<div class="col-100">
 					<input type="text" name="phone" id="phone" class="s_input"
 						name="phone" placeholder="변경할 연락처 입력" maxLength="11" required>
@@ -148,9 +183,9 @@ instead of next to each other */
 				</div>
 			</div>
 		</form>
+</div>		
 	</div>
-
-
+</div>
 
 </body>
 </html>

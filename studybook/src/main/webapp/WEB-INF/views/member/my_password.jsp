@@ -13,17 +13,43 @@
 	font-family: "맑은 고딕";
 }
 
+body {
+	background-color: #f2f2f2;
+	text-align: center;
+}
+
 .s_title {
-	margin-top: 200px; 
-	margin-bottom: 35px;
+	margin-top: 60px;
+	margin-bottom: 65px;
 	font-size: 32px;
 	text-align: center;
-} 
+}
 
-.s_container {
+.s_content {
+	font-size: 14px;
+	margin: 12px;
+	text-align: center;
+}
+
+.outer_container {
 	display: flex;
 	justify-content: center;
-} 
+}
+
+
+.s_container {
+	margin-top: 115px;
+	background-color: #ffffff;
+	padding: 20px;
+	width: 30%;
+	min-width: 500px;
+	margin-bottom: 10px;
+}
+
+.formdiv {
+	display: flex;
+    justify-content: center;
+}
 
 .s_input {
 	width: 330px;
@@ -42,7 +68,7 @@
 	background-color: #9f9f9f;
 	color: white;
 	margin-top: 10px;
-	margin-bottom: 180px;
+	margin-bottom: 120px;
 	border: none;
 	cursor: pointer;
 }
@@ -61,7 +87,12 @@ input[type=checkbox] {
 
 .col-100 {
 	width: 100%;
-	margin-bottom: 0px;
+	margin-bottom: 10px;
+}
+
+.col-100 .first {
+	width: 100%;
+	margin-bottom: 30px;
 }
 
 /* Responsive layout 
@@ -76,16 +107,12 @@ instead of next to each other */
 }
 
 .message {
-	margin-bottom: 5px;
-}
-
-.msg {
-	font-size:10px;
-	color:crimson;
+	margin-top: 0px;
+	height: 15px;
 }
 
 
-.height {
+.heght {
 	width: 330px;
 	height: 70px;
 }
@@ -107,7 +134,8 @@ img {
 	   	$('#password').blur(function() {
 			if (passwordtest.test($(this).val())) {
 				console.log(passwordtest.test($(this).val()));
-				$('.pwmsg').html('<img src=resources/image/check.png>');
+				$('.pwmsg').text('변경 가능한 비밀번호 입니다.');
+				$('.pwmsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', true);
 			} else {
 				$('.pwmsg').text('! 숫자, 영문 대/소문자로 총 6자 이상 입력해주세요.');
@@ -122,7 +150,8 @@ img {
 				$('.pwcheckmsg').css('color', 'crimson');
 				$('.s_submit').attr('disabled', true);
 			} else {
-				$('.pwcheckmsg').html('<img src=resources/image/check.png>');
+				$('.pwcheckmsg').text('비밀번호가 일치합니다!');
+				$('.pwcheckmsg').css('color', '#7F56D2');
 				$('.s_submit').attr('disabled', false);
 				$('.s_submit').css('background', '#7F56D2');
 			}
@@ -130,6 +159,14 @@ img {
 		});   
 		
 		   
+		$(".s_submit").click(function() {
+		if ($('#password').val() == "" || $('#pwcheck').val() == "") {
+			$('.s_submit').attr('disabled', true);
+		} else {
+			$('.s_submit').attr('disabled', false);
+		}
+		});
+		
 	});
    
 </script>
@@ -138,14 +175,18 @@ img {
 </head>
 <body>
 
-<p class=s_title>비밀번호 변경</p>
-<br><br><br>
+<div class=outer_container>
 	<div class="s_container">
 	
+
+<p class=s_title>비밀번호 변경</p>
+
+<div class=formdiv>
+
 		<form name="updatepwform" action="passwordProcess.mem" method="get">
 
 			<div class="row height">
-				<div class="col-100">
+				<div class="col-100 first">
 					<input type="password" id="password" class="s_input"
 						name="password" placeholder="새 비밀번호 입력">
 				</div>
@@ -159,7 +200,9 @@ img {
 						placeholder="새 비밀번호 확인">
 				</div>
 				<div class="col-100 message">
+					<div class=msgdiv>
 					<span class="pwcheckmsg msg"></span>
+					</div>
 				</div>
 			</div>
 
@@ -170,9 +213,8 @@ img {
 				</div>
 			</div>
 		</form>
+</div>		
 	</div>
-
-
-
+</div>
 </body>
 </html>
