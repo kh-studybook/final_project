@@ -323,7 +323,7 @@ body {
 		<c:if test="${listcount > 0 }">
 			<table class="table">
 				<thead></thead>
-				<tbody>
+				<tbody> 
 					<c:set var="num" value="${listcount-(page-1)*7 }" />
 					<c:forEach var="b" items="${noticelist }">
 						<tr class=tr>
