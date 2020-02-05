@@ -53,10 +53,18 @@ body {
 
 .s_desc {
 	margin-top: 30px;
-	margin-bottom: 50px;
-	font-size: 14px;
+	margin-bottom: 2px;
+	font-size: 12px;
 	text-align: center;
 }
+
+.s_desc2 {
+	margin-top: 0px;
+	margin-bottom: 50px;
+	font-size: 12px;
+	text-align: center;
+}
+
 .s_container {
 	display: flex;
 	justify-content: center;
@@ -308,7 +316,8 @@ body {
 <div class=lineforbutton>	
 	<div class=title_wrap>
 	<p class=s_title>공 지 사 항</p> 	
-	<p class=s_desc>StudyBook 이용 중 자주 문의하시는 부분에 대한 답변입니다.</p>
+	<p class=s_desc>스터디북 서비스 가이드</p>
+	<p class=s_desc2>더 궁금하신 부분은 admin@studybook.com 으로 문의 바랍니다.</p>
 	</div>
 	<div class="container_wrap">
 	<div class=s_container>
