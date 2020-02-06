@@ -36,7 +36,7 @@
  		<input type=hidden name='food_total_cost' value="${food_total_costlist}">	
  		</c:forEach>
  	</c:if>
- 	<button>전송</button>
+ 	<!-- <button>전송</button> -->
 </form>
  	
    <script>

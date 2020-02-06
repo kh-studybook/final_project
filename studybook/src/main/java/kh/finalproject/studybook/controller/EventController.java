@@ -82,7 +82,6 @@ public class EventController {
 			 * "C:\\Users\\user1\\git\\final_project[0121]\\final_project\\studybook\\src\\main\\webapp\\resources\\upload/";
 			 */
 
-		      saveFolder="C:\\Users\\minji\\git\\final_project\\studybook\\src\\main\\webapp\\resources\\upload\\";
 		      String homedir=saveFolder+year+"-"+month+"-"+date;
 		      System.out.println(homedir);
 		      File path1=new File(homedir);
